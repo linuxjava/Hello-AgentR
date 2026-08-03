@@ -62,7 +62,13 @@
                 <artifactId>mybatis-plus-jsqlparser</artifactId>
                 <version>${mybatis-plus-spring-boot3-starter.version}</version>
             </dependency>
-            <!--mybatis-plus依赖 start-->
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-spring-boot3-starter.version}</version>
+            </dependency>
+            <!--mybatis-plus依赖 end-->
 
             <!--redis依赖 start-->
             <dependency>
@@ -105,6 +111,12 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!--lombok依赖 end-->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
