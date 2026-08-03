@@ -18,16 +18,27 @@
         <java.version>17</java.version>
         <!--spring-boot版本-->
         <spring-boot.version>3.5.7</spring-boot.version>
+        <!--hutool版本-->
+        <hutool-all.version>5.8.37</hutool-all.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--spring-boot统一管理依赖版本-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <!--引入的是一个 POM 清单，不是普通 jar-->
                 <type>pom</type>
+                <!--把这份清单里的版本管理「合并」进当前项目的 dependencyManagement-->
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -43,6 +54,21 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--lombok依赖 start-->
+        <!--spring-boot-dependencies中包含了lombok版本，所以这里不用单独配置-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!--lombok依赖 end-->
+
+        <!--hutool依赖 start-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <!--hutool依赖 end-->
     </dependencies>
 
     <build>
