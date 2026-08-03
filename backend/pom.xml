@@ -20,6 +20,13 @@
         <spring-boot.version>3.5.7</spring-boot.version>
         <!--hutool版本-->
         <hutool-all.version>5.8.37</hutool-all.version>
+        <!--mybatis-plus版本-->
+        <mybatis-plus-spring-boot3-starter.version>3.5.17</mybatis-plus-spring-boot3-starter.version>
+        <!--pgvector版本-->
+        <pgvector.version>0.1.6</pgvector.version>
+        <!--redis相关配置-->
+        <sa-token.version>1.43.0</sa-token.version>
+        <redisson.version>4.0.0</redisson.version>
     </properties>
 
     <dependencyManagement>
@@ -35,11 +42,47 @@
                 <scope>import</scope>
             </dependency>
 
+            <!--hutool依赖 start-->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool-all.version}</version>
             </dependency>
+            <!--hutool依赖 start-->
+
+            <!--mybatis-plus依赖 start-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus-spring-boot3-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-jsqlparser</artifactId>
+                <version>${mybatis-plus-spring-boot3-starter.version}</version>
+            </dependency>
+            <!--mybatis-plus依赖 start-->
+
+            <!--redis依赖 start-->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot3-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-template</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <!--redis依赖 start-->
         </dependencies>
     </dependencyManagement>
 
@@ -62,13 +105,6 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!--lombok依赖 end-->
-
-        <!--hutool依赖 start-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-        <!--hutool依赖 end-->
     </dependencies>
 
     <build>

@@ -3,7 +3,7 @@ package com.xgc.agent.rag;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.xgc.agent.rag")
 public class HelloAgentRagApplication {
 
     public static void main(String[] args) {

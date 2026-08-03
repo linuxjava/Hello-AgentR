@@ -1,6 +1,31 @@
+server:
+  port: 9898
+  servlet:
+    context-path: /api/hellorag
+
 spring:
   application:
     name: backend
 
-server:
-  port: 8080
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    username: postgres
+    password: postgres@Xiao123456
+    url: jdbc:postgresql://127.0.0.1:5432/ragent?client_encoding=UTF8
+    hikari:
+      connection-timeout: 5000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: HelloRagHikariPool
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: redis@Xiao123456
+
+
+

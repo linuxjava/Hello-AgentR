@@ -25,5 +25,20 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--web容器依赖 end-->
+
+        <!--Postgres start-->
+        <!-- Postgres JDBC驱动（基础） -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- pgvector自定义向量类型支持 -->
+        <dependency>
+            <groupId>com.pgvector</groupId>
+            <artifactId>pgvector</artifactId>
+            <version>${pgvector.version}</version>
+        </dependency>
+        <!--Postgres end-->
     </dependencies>
 </project>
