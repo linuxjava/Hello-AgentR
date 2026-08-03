@@ -48,8 +48,8 @@ public class CodeGenerator {
     /** 该业务下需要生成的表；至少配置一张 */
     private static final String[] TABLES = {
             "t_knowledge_base",
-            // "t_knowledge_document",
-            // "t_knowledge_chunk",
+             "t_knowledge_document",
+             "t_knowledge_chunk",
     };
 
     private static final String TABLE_PREFIX = "t_";

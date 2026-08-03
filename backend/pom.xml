@@ -112,11 +112,13 @@
         </dependency>
         <!--lombok依赖 end-->
 
+        <!--junit test依赖 start-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--junit test依赖 end-->
     </dependencies>
 
     <build>
