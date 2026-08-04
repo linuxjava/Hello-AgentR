@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.xgc.rag</groupId>
-        <artifactId>hello-rag-agent</artifactId>
+        <artifactId>hello-agent-rag</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
