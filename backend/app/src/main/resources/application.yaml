@@ -1,11 +1,11 @@
 server:
   port: 9898
   servlet:
-    context-path: /api/hellorag
+    context-path: /api/agentr
 
 spring:
   application:
-    name: backend
+    name: HelloAgentR
 
   servlet:
     multipart:
