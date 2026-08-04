@@ -17,7 +17,7 @@
 
 package com.xgc.agent.framework.base.error.exception;
 
-import com.xgc.agent.framework.base.error.errorcode.IErrorCode;
+import com.xgc.agent.framework.base.error.code.IErrorCode;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 

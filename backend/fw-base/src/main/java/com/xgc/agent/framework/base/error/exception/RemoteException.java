@@ -17,12 +17,11 @@
 
 package com.xgc.agent.framework.base.error.exception;
 
-import com.xgc.agent.framework.base.error.errorcode.BaseErrorCode;
-import com.xgc.agent.framework.base.error.errorcode.IErrorCode;
+import com.xgc.agent.framework.base.error.code.BaseErrorCode;
+import com.xgc.agent.framework.base.error.code.IErrorCode;
 
 /**
- * 远程服务调用异常
- * 比如订单调用支付失败，向上抛出的异常应该是远程服务调用异常
+ * 调用远程服务异常
  */
 public class RemoteException extends AbstractException {
 

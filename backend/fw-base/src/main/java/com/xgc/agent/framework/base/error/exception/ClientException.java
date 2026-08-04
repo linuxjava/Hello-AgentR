@@ -17,8 +17,8 @@
 
 package com.xgc.agent.framework.base.error.exception;
 
-import com.xgc.agent.framework.base.error.errorcode.BaseErrorCode;
-import com.xgc.agent.framework.base.error.errorcode.IErrorCode;
+import com.xgc.agent.framework.base.error.code.BaseErrorCode;
+import com.xgc.agent.framework.base.error.code.IErrorCode;
 
 /**
  * 客户端异常

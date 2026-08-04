@@ -18,8 +18,8 @@
 package com.xgc.agent.framework.base.error.exception;
 
 
-import com.xgc.agent.framework.base.error.errorcode.BaseErrorCode;
-import com.xgc.agent.framework.base.error.errorcode.IErrorCode;
+import com.xgc.agent.framework.base.error.code.BaseErrorCode;
+import com.xgc.agent.framework.base.error.code.IErrorCode;
 
 import java.util.Optional;
 
@@ -27,21 +27,21 @@ import java.util.Optional;
  * 服务端运行异常
  * 请求运行过程中出现的不符合业务预期的异常
  */
-public class ServiceException extends AbstractException {
+public class ServerException extends AbstractException {
 
-    public ServiceException(String message) {
+    public ServerException(String message) {
         this(message, null, BaseErrorCode.SERVICE_ERROR);
     }
 
-    public ServiceException(IErrorCode errorCode) {
+    public ServerException(IErrorCode errorCode) {
         this(null, errorCode);
     }
 
-    public ServiceException(String message, IErrorCode errorCode) {
+    public ServerException(String message, IErrorCode errorCode) {
         this(message, null, errorCode);
     }
 
-    public ServiceException(String message, Throwable throwable, IErrorCode errorCode) {
+    public ServerException(String message, Throwable throwable, IErrorCode errorCode) {
         super(Optional.ofNullable(message).orElse(errorCode.message()), throwable, errorCode);
     }
 

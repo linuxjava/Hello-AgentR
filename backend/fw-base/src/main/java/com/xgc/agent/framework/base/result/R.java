@@ -17,11 +17,14 @@
 
 package com.xgc.agent.framework.base.result;
 
+import com.xgc.agent.framework.base.error.code.BaseErrorCode;
+import com.xgc.agent.framework.base.error.exception.AbstractException;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * 全局统一返回结果对象
@@ -35,7 +38,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class Result<T> implements Serializable {
+public class R<T> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 5679018624309023727L;
@@ -87,5 +90,53 @@ public class Result<T> implements Serializable {
      */
     public boolean isSuccess() {
         return SUCCESS_CODE.equals(code);
+    }
+
+    /**
+     * 构造成功响应
+     */
+    public static R<Void> success() {
+        return new R<Void>()
+                .setCode(R.SUCCESS_CODE);
+    }
+
+    /**
+     * 构造带返回数据的成功响应
+     */
+    public static <T> R<T> success(T data) {
+        return new R<T>()
+                .setCode(R.SUCCESS_CODE)
+                .setData(data);
+    }
+
+    /**
+     * 构建服务端失败响应
+     */
+    public static R<Void> failure() {
+        return new R<Void>()
+                .setCode(BaseErrorCode.SERVICE_ERROR.code())
+                .setMessage(BaseErrorCode.SERVICE_ERROR.message());
+    }
+
+    /**
+     * 通过 {@link AbstractException} 构建失败响应
+     */
+    public static R<Void> failure(AbstractException abstractException) {
+        String errorCode = Optional.ofNullable(abstractException.getErrorCode())
+                .orElse(BaseErrorCode.SERVICE_ERROR.code());
+        String errorMessage = Optional.ofNullable(abstractException.getErrorMessage())
+                .orElse(BaseErrorCode.SERVICE_ERROR.message());
+        return new R<Void>()
+                .setCode(errorCode)
+                .setMessage(errorMessage);
+    }
+
+    /**
+     * 通过 errorCode、errorMessage 构建失败响应
+     */
+    public static R<Void> failure(String errorCode, String errorMessage) {
+        return new R<Void>()
+                .setCode(errorCode)
+                .setMessage(errorMessage);
     }
 }

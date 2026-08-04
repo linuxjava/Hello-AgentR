@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.xgc.agent.framework.base.error.errorcode;
+package com.xgc.agent.framework.base.error.code;
 
 /**
  * 基础错误码定义枚举
