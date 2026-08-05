@@ -16,12 +16,14 @@
 
 ```
 Hello-ARag/
+├── CONTEXT-MAP.md     # 多上下文地图（词汇表 / ADR 放置约定）
 ├── backend/           # SpringBoot 后端
 ├── frontend-admin/    # Web 管理后台
 ├── frontend/          # Web 用户端
 ├── mobile/            # Flutter 移动端
 └── docs/              # 项目文档
-    ├── backend/              # 后端文档
+    ├── adr/                  # 系统级 Architecture Decision Records
+    ├── backend/              # 后端文档（含 CONTEXT.md 领域词汇表）
     ├── frontend-admin/       # 管理后台文档
     │   └── design-system/    # 管理后台设计系统
     ├── frontend/             # Web 用户端文档
@@ -34,7 +36,9 @@ Hello-ARag/
 
 | 目录 | 说明 |
 | ---- | ---- |
-| [docs/backend](docs/backend) | 后端文档 |
+| [CONTEXT-MAP.md](CONTEXT-MAP.md) | 多上下文地图：词汇表与系统级 ADR 放置约定 |
+| [docs/adr](docs/adr) | 系统级 Architecture Decision Records |
+| [docs/backend](docs/backend) | 后端文档（含 [`CONTEXT.md`](docs/backend/CONTEXT.md) 领域词汇表） |
 | [docs/frontend-admin](docs/frontend-admin) | Web 管理后台文档 |
 | [docs/frontend-admin/design-system](docs/frontend-admin/design-system) | 管理后台设计系统 |
 | [docs/frontend](docs/frontend) | Web 用户端文档 |
