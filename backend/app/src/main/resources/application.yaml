@@ -1,7 +1,7 @@
 server:
   port: 9898
   servlet:
-    context-path: /api/agentr
+    context-path: /hello/agentr
 
 spring:
   application:
