@@ -52,6 +52,13 @@ spring:
       port: 6379
       password: ${REDIS_PASSWORD:redis@Xiao123456}
 
+# ---------- XGC Framework ----------
+xgc:
+  framework:
+    redis:
+      # Redis key 前缀（用于业务隔离，避免不同应用键冲突）
+      prefix: ${XGC_FRAMEWORK_REDIS_PREFIX:HelloAgentR}
+
 # ---------- Sa-Token 鉴权 ----------
 # token 放在 Authorization 请求头；超时单位为秒（2592000 ≈ 30 天）
 sa-token:
