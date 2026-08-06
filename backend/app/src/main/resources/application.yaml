@@ -1,36 +1,71 @@
+# =============================================================================
+# HelloAgentR 主配置（Spring Boot）
+# 说明：本文件为本地/默认环境配置；敏感项建议后续迁移至环境变量或 profile 专用文件。
+# =============================================================================
+
+# ---------- 内嵌 Web 服务器 ----------
 server:
+  # 服务监听端口
   port: 9898
   servlet:
+    # 统一 API 前缀，所有 HTTP 接口挂在该 context-path 下
     context-path: /hello/agentr
 
 spring:
   application:
+    # 应用名（日志、监控、服务发现等会用到）
     name: HelloAgentR
 
+  # ---------- 文件上传限制 ----------
+  # 与 GlobalExceptionHandler 中的超限提示联动；单文件与整次请求分别设上限
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 100MB
 
+  # ---------- 数据源（PostgreSQL + HikariCP） ----------
   datasource:
     driver-class-name: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
     username: postgres
     password: postgres@Xiao123456
+    # client_encoding=UTF8：避免中文乱码；库名 HelloAgentR
     url: jdbc:postgresql://127.0.0.1:5432/HelloAgentR?client_encoding=UTF8
     hikari:
+      # 获取连接最长等待（毫秒），超时则快速失败
       connection-timeout: 5000
+      # 空闲连接最大存活时间（毫秒），超时回收
       idle-timeout: 600000
+      # 连接在池中的最长生命周期（毫秒），到期强制重建，避免数据库侧断连
       max-lifetime: 1800000
+      # 池内最大连接数
       maximum-pool-size: 10
+      # 池内最小空闲连接数
       minimum-idle: 5
+      # 连接池名称，便于监控与日志区分
       pool-name: HelloRagHikariPool
 
+  # ---------- Redis（缓存 / 会话等） ----------
   data:
     redis:
       host: 127.0.0.1
       port: 6379
       password: redis@Xiao123456
 
-
-
+# ---------- Sa-Token 鉴权 ----------
+# token 放在 Authorization 请求头；超时单位为秒（2592000 ≈ 30 天）
+sa-token:
+  # 读写 token 使用的 header / cookie 名
+  token-name: Authorization
+  # token 有效期（秒）
+  timeout: 2592000
+  # 同一账号是否允许并发登录（多端同时在线）
+  is-concurrent: true
+  # 并发登录时是否共用同一 token（false = 每端独立 token）
+  is-share: false
+  # token 生成风格：简单 UUID
+  token-style: simple-uuid
+  # 是否输出 Sa-Token 操作日志
+  is-log: false
+  # 是否在控制台打印 Sa-Token 横幅
+  is-print: false
