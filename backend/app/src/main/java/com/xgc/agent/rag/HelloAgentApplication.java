@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "com.xgc.agent.rag")
-public class HelloAgentRApplication {
+public class HelloAgentApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HelloAgentRApplication.class, args);
+        SpringApplication.run(HelloAgentApplication.class, args);
     }
 
 }
