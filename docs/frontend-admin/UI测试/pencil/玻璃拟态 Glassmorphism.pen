@@ -11322,8 +11322,8 @@
     {
       "type": "frame",
       "id": "RAP8x",
-      "x": 3040,
-      "y": 1260,
+      "x": 793,
+      "y": 3247,
       "name": "AI 聊天 · 豆包风 Glass",
       "clip": true,
       "width": 1440,
@@ -11752,7 +11752,8 @@
                                   "fill": "$--fg",
                                   "content": "年假剩余天数查询",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -11807,7 +11808,8 @@
                                   "fill": "$--fg",
                                   "content": "合同审批流程说明",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -11862,7 +11864,8 @@
                                   "fill": "$--fg",
                                   "content": "知识库切片策略建议",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -11917,7 +11920,8 @@
                                   "fill": "$--fg",
                                   "content": "MCP 工具调用失败排查",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -11972,7 +11976,8 @@
                                   "fill": "$--fg",
                                   "content": "意图树如何配置",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -12391,7 +12396,7 @@
                           "type": "frame",
                           "id": "WKFM2",
                           "name": "AI Col",
-                          "width": 560,
+                          "width": "fill_container",
                           "layout": "vertical",
                           "gap": 10,
                           "children": [
@@ -12417,7 +12422,7 @@
                                   "id": "XTzTH",
                                   "name": "Think Chip",
                                   "height": 22,
-                                  "fill": "#000000",
+                                  "fill": "$--violet-soft",
                                   "cornerRadius": 980,
                                   "gap": 4,
                                   "padding": [
@@ -12444,7 +12449,7 @@
                                       "content": "已深度思考",
                                       "fontFamily": "$--font",
                                       "fontSize": 11,
-                                      "fontWeight": "normal"
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 }
@@ -12455,31 +12460,13 @@
                               "id": "g8F1DB",
                               "name": "AI Bubble",
                               "width": "fill_container",
-                              "fill": "$--glass-strong",
-                              "cornerRadius": 18,
-                              "stroke": "$--edge",
-                              "strokeWidth": 1,
-                              "effect": [
-                                {
-                                  "type": "background_blur",
-                                  "radius": 24
-                                },
-                                {
-                                  "type": "shadow",
-                                  "shadowType": "outer",
-                                  "color": "#0F172A14",
-                                  "offset": {
-                                    "x": 0,
-                                    "y": 8
-                                  },
-                                  "blur": 24
-                                }
-                              ],
+                              "fill": "#00000000",
+                              "stroke": "#00000000",
                               "layout": "vertical",
                               "gap": 10,
                               "padding": [
-                                16,
-                                18
+                                4,
+                                0
                               ],
                               "children": [
                                 {
@@ -12982,7 +12969,7 @@
                                   "id": "mFvWo",
                                   "name": "Deep Label",
                                   "height": 26,
-                                  "fill": "#000000",
+                                  "fill": "$--violet-soft",
                                   "cornerRadius": 980,
                                   "padding": [
                                     0,
@@ -12998,7 +12985,7 @@
                                       "content": "深度思考",
                                       "fontFamily": "$--font",
                                       "fontSize": 11,
-                                      "fontWeight": "normal"
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 }
@@ -13081,8 +13068,8 @@
     {
       "type": "frame",
       "id": "uqwDA",
-      "x": 4560,
-      "y": 1260,
+      "x": 2313,
+      "y": 3247,
       "name": "AI 聊天 · 欢迎空态 Glass",
       "clip": true,
       "width": 1440,
@@ -13511,7 +13498,8 @@
                                   "fill": "$--fg",
                                   "content": "年假剩余天数查询",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -13566,7 +13554,8 @@
                                   "fill": "$--fg",
                                   "content": "合同审批流程说明",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -13621,7 +13610,8 @@
                                   "fill": "$--fg",
                                   "content": "知识库切片策略建议",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -13676,7 +13666,8 @@
                                   "fill": "$--fg",
                                   "content": "MCP 工具调用失败排查",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -13731,7 +13722,8 @@
                                   "fill": "$--fg",
                                   "content": "意图树如何配置",
                                   "fontFamily": "$--font",
-                                  "fontSize": 13
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -14564,7 +14556,7 @@
                                   "id": "V0hNx",
                                   "name": "Deep Label",
                                   "height": 26,
-                                  "fill": "#000000",
+                                  "fill": "$--violet-soft",
                                   "cornerRadius": 980,
                                   "padding": [
                                     0,
@@ -14580,7 +14572,7 @@
                                       "content": "深度思考",
                                       "fontFamily": "$--font",
                                       "fontSize": 11,
-                                      "fontWeight": "normal"
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 }
@@ -14749,6 +14741,10 @@
     "--r": {
       "type": "number",
       "value": 20
+    },
+    "--violet-soft": {
+      "type": "color",
+      "value": "#EDE9FE"
     }
   },
   "fileToken": "d5025959-ea9b-41e3-b900-409eeb893318"
