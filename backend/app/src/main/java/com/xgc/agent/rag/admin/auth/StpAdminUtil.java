@@ -1,12 +1,12 @@
 package com.xgc.agent.rag.admin.auth;
 
 import cn.dev33.satoken.stp.StpLogic;
-import cn.dev33.satoken.stp.StpUtil;
 
 /**
  * 管理端独立 Sa-Token 工具。
  *
- * <p>使用独立 {@link #LOGIN_TYPE}，与未来 EndUser 登录态隔离，避免凭证互通。</p>
+ * <p>使用独立 {@link #LOGIN_TYPE}，与未来 EndUser 登录态隔离，避免凭证互通。
+ * 登录门禁由 {@code AdminSaTokenConfig} 统一拦截；本类供拦截器与业务踢人等场景调用。</p>
  */
 public final class StpAdminUtil {
 

@@ -85,7 +85,7 @@ class AdminAuthAndUserIT {
                                 {"username":"admin","password":"wrong-pass-1"}
                                 """))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value("C001001"))
+                .andExpect(jsonPath("$.code").value("A001001"))
                 .andExpect(jsonPath("$.message").value("用户名或密码错误"));
     }
 
@@ -165,7 +165,7 @@ class AdminAuthAndUserIT {
                                 {"username":"ops_x_%s","password":"Staff1234","role":"STAFF"}
                                 """.formatted(uniqueSuffix)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value("C001002"));
+                .andExpect(jsonPath("$.code").value("A001002"));
 
         mockMvc.perform(get("/admin/users").header("Authorization", staffToken))
                 .andExpect(status().isOk())
@@ -183,7 +183,7 @@ class AdminAuthAndUserIT {
                         .header("Authorization", adminToken)
                         .param("pageSize", "101"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value("C001010"));
+                .andExpect(jsonPath("$.code").value("A001010"));
     }
 
     /**
@@ -196,11 +196,11 @@ class AdminAuthAndUserIT {
                 .eq(AdminUserDO::getUsername, "admin")).getId();
         mockMvc.perform(delete("/admin/users/" + bootstrapId).header("Authorization", adminToken))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value("C001009"));
+                .andExpect(jsonPath("$.code").value("A001009"));
 
         mockMvc.perform(delete("/admin/users/" + bootstrapId).header("Authorization", adminToken)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.code").value("C001009"));
+                .andExpect(jsonPath("$.code").value("A001009"));
 
         mockMvc.perform(post("/admin/users")
                         .header("Authorization", adminToken)
@@ -228,6 +228,6 @@ class AdminAuthAndUserIT {
                                 {"oldPassword":"bad-old-pass","newPassword":"Admin9999"}
                                 """))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value("C001008"));
+                .andExpect(jsonPath("$.code").value("A001008"));
     }
 }

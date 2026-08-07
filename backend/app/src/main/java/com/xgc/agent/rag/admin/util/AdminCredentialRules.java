@@ -1,6 +1,6 @@
 package com.xgc.agent.rag.admin.util;
 
-import com.xgc.agent.framework.base.error.exception.ClientException;
+import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.rag.admin.error.AdminErrorCode;
 
 import java.util.regex.Pattern;
@@ -40,7 +40,7 @@ public final class AdminCredentialRules {
      */
     public static void validateUsername(String username) {
         if (username == null || !USERNAME_PATTERN.matcher(username).matches()) {
-            throw new ClientException(AdminErrorCode.USERNAME_INVALID.message(), AdminErrorCode.USERNAME_INVALID);
+            throw new WebAdminException(AdminErrorCode.USERNAME_INVALID.message(), AdminErrorCode.USERNAME_INVALID);
         }
     }
 
@@ -51,10 +51,10 @@ public final class AdminCredentialRules {
      */
     public static void validatePassword(String password) {
         if (password == null || password.length() < 8 || password.length() > 64) {
-            throw new ClientException(AdminErrorCode.PASSWORD_INVALID.message(), AdminErrorCode.PASSWORD_INVALID);
+            throw new WebAdminException(AdminErrorCode.PASSWORD_INVALID.message(), AdminErrorCode.PASSWORD_INVALID);
         }
         if (!PASSWORD_HAS_LETTER.matcher(password).matches() || !PASSWORD_HAS_DIGIT.matcher(password).matches()) {
-            throw new ClientException(AdminErrorCode.PASSWORD_INVALID.message(), AdminErrorCode.PASSWORD_INVALID);
+            throw new WebAdminException(AdminErrorCode.PASSWORD_INVALID.message(), AdminErrorCode.PASSWORD_INVALID);
         }
     }
 }

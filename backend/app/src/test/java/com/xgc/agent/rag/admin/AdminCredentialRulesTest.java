@@ -1,6 +1,6 @@
 package com.xgc.agent.rag.admin;
 
-import com.xgc.agent.framework.base.error.exception.ClientException;
+import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.rag.admin.util.AdminCredentialRules;
 import com.xgc.agent.rag.admin.util.AdminPasswordHasher;
 import org.junit.jupiter.api.Test;
@@ -31,9 +31,9 @@ class AdminCredentialRulesTest {
     void usernameRules() {
         AdminCredentialRules.validateUsername("admin");
         assertThatThrownBy(() -> AdminCredentialRules.validateUsername("ab"))
-                .isInstanceOf(ClientException.class);
+                .isInstanceOf(WebAdminException.class);
         assertThatThrownBy(() -> AdminCredentialRules.validateUsername("bad-name"))
-                .isInstanceOf(ClientException.class);
+                .isInstanceOf(WebAdminException.class);
     }
 
     /**
@@ -43,8 +43,8 @@ class AdminCredentialRulesTest {
     void passwordRules() {
         AdminCredentialRules.validatePassword("admin@123456");
         assertThatThrownBy(() -> AdminCredentialRules.validatePassword("short1"))
-                .isInstanceOf(ClientException.class);
+                .isInstanceOf(WebAdminException.class);
         assertThatThrownBy(() -> AdminCredentialRules.validatePassword("onlyletters"))
-                .isInstanceOf(ClientException.class);
+                .isInstanceOf(WebAdminException.class);
     }
 }

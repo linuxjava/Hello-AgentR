@@ -21,30 +21,31 @@ import com.xgc.agent.framework.base.error.code.BaseErrorCode;
 import com.xgc.agent.framework.base.error.code.IErrorCode;
 
 /**
- * 客户端异常
- * 用户发起调用请求后因客户端提交参数或其他客户端问题导致的异常
+ * Web 管理端异常
+ *
+ * <p>管理端请求因参数、鉴权或业务规则导致的客户端侧异常，默认归属 {@link BaseErrorCode#WEB_ADMIN_ERROR}。</p>
  */
-public class ClientException extends AbstractException {
+public class WebAdminException extends AbstractException {
 
-    public ClientException(IErrorCode errorCode) {
+    public WebAdminException(IErrorCode errorCode) {
         this(null, null, errorCode);
     }
 
-    public ClientException(String message) {
-        this(message, null, BaseErrorCode.CLIENT_ERROR);
+    public WebAdminException(String message) {
+        this(message, null, BaseErrorCode.WEB_ADMIN_ERROR);
     }
 
-    public ClientException(String message, IErrorCode errorCode) {
+    public WebAdminException(String message, IErrorCode errorCode) {
         this(message, null, errorCode);
     }
 
-    public ClientException(String message, Throwable throwable, IErrorCode errorCode) {
+    public WebAdminException(String message, Throwable throwable, IErrorCode errorCode) {
         super(message, throwable, errorCode);
     }
 
     @Override
     public String toString() {
-        return "ClientException{" +
+        return "WebAdminException{" +
                 "code='" + errorCode + "'," +
                 "message='" + errorMessage + "'" +
                 '}';

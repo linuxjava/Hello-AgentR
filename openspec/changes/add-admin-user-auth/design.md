@@ -2,7 +2,7 @@
 
 - **来源**：PRD `docs/backend/版本迭代/V0.1/prd.md`；词汇表 `docs/backend/CONTEXT.md`；ADR-0001
 - **现状**：`backend` 已具备 `fw-base`（`R<T>`、异常、MyBatis-Plus、Snowflake、Sa-Token/Redis），`app` 尚无 AdminUser 业务模块
-- **约束**：Java 21 / Spring Boot 3；上下文路径以 `application.yaml` 为准（当前 `server.servlet.context-path: /hello/agentr`）；管理端与 EndUser 身份隔离
+- **约束**：Java 21 / Spring Boot 3；上下文路径以 `application.yaml` 为准（当前 `server.servlet.context-path: /hello-agent`）；管理端与 EndUser 身份隔离
 - **消费方**：后续 `frontend-admin`；本变更只交付后端 API
 
 ## Goals / Non-Goals
@@ -42,7 +42,7 @@ flowchart TB
     RD[(Redis)]
   end
 
-  ADM -->|HTTPS /hello/agentr| CTRL
+  ADM -->|HTTPS /hello-agent| CTRL
   CTRL --> SVC
   SVC -.->|implements| IMPL
   CTRL --> R
@@ -93,6 +93,7 @@ flowchart TB
 
 - **选择**：Service 内基于当前登录 role 校验能力矩阵；Admin 专属写操作在入口显式拒绝 Staff
 - **备选**：Sa-Token 权限码体系 → V0.1 不做自定义权限码，仅两角色
+- **登录门禁**：`AdminSaTokenConfig` 对 `/admin/**`（排除 `/admin/auth/login`）统一 `StpAdminUtil.checkLogin()`；业务层不再为「仅确认已登录」重复调用 `requireLoginUser()`
 
 ### D7. Bootstrap 初始化
 
@@ -100,7 +101,7 @@ flowchart TB
 
 ## API 端点规范
 
-基础前缀：`{context-path}` = `/hello/agentr`（若配置变更，前缀随之变更）。  
+基础前缀：`{context-path}` = `/hello-agent`（若配置变更，前缀随之变更）。  
 统一响应：`R<T>`（`code="0"` 成功）。  
 鉴权：除登录外，请求头 `Authorization: <token>`。
 
@@ -119,14 +120,14 @@ flowchart TB
 **错误语义（产品层）**：
 
 - 登录失败：统一「用户名或密码错误」
-- 未登录 / 无权限 / 校验失败 / 保护规则：客户端错误（走既有 `ClientException` + 错误码扩展）
+- 未登录 / 无权限 / 校验失败 / 保护规则：管理端客户端错误（走 `WebAdminException` + `AdminErrorCode`）
 - Bootstrap 冲突：启动失败（非 HTTP）
 
 ## Risks / Trade-offs
 
 - [初始密码明文出现在文档/仓库] → 部署文档强调立即改密；后续可加强制首登改密（本变更不做）
 - [逻辑删除与物理删冲突] → 实现时明确真删路径并加测试
-- [工程文档曾写 `/api/agentr` 与配置不一致] → API 以运行配置为准，必要时另开文档修正任务
+- [工程文档曾写 `/api/agentr` 与配置不一致] → 已统一为运行配置 `/hello-agent`
 - [Staff 可见全量列表] → 产品已接受；无字段级脱敏需求（本无敏感字段除哈希，且哈希不返回）
 
 ## Migration Plan
@@ -143,7 +144,7 @@ flowchart TB
 | 能力 | 复用点 |
 | --- | --- |
 | 统一响应 | `com.xgc.agent.framework.base.result.R` |
-| 错误码 / 异常 | `BaseErrorCode`、`ClientException` / `ServerException`；可复用已有用户名/密码相关码（如 `USER_NAME_*`、`PASSWORD_*`），不足再扩展 |
+| 错误码 / 异常 | `BaseErrorCode`（S/T/C/A/M 一级码）、`WebAdminException` / `WebUserException` / `MobileException` / `ServerException`；管理端业务码见 `AdminErrorCode`（A001xxx） |
 | 全局异常 | `GlobalExceptionHandler`（已映射 Sa-Token 未登录 / 无角色） |
 | MyBatis-Plus | `MyBatisPlusConfig` 分页、`MyBatisPlusMetaObjectHandler` 审计字段填充 |
 | 分布式 ID | Snowflake + `IdType.ASSIGN_ID` |

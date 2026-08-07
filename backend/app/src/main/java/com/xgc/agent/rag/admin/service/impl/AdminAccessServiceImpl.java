@@ -1,6 +1,6 @@
 package com.xgc.agent.rag.admin.service.impl;
 
-import com.xgc.agent.framework.base.error.exception.ClientException;
+import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.rag.admin.auth.StpAdminUtil;
 import com.xgc.agent.rag.admin.dao.entity.AdminUserDO;
 import com.xgc.agent.rag.admin.dao.entity.AdminUserRole;
@@ -28,7 +28,7 @@ public class AdminAccessServiceImpl implements AdminAccessService {
         String loginId = StpAdminUtil.getLoginIdAsString();
         AdminUserDO user = adminUserMapper.selectById(loginId);
         if (user == null) {
-            throw new ClientException(AdminErrorCode.USER_NOT_FOUND.message(), AdminErrorCode.USER_NOT_FOUND);
+            throw new WebAdminException(AdminErrorCode.USER_NOT_FOUND.message(), AdminErrorCode.USER_NOT_FOUND);
         }
         return user;
     }
@@ -37,7 +37,7 @@ public class AdminAccessServiceImpl implements AdminAccessService {
     public AdminUserDO requireAdmin() {
         AdminUserDO current = requireLoginUser();
         if (current.getRole() != AdminUserRole.ADMIN) {
-            throw new ClientException(AdminErrorCode.FORBIDDEN.message(), AdminErrorCode.FORBIDDEN);
+            throw new WebAdminException(AdminErrorCode.FORBIDDEN.message(), AdminErrorCode.FORBIDDEN);
         }
         return current;
     }

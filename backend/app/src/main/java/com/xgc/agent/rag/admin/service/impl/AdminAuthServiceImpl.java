@@ -1,7 +1,7 @@
 package com.xgc.agent.rag.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.xgc.agent.framework.base.error.exception.ClientException;
+import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.rag.admin.auth.StpAdminUtil;
 import com.xgc.agent.rag.admin.dao.entity.AdminUserDO;
 import com.xgc.agent.rag.admin.dao.mapper.AdminUserMapper;
@@ -45,7 +45,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         AdminUserDO user = adminUserMapper.selectOne(Wrappers.lambdaQuery(AdminUserDO.class)
                 .eq(AdminUserDO::getUsername, request.username()));
         if (user == null || !adminPasswordHasher.matches(request.password(), user.getPasswordHash())) {
-            throw new ClientException(AdminErrorCode.LOGIN_FAILED.message(), AdminErrorCode.LOGIN_FAILED);
+            throw new WebAdminException(AdminErrorCode.LOGIN_FAILED.message(), AdminErrorCode.LOGIN_FAILED);
         }
 
         StpAdminUtil.login(user.getId());
@@ -69,11 +69,11 @@ public class AdminAuthServiceImpl implements AdminAuthService {
     public void changeOwnPassword(AdminChangeOwnPasswordRequest request) {
         AdminUserDO current = adminAccessService.requireLoginUser();
         if (!adminPasswordHasher.matches(request.oldPassword(), current.getPasswordHash())) {
-            throw new ClientException(AdminErrorCode.OLD_PASSWORD_WRONG.message(), AdminErrorCode.OLD_PASSWORD_WRONG);
+            throw new WebAdminException(AdminErrorCode.OLD_PASSWORD_WRONG.message(), AdminErrorCode.OLD_PASSWORD_WRONG);
         }
         AdminCredentialRules.validatePassword(request.newPassword());
         if (adminPasswordHasher.matches(request.newPassword(), current.getPasswordHash())) {
-            throw new ClientException(AdminErrorCode.PASSWORD_SAME_AS_OLD.message(), AdminErrorCode.PASSWORD_SAME_AS_OLD);
+            throw new WebAdminException(AdminErrorCode.PASSWORD_SAME_AS_OLD.message(), AdminErrorCode.PASSWORD_SAME_AS_OLD);
         }
 
         current.setPasswordHash(adminPasswordHasher.hash(request.newPassword()));

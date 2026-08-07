@@ -64,7 +64,7 @@ public class GlobalExceptionHandler {
                 .map(FieldError::getDefaultMessage)
                 .orElse(StrUtil.EMPTY);
         log.error("[{}] {} [ex] {}", request.getMethod(), getUrl(request), exceptionStr);
-        return R.failure(BaseErrorCode.CLIENT_ERROR.code(), exceptionStr);
+        return R.failure(resolveClientErrorCode(request).code(), exceptionStr);
     }
 
     /**
@@ -92,7 +92,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = NotLoginException.class)
     public R<Void> notLoginException(HttpServletRequest request, NotLoginException ex) {
         log.warn("[{}] {} [auth] not-login: {}", request.getMethod(), getUrl(request), ex.getMessage());
-        return R.failure(BaseErrorCode.CLIENT_ERROR.code(), "未登录或登录已过期");
+        return R.failure(resolveClientErrorCode(request).code(), "未登录或登录已过期");
     }
 
     /**
@@ -101,7 +101,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = NotRoleException.class)
     public R<Void> notRoleException(HttpServletRequest request, NotRoleException ex) {
         log.warn("[{}] {} [auth] no-role: {}", request.getMethod(), getUrl(request), ex.getMessage());
-        return R.failure(BaseErrorCode.CLIENT_ERROR.code(), "权限不足");
+        return R.failure(resolveClientErrorCode(request).code(), "权限不足");
     }
 
     /**
@@ -117,7 +117,7 @@ public class GlobalExceptionHandler {
         } else {
             message = "上传请求大小超过限制，单次请求最大允许 " + maxRequestSize;
         }
-        return R.failure(BaseErrorCode.CLIENT_ERROR.code(), message);
+        return R.failure(resolveClientErrorCode(request).code(), message);
     }
 
     /**
@@ -134,5 +134,25 @@ public class GlobalExceptionHandler {
             return request.getRequestURL().toString();
         }
         return request.getRequestURL().toString() + "?" + request.getQueryString();
+    }
+
+    /**
+     * 按请求路径选择客户端一级宏观错误码（不含 context-path）。
+     *
+     * @param request 当前请求
+     * @return 对应端的一级错误码
+     */
+    private BaseErrorCode resolveClientErrorCode(HttpServletRequest request) {
+        String path = request.getServletPath();
+        if (StrUtil.isBlank(path)) {
+            path = request.getRequestURI();
+        }
+        if (path != null && path.startsWith("/admin")) {
+            return BaseErrorCode.WEB_ADMIN_ERROR;
+        }
+        if (path != null && path.startsWith("/mobile")) {
+            return BaseErrorCode.MOBILE_ERROR;
+        }
+        return BaseErrorCode.WEB_USER_ERROR;
     }
 }

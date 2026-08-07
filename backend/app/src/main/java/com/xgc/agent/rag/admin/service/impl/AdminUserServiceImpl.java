@@ -2,7 +2,7 @@ package com.xgc.agent.rag.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xgc.agent.framework.base.error.exception.ClientException;
+import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.rag.admin.auth.StpAdminUtil;
 import com.xgc.agent.rag.admin.dao.entity.AdminUserDO;
 import com.xgc.agent.rag.admin.dao.entity.AdminUserRole;
@@ -58,11 +58,10 @@ public class AdminUserServiceImpl implements AdminUserService {
 
     @Override
     public AdminUserPageResponse page(Long page, Long pageSize, String username, AdminUserRole role) {
-        adminAccessService.requireLoginUser();
         long pageNo = page == null || page < 1 ? 1L : page;
         long size = pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
         if (size < 1 || size > MAX_PAGE_SIZE) {
-            throw new ClientException(AdminErrorCode.PAGE_SIZE_INVALID.message(), AdminErrorCode.PAGE_SIZE_INVALID);
+            throw new WebAdminException(AdminErrorCode.PAGE_SIZE_INVALID.message(), AdminErrorCode.PAGE_SIZE_INVALID);
         }
 
         Page<AdminUserDO> result = adminUserMapper.selectPage(
@@ -83,12 +82,12 @@ public class AdminUserServiceImpl implements AdminUserService {
         AdminCredentialRules.validateUsername(request.username());
         AdminCredentialRules.validatePassword(request.password());
         if (request.role() == null) {
-            throw new ClientException(AdminErrorCode.ROLE_INVALID.message(), AdminErrorCode.ROLE_INVALID);
+            throw new WebAdminException(AdminErrorCode.ROLE_INVALID.message(), AdminErrorCode.ROLE_INVALID);
         }
         Long exists = adminUserMapper.selectCount(Wrappers.lambdaQuery(AdminUserDO.class)
                 .eq(AdminUserDO::getUsername, request.username()));
         if (exists != null && exists > 0) {
-            throw new ClientException(AdminErrorCode.USERNAME_EXISTS.message(), AdminErrorCode.USERNAME_EXISTS);
+            throw new WebAdminException(AdminErrorCode.USERNAME_EXISTS.message(), AdminErrorCode.USERNAME_EXISTS);
         }
 
         AdminUserDO created = AdminUserDO.builder()
@@ -118,12 +117,12 @@ public class AdminUserServiceImpl implements AdminUserService {
         adminAccessService.requireAdmin();
         AdminUserDO target = requireUser(id);
         if (request.role() == null) {
-            throw new ClientException(AdminErrorCode.ROLE_INVALID.message(), AdminErrorCode.ROLE_INVALID);
+            throw new WebAdminException(AdminErrorCode.ROLE_INVALID.message(), AdminErrorCode.ROLE_INVALID);
         }
         if (target.getRole() == AdminUserRole.ADMIN
                 && request.role() == AdminUserRole.STAFF
                 && countByRole(AdminUserRole.ADMIN) <= 1) {
-            throw new ClientException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
+            throw new WebAdminException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
         }
         target.setRole(request.role());
         adminUserMapper.updateById(target);
@@ -137,16 +136,16 @@ public class AdminUserServiceImpl implements AdminUserService {
         AdminUserDO target = requireUser(id);
 
         if (Boolean.TRUE.equals(target.getBootstrap())) {
-            throw new ClientException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
+            throw new WebAdminException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
         }
         if (operator.getId().equals(target.getId())) {
-            throw new ClientException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
+            throw new WebAdminException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
         }
         if (countAll() <= 1) {
-            throw new ClientException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
+            throw new WebAdminException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
         }
         if (target.getRole() == AdminUserRole.ADMIN && countByRole(AdminUserRole.ADMIN) <= 1) {
-            throw new ClientException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
+            throw new WebAdminException(AdminErrorCode.PROTECTION_VIOLATION.message(), AdminErrorCode.PROTECTION_VIOLATION);
         }
 
         adminUserMapper.deleteById(target.getId());
@@ -162,7 +161,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     private AdminUserDO requireUser(String id) {
         AdminUserDO user = adminUserMapper.selectById(id);
         if (user == null) {
-            throw new ClientException(AdminErrorCode.USER_NOT_FOUND.message(), AdminErrorCode.USER_NOT_FOUND);
+            throw new WebAdminException(AdminErrorCode.USER_NOT_FOUND.message(), AdminErrorCode.USER_NOT_FOUND);
         }
         return user;
     }

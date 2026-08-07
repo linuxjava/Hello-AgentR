@@ -17,25 +17,37 @@
 
 package com.xgc.agent.framework.base.error.exception;
 
+import com.xgc.agent.framework.base.error.code.BaseErrorCode;
 import com.xgc.agent.framework.base.error.code.IErrorCode;
-import lombok.Getter;
-import org.springframework.util.StringUtils;
-
-import java.util.Optional;
 
 /**
- * 抽象项目异常体系：Web 用户端 / Web 管理端 / 移动端 / 服务端 / 远程调用异常
+ * 移动端异常
+ *
+ * <p>移动端请求因参数、鉴权或业务规则导致的客户端侧异常，默认归属 {@link BaseErrorCode#MOBILE_ERROR}。</p>
  */
-@Getter
-public abstract class AbstractException extends RuntimeException {
+public class MobileException extends AbstractException {
 
-    public final String errorCode;
+    public MobileException(IErrorCode errorCode) {
+        this(null, null, errorCode);
+    }
 
-    public final String errorMessage;
+    public MobileException(String message) {
+        this(message, null, BaseErrorCode.MOBILE_ERROR);
+    }
 
-    public AbstractException(String message, Throwable throwable, IErrorCode errorCode) {
-        super(message, throwable);
-        this.errorCode = errorCode.code();
-        this.errorMessage = Optional.ofNullable(StringUtils.hasLength(message) ? message : null).orElse(errorCode.message());
+    public MobileException(String message, IErrorCode errorCode) {
+        this(message, null, errorCode);
+    }
+
+    public MobileException(String message, Throwable throwable, IErrorCode errorCode) {
+        super(message, throwable, errorCode);
+    }
+
+    @Override
+    public String toString() {
+        return "MobileException{" +
+                "code='" + errorCode + "'," +
+                "message='" + errorMessage + "'" +
+                '}';
     }
 }

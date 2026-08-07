@@ -9,7 +9,7 @@ server:
   port: 9898
   servlet:
     # 统一 API 前缀，所有 HTTP 接口挂在该 context-path 下
-    context-path: /hello/agentr
+    context-path: /hello-agent
 
 spring:
   application:
