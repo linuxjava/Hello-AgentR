@@ -6,13 +6,13 @@
 
 ## 目录结构
 
-| 目录 | 说明 |
-| ---- | ---- |
-| [backend](backend) | 基于 SpringBoot 开发的后端 |
-| [frontend-admin](frontend-admin) | Web 管理后台 |
-| [frontend](frontend) | Web 用户端 |
-| [mobile](mobile) | 基于 Flutter 的 App 移动端 |
-| [docs](docs) | 项目文档目录 |
+| 目录                               | 说明                   |
+| -------------------------------- | -------------------- |
+| [backend](backend)               | 基于 SpringBoot 开发的后端  |
+| [frontend-admin](frontend-admin) | Web 管理后台             |
+| [frontend](frontend)             | Web 用户端              |
+| [mobile](mobile)                 | 基于 Flutter 的 App 移动端 |
+| [docs](docs)                     | 项目文档目录               |
 
 ```
 Hello-ARag/
@@ -34,28 +34,31 @@ Hello-ARag/
 
 ## 文档目录（docs）
 
-| 目录 | 说明 |
-| ---- | ---- |
-| [CONTEXT-MAP.md](CONTEXT-MAP.md) | 多上下文地图：词汇表与系统级 ADR 放置约定 |
-| [docs/adr](docs/adr) | 系统级 Architecture Decision Records |
-| [docs/backend](docs/backend) | 后端文档（含 [`CONTEXT.md`](docs/backend/CONTEXT.md) 领域词汇表） |
-| [docs/frontend-admin](docs/frontend-admin) | Web 管理后台文档 |
-| [docs/frontend-admin/design-system](docs/frontend-admin/design-system) | 管理后台设计系统 |
-| [docs/frontend](docs/frontend) | Web 用户端文档 |
-| [docs/frontend/design-system](docs/frontend/design-system) | 用户端设计系统 |
-| [docs/mobile](docs/mobile) | Flutter 移动端文档 |
-| [docs/mobile/design-system](docs/mobile/design-system) | 移动端设计系统 |
+| 目录                                       | 说明                                       |
+| ---------------------------------------- | ---------------------------------------- |
+| [CONTEXT-MAP.md](CONTEXT-MAP.md)         | 多上下文地图：词汇表与系统级 ADR 放置约定                  |
+| [docs/adr](docs/adr)                     | 系统级 Architecture Decision Records        |
+| [docs/backend](docs/backend)             | 后端文档（含 [`CONTEXT.md`](docs/backend/CONTEXT.md) 领域词汇表） |
+| [docs/frontend-admin](docs/frontend-admin) | Web 管理后台文档                               |
+| [docs/frontend-admin/design-system](docs/frontend-admin/design-system) | 管理后台设计系统                                 |
+| [docs/frontend](docs/frontend)           | Web 用户端文档                                |
+| [docs/frontend/design-system](docs/frontend/design-system) | 用户端设计系统                                  |
+| [docs/mobile](docs/mobile)               | Flutter 移动端文档                            |
+| [docs/mobile/design-system](docs/mobile/design-system) | 移动端设计系统                                  |
 
 所有生成的文档使用中文输出，代码相关术语请使用英文。
 
 ### 后端核心文档
-| 类型       | 路径                                 | 说明                                       |
-|----------|------------------------------------| ---------------------------------------- |
-| 后端文档目录索引 | [后端目录索引](docs/backend/后端文档目录索引.md) | 不涉及技术细节，专注工程架构、三方依赖说明等                   |
+| 类型       | 路径                                 | 说明                     |
+| -------- | ---------------------------------- | ---------------------- |
+| 后端文档目录索引 | [后端目录索引](docs/backend/后端文档目录索引.md) | 不涉及技术细节，专注工程架构、三方依赖说明等 |
 
 ### Web用户端核心文档
 
 ### Web管理端核心文档
+| 类型           | 路径                                       | 说明                     |
+| ------------ | ---------------------------------------- | ---------------------- |
+| Web管理端文档目录索引 | [Web管理端文档目录索引](docs/frontend-admin/Web管理端文档目录索引.md) | 不涉及技术细节，专注工程架构、三方依赖说明等 |
 
 ### 移动端核心文档
 
@@ -89,14 +92,14 @@ Hello-ARag/
 
 If the `agent-skills-standard` MCP server is registered in your runtime (check your tool list — look for `load_skills_for_files`), **prefer those tools over manually walking the router below**. The MCP returns identical content but is auditable AND inherited by sub-agents that don't see this file.
 
-| Tool | When to call it |
-| --- | --- |
-| `list_workflows()` | At the start of any task or session to discover available standard operating procedures |
-| `get_workflow(name)` | Once a relevant workflow is identified to retrieve exact step-by-step instructions |
-| `load_skills_for_files(files=[...])` | Before editing/reviewing any source file |
-| `load_skills_for_keywords(keywords=[...])` | Planning before files are chosen |
-| `get_skill(category, name)` | Direct lookup when you know the skill id |
-| `audit_session_compliance()` | Before declaring a task complete |
+| Tool                                     | When to call it                          |
+| ---------------------------------------- | ---------------------------------------- |
+| `list_workflows()`                       | At the start of any task or session to discover available standard operating procedures |
+| `get_workflow(name)`                     | Once a relevant workflow is identified to retrieve exact step-by-step instructions |
+| `load_skills_for_files(files=[...])`     | Before editing/reviewing any source file |
+| `load_skills_for_keywords(keywords=[...])` | Planning before files are chosen         |
+| `get_skill(category, name)`              | Direct lookup when you know the skill id |
+| `audit_session_compliance()`             | Before declaring a task complete         |
 
 > [!IMPORTANT] **Sub-agents don't inherit this `AGENTS.md` — they do inherit the MCP.** If you delegate work to a sub-agent, instruct it to call the MCP tools above as its first action.
 
@@ -118,16 +121,16 @@ Each `_INDEX.md` has two sections - follow both:
 
 > `<SKILLS>` = your agent's skill directory (e.g., `.claude/skills/`, `.cursor/skills/`, `.gemini/skills/`).
 
-| File type | Read category index |
-| --------- | ------------------- |
-| `*.ts`, `*.tsx` | `<SKILLS>/react/_INDEX.md`, `<SKILLS>/typescript/_INDEX.md` |
-| `*.js`, `*.mjs` | `<SKILLS>/javascript/_INDEX.md` |
-| `*.jsx`, `*.test.tsx`, `*.spec.tsx` | `<SKILLS>/react/_INDEX.md` |
-| `*.java` | `<SKILLS>/java/_INDEX.md`, `<SKILLS>/spring-boot/_INDEX.md` |
-| `*.sql`, `*.entity.ts`, `*.prisma` | `<SKILLS>/database/_INDEX.md` |
-| `*.spec.ts`, `*.test.ts` | `<SKILLS>/common/_INDEX.md` |
-| Any file (keyword match) | `<SKILLS>/common/_INDEX.md` |
-| QE workflow | `<SKILLS>/quality-engineering/_INDEX.md` |
+| File type                           | Read category index                      |
+| ----------------------------------- | ---------------------------------------- |
+| `*.ts`, `*.tsx`                     | `<SKILLS>/react/_INDEX.md`, `<SKILLS>/typescript/_INDEX.md` |
+| `*.js`, `*.mjs`                     | `<SKILLS>/javascript/_INDEX.md`          |
+| `*.jsx`, `*.test.tsx`, `*.spec.tsx` | `<SKILLS>/react/_INDEX.md`               |
+| `*.java`                            | `<SKILLS>/java/_INDEX.md`, `<SKILLS>/spring-boot/_INDEX.md` |
+| `*.sql`, `*.entity.ts`, `*.prisma`  | `<SKILLS>/database/_INDEX.md`            |
+| `*.spec.ts`, `*.test.ts`            | `<SKILLS>/common/_INDEX.md`              |
+| Any file (keyword match)            | `<SKILLS>/common/_INDEX.md`              |
+| QE workflow                         | `<SKILLS>/quality-engineering/_INDEX.md` |
 
 > [!NOTE] **Test/spec file precedence:** `.spec.ts`, `.test.ts` -> use the `common` row (takes precedence over the generic `*.ts` row). `.spec.tsx`, `.test.tsx` -> use the `react` row (takes precedence over the generic `*.tsx` row).
 
