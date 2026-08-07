@@ -72,6 +72,15 @@ Hello-ARag/
   - openspec/changes/ 当前活跃的变更（如果存在）
 2. **不要猜测需求**：如果 spec 中没有明确定义某个行为，问我，不要自行补充。
 3. **out-of-scope 是红线**：proposal.md 中标注为 out-of-scope 的功能，严禁实现。
+4. **提案统一标识**：为后端、Web 管理端、Web 用户端、移动端创建提案时，change 名称必须以对应作用域前缀开头，便于检索与归属：
+  | 作用域 | 目录 | change 名称前缀 |
+  | ------ | ---- | --------------- |
+  | 后端 | `backend` | `backend-` |
+  | Web 管理端 | `frontend-admin` | `frontAdm-` |
+  | Web 用户端 | `frontend` | `front-` |
+  | 移动端 | `mobile` | `mobile-` |
+
+  示例：`backend-admin-identity`、`frontend-admin-login-page`、`frontend-chat-home`、`mobile-push-settings`。跨端变更按**主要交付面**选一个前缀，并在 `proposal.md` 中写明其余受影响端。
 
 ### Apply 阶段规则
 
@@ -79,6 +88,7 @@ Hello-ARag/
 2. 总结当前阶段的代码变更（改了什么文件、为什么这么改）。
 3. 等待我 review 并确认后，再继续下一 Phase。
 4. 严禁一次性实现所有任务。
+5. **代码注释**：OpenSpec Apply 阶段编写的代码须添加详细注释——说明意图与取舍（Why），而非复述语法（What）；公共 API / 复杂分支 / 非显而易见的约束与边界条件必须写清。
 
 <!-- SKILLS_INDEX_START -->
 ## Agent Skills Index

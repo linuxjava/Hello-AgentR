@@ -3,8 +3,11 @@ import { describe, expect, it } from 'vitest'
 import { HomePage } from '@/pages/HomePage'
 
 describe('HomePage', () => {
-  it('renders placeholder title', () => {
+  it('renders Pencil placeholder title and description', () => {
     render(<HomePage />)
-    expect(screen.getByRole('heading', { name: 'Hello-AgentR Admin' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: '首页占位' })).toBeTruthy()
+    expect(
+      screen.getByText('本阶段无业务内容。后续业务模块将挂载于此。'),
+    ).toBeTruthy()
   })
 })

@@ -14,8 +14,20 @@ export default defineConfig({
       '@': path.resolve(rootDir, 'src'),
     },
   },
+  server: {
+    proxy: {
+      '/hello-agent': {
+        target: 'http://127.0.0.1:9898',
+        changeOrigin: true,
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
+    setupFiles: ['./src/test/setup.ts'],
+    env: {
+      VITE_API_BASE_URL: 'http://localhost:9898/hello-agent',
+    },
   },
 })
