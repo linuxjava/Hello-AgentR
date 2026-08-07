@@ -4255,107 +4255,214 @@
                       "id": "ATAmw",
                       "name": "Pagination",
                       "width": "fill_container",
-                      "height": 44,
-                      "justifyContent": "space_between",
+                      "height": 32,
+                      "gap": 16,
+                      "justifyContent": "end",
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "d8ArAU",
-                          "name": "Page Meta",
-                          "fill": "$fg-3",
-                          "content": "共 5 条 · 每页 20 条",
-                          "fontFamily": "$font-body",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
                           "type": "frame",
-                          "id": "LraYe",
+                          "id": "vZqcu",
                           "name": "Pager Controls",
+                          "height": 32,
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
-                              "id": "iPaNk",
+                              "id": "Yioi8",
                               "name": "Prev",
-                              "opacity": 0.55,
+                              "opacity": 0.35,
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "V8wqv",
-                                  "name": "Prev Label",
-                                  "fill": "$disabled",
-                                  "content": "上一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "type": "icon",
+                                  "id": "T8pTB",
+                                  "name": "Prev Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-left",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "cK4q6",
-                              "name": "Page Current",
+                              "id": "BNAIG",
+                              "name": "Page Active",
                               "width": 32,
                               "height": 32,
-                              "fill": "$primary",
-                              "cornerRadius": "$radius-pill",
+                              "fill": "#FFFFFF",
+                              "cornerRadius": 6,
+                              "stroke": "#1677FF",
+                              "strokeWidth": 2,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "ljbpS",
+                                  "id": "ZTs5B",
                                   "name": "Page Num",
-                                  "fill": "$primary-fg",
+                                  "fill": "#1677FF",
                                   "content": "1",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
                                   "fontWeight": "600"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "KnnCE",
-                              "name": "Next",
-                              "opacity": 0.55,
+                              "id": "w89Sq",
+                              "name": "Page 2",
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "mJYIo",
-                                  "name": "Next Label",
-                                  "fill": "$disabled",
-                                  "content": "下一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "id": "pljWn",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "2",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "RCwPq",
+                              "name": "Page 3",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ww3dV",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "3",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "wVzEc",
+                              "name": "Ellipsis",
+                              "width": 32,
+                              "height": 32,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "K9EMan",
+                                  "name": "Ellipsis Text",
+                                  "fill": "#00000073",
+                                  "content": "···",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "g0MB7K",
+                              "name": "Page 8",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "B1ktDj",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "8",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "zjt3m",
+                              "name": "Next",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "Ud7gl",
+                                  "name": "Next Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-right",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "w6GGJ",
+                          "name": "Size Changer",
+                          "height": 32,
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 6,
+                          "stroke": "#D9D9D9",
+                          "strokeWidth": 1,
+                          "gap": 4,
+                          "padding": [
+                            0,
+                            11
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "sRJxT",
+                              "name": "Size Label",
+                              "fill": "#000000E0",
+                              "content": "5 条/页",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "Gtqo9",
+                              "name": "Size Chevron",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "chevron-down",
+                              "library": "lucide",
+                              "fill": "#00000073"
                             }
                           ]
                         }
@@ -6276,107 +6383,214 @@
                       "id": "cBNpR",
                       "name": "Pagination",
                       "width": "fill_container",
-                      "height": 44,
-                      "justifyContent": "space_between",
+                      "height": 32,
+                      "gap": 16,
+                      "justifyContent": "end",
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "qbun8",
-                          "name": "Page Meta",
-                          "fill": "$fg-3",
-                          "content": "共 5 条 · 每页 20 条",
-                          "fontFamily": "$font-body",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
                           "type": "frame",
-                          "id": "eVvAo",
+                          "id": "iBbfn",
                           "name": "Pager Controls",
+                          "height": 32,
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
-                              "id": "h2MRk",
+                              "id": "TYjrn",
                               "name": "Prev",
-                              "opacity": 0.55,
+                              "opacity": 0.35,
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "v8H503",
-                                  "name": "Prev Label",
-                                  "fill": "$disabled",
-                                  "content": "上一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "type": "icon",
+                                  "id": "lKBGN",
+                                  "name": "Prev Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-left",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "N0iGxk",
-                              "name": "Page Current",
+                              "id": "ANkfm",
+                              "name": "Page Active",
                               "width": 32,
                               "height": 32,
-                              "fill": "$primary",
-                              "cornerRadius": "$radius-pill",
+                              "fill": "#FFFFFF",
+                              "cornerRadius": 6,
+                              "stroke": "#1677FF",
+                              "strokeWidth": 2,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "RoxZz",
+                                  "id": "n9Res",
                                   "name": "Page Num",
-                                  "fill": "$primary-fg",
+                                  "fill": "#1677FF",
                                   "content": "1",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
                                   "fontWeight": "600"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "G9G4k",
-                              "name": "Next",
-                              "opacity": 0.55,
+                              "id": "qIdEj",
+                              "name": "Page 2",
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "SOcOp",
-                                  "name": "Next Label",
-                                  "fill": "$disabled",
-                                  "content": "下一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "id": "fObzn",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "2",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "xdDFm",
+                              "name": "Page 3",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "uYAE6",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "3",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "K6xB3E",
+                              "name": "Ellipsis",
+                              "width": 32,
+                              "height": 32,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Hwyzf",
+                                  "name": "Ellipsis Text",
+                                  "fill": "#00000073",
+                                  "content": "···",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "a7hVj",
+                              "name": "Page 8",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "oF3r0",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "8",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "tRclx",
+                              "name": "Next",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "aGGNe",
+                                  "name": "Next Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-right",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "p7X3H",
+                          "name": "Size Changer",
+                          "height": 32,
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 6,
+                          "stroke": "#D9D9D9",
+                          "strokeWidth": 1,
+                          "gap": 4,
+                          "padding": [
+                            0,
+                            11
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Y963wU",
+                              "name": "Size Label",
+                              "fill": "#000000E0",
+                              "content": "5 条/页",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "J6CVGe",
+                              "name": "Size Chevron",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "chevron-down",
+                              "library": "lucide",
+                              "fill": "#00000073"
                             }
                           ]
                         }
@@ -8353,107 +8567,214 @@
                       "id": "Zq4sw",
                       "name": "Pagination",
                       "width": "fill_container",
-                      "height": 44,
-                      "justifyContent": "space_between",
+                      "height": 32,
+                      "gap": 16,
+                      "justifyContent": "end",
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "wmkoa",
-                          "name": "Page Meta",
-                          "fill": "$fg-3",
-                          "content": "共 5 条 · 每页 20 条",
-                          "fontFamily": "$font-body",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
                           "type": "frame",
-                          "id": "JyNRe",
+                          "id": "A2oZx1",
                           "name": "Pager Controls",
+                          "height": 32,
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
-                              "id": "sRbqn",
+                              "id": "DwgXp",
                               "name": "Prev",
-                              "opacity": 0.55,
+                              "opacity": 0.35,
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "HLnL2",
-                                  "name": "Prev Label",
-                                  "fill": "$disabled",
-                                  "content": "上一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "type": "icon",
+                                  "id": "RYWNZ",
+                                  "name": "Prev Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-left",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "E9vKo",
-                              "name": "Page Current",
+                              "id": "G6gqsF",
+                              "name": "Page Active",
                               "width": 32,
                               "height": 32,
-                              "fill": "$primary",
-                              "cornerRadius": "$radius-pill",
+                              "fill": "#FFFFFF",
+                              "cornerRadius": 6,
+                              "stroke": "#1677FF",
+                              "strokeWidth": 2,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "YNcev",
+                                  "id": "bIrIm",
                                   "name": "Page Num",
-                                  "fill": "$primary-fg",
+                                  "fill": "#1677FF",
                                   "content": "1",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
                                   "fontWeight": "600"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "i2M8Y",
-                              "name": "Next",
-                              "opacity": 0.55,
+                              "id": "nsmea",
+                              "name": "Page 2",
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "qKmpD",
-                                  "name": "Next Label",
-                                  "fill": "$disabled",
-                                  "content": "下一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "id": "Z4kB8",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "2",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "wEw01",
+                              "name": "Page 3",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "CMbu5",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "3",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "lgM7x",
+                              "name": "Ellipsis",
+                              "width": 32,
+                              "height": 32,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "uIixW",
+                                  "name": "Ellipsis Text",
+                                  "fill": "#00000073",
+                                  "content": "···",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Q2syE",
+                              "name": "Page 8",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "FwwN2",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "8",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "S5HNTa",
+                              "name": "Next",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "uvHGN",
+                                  "name": "Next Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-right",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Yc6Ui",
+                          "name": "Size Changer",
+                          "height": 32,
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 6,
+                          "stroke": "#D9D9D9",
+                          "strokeWidth": 1,
+                          "gap": 4,
+                          "padding": [
+                            0,
+                            11
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gIZKn",
+                              "name": "Size Label",
+                              "fill": "#000000E0",
+                              "content": "5 条/页",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "jFSVH",
+                              "name": "Size Chevron",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "chevron-down",
+                              "library": "lucide",
+                              "fill": "#00000073"
                             }
                           ]
                         }
@@ -10598,107 +10919,214 @@
                       "id": "SMEid",
                       "name": "Pagination",
                       "width": "fill_container",
-                      "height": 44,
-                      "justifyContent": "space_between",
+                      "height": 32,
+                      "gap": 16,
+                      "justifyContent": "end",
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "TVqBB",
-                          "name": "Page Meta",
-                          "fill": "$fg-3",
-                          "content": "共 5 条 · 每页 20 条",
-                          "fontFamily": "$font-body",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
                           "type": "frame",
-                          "id": "k87jA",
+                          "id": "TZ5nh",
                           "name": "Pager Controls",
+                          "height": 32,
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
-                              "id": "o4g8LX",
+                              "id": "k1YgeM",
                               "name": "Prev",
-                              "opacity": 0.55,
+                              "opacity": 0.35,
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "AmytB",
-                                  "name": "Prev Label",
-                                  "fill": "$disabled",
-                                  "content": "上一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "type": "icon",
+                                  "id": "X0BZG6",
+                                  "name": "Prev Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-left",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "A34Qde",
-                              "name": "Page Current",
+                              "id": "iTUwe",
+                              "name": "Page Active",
                               "width": 32,
                               "height": 32,
-                              "fill": "$primary",
-                              "cornerRadius": "$radius-pill",
+                              "fill": "#FFFFFF",
+                              "cornerRadius": 6,
+                              "stroke": "#1677FF",
+                              "strokeWidth": 2,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "kDUJe",
+                                  "id": "mGU05",
                                   "name": "Page Num",
-                                  "fill": "$primary-fg",
+                                  "fill": "#1677FF",
                                   "content": "1",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
                                   "fontWeight": "600"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "eljMv",
-                              "name": "Next",
-                              "opacity": 0.55,
+                              "id": "UpOZV",
+                              "name": "Page 2",
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "p2xBlc",
-                                  "name": "Next Label",
-                                  "fill": "$disabled",
-                                  "content": "下一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "id": "L16Lp",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "2",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "YMntI",
+                              "name": "Page 3",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "n7o8d",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "3",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Qkuly",
+                              "name": "Ellipsis",
+                              "width": 32,
+                              "height": 32,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "I2tOSh",
+                                  "name": "Ellipsis Text",
+                                  "fill": "#00000073",
+                                  "content": "···",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qKP6q",
+                              "name": "Page 8",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "eRhuA",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "8",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "TQqyP",
+                              "name": "Next",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "gNw6X",
+                                  "name": "Next Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-right",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "MRWuh",
+                          "name": "Size Changer",
+                          "height": 32,
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 6,
+                          "stroke": "#D9D9D9",
+                          "strokeWidth": 1,
+                          "gap": 4,
+                          "padding": [
+                            0,
+                            11
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "oEE3r",
+                              "name": "Size Label",
+                              "fill": "#000000E0",
+                              "content": "5 条/页",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "E8WHC",
+                              "name": "Size Chevron",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "chevron-down",
+                              "library": "lucide",
+                              "fill": "#00000073"
                             }
                           ]
                         }
@@ -12884,107 +13312,214 @@
                       "id": "U1yUp",
                       "name": "Pagination",
                       "width": "fill_container",
-                      "height": 44,
-                      "justifyContent": "space_between",
+                      "height": 32,
+                      "gap": 16,
+                      "justifyContent": "end",
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "X0eVI",
-                          "name": "Page Meta",
-                          "fill": "$fg-3",
-                          "content": "共 5 条 · 每页 20 条",
-                          "fontFamily": "$font-body",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
                           "type": "frame",
-                          "id": "a4ERjZ",
+                          "id": "i2wjs5",
                           "name": "Pager Controls",
+                          "height": 32,
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
-                              "id": "rEitl",
+                              "id": "pq6S5",
                               "name": "Prev",
-                              "opacity": 0.55,
+                              "opacity": 0.35,
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "text",
-                                  "id": "HFvq8",
-                                  "name": "Prev Label",
-                                  "fill": "$disabled",
-                                  "content": "上一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "type": "icon",
+                                  "id": "lB8ud",
+                                  "name": "Prev Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-left",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "MRV8R",
-                              "name": "Page Current",
+                              "id": "LxXBT",
+                              "name": "Page Active",
                               "width": 32,
                               "height": 32,
-                              "fill": "$primary",
-                              "cornerRadius": "$radius-pill",
+                              "fill": "#FFFFFF",
+                              "cornerRadius": 6,
+                              "stroke": "#1677FF",
+                              "strokeWidth": 2,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "wZsul",
+                                  "id": "W7Vqt6",
                                   "name": "Page Num",
-                                  "fill": "$primary-fg",
+                                  "fill": "#1677FF",
                                   "content": "1",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
                                   "fontWeight": "600"
                                 }
                               ]
                             },
                             {
                               "type": "frame",
-                              "id": "K1jEW",
-                              "name": "Next",
-                              "opacity": 0.55,
+                              "id": "mAqAr",
+                              "name": "Page 2",
+                              "width": 32,
                               "height": 32,
-                              "fill": "$glass-fill",
-                              "cornerRadius": "$radius-pill",
-                              "stroke": "$edge-dim",
-                              "strokeWidth": 1,
-                              "padding": [
-                                0,
-                                12
-                              ],
+                              "cornerRadius": 6,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "NGeV3",
-                                  "name": "Next Label",
-                                  "fill": "$disabled",
-                                  "content": "下一页",
-                                  "fontFamily": "$font-body",
-                                  "fontSize": 12,
-                                  "fontWeight": "500"
+                                  "id": "DkX3R",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "2",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "A4uLcN",
+                              "name": "Page 3",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "s6fA0",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "3",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qHIS0",
+                              "name": "Ellipsis",
+                              "width": 32,
+                              "height": 32,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Jmfxc",
+                                  "name": "Ellipsis Text",
+                                  "fill": "#00000073",
+                                  "content": "···",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ACFsH",
+                              "name": "Page 8",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "LixDH",
+                                  "name": "Page Num",
+                                  "fill": "#000000E0",
+                                  "content": "8",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Bb1tt",
+                              "name": "Next",
+                              "width": 32,
+                              "height": 32,
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "c8FsMK",
+                                  "name": "Next Icon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "chevron-right",
+                                  "library": "lucide",
+                                  "fill": "#000000E0"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "z9iDUj",
+                          "name": "Size Changer",
+                          "height": 32,
+                          "fill": "#FFFFFF",
+                          "cornerRadius": 6,
+                          "stroke": "#D9D9D9",
+                          "strokeWidth": 1,
+                          "gap": 4,
+                          "padding": [
+                            0,
+                            11
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qTQk5",
+                              "name": "Size Label",
+                              "fill": "#000000E0",
+                              "content": "5 条/页",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "DDzbu",
+                              "name": "Size Chevron",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "chevron-down",
+                              "library": "lucide",
+                              "fill": "#00000073"
                             }
                           ]
                         }
