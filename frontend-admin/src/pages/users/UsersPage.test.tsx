@@ -63,7 +63,7 @@ describe('UsersPage', () => {
     useToastStore.setState({ items: [] })
     listMock.mockResolvedValue({
       page: 1,
-      pageSize: 5,
+      pageSize: 10,
       total: 2,
       records: sampleUsers,
     })
@@ -90,14 +90,14 @@ describe('UsersPage', () => {
     expect(within(table).getByText('创建时间')).toBeInTheDocument()
     expect(within(table).getByText('操作')).toBeInTheDocument()
     expect(screen.queryByText('Bootstrap')).not.toBeInTheDocument()
-    expect(screen.getByText('5 条/页')).toBeInTheDocument()
+    expect(screen.getByText('10 条/页')).toBeInTheDocument()
   })
 
   it('navigates by clicking a page number', async () => {
     const user = userEvent.setup()
     listMock.mockResolvedValue({
       page: 1,
-      pageSize: 5,
+      pageSize: 10,
       total: 12,
       records: sampleUsers,
     })
@@ -110,7 +110,7 @@ describe('UsersPage', () => {
     await waitFor(() => {
       expect(listMock).toHaveBeenLastCalledWith({
         page: 2,
-        pageSize: 5,
+        pageSize: 10,
         username: undefined,
         role: undefined,
       })
@@ -130,7 +130,7 @@ describe('UsersPage', () => {
     await waitFor(() => {
       expect(listMock).toHaveBeenLastCalledWith({
         page: 1,
-        pageSize: 5,
+        pageSize: 10,
         username: 'ali',
         role: 'STAFF',
       })

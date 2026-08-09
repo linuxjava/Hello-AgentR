@@ -73,8 +73,8 @@ export function SelectMenu({
         aria-label={ariaLabel ?? label}
         onClick={() => setOpen((v) => !v)}
         className={[
-          'flex h-11 w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] pr-3.5 pl-3.5 text-left text-sm text-[#0F172A] outline-none',
-          triggerClassName ?? '',
+          'flex w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] text-left text-sm text-[#0F172A] outline-none',
+          triggerClassName ?? 'h-11 bg-[#FFFFFF59] px-3.5',
         ].join(' ')}
       >
         <span className="min-w-0 truncate">{selected?.label ?? ''}</span>
@@ -90,7 +90,7 @@ export function SelectMenu({
           id={listboxId}
           role="listbox"
           aria-labelledby={triggerId}
-          className="absolute top-[calc(100%+6px)] right-0 left-0 z-40 overflow-hidden rounded-[12px] border border-[#FFFFFFCC] bg-[#FFFFFFF2] py-1.5 shadow-[0_12px_28px_#0F172A33] backdrop-blur-[24px]"
+          className="absolute top-[calc(100%+6px)] right-0 left-0 z-40 overflow-hidden rounded-lg bg-[#FFFFFF] py-1 shadow-[0_6px_16px_0_rgba(0,0,0,0.08),0_3px_6px_-4px_rgba(0,0,0,0.12),0_9px_28px_8px_rgba(0,0,0,0.05)]"
         >
           {options.map((opt) => {
             const isSelected = opt.value === value
@@ -101,10 +101,12 @@ export function SelectMenu({
                   role="option"
                   aria-selected={isSelected}
                   className={[
-                    'flex h-12 w-full items-center px-3.5 text-left text-sm transition-colors',
+                    'flex h-10 w-full items-center px-3.5 text-left text-sm transition-colors',
+                    // Match Ant Design Pagination size-changer Select tokens:
+                    // optionSelectedBg=#E6F4FF, optionActiveBg=rgba(0,0,0,0.04)
                     isSelected
-                      ? 'bg-[#E2E8F0] font-medium text-[#0F172A]'
-                      : 'text-[#0F172A] hover:bg-[#F1F5F9]',
+                      ? 'bg-[#E6F4FF] font-semibold text-[rgba(0,0,0,0.88)]'
+                      : 'text-[rgba(0,0,0,0.88)] hover:bg-[rgba(0,0,0,0.04)]',
                   ].join(' ')}
                   onClick={() => {
                     onChange(opt.value)

@@ -13,7 +13,7 @@ import { CreateAccountModal } from '@/pages/users/CreateAccountModal'
 import { DeleteAccountModal } from '@/pages/users/DeleteAccountModal'
 import { EditAccountModal } from '@/pages/users/EditAccountModal'
 
-const DEFAULT_PAGE_SIZE = 5
+const DEFAULT_PAGE_SIZE = 10
 
 type RoleFilter = '' | AdminRole
 
@@ -100,31 +100,28 @@ function UsersPageInner() {
   }
 
   return (
-    <div className="flex h-full flex-col gap-5 p-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div className="flex flex-wrap items-end gap-3">
-          <div className="flex w-[220px] flex-col gap-2">
-            <label htmlFor="filter-username" className="text-[13px] font-medium text-[#334155]">
-              用户名
-            </label>
-            <div className="flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
-              <Search size={16} className="text-[#64748B]" aria-hidden />
-              <input
-                id="filter-username"
-                value={usernameInput}
-                onChange={(e) => setUsernameInput(e.target.value)}
-                placeholder="模糊搜索用户名"
-                className="h-full min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[#64748B]"
-              />
-            </div>
+    <div className="flex h-full flex-col gap-4 p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex h-9 w-[220px] items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFF59] px-3">
+            <Search size={14} className="text-[#64748B]" aria-hidden />
+            <input
+              id="filter-username"
+              aria-label="用户名"
+              value={usernameInput}
+              onChange={(e) => setUsernameInput(e.target.value)}
+              placeholder="模糊搜索用户名"
+              className="h-full min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[#64748B]"
+            />
           </div>
 
           <SelectMenu
             id="filter-role"
-            label="角色"
+            aria-label="角色"
             value={roleInput}
             onChange={(next) => setRoleInput(next as RoleFilter)}
             className="w-[160px]"
+            triggerClassName="h-9 bg-[#FFFFFF59] px-3"
             options={[
               { value: '', label: '全部' },
               { value: 'ADMIN', label: '管理员' },
@@ -135,7 +132,7 @@ function UsersPageInner() {
           <button
             type="button"
             onClick={onSearch}
-            className="h-11 rounded-full border border-[#FFFFFFCC] bg-[#FFFFFF59] px-5 text-sm font-medium text-[#0F172A]"
+            className="h-9 rounded-full border border-[#FFFFFFCC] bg-[#FFFFFF59] px-4 text-sm font-medium text-[#0F172A]"
           >
             查询
           </button>
@@ -145,7 +142,7 @@ function UsersPageInner() {
           type="button"
           onClick={() => guardWrite(() => setCreateOpen(true))}
           className={[
-            'h-11 rounded-full px-5 text-sm font-semibold text-white shadow-[0_6px_16px_#2563EB66]',
+            'h-9 rounded-full px-4 text-sm font-semibold text-white shadow-[0_6px_16px_#2563EB66]',
             isAdmin ? 'bg-[#2563EB]' : 'bg-[#2563EB]/70',
           ].join(' ')}
         >
@@ -159,15 +156,17 @@ function UsersPageInner() {
         </p>
       ) : null}
 
-      <div className="min-h-0 flex-1 overflow-auto rounded-[14px] border border-[#FFFFFF66] bg-[#FFFFFFD9]">
-        <table className="w-full min-w-[720px] border-collapse text-left">
+      {/* Table + pager share one scroll flow so pager sits under the table, not page foot */}
+      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto">
+        <div className="w-full overflow-x-auto">
+          <table className="w-full table-fixed border-collapse text-left">
           <thead>
-            <tr className="h-11 border-b border-[#CBD5E1] bg-[#FFFFFF66] text-xs font-semibold text-[#64748B]">
-              <th className="w-[72px] px-4">ID</th>
-              <th className="w-[180px] px-4">用户名</th>
-              <th className="w-[110px] px-4">角色</th>
-              <th className="w-[180px] px-4">创建时间</th>
-              <th className="px-4">操作</th>
+            <tr className="h-11 border-b border-[#CBD5E159] bg-[#FFFFFF66] text-xs font-semibold text-[#64748B]">
+              <th className="w-[18%] px-4">ID</th>
+              <th className="w-[22%] px-4">用户名</th>
+              <th className="w-[12%] px-4">角色</th>
+              <th className="w-[22%] px-4">创建时间</th>
+              <th className="w-[26%] px-4">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -192,21 +191,29 @@ function UsersPageInner() {
                 <tr
                   key={user.id}
                   className={[
-                    'h-[52px] border-b border-[#E2E8F0] text-[13px] text-[#0F172A]',
-                    index % 2 === 1 ? 'bg-[#FFFFFF33]' : '',
+                    'h-[52px] text-[13px] text-[#0F172A]',
+                    // Zebra rows stay borderless; skip the previous row's bottom border too
+                    // so even bands have no top/bottom hairlines.
+                    index % 2 === 1
+                      ? 'bg-[#FFFFFF14]'
+                      : index + 1 < records.length && (index + 1) % 2 === 1
+                        ? ''
+                        : 'border-b border-[#CBD5E140]',
                   ].join(' ')}
                 >
-                  <td className="px-4">{user.id}</td>
+                  <td className="truncate px-4 font-mono text-xs" title={user.id}>
+                    {user.id}
+                  </td>
                   <td className="px-4">
-                    <div className="flex items-center gap-2.5">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#7C3AED] text-xs font-bold text-white">
+                    <div className="flex min-w-0 items-center gap-2.5">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#7C3AED] text-xs font-bold text-white">
                         {avatarLetter(user.username)}
                       </span>
-                      <span>{user.username}</span>
+                      <span className="truncate">{user.username}</span>
                     </div>
                   </td>
-                  <td className="px-4">{roleLabel(user.role)}</td>
-                  <td className="px-4">{formatCreatedAt(user.createdAt)}</td>
+                  <td className="truncate px-4">{roleLabel(user.role)}</td>
+                  <td className="truncate px-4">{formatCreatedAt(user.createdAt)}</td>
                   <td className="px-4">
                     <div className="flex items-center gap-2">
                       <button
@@ -251,11 +258,12 @@ function UsersPageInner() {
               )
             })}
           </tbody>
-        </table>
-      </div>
+          </table>
+        </div>
 
-      <div className="flex justify-end">
-        <Pagination page={page} total={total} pageSize={pageSize} onChange={onPaginationChange} />
+        <div className="flex shrink-0 justify-end">
+          <Pagination page={page} total={total} pageSize={pageSize} onChange={onPaginationChange} />
+        </div>
       </div>
 
       <CreateAccountModal

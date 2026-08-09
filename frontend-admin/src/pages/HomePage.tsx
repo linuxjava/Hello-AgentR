@@ -2,7 +2,7 @@ import { LayoutDashboard } from 'lucide-react'
 
 export function HomePage() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 p-12 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-4 p-5 text-center">
       <div className="flex h-[72px] w-[72px] items-center justify-center rounded-[14px] bg-[#CFFAFE]">
         <LayoutDashboard size={32} className="text-[#2563EB]" aria-hidden />
       </div>

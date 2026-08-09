@@ -21,9 +21,9 @@
 .login-frost {
   position: absolute;
   inset: 0;
-  background: #ffffff38;
-  border: 1px solid #ffffff40;
-  backdrop-filter: blur(72px);
+  /* Softer frost so gradient orbs stay visible under shell glass panels */
+  background: #ffffff1a;
+  backdrop-filter: blur(48px);
 }
 
 .login-orb {

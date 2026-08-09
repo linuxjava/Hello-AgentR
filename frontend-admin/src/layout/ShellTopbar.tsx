@@ -63,7 +63,7 @@ export function ShellTopbar({ breadcrumb, onChangePassword }: ShellTopbarProps) 
                 <span
                   className={
                     isLast
-                      ? 'text-lg font-bold text-[#0F172A] font-[family-name:var(--font-display)]'
+                      ? 'text-lg font-normal text-[#0F172A] font-[family-name:var(--font-display)]'
                       : 'text-[13px] font-medium text-[#64748B]'
                   }
                 >
