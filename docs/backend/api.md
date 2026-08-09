@@ -11,7 +11,7 @@
 | Context Path | `/hello-agent`（见 `application.yaml`）     |
 | 鉴权头          | `Authorization: <token>`（Sa-Token，`loginType=admin`） |
 | 匿名接口         | 仅 `POST /admin/auth/login`               |
-| 登录门禁         | 其余 `/admin/**` 由拦截器统一校验；未登录返回宏观码 `A000001`，文案「未登录或登录已过期」 |
+| 登录门禁         | 其余 `/admin/**` 由拦截器统一校验；未登录返回宏观码 `A000001`，文案「未登录或登录已过期」；Web 用户端框架层一级码为 `U000001` |
 | 角色           | `ADMIN` / `STAFF`（JSON 枚举名）              |
 | 密码规则         | 长度 8–64，须同时包含字母与数字                       |
 | 用户名规则        | 长度 4–32，仅 `[a-zA-Z0-9_]`，创建后不可改          |
@@ -320,7 +320,7 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/users/$USER_ID" \
 | ------- | ----------------------------- |
 | S000001 | 系统执行出错                        |
 | T000001 | 第三方服务出错                       |
-| C000001 | Web 用户端错误                     |
+| U000001 | Web 用户端错误                     |
 | A000001 | Web 管理端错误（框架层：未登录、参数校验等按路径归入） |
 | M000001 | 移动端错误                         |
 
