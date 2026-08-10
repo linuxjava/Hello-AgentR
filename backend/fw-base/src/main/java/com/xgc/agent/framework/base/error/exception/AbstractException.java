@@ -24,7 +24,7 @@ import org.springframework.util.StringUtils;
 import java.util.Optional;
 
 /**
- * 抽象项目中三类异常体系，客户端异常、服务端异常以及远程服务调用异常
+ * 抽象项目异常体系：Web 用户端 / Web 管理端 / 移动端 / 服务端 / 远程调用异常
  */
 @Getter
 public abstract class AbstractException extends RuntimeException {

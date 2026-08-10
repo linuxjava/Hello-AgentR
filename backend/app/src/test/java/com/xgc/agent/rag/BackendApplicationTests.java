@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@SpringBootTest(classes = HelloAgentRagApplication.class)
+@SpringBootTest(classes = HelloAgentApplication.class)
 class BackendApplicationTests {
 
     @Autowired

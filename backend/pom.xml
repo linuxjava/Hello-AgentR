@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xgc.rag</groupId>
-    <artifactId>hello-agent-rag</artifactId>
+    <artifactId>Hello-AgentR</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hello-agent-rag</name>
+    <name>Hello-AgentR</name>
     <packaging>pom</packaging>
     <description>backend</description>
 
@@ -15,7 +15,7 @@
     </modules>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <!--spring-boot版本-->
         <spring-boot.version>3.5.7</spring-boot.version>
         <!--hutool版本-->

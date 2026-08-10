@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.xgc.rag</groupId>
-        <artifactId>hello-agent-rag</artifactId>
+        <artifactId>Hello-AgentR</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -53,5 +53,20 @@
             <scope>test</scope>
         </dependency>
         <!-- Mybatis-plus代码生成器（仅开发/测试阶段使用，不进入正式包） -->
+
+        <!--参数校验-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <!--参数校验-->
+
+        <!-- 密码哈希（BCrypt）；仅 crypto，不引入 spring-security-web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+        <!-- 密码哈希（BCrypt）；仅 crypto，不引入 spring-security-web -->
+
     </dependencies>
 </project>
