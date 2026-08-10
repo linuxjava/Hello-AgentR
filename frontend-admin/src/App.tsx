@@ -53,6 +53,13 @@ export default function App() {
           colorPrimary: '#1677ff',
           borderRadius: 6,
         },
+        components: {
+          Pagination: {
+            itemActiveBg: '#1677ff',
+            itemActiveColor: '#ffffff',
+            itemActiveColorHover: '#ffffff',
+          },
+        },
       }}
     >
       <RouterProvider router={router} />
