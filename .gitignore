@@ -1,3 +1,9 @@
 .claude/
 .codex/
 .cursor/
+openspec/
+CONTEXT-MAP.md
+AGENTS.md
+claude.md
+.cursorrules
+.agents/
