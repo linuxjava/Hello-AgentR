@@ -15,7 +15,7 @@ export function ShellSidebar() {
         </div>
         <div className="flex min-w-0 flex-col gap-0.5">
           <p className="truncate text-[15px] font-bold text-[#0F172A] font-[family-name:var(--font-display)]">
-            Hello-Agent
+            Hello-AgentR
           </p>
           <p className="text-[11px] text-[#64748B]">管理控制台</p>
         </div>

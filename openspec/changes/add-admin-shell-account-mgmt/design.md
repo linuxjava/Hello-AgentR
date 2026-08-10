@@ -84,7 +84,7 @@ App
     ├── /login → LoginPage（既有，本变更不改视觉）
     └── RequireAuth
           └── AdminShell
-                ├── Sidebar（Brand「Hello-Agent」+「管理控制台」；Nav 首页/账号管理）
+                ├── Sidebar（Brand「Hello-AgentR」+「管理控制台」；Nav 首页/账号管理）
                 ├── Topbar（Breadcrumb；IdentityDropdown → 修改密码 / 登出）
                 ├── Outlet
                 │     ├── HomePlaceholder（P-02）

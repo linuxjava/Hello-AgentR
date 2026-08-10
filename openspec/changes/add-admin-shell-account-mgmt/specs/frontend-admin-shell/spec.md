@@ -2,7 +2,7 @@
 
 ### Requirement: Admin Shell 布局与导航
 
-系统 SHALL 在已登录受保护路由外包裹 Admin Shell，视觉与文案对齐 Pencil `P-02` / `P-03`：侧栏展示品牌「Hello-Agent」与副标题「管理控制台」，导航项为「首页」「账号管理」；顶栏展示面包屑与身份区（username + 角色中文标签）；身份区为下拉，含「修改密码」「登出」。
+系统 SHALL 在已登录受保护路由外包裹 Admin Shell，视觉与文案对齐 Pencil `P-02` / `P-03`：侧栏展示品牌「Hello-AgentR」与副标题「管理控制台」，导航项为「首页」「账号管理」；顶栏展示面包屑与身份区（username + 角色中文标签）；身份区为下拉，含「修改密码」「登出」。
 
 #### Scenario: 侧栏切换页面
 

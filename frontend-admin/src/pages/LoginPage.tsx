@@ -88,7 +88,7 @@ export function LoginPage() {
                 HA
               </div>
               <p className="text-xl font-bold tracking-tight text-[#0F172A] font-[family-name:var(--font-display)]">
-                Hello-Agent
+                Hello-AgentR
               </p>
             </div>
           </div>

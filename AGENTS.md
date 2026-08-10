@@ -15,7 +15,7 @@
 | [docs](docs)                     | 项目文档目录               |
 
 ```
-Hello-ARag/
+Hello-AgentR/
 ├── CONTEXT-MAP.md     # 多上下文地图（词汇表 / ADR 放置约定）
 ├── backend/           # SpringBoot 后端
 ├── frontend-admin/    # Web 管理后台

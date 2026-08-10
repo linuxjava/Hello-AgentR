@@ -125,7 +125,7 @@
               "id": "bnLrJ",
               "name": "Title",
               "fill": "$text-on-bg",
-              "content": "DS-00 · Hello-Agent Admin",
+              "content": "DS-00 · Hello-AgentR Admin",
               "fontFamily": "$font-display",
               "fontSize": 28,
               "fontWeight": "700"
@@ -1099,7 +1099,7 @@
                               "id": "D1A1l",
                               "name": "Product",
                               "fill": "$fg",
-                              "content": "Hello-Agent",
+                              "content": "Hello-AgentR",
                               "fontFamily": "$font-display",
                               "fontSize": 20,
                               "fontWeight": "700"
@@ -1526,7 +1526,7 @@
                               "id": "d9uTD",
                               "name": "Product",
                               "fill": "$fg",
-                              "content": "Hello-Agent",
+                              "content": "Hello-AgentR",
                               "fontFamily": "$font-display",
                               "fontSize": 20,
                               "fontWeight": "700"
@@ -2051,7 +2051,7 @@
                           "id": "tJt87",
                           "name": "Product",
                           "fill": "$fg",
-                          "content": "Hello-Agent",
+                          "content": "Hello-AgentR",
                           "fontFamily": "$font-display",
                           "fontSize": 15,
                           "fontWeight": "700"
@@ -2668,7 +2668,7 @@
                           "id": "pirsg",
                           "name": "Product",
                           "fill": "$fg",
-                          "content": "Hello-Agent",
+                          "content": "Hello-AgentR",
                           "fontFamily": "$font-display",
                           "fontSize": 15,
                           "fontWeight": "700"
@@ -4770,7 +4770,7 @@
                           "id": "Er4oo",
                           "name": "Product",
                           "fill": "$fg",
-                          "content": "Hello-Agent",
+                          "content": "Hello-AgentR",
                           "fontFamily": "$font-display",
                           "fontSize": 15,
                           "fontWeight": "700"
@@ -6957,7 +6957,7 @@
                           "id": "Zndnw",
                           "name": "Product",
                           "fill": "$fg",
-                          "content": "Hello-Agent",
+                          "content": "Hello-AgentR",
                           "fontFamily": "$font-display",
                           "fontSize": 15,
                           "fontWeight": "700"
@@ -9287,7 +9287,7 @@
                           "id": "n7SZyE",
                           "name": "Product",
                           "fill": "$fg",
-                          "content": "Hello-Agent",
+                          "content": "Hello-AgentR",
                           "fontFamily": "$font-display",
                           "fontSize": 15,
                           "fontWeight": "700"
@@ -11658,7 +11658,7 @@
                           "id": "fomG7",
                           "name": "Product",
                           "fill": "$fg",
-                          "content": "Hello-Agent",
+                          "content": "Hello-AgentR",
                           "fontFamily": "$font-display",
                           "fontSize": 15,
                           "fontWeight": "700"
@@ -13971,7 +13971,7 @@
                           "id": "yJexg",
                           "name": "Product",
                           "fill": "$fg",
-                          "content": "Hello-Agent",
+                          "content": "Hello-AgentR",
                           "fontFamily": "$font-display",
                           "fontSize": 15,
                           "fontWeight": "700"

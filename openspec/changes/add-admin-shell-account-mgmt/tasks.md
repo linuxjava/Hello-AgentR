@@ -8,7 +8,7 @@
 
 ## 2. Admin Shell + 首页占位（Pencil P-02）
 
-- [x] 2.1 实现 `AdminShell`：渐变背景/玻璃侧栏与主区；品牌「Hello-Agent」+「管理控制台」；Nav「首页」「账号管理」选中态
+- [x] 2.1 实现 `AdminShell`：渐变背景/玻璃侧栏与主区；品牌「Hello-AgentR」+「管理控制台」；Nav「首页」「账号管理」选中态
 - [x] 2.2 顶栏：面包屑；身份芯片（头像缩写 + username + 角色）下拉「修改密码」「登出」
 - [x] 2.3 路由：`RequireAuth` 下挂 Shell；`/` → HomePlaceholder；`/users` → 账号页占位出口；登出清会话回 `/login`
 - [x] 2.4 首页占位文案对齐 Pencil：「首页占位」/「本阶段无业务内容。后续业务模块将挂载于此。」

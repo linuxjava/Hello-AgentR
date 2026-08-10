@@ -35,7 +35,7 @@ describe('LoginPage', () => {
 
   it('matches Pencil login card structure and copy', () => {
     renderLogin()
-    expect(screen.getByText('Hello-Agent')).toBeInTheDocument()
+    expect(screen.getByText('Hello-AgentR')).toBeInTheDocument()
     expect(screen.getByText('HA')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '登录' })).toBeInTheDocument()
     expect(screen.getByText('使用运营账号进入管理后台')).toBeInTheDocument()
