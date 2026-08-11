@@ -112,4 +112,5 @@ button:not(:disabled):not([aria-label='关闭遮罩']),
 
 .ant-pagination-item-active a {
   font-weight: 600;
+  color: #ffffff;
 }
