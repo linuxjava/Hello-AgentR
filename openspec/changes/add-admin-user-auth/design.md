@@ -1,6 +1,6 @@
 ## Context
 
-- **来源**：PRD `docs/backend/版本迭代/V0.1/prd.md`；词汇表 `docs/backend/CONTEXT.md`；ADR-0001
+- **来源**：PRD `docs/backend/版本迭代/V0.1/prd.md`；词汇表 `docs/backend/context/admin-identity/CONTEXT.md`；ADR-0001
 - **现状**：`backend` 已具备 `fw-base`（`R<T>`、异常、MyBatis-Plus、Snowflake、Sa-Token/Redis），`app` 尚无 AdminUser 业务模块
 - **约束**：Java 21 / Spring Boot 3；上下文路径以 `application.yaml` 为准（当前 `server.servlet.context-path: /hello-agent`）；管理端与 EndUser 身份隔离
 - **消费方**：后续 `frontend-admin`；本变更只交付后端 API

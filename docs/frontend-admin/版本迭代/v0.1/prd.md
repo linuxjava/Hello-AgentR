@@ -4,7 +4,7 @@
 
 **版本**：V0.1  
 **交付重心**：`frontend-admin` 功能闭环（登录、壳层、首页占位、账号管理）；**视觉定稿不在本阶段**（后续 Pencil）。  
-**领域词汇**：[`docs/frontend-admin/CONTEXT.md`](../../CONTEXT.md)（屏态/交互）；身份实体见 [`docs/backend/CONTEXT.md`](../../../backend/CONTEXT.md)  
+**领域词汇**：[`docs/frontend-admin/CONTEXT.md`](../../CONTEXT.md)（屏态/交互）；身份实体见 [`docs/backend/context/admin-identity/CONTEXT.md`](../../../backend/context/admin-identity/CONTEXT.md)  
 **后端契约**：[`docs/backend/api.md`](../../../backend/api.md)  
 **后端 PRD**：[`docs/backend/版本迭代/V0.1/prd.md`](../../../backend/版本迭代/V0.1/prd.md)  
 **相关决策**：  
@@ -220,7 +220,7 @@
 ## 11. 追溯链接
 
 - **前端领域词汇**：`docs/frontend-admin/CONTEXT.md`
-- **后端领域词汇**：`docs/backend/CONTEXT.md`
+- **后端领域词汇**：`docs/backend/context/admin-identity/CONTEXT.md`
 - **后端 API**：`docs/backend/api.md`
 - **后端 PRD**：`docs/backend/版本迭代/V0.1/prd.md`
 - **ADR**：0001 身份隔离；0002 localStorage token

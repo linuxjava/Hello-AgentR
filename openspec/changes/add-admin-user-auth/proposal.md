@@ -39,7 +39,7 @@ Web 管理端尚无独立身份与账号治理 API，无法安全完成首次管
 - **API**：在上下文路径 `/hello-agent` 下新增管理端认证与账号管理端点
 - **依赖**：既有 PostgreSQL、Redis、Sa-Token；无新外部厂商依赖
 - **客户端**：为后续 `frontend-admin` 对接提供契约；本变更不实现前端
-- **决策依据**：ADR-0001（管理端与 EndUser 身份隔离）、`docs/backend/CONTEXT.md`
+- **决策依据**：ADR-0001（管理端与 EndUser 身份隔离）、`docs/backend/context/admin-identity/CONTEXT.md`
 
 ## 回滚方案
 
