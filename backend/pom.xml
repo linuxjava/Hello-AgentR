@@ -24,9 +24,11 @@
         <mybatis-plus-spring-boot3-starter.version>3.5.17</mybatis-plus-spring-boot3-starter.version>
         <!--pgvector版本-->
         <pgvector.version>0.1.6</pgvector.version>
-        <!--redis相关配置-->
+        <!--redis版本相关配置-->
         <sa-token.version>1.43.0</sa-token.version>
         <redisson.version>4.0.0</redisson.version>
+        <!--tika版本-->
+        <tika.version>3.2.3</tika.version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +43,16 @@
                 <!--把这份清单里的版本管理「合并」进当前项目的 dependencyManagement-->
                 <scope>import</scope>
             </dependency>
+
+            <!--tika统一管理依赖版本 start-->
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-bom</artifactId>
+                <version>${tika.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--tika统一管理依赖版本 end-->
 
             <!--hutool依赖 start-->
             <dependency>
