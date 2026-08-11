@@ -8,6 +8,7 @@ import { authApi } from '@/shared/api/auth'
 import { ApiError } from '@/shared/api/types'
 import { useSessionStore } from '@/shared/auth/session-store'
 import { passwordSchema } from '@/shared/lib/validation'
+import { ModalLayer } from '@/shared/ui/ModalLayer'
 import { toastSuccess } from '@/shared/ui/toast-store'
 
 const schema = z
@@ -86,6 +87,7 @@ export function ChangePasswordModal({ open, onClose }: ChangePasswordModalProps)
   })
 
   return (
+    <ModalLayer>
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <button
         type="button"
@@ -174,6 +176,7 @@ export function ChangePasswordModal({ open, onClose }: ChangePasswordModalProps)
         </form>
       </section>
     </div>
+    </ModalLayer>
   )
 }
 

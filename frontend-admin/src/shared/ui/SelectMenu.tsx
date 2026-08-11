@@ -14,6 +14,7 @@ export interface SelectMenuProps {
   onChange: (value: string) => void
   className?: string
   triggerClassName?: string
+  disabled?: boolean
   'aria-label'?: string
 }
 
@@ -25,6 +26,7 @@ export function SelectMenu({
   onChange,
   className,
   triggerClassName,
+  disabled = false,
   'aria-label': ariaLabel,
 }: SelectMenuProps) {
   const autoId = useId()
@@ -71,10 +73,17 @@ export function SelectMenu({
         aria-expanded={open}
         aria-controls={listboxId}
         aria-label={ariaLabel ?? label}
-        onClick={() => setOpen((v) => !v)}
+        disabled={disabled}
+        onClick={() => {
+          if (disabled) {
+            return
+          }
+          setOpen((v) => !v)
+        }}
         className={[
           'flex w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] text-left text-sm text-[#0F172A] outline-none',
           triggerClassName ?? 'h-11 bg-[#FFFFFF59] px-3.5',
+          disabled ? 'cursor-not-allowed opacity-70' : '',
         ].join(' ')}
       >
         <span className="min-w-0 truncate">{selected?.label ?? ''}</span>

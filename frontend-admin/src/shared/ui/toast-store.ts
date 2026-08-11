@@ -56,3 +56,10 @@ export function toastInfo(message: string): string {
 export function toastNoPermission(): string {
   return toastInfo(NO_PERMISSION_MESSAGE)
 }
+
+/** Staff 点删除时的专用文案（Pencil H-02），与账号页通用无权限句区分。 */
+export const KB_NO_DELETE_PERMISSION_MESSAGE = '无权限删除知识库'
+
+export function toastKbNoDeletePermission(): string {
+  return toastInfo(KB_NO_DELETE_PERMISSION_MESSAGE)
+}

@@ -1,8 +1,9 @@
-import { Home, Users } from 'lucide-react'
+import { Database, Home, Users } from 'lucide-react'
 import { NavLink } from 'react-router'
 
 const navItems = [
   { to: '/', label: '首页', icon: Home, end: true },
+  { to: '/knowledge-bases', label: '知识库管理', icon: Database, end: false },
   { to: '/users', label: '账号管理', icon: Users, end: false },
 ] as const
 

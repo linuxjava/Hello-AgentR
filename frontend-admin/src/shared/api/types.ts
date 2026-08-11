@@ -20,6 +20,18 @@ export interface PageResult<T> {
   records: T[]
 }
 
+/** KnowledgeBase 列表/写回视图；不含文档数等摄入假字段（V0.2 契约）。 */
+export interface KnowledgeBaseView {
+  id: string
+  name: string
+  description: string | null
+  namespace: string
+  embeddingModel: string
+  createdBy: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface ApiResponse<T> {
   code: string
   message: string

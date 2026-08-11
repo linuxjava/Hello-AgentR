@@ -1,28 +1,24 @@
-import { CircleAlert, Trash2, TriangleAlert, X } from 'lucide-react'
+import { Trash2, TriangleAlert, X } from 'lucide-react'
 import { useState } from 'react'
-import type { AdminUserView } from '@/shared/api/types'
+import type { KnowledgeBaseView } from '@/shared/api/types'
 import { ApiError } from '@/shared/api/types'
-import { usersApi } from '@/shared/api/users'
-import { ModalLayer } from '@/shared/ui/ModalLayer'
+import { knowledgeApi } from '@/shared/api/knowledge'
 import { toastSuccess } from '@/shared/ui/toast-store'
+import { ErrorBanner } from '@/pages/knowledge-bases/kb-modal-chrome'
+import { ModalLayer } from '@/shared/ui/ModalLayer'
 
-export interface DeleteAccountModalProps {
+export interface DeleteKbModalProps {
   open: boolean
-  user: AdminUserView | null
+  kb: KnowledgeBaseView | null
   onClose: () => void
   onDeleted: () => void
 }
 
-export function DeleteAccountModal({
-  open,
-  user,
-  onClose,
-  onDeleted,
-}: DeleteAccountModalProps) {
+export function DeleteKbModal({ open, kb, onClose, onDeleted }: DeleteKbModalProps) {
   const [businessError, setBusinessError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
-  if (!open || !user) {
+  if (!open || !kb) {
     return null
   }
 
@@ -35,7 +31,7 @@ export function DeleteAccountModal({
     setSubmitting(true)
     setBusinessError(null)
     try {
-      await usersApi.remove(user.id)
+      await knowledgeApi.remove(kb.id)
       toastSuccess('删除成功')
       close()
       onDeleted()
@@ -59,7 +55,7 @@ export function DeleteAccountModal({
       <section
         role="dialog"
         aria-modal
-        aria-labelledby="delete-account-title"
+        aria-labelledby="delete-kb-title"
         className="relative z-10 flex w-full max-w-[460px] flex-col gap-5 rounded-[20px] border border-[#FFFFFFCC] bg-[#FFFFFFD9] p-7 shadow-[0_16px_40px_#0F172A40] backdrop-blur-[48px]"
       >
         <header className="flex items-start gap-3">
@@ -68,10 +64,10 @@ export function DeleteAccountModal({
           </div>
           <div className="min-w-0 flex-1">
             <h2
-              id="delete-account-title"
+              id="delete-kb-title"
               className="text-lg font-bold text-[#0F172A] font-[family-name:var(--font-display)]"
             >
-              删除账号
+              删除知识库
             </h2>
             <p className="text-[13px] text-[#64748B]">此操作不可恢复</p>
           </div>
@@ -85,23 +81,13 @@ export function DeleteAccountModal({
           </button>
         </header>
 
-        {businessError ? (
-          <div
-            role="alert"
-            className="flex items-center gap-2.5 rounded-[10px] border border-[#DC26264D] bg-[#DC262626] px-3.5 py-3 text-[13px] font-medium text-[#DC2626]"
-          >
-            <CircleAlert size={16} aria-hidden />
-            <span>{businessError}</span>
-          </div>
-        ) : null}
+        {businessError ? <ErrorBanner message={businessError} /> : null}
 
         <div className="flex flex-col gap-3 rounded-[14px] border border-[#FFFFFF66] bg-[#FFFFFF59] p-4">
           <p className="text-sm font-semibold text-[#0F172A]">
-            确定删除账号「{user.username}」吗？
+            确定删除知识库「{kb.name}」吗？
           </p>
-          <p className="text-[13px] text-[#334155]">
-            将执行删除，账号及其关联登录态会立即失效，且无法恢复。
-          </p>
+          <p className="text-[13px] text-[#334155]">将执行彻底删除，且无法恢复。</p>
         </div>
 
         <div className="flex justify-end gap-3">
