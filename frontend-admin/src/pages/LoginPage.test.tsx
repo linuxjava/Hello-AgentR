@@ -61,10 +61,18 @@ describe('LoginPage', () => {
     expect(password).toHaveAttribute('type', 'password')
   })
 
+  it('prefills Bootstrap username and password', () => {
+    renderLogin()
+    expect(screen.getByLabelText('用户名')).toHaveValue('admin')
+    expect(screen.getByLabelText('密码')).toHaveValue('admin@123456')
+  })
+
   it('shows field errors when required values are empty', async () => {
     const user = userEvent.setup()
     renderLogin()
 
+    await user.clear(screen.getByLabelText('用户名'))
+    await user.clear(screen.getByLabelText('密码'))
     await user.click(screen.getByRole('button', { name: '登录' }))
 
     expect(await screen.findByText('请输入用户名')).toBeInTheDocument()
@@ -86,10 +94,15 @@ describe('LoginPage', () => {
     })
 
     renderLogin()
-    await user.type(screen.getByLabelText('用户名'), 'admin')
-    await user.type(screen.getByLabelText('密码'), 'secret')
     await user.click(screen.getByLabelText('记住我'))
     await user.click(screen.getByRole('button', { name: '登录' }))
+
+    await waitFor(() => {
+      expect(loginMock).toHaveBeenCalledWith({
+        username: 'admin',
+        password: 'admin@123456',
+      })
+    })
 
     await waitFor(() => {
       expect(screen.getByText('HOME_OK')).toBeInTheDocument()
@@ -105,7 +118,7 @@ describe('LoginPage', () => {
     loginMock.mockRejectedValue(new ApiError('A000001', '用户名或密码错误'))
 
     renderLogin()
-    await user.type(screen.getByLabelText('用户名'), 'admin')
+    await user.clear(screen.getByLabelText('密码'))
     await user.type(screen.getByLabelText('密码'), 'bad')
     await user.click(screen.getByRole('button', { name: '登录' }))
 

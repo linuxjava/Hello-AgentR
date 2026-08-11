@@ -107,7 +107,7 @@
 | AC-F102 | US-F101 | 正常 | 已登录；库中有多条 | 打开列表（不填筛选） | 按创建时间倒序分页；默认 pageSize=20；列含 Name、Namespace、EmbeddingModel、描述（可空）、createdAt；**无**文档数 / 切片数 / 索引状态 | 草稿 |
 | AC-F103 | US-F101 | 边界 | 已登录 | 用 Name 模糊筛选或翻页 | 结果与筛选/分页一致；页上**没有** Namespace 筛选控件 | 草稿 |
 | AC-F104 | US-F102 | 正常 | 已登录；目录接口成功；Name/Namespace 未被占用 | 打开创建弹窗，选 `mock-embedding-v1` 或 `mock-embedding-v2`，提交合法表单 | Toast 成功；弹窗关闭；列表可见新库；Namespace 与模型与提交一致 | 草稿 |
-| AC-F105 | US-F102 | 正常 | 已登录 | 打开创建弹窗 | 模型为下拉，选项来自 `GET /admin/embedding-models`；附「模拟目录，非生产模型」说明；无自填任意模型 | 草稿 |
+| AC-F105 | US-F102 | 正常 | 已登录 | 打开创建弹窗 | 模型为下拉，默认不选任何项，占位「请选择向量模型」；选项来自 `GET /admin/embedding-models`；无自填任意模型 | 草稿 |
 | AC-F106 | US-F102 | 失败 | 已登录 | Name 为空/超 64、Namespace 含大写或连字符、描述超 200 | 弹窗不关闭；内联或弹窗内错误；不发成功请求或后端拒绝后无新行 | 草稿 |
 | AC-F107 | US-F102 | 失败 | 已登录；Name 或 Namespace 已存在 | 再次提交冲突值 | 弹窗内展示后端文案（如「名称已存在」「Namespace 已存在」）；原库不被覆盖 | 草稿 |
 | AC-F108 | US-F103 | 正常 | 已登录；目标存在 | 打开编辑弹窗，改 Name，清空描述并提交 | 成功；列表刷新；Namespace 与 EmbeddingModel 仍为原值且控件不可编辑 | 草稿 |

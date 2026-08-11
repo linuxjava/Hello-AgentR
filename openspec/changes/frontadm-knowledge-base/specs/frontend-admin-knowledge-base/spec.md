@@ -50,13 +50,19 @@
 
 ### Requirement: 创建知识库模态
 
-系统 SHALL 提供「创建知识库」→ O-05（Pencil）：字段顺序 MUST 为名称、命名空间、向量模型下拉、描述；占位与按钮「取消」「创建」MUST 对齐 Pencil。向量模型选项 SHALL 仅来自 `GET /admin/embedding-models`，SHALL NOT 允许自填任意值，SHALL NOT 展示「模拟目录，非生产模型」说明句。Admin 与 Staff 均可提交合法创建。
+系统 SHALL 提供「创建知识库」→ O-05（Pencil）：字段顺序 MUST 为名称、命名空间、向量模型下拉、描述；占位与按钮「取消」「创建」MUST 对齐 Pencil。向量模型打开时 MUST 不预选任何项，触发器 MUST 显示「请选择向量模型」。向量模型选项 SHALL 仅来自 `GET /admin/embedding-models`，SHALL NOT 允许自填任意值，SHALL NOT 展示「模拟目录，非生产模型」说明句。未选择模型时提交 SHALL 展示「请选择向量模型」且不得建库。Admin 与 Staff 均可提交合法创建。
 
 #### Scenario: 创建成功
 
 - **GIVEN** 已登录且目录接口成功、名称与命名空间未被占用
 - **WHEN** 打开创建弹窗，选择目录中的模型并提交合法表单
 - **THEN** Toast「创建成功」，弹窗关闭，列表可见新库且命名空间与模型与提交一致
+
+#### Scenario: 未选向量模型
+
+- **GIVEN** 已打开创建弹窗且目录已加载
+- **WHEN** 未选择向量模型即提交
+- **THEN** 触发器仍显示「请选择向量模型」，展示该提示文案，不创建知识库
 
 #### Scenario: 名称冲突
 

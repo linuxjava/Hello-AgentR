@@ -77,7 +77,7 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
           return
         }
         setModels(next)
-        setValue('embeddingModel', next[0] ?? '')
+        // 产品要求默认不预选，避免运营未确认就绑上目录第一项。
         setCatalogState('ready')
       })
       .catch(() => {
@@ -90,7 +90,7 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
     return () => {
       cancelled = true
     }
-  }, [open, reset, setValue])
+  }, [open, reset])
 
   if (!open) {
     return null
@@ -98,9 +98,9 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
 
   const catalogFailed = catalogState === 'failed'
   const catalogOptions =
-    catalogState === 'ready'
-      ? models.map((id) => ({ value: id, label: id }))
-      : [{ value: '', label: catalogFailed ? '目录不可用' : '加载中…' }]
+    catalogState === 'ready' ? models.map((id) => ({ value: id, label: id })) : []
+  const modelPlaceholder =
+    catalogFailed ? '目录不可用' : catalogState === 'loading' ? '加载中…' : '请选择向量模型'
 
   const close = () => {
     setBusinessError(null)
@@ -169,7 +169,9 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
           label="向量模型"
           value={embeddingModel}
           disabled={catalogState !== 'ready'}
-          onChange={(next) => setValue('embeddingModel', next, { shouldDirty: true })}
+          placeholder={modelPlaceholder}
+          error={errors.embeddingModel?.message}
+          onChange={(next) => setValue('embeddingModel', next, { shouldDirty: true, shouldValidate: true })}
           options={catalogOptions}
         />
         <LabeledTextarea
