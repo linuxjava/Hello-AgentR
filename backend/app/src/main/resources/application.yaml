@@ -74,13 +74,13 @@ hello-agent:
     embeddingModels:
       - id: qwen3.7-text-embedding
         model: qwen3.7-text-embedding
-        dimension: 1024
+        dimension: 1536
         providerId: alibailian
         priority: 10
         isDefault: true
       - id: Qwen/Qwen3-Embedding-8B
         model: Qwen/Qwen3-Embedding-8B
-        dimension: 1024
+        dimension: 1536
         providerId: siliconflow
         priority: 20
         isDefault: false
