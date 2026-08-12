@@ -12,7 +12,7 @@
 ## 1. 目的与范围
 
 - **业务目标引用**：`BRD-OBJ-TBD`
-- **问题陈述**：V0.2 的 EmbeddingModel 目录为模拟写死数据，无法按环境配置真实可用模型。需要将目录改为 YAML 配置驱动，使创建 KnowledgeBase 时可选择已配置模型。
+- **问题陈述**：V0.2 的 EmbeddingModel 目录为模拟写死数据，无法按环境配置真实可用模型。需要将目录改为 YAML 配置驱动，并在创建 KnowledgeBase 时由后端自动绑定默认模型，确保后续 query 与知识库使用同一向量模型。
 - **假设**：
   - 本迭代仅覆盖 Embedding 相关配置，不覆盖 Chat/LLM。
   - 配置为后端唯一事实来源；不提供 Provider/Model 的管理 API。
@@ -33,7 +33,7 @@
 
 ## 2. 目标与护栏
 
-- **首要指标**：运维仅通过 YAML 即可完成多厂商 Embedding 模型目录配置；已登录 Admin/Staff 可在创建知识库时选择配置目录中的模型，且非法模型 100% 被拒绝。
+- **首要指标**：运维仅通过 YAML 即可完成多厂商 Embedding 模型目录配置；已登录 Admin/Staff 创建知识库时由后端自动绑定默认模型，且无默认模型时 100% 拒绝创建。
 - **次要指标**：
   - 配置结构错误在启动期 100% fail-fast
   - 目录排序稳定、可预测
@@ -56,7 +56,7 @@
 7. **模型字段**：去掉 `displayName`；保留 `model` 字段作为上游请求模型名。  
 8. **模型唯一性**：`embeddingModels.id` 全局唯一（G）。  
 9. **维度约束**：所有 `embeddingModels.dimension` 必须统一大小。  
-10. **默认模型**：新增 `isDefault`，全局必须且仅一个 `true`。  
+10. **默认模型**：新增 `isDefault`，全局必须且仅一个 `true`；创建知识库固定使用该默认模型。  
 11. **目录排序**：`priority ASC, id ASC`（priority 可重复，P1）。  
 12. **目录漂移策略**：L（宽松）——已绑定但被移除的模型不阻断已有库读/改/删，仅阻断新建。  
 13. **引用完整性**：`providerId` 悬空即启动失败（R1）。  
@@ -143,9 +143,10 @@ hello-agent:
 
 ### 6.2 创建 KnowledgeBase
 
-- 请求仍只传 `embeddingModel`（即模型 `id`）
-- 仅允许目录中存在的 id
-- 成功后库内只保存该 id，不保存 provider 信息
+- 请求不再接收 `embeddingModel`
+- 后端读取目录中的默认模型（`isDefault=true`）并自动绑定
+- 当默认模型不存在/不可用时拒绝创建（`A002007`）
+- 成功后库内只保存模型 id，不保存 provider 信息
 
 ### 6.3 目录漂移（L）
 

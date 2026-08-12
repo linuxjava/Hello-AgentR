@@ -67,10 +67,10 @@ export function KnowledgeBaseTable({
             <tr className="h-11 border-b border-[#CBD5E159] bg-[#FFFFFF66] text-xs font-semibold text-[#64748B]">
               <th className="w-[15%] px-4">名称</th>
               <th className="w-[14%] px-4">命名空间</th>
-              <th className="w-[16%] px-4">向量模型</th>
+              <th className="w-[24%] px-4">向量模型</th>
               <th className="w-[18%] px-4">描述</th>
               <th className="w-[15%] px-4">创建时间</th>
-              <th className="w-[22%] min-w-[168px] px-4">操作</th>
+              <th className="w-[14%] min-w-[120px] px-4">操作</th>
             </tr>
           </thead>
           {showTableBody ? (

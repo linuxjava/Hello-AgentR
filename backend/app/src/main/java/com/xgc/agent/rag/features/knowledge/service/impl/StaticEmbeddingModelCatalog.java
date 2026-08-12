@@ -25,11 +25,17 @@ public class StaticEmbeddingModelCatalog implements EmbeddingModelCatalog {
     private final List<EmbeddingModelCatalogItem> items;
 
     private final Set<String> idSet;
+    private final String defaultId;
 
     public StaticEmbeddingModelCatalog(ModelCatalogProperties properties) {
         validateAndInit(properties);
         this.items = buildItems(properties);
         this.idSet = items.stream().map(EmbeddingModelCatalogItem::id).collect(java.util.stream.Collectors.toSet());
+        this.defaultId = items.stream()
+                .filter(EmbeddingModelCatalogItem::isDefault)
+                .map(EmbeddingModelCatalogItem::id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -40,6 +46,11 @@ public class StaticEmbeddingModelCatalog implements EmbeddingModelCatalog {
     @Override
     public boolean contains(String id) {
         return id != null && idSet.contains(id);
+    }
+
+    @Override
+    public String defaultId() {
+        return defaultId;
     }
 
     private void validateAndInit(ModelCatalogProperties properties) {

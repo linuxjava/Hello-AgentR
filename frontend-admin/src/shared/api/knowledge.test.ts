@@ -105,7 +105,6 @@ describe('knowledgeApi', () => {
     await createKnowledgeBase({
       name: '产品手册',
       namespace: 'productdocs',
-      embeddingModel: 'qwen3.7-text-embedding',
     })
     await updateKnowledgeBase('kb-1', { name: '产品手册', description: '' })
     await removeKnowledgeBase('kb-1')
@@ -141,7 +140,6 @@ describe('knowledgeApi', () => {
       createKnowledgeBase({
         name: '产品手册',
         namespace: 'other',
-        embeddingModel: 'qwen3.7-text-embedding',
       }),
     ).rejects.toMatchObject({
       name: 'ApiError',

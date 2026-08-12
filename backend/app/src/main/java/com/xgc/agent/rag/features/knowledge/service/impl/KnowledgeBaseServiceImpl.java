@@ -75,7 +75,8 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
         String name = KnowledgeFieldRules.normalizeName(request.name());
         String namespace = KnowledgeFieldRules.normalizeNamespace(request.namespace());
         String description = KnowledgeFieldRules.normalizeDescription(request.description());
-        if (!embeddingModelCatalog.contains(request.embeddingModel())) {
+        String defaultEmbeddingModel = embeddingModelCatalog.defaultId();
+        if (defaultEmbeddingModel == null || !embeddingModelCatalog.contains(defaultEmbeddingModel)) {
             throw new WebAdminException(
                     KnowledgeErrorCode.EMBEDDING_MODEL_INVALID.message(),
                     KnowledgeErrorCode.EMBEDDING_MODEL_INVALID);
@@ -87,7 +88,7 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
                 .name(name)
                 .description(description)
                 .namespace(namespace)
-                .embeddingModel(request.embeddingModel())
+                .embeddingModel(defaultEmbeddingModel)
                 .createdBy(operatorId)
                 .updatedBy(operatorId)
                 .build();

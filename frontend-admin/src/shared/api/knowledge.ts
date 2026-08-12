@@ -16,7 +16,6 @@ export interface CreateKnowledgeBaseRequest {
   name: string
   description?: string
   namespace: string
-  embeddingModel: string
 }
 
 export interface UpdateKnowledgeBaseRequest {

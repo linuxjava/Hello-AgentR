@@ -26,7 +26,7 @@ _Avoid_: slug、code、Collection、path、用 Name 当存储键、系统自动�
 _Avoid_: Vendor、Supplier、账号、把 Provider 当成 EmbeddingModel、在目录 API 中暴露密钥、YAML 明文 apiKey、自定义实例名（如 bailian-main）、同一厂商多条配置
 
 **EmbeddingModel（嵌入模型）**：
-创建 KnowledgeBase 时绑定的嵌入模型；创建后不可更换；不是对话用的 LLM。权威来源是部署侧 YAML（挂在某个 ModelProvider 下）；进程启动时加载为只读目录，**仅重启后**反映配置变更（不热加载）。标识在全配置内全局唯一；KnowledgeBase 只存该标识，不存 Provider。目录项对人暴露 id、model、dimension、providerId、priority、isDefault；创建请求只传 id，且必须仍在当前目录中。`model` 是调用上游嵌入接口时使用的模型标识。目录返回顺序按 priority 升序（数值越小优先级越高）；priority 相同按 id 升序稳定排序。`dimension` 在本配置中要求统一大小（所有 EmbeddingModel 必须相同）。`isDefault` 在全目录中必须且仅能有一个 `true`。
+创建 KnowledgeBase 时绑定的嵌入模型；创建后不可更换；不是对话用的 LLM。权威来源是部署侧 YAML（挂在某个 ModelProvider 下）；进程启动时加载为只读目录，**仅重启后**反映配置变更（不热加载）。标识在全配置内全局唯一；KnowledgeBase 只存该标识，不存 Provider。目录项对人暴露 id、model、dimension、providerId、priority、isDefault；创建知识库时由后端自动选择 `isDefault=true` 的目录项，不接受前端传入模型 id。`model` 是调用上游嵌入接口时使用的模型标识。目录返回顺序按 priority 升序（数值越小优先级越高）；priority 相同按 id 升序稳定排序。`dimension` 在本配置中要求统一大小（所有 EmbeddingModel 必须相同）。`isDefault` 在全目录中必须且仅能有一个 `true`。
 _Avoid_: LLM、Chat 模型、向量模型（口语可，文档用 EmbeddingModel）、模拟目录（已废弃称谓）、运行中热更新目录
 
 **目录漂移（已绑定但配置已移除）**：
@@ -77,12 +77,12 @@ _Avoid_: 附件、File（作业务实体时）、把 Document 当成 KnowledgeBa
 
 ## In-scope（本阶段）
 
-- 创建 KnowledgeBase（Name、Description、Namespace、EmbeddingModel id）
+- 创建 KnowledgeBase（Name、Description、Namespace；EmbeddingModel 由后端默认模型自动绑定）
 - 分页列表与详情
 - 修改任意库的 Name / Description
 - 物理删除（无 Document 前提；仅 Admin）
 - 从 YAML 加载 ModelProvider（map key = providerId，首版 `alibailian` | `siliconflow`）+ EmbeddingModel（list），暴露 EmbeddingModel 只读目录（对象：id / model / dimension / providerId / priority / isDefault）；密钥不出现在 API 响应；配置变更仅重启生效
-- 创建时校验 EmbeddingModel id 属于当前目录
+- 创建时使用目录唯一默认模型；无默认模型或默认模型缺失时拒绝创建
 - 目录漂移按宽松规则（已绑定可读写删；仅新建校验目录）
 - 配置结构不合法则启动失败；缺密钥与空目录不挡启动
 

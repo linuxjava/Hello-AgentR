@@ -225,7 +225,7 @@ describe('KnowledgeBasesPage', () => {
     expect(removeMock).not.toHaveBeenCalled()
   })
 
-  it('creates a knowledge base after loading the catalog', async () => {
+  it('creates a knowledge base without showing embedding model field', async () => {
     const user = userEvent.setup()
     createMock.mockResolvedValue(sampleKb)
     renderPage()
@@ -234,27 +234,15 @@ describe('KnowledgeBasesPage', () => {
     await user.click(screen.getByRole('button', { name: '创建知识库' }))
     const dialog = await screen.findByRole('dialog', { name: '创建知识库' })
     expect(screen.queryByText('模拟目录，非生产模型')).not.toBeInTheDocument()
-    await waitFor(() => {
-      expect(listEmbeddingModelsMock).toHaveBeenCalled()
-    })
-    expect(within(dialog).getByRole('button', { name: '向量模型' })).toHaveTextContent(
-      '请选择向量模型',
-    )
+    expect(within(dialog).queryByLabelText('向量模型')).not.toBeInTheDocument()
     await user.type(within(dialog).getByLabelText('名称'), '新品手册')
     await user.type(within(dialog).getByLabelText('命名空间'), 'newdocs')
-    await user.click(within(dialog).getByRole('button', { name: '向量模型' }))
-    await user.click(
-      within(dialog).getByRole('option', {
-        name: 'alibailian / qwen3.7-text-embedding',
-      }),
-    )
     await user.click(within(dialog).getByRole('button', { name: '创建' }))
 
     await waitFor(() => {
       expect(createMock).toHaveBeenCalledWith({
         name: '新品手册',
         namespace: 'newdocs',
-        embeddingModel: 'qwen3.7-text-embedding',
       })
     })
     expect(await screen.findByRole('status')).toHaveTextContent('创建成功')
@@ -268,63 +256,12 @@ describe('KnowledgeBasesPage', () => {
 
     await user.click(screen.getByRole('button', { name: '创建知识库' }))
     const dialog = await screen.findByRole('dialog', { name: '创建知识库' })
-    await waitFor(() => expect(listEmbeddingModelsMock).toHaveBeenCalled())
     await user.type(within(dialog).getByLabelText('名称'), '产品手册')
     await user.type(within(dialog).getByLabelText('命名空间'), 'otherns')
-    await user.click(within(dialog).getByRole('button', { name: '向量模型' }))
-    await user.click(
-      within(dialog).getByRole('option', {
-        name: 'alibailian / qwen3.7-text-embedding',
-      }),
-    )
     await user.click(within(dialog).getByRole('button', { name: '创建' }))
 
     expect(await within(dialog).findByRole('alert')).toHaveTextContent('名称已存在')
     expect(screen.getByRole('dialog', { name: '创建知识库' })).toBeInTheDocument()
-  })
-
-  it('requires choosing an embedding model before create', async () => {
-    const user = userEvent.setup()
-    renderPage()
-    await screen.findByText('产品手册')
-
-    await user.click(screen.getByRole('button', { name: '创建知识库' }))
-    const dialog = await screen.findByRole('dialog', { name: '创建知识库' })
-    await waitFor(() => expect(listEmbeddingModelsMock).toHaveBeenCalled())
-    expect(within(dialog).getByRole('button', { name: '向量模型' })).toHaveTextContent(
-      '请选择向量模型',
-    )
-    await user.type(within(dialog).getByLabelText('名称'), '新品手册')
-    await user.type(within(dialog).getByLabelText('命名空间'), 'newdocs')
-    await user.click(within(dialog).getByRole('button', { name: '创建' }))
-
-    expect(
-      within(dialog).getByText((content, element) =>
-        element?.tagName === 'SPAN'
-        && element.className.includes('text-[#DC2626]')
-        && content === '请选择向量模型',
-      ),
-    ).toBeInTheDocument()
-    expect(createMock).not.toHaveBeenCalled()
-    expect(screen.getByRole('dialog', { name: '创建知识库' })).toBeInTheDocument()
-  })
-
-  it('disables create when embedding catalog fails', async () => {
-    const user = userEvent.setup()
-    listEmbeddingModelsMock.mockRejectedValue(new ApiError('NETWORK', 'down'))
-    renderPage()
-    await screen.findByText('产品手册')
-
-    await user.click(screen.getByRole('button', { name: '创建知识库' }))
-    const dialog = await screen.findByRole('dialog', { name: '创建知识库' })
-    expect(await within(dialog).findByRole('alert')).toHaveTextContent(
-      '向量模型目录暂不可用，无法提交创建。',
-    )
-    expect(within(dialog).getByRole('button', { name: '向量模型' })).toHaveTextContent(
-      '目录不可用',
-    )
-    expect(within(dialog).getByRole('button', { name: '创建' })).toBeDisabled()
-    expect(createMock).not.toHaveBeenCalled()
   })
 
   it('edits name/description without showing isolation keys', async () => {

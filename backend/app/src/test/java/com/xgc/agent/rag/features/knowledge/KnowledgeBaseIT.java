@@ -83,20 +83,12 @@ class KnowledgeBaseIT {
 
     @Test
     @Order(2)
-    void createRejectsInvalidModelAndBadNamespace() throws Exception {
+    void createRejectsBadNamespace() throws Exception {
         mockMvc.perform(post("/admin/knowledge-bases")
                         .header("Authorization", adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"坏模型","namespace":"%s","embeddingModel":"gpt-does-not-exist"}
-                                """.formatted(reusedNamespace)))
-                .andExpect(jsonPath("$.code").value("A002007"));
-
-        mockMvc.perform(post("/admin/knowledge-bases")
-                        .header("Authorization", adminToken)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {"name":"坏键","namespace":"HR-FAQ","embeddingModel":"bge-m3"}
+                                {"name":"坏键","namespace":"HR-FAQ"}
                                 """))
                 .andExpect(jsonPath("$.code").value("A002004"));
     }
@@ -119,7 +111,7 @@ class KnowledgeBaseIT {
                         .header("Authorization", staffToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"%s","description":"手册","namespace":"%s","embeddingModel":"bge-m3"}
+                                {"name":"%s","description":"手册","namespace":"%s"}
                                 """.formatted(name, reusedNamespace)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("0"))
@@ -134,7 +126,7 @@ class KnowledgeBaseIT {
                         .header("Authorization", adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"%s","namespace":"other%s","embeddingModel":"sf-bge-large-zh"}
+                                {"name":"%s","namespace":"other%s"}
                                 """.formatted(name, uniqueSuffix.substring(uniqueSuffix.length() - 8))))
                 .andExpect(jsonPath("$.code").value("A002003"));
 
@@ -177,11 +169,11 @@ class KnowledgeBaseIT {
                         .header("Authorization", adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"重建%s","namespace":"%s","embeddingModel":"sf-bge-large-zh"}
+                                {"name":"重建%s","namespace":"%s"}
                                 """.formatted(uniqueSuffix, reusedNamespace)))
                 .andExpect(jsonPath("$.code").value("0"))
                 .andExpect(jsonPath("$.data.namespace").value(reusedNamespace))
-                .andExpect(jsonPath("$.data.embeddingModel").value("sf-bge-large-zh"));
+                .andExpect(jsonPath("$.data.embeddingModel").value("bge-m3"));
     }
 
     private String login(String username, String password) throws Exception {

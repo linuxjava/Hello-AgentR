@@ -17,6 +17,11 @@ public interface EmbeddingModelCatalog {
     List<EmbeddingModelCatalogItem> listItems();
 
     /**
+     * @return 默认模型 id；目录为空时返回 null
+     */
+    String defaultId();
+
+    /**
      * @param id 调用方提交的模型标识
      * @return 是否属于当前目录
      */

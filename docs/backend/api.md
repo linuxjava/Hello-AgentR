@@ -374,10 +374,11 @@ curl -s 'http://localhost:9898/hello-agent/admin/embedding-models' \
 {
   "name": "员工手册",
   "description": "可选",
-  "namespace": "hrfaq",
-  "embeddingModel": "mock-embedding-v1"
+  "namespace": "hrfaq"
 }
 ```
+
+创建时不接收 `embeddingModel`；后端会自动绑定目录中 `isDefault=true` 的默认模型。
 
 | 错误码 | 文案 |
 | --- | --- |

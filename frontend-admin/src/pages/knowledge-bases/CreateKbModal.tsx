@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ApiError } from '@/shared/api/types'
-import type { EmbeddingModelCatalogItem } from '@/shared/api/types'
 import { knowledgeApi } from '@/shared/api/knowledge'
 import {
   knowledgeDescriptionSchema,
   knowledgeNameSchema,
   knowledgeNamespaceSchema,
 } from '@/shared/lib/validation'
-import { SelectMenu } from '@/shared/ui/SelectMenu'
 import { toastSuccess } from '@/shared/ui/toast-store'
 import {
   ErrorBanner,
@@ -22,15 +20,10 @@ import {
 const schema = z.object({
   name: knowledgeNameSchema,
   namespace: knowledgeNamespaceSchema,
-  embeddingModel: z.string().min(1, '请选择向量模型'),
   description: knowledgeDescriptionSchema,
 })
 
 type FormValues = z.infer<typeof schema>
-
-const CATALOG_UNAVAILABLE = '向量模型目录暂不可用，无法提交创建。'
-
-type CatalogState = 'loading' | 'ready' | 'failed'
 
 export interface CreateKbModalProps {
   open: boolean
@@ -40,72 +33,27 @@ export interface CreateKbModalProps {
 
 export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) {
   const [businessError, setBusinessError] = useState<string | null>(null)
-  const [catalogState, setCatalogState] = useState<CatalogState>('loading')
-  const [models, setModels] = useState<EmbeddingModelCatalogItem[]>([])
   const {
     register,
     handleSubmit,
     reset,
     setError,
-    setValue,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
-    defaultValues: { name: '', namespace: '', embeddingModel: '', description: '' },
+    defaultValues: { name: '', namespace: '', description: '' },
   })
 
-  const embeddingModel = watch('embeddingModel')
-
-  // 打开时拉目录：失败立刻切 O-05b，避免用户填完才发现不能提交。
   useEffect(() => {
     if (!open) {
       return
     }
-    reset({ name: '', namespace: '', embeddingModel: '', description: '' })
+    reset({ name: '', namespace: '', description: '' })
     setBusinessError(null)
-    setCatalogState('loading')
-    setModels([])
-    let cancelled = false
-    void knowledgeApi
-      .listEmbeddingModels()
-      .then((next) => {
-        if (cancelled) {
-          return
-        }
-        if (next.length === 0) {
-          setCatalogState('failed')
-          setBusinessError(CATALOG_UNAVAILABLE)
-          return
-        }
-        setModels(next)
-        // 产品要求默认不预选，避免运营未确认就绑上目录第一项。
-        setCatalogState('ready')
-      })
-      .catch(() => {
-        if (cancelled) {
-          return
-        }
-        setCatalogState('failed')
-        setBusinessError(CATALOG_UNAVAILABLE)
-      })
-    return () => {
-      cancelled = true
-    }
   }, [open, reset])
 
   if (!open) {
     return null
   }
-
-  const catalogFailed = catalogState === 'failed'
-  const catalogOptions = catalogState === 'ready'
-    ? models.map((item) => ({
-      value: item.id,
-      label: `${item.providerId} / ${item.id}`,
-    }))
-    : []
-  const modelPlaceholder =
-    catalogFailed ? '目录不可用' : catalogState === 'loading' ? '加载中…' : '请选择向量模型'
 
   const close = () => {
     setBusinessError(null)
@@ -113,10 +61,6 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
   }
 
   const onSubmit = handleSubmit(async (raw) => {
-    if (catalogFailed) {
-      setBusinessError(CATALOG_UNAVAILABLE)
-      return
-    }
     const parsed = schema.safeParse(raw)
     if (!parsed.success) {
       for (const issue of parsed.error.issues) {
@@ -124,7 +68,6 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
         if (
           field === 'name' ||
           field === 'namespace' ||
-          field === 'embeddingModel' ||
           field === 'description'
         ) {
           setError(field, { message: issue.message })
@@ -139,7 +82,6 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
       await knowledgeApi.create({
         name: parsed.data.name,
         namespace: parsed.data.namespace,
-        embeddingModel: parsed.data.embeddingModel,
         ...(description ? { description } : {}),
       })
       toastSuccess('创建成功')
@@ -169,16 +111,6 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
           error={errors.namespace?.message}
           {...register('namespace')}
         />
-        <SelectMenu
-          id="create-kb-model"
-          label="向量模型"
-          value={embeddingModel}
-          disabled={catalogState !== 'ready'}
-          placeholder={modelPlaceholder}
-          error={errors.embeddingModel?.message}
-          onChange={(next) => setValue('embeddingModel', next, { shouldDirty: true, shouldValidate: true })}
-          options={catalogOptions}
-        />
         <LabeledTextarea
           id="create-kb-description"
           label="描述"
@@ -189,7 +121,7 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
         <ModalActions
           cancelLabel="取消"
           submitLabel={isSubmitting ? '创建中…' : '创建'}
-          disabled={isSubmitting || catalogFailed || catalogState === 'loading'}
+          disabled={isSubmitting}
           onCancel={close}
         />
       </form>
