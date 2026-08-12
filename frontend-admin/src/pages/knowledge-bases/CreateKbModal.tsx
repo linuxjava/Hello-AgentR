@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ApiError } from '@/shared/api/types'
+import type { EmbeddingModelCatalogItem } from '@/shared/api/types'
 import { knowledgeApi } from '@/shared/api/knowledge'
 import {
   knowledgeDescriptionSchema,
@@ -40,7 +41,7 @@ export interface CreateKbModalProps {
 export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) {
   const [businessError, setBusinessError] = useState<string | null>(null)
   const [catalogState, setCatalogState] = useState<CatalogState>('loading')
-  const [models, setModels] = useState<string[]>([])
+  const [models, setModels] = useState<EmbeddingModelCatalogItem[]>([])
   const {
     register,
     handleSubmit,
@@ -97,8 +98,12 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
   }
 
   const catalogFailed = catalogState === 'failed'
-  const catalogOptions =
-    catalogState === 'ready' ? models.map((id) => ({ value: id, label: id })) : []
+  const catalogOptions = catalogState === 'ready'
+    ? models.map((item) => ({
+      value: item.id,
+      label: `${item.providerId} / ${item.id}`,
+    }))
+    : []
   const modelPlaceholder =
     catalogFailed ? '目录不可用' : catalogState === 'loading' ? '加载中…' : '请选择向量模型'
 

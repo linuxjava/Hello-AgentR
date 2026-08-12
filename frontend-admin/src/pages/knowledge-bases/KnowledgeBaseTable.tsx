@@ -37,6 +37,7 @@ export interface KnowledgeBaseTableProps {
   page: number
   pageSize: number
   total: number
+  embeddingModelDisplayMap: Record<string, string>
   onPageChange: (page: number, pageSize: number) => void
   onEdit: (kb: KnowledgeBaseView) => void
   onDelete: (kb: KnowledgeBaseView) => void
@@ -51,6 +52,7 @@ export function KnowledgeBaseTable({
   page,
   pageSize,
   total,
+  embeddingModelDisplayMap,
   onPageChange,
   onEdit,
   onDelete,
@@ -98,8 +100,11 @@ export function KnowledgeBaseTable({
                 <td className="truncate px-4 font-mono text-xs" title={kb.namespace}>
                   {kb.namespace}
                 </td>
-                <td className="truncate px-4 font-mono text-xs" title={kb.embeddingModel}>
-                  {kb.embeddingModel}
+                <td
+                  className="truncate px-4 font-mono text-xs"
+                  title={embeddingModelDisplayMap[kb.embeddingModel] ?? kb.embeddingModel}
+                >
+                  {embeddingModelDisplayMap[kb.embeddingModel] ?? kb.embeddingModel}
                 </td>
                 <td className="truncate px-4 text-[#334155]" title={kb.description ?? undefined}>
                   {kb.description?.trim() ? kb.description : '—'}

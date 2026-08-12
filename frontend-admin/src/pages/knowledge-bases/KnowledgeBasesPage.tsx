@@ -35,6 +35,11 @@ function KnowledgeBasesPageInner() {
       }),
     placeholderData: keepPreviousData,
   })
+  const catalogQuery = useQuery({
+    queryKey: ['admin-embedding-model-catalog'],
+    queryFn: () => knowledgeApi.listEmbeddingModels(),
+    retry: false,
+  })
 
   useEffect(() => {
     if (!query.error) {
@@ -47,6 +52,13 @@ function KnowledgeBasesPageInner() {
 
   const records = query.data?.records ?? []
   const total = query.data?.total ?? 0
+  const embeddingModelDisplayMap = useMemo(() => {
+    const map: Record<string, string> = {}
+    for (const item of catalogQuery.data ?? []) {
+      map[item.id] = `${item.providerId} / ${item.id}`
+    }
+    return map
+  }, [catalogQuery.data])
   const showLibraryEmpty =
     !query.isLoading && !query.error && records.length === 0 && !appliedName
   const showFilterEmpty =
@@ -112,6 +124,7 @@ function KnowledgeBasesPageInner() {
         page={page}
         pageSize={pageSize}
         total={total}
+        embeddingModelDisplayMap={embeddingModelDisplayMap}
         onPageChange={(nextPage, nextPageSize) => {
           setPage(nextPage)
           setPageSize(nextPageSize)

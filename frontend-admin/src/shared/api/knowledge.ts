@@ -1,5 +1,9 @@
 import { apiRequest } from '@/shared/api/client'
-import type { KnowledgeBaseView, PageResult } from '@/shared/api/types'
+import type {
+  EmbeddingModelCatalogItem,
+  KnowledgeBaseView,
+  PageResult,
+} from '@/shared/api/types'
 
 export interface ListKnowledgeBasesQuery {
   page?: number
@@ -36,8 +40,8 @@ function buildListQuery(query: ListKnowledgeBasesQuery = {}): string {
   return qs ? `/admin/knowledge-bases?${qs}` : '/admin/knowledge-bases'
 }
 
-export async function listEmbeddingModels(): Promise<string[]> {
-  return apiRequest<string[]>('/admin/embedding-models', { method: 'GET' })
+export async function listEmbeddingModels(): Promise<EmbeddingModelCatalogItem[]> {
+  return apiRequest<EmbeddingModelCatalogItem[]>('/admin/embedding-models', { method: 'GET' })
 }
 
 export async function listKnowledgeBases(

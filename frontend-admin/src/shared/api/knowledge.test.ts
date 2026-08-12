@@ -14,7 +14,7 @@ const sampleKb = {
   name: '产品手册',
   description: '面向运营的产品说明容器',
   namespace: 'productdocs',
-  embeddingModel: 'mock-embedding-v1',
+  embeddingModel: 'qwen3.7-text-embedding',
   createdBy: '1',
   createdAt: '2026-08-01T09:12:00.000+00:00',
   updatedAt: '2026-08-01T09:12:00.000+00:00',
@@ -28,19 +28,39 @@ describe('knowledgeApi', () => {
     setUnauthorizedHandler(null)
   })
 
-  it('listEmbeddingModels hits the mock catalog endpoint', async () => {
+  it('listEmbeddingModels hits the catalog endpoint', async () => {
     setTokenProvider(() => 'tok-1')
     const fetchMock = vi.fn().mockResolvedValue({
       json: async () => ({
         code: '0',
         message: 'ok',
-        data: ['mock-embedding-v1', 'mock-embedding-v2'],
+        data: [
+          {
+            id: 'qwen3.7-text-embedding',
+            model: 'qwen3.7-text-embedding',
+            dimension: 1024,
+            providerId: 'alibailian',
+            priority: 10,
+            isDefault: true,
+          },
+          {
+            id: 'Qwen/Qwen3-Embedding-8B',
+            model: 'Qwen/Qwen3-Embedding-8B',
+            dimension: 1024,
+            providerId: 'siliconflow',
+            priority: 20,
+            isDefault: false,
+          },
+        ],
       }),
     })
     vi.stubGlobal('fetch', fetchMock)
 
     const models = await listEmbeddingModels()
-    expect(models).toEqual(['mock-embedding-v1', 'mock-embedding-v2'])
+    expect(models.map((m) => m.id)).toEqual([
+      'qwen3.7-text-embedding',
+      'Qwen/Qwen3-Embedding-8B',
+    ])
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit]
     expect(url).toBe('http://localhost:9898/hello-agent/admin/embedding-models')
     expect(init.method).toBe('GET')
@@ -85,7 +105,7 @@ describe('knowledgeApi', () => {
     await createKnowledgeBase({
       name: '产品手册',
       namespace: 'productdocs',
-      embeddingModel: 'mock-embedding-v1',
+      embeddingModel: 'qwen3.7-text-embedding',
     })
     await updateKnowledgeBase('kb-1', { name: '产品手册', description: '' })
     await removeKnowledgeBase('kb-1')
@@ -121,7 +141,7 @@ describe('knowledgeApi', () => {
       createKnowledgeBase({
         name: '产品手册',
         namespace: 'other',
-        embeddingModel: 'mock-embedding-v1',
+        embeddingModel: 'qwen3.7-text-embedding',
       }),
     ).rejects.toMatchObject({
       name: 'ApiError',

@@ -34,7 +34,7 @@ const sampleKb = {
   name: '产品手册',
   description: '面向运营的产品说明容器',
   namespace: 'productdocs',
-  embeddingModel: 'mock-embedding-v1',
+  embeddingModel: 'qwen3.7-text-embedding',
   createdBy: '1',
   createdAt: '2026-08-01T09:12:00.000+00:00',
   updatedAt: '2026-08-01T09:12:00.000+00:00',
@@ -101,7 +101,24 @@ describe('KnowledgeBasesPage', () => {
       total: 2,
       records: [sampleKb, emptyDescKb],
     })
-    listEmbeddingModelsMock.mockResolvedValue(['mock-embedding-v1', 'mock-embedding-v2'])
+    listEmbeddingModelsMock.mockResolvedValue([
+      {
+        id: 'qwen3.7-text-embedding',
+        model: 'qwen3.7-text-embedding',
+        dimension: 1024,
+        providerId: 'alibailian',
+        priority: 10,
+        isDefault: true,
+      },
+      {
+        id: 'Qwen/Qwen3-Embedding-8B',
+        model: 'Qwen/Qwen3-Embedding-8B',
+        dimension: 1024,
+        providerId: 'siliconflow',
+        priority: 20,
+        isDefault: false,
+      },
+    ])
     setAdminSession()
   })
 
@@ -226,14 +243,18 @@ describe('KnowledgeBasesPage', () => {
     await user.type(within(dialog).getByLabelText('名称'), '新品手册')
     await user.type(within(dialog).getByLabelText('命名空间'), 'newdocs')
     await user.click(within(dialog).getByRole('button', { name: '向量模型' }))
-    await user.click(within(dialog).getByRole('option', { name: 'mock-embedding-v1' }))
+    await user.click(
+      within(dialog).getByRole('option', {
+        name: 'alibailian / qwen3.7-text-embedding',
+      }),
+    )
     await user.click(within(dialog).getByRole('button', { name: '创建' }))
 
     await waitFor(() => {
       expect(createMock).toHaveBeenCalledWith({
         name: '新品手册',
         namespace: 'newdocs',
-        embeddingModel: 'mock-embedding-v1',
+        embeddingModel: 'qwen3.7-text-embedding',
       })
     })
     expect(await screen.findByRole('status')).toHaveTextContent('创建成功')
@@ -251,7 +272,11 @@ describe('KnowledgeBasesPage', () => {
     await user.type(within(dialog).getByLabelText('名称'), '产品手册')
     await user.type(within(dialog).getByLabelText('命名空间'), 'otherns')
     await user.click(within(dialog).getByRole('button', { name: '向量模型' }))
-    await user.click(within(dialog).getByRole('option', { name: 'mock-embedding-v1' }))
+    await user.click(
+      within(dialog).getByRole('option', {
+        name: 'alibailian / qwen3.7-text-embedding',
+      }),
+    )
     await user.click(within(dialog).getByRole('button', { name: '创建' }))
 
     expect(await within(dialog).findByRole('alert')).toHaveTextContent('名称已存在')
@@ -311,7 +336,7 @@ describe('KnowledgeBasesPage', () => {
     await user.click(screen.getAllByRole('button', { name: '编辑' })[0]!)
     const dialog = await screen.findByRole('dialog', { name: '编辑知识库' })
     expect(within(dialog).queryByText('productdocs')).not.toBeInTheDocument()
-    expect(within(dialog).queryByText('mock-embedding-v1')).not.toBeInTheDocument()
+    expect(within(dialog).queryByText('qwen3.7-text-embedding')).not.toBeInTheDocument()
     expect(
       within(dialog).queryByText('命名空间与向量模型创建后不可修改，选错只能删库重建。'),
     ).not.toBeInTheDocument()
