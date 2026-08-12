@@ -1,6 +1,7 @@
 package com.xgc.agent.rag.features.knowledge.service;
 
 import com.xgc.agent.rag.features.knowledge.dto.KnowledgeBaseCreateRequest;
+import com.xgc.agent.rag.features.knowledge.dto.EmbeddingModelCatalogItem;
 import com.xgc.agent.rag.features.knowledge.dto.KnowledgeBasePageResponse;
 import com.xgc.agent.rag.features.knowledge.dto.KnowledgeBaseUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.KnowledgeBaseView;
@@ -53,7 +54,7 @@ public interface KnowledgeBaseService {
     void delete(String id);
 
     /**
-     * @return 模拟 EmbeddingModel 标识
+     * @return EmbeddingModel 目录项
      */
-    List<String> listEmbeddingModels();
+    List<EmbeddingModelCatalogItem> listEmbeddingModels();
 }

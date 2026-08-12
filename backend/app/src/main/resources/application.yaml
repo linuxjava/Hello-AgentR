@@ -59,6 +59,32 @@ xgc:
       # Redis key 前缀（用于业务隔离，避免不同应用键冲突）
       prefix: ${XGC_FRAMEWORK_REDIS_PREFIX:HelloAgentR}
 
+# ---------- 模型目录（V0.3：配置驱动 Embedding） ----------
+hello-agent:
+  model-catalog:
+    # key = providerId（首版仅允许 alibailian / siliconflow）
+    modelProviders:
+      alibailian:
+        baseUrl: https://ws-bdrplgj2i1dzo31r.cn-beijing.maas.aliyuncs.com/compatible-mode/v1
+        apiKey: ${ALIBAILIAN_API_KEY:}
+      siliconflow:
+        baseUrl: https://api.siliconflow.cn/v1
+        apiKey: ${SILICONFLOW_API_KEY:}
+    # 目录可为空（可启动，但创建会因模型不合法被拒绝）
+    embeddingModels:
+      - id: qwen3.7-text-embedding
+        model: qwen3.7-text-embedding
+        dimension: 1024
+        providerId: alibailian
+        priority: 10
+        isDefault: true
+      - id: Qwen/Qwen3-Embedding-8B
+        model: Qwen/Qwen3-Embedding-8B
+        dimension: 1024
+        providerId: siliconflow
+        priority: 20
+        isDefault: false
+
 # ---------- Sa-Token 鉴权 ----------
 # token 放在 Authorization 请求头；超时单位为秒（2592000 ≈ 30 天）
 sa-token:

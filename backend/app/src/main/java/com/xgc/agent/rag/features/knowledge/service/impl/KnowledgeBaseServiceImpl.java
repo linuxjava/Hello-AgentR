@@ -7,6 +7,7 @@ import com.xgc.agent.rag.features.admin.error.AdminErrorCode;
 import com.xgc.agent.rag.features.admin.service.AdminAccessService;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeBaseDO;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeBaseMapper;
+import com.xgc.agent.rag.features.knowledge.dto.EmbeddingModelCatalogItem;
 import com.xgc.agent.rag.features.knowledge.dto.KnowledgeBaseCreateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.KnowledgeBasePageResponse;
 import com.xgc.agent.rag.features.knowledge.dto.KnowledgeBaseUpdateRequest;
@@ -124,8 +125,8 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
     }
 
     @Override
-    public List<String> listEmbeddingModels() {
-        return embeddingModelCatalog.listIds();
+    public List<EmbeddingModelCatalogItem> listEmbeddingModels() {
+        return embeddingModelCatalog.listItems();
     }
 
     private KnowledgeBaseDO requireById(String id) {

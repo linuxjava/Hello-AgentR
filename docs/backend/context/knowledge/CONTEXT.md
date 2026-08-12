@@ -21,9 +21,21 @@ _Avoid_: 简介、备注（口语可，文档用 Description）
 KnowledgeBase 的稳定唯一标识；由运营人员在创建时填写；仅小写字母与数字（`[a-z0-9]`）；长度 2–32；创建后不可改；用于存储目录与检索隔离。
 _Avoid_: slug、code、Collection、path、用 Name 当存储键、系统自动生成的目录名
 
+**ModelProvider（模型提供商）**：
+上游嵌入服务的接入点；由部署侧 YAML 以 **map** 声明，不是运营在 API 里创建的实体。map 的 **key 即 providerId**，同时也是协议适配标识；首版仅允许 `alibailian`、`siliconflow` 两个 key，**每个 key 最多一条**（无 `type` 字段——key 即 type）。每条声明含连接参数（baseUrl、鉴权密钥引用等）。密钥在配置中只以环境变量/占位引用出现，不以明文写入 YAML。本阶段不包含 Chat/LLM。`ModelProvider` 与 `EmbeddingModel` 在配置结构上分开声明；`EmbeddingModel.providerId` 必须指向 map 中已存在的 key。连接参数只服务后续摄入/调用，不通过管理 API 回传密钥；本阶段不调用上游做连通性探测。
+_Avoid_: Vendor、Supplier、账号、把 Provider 当成 EmbeddingModel、在目录 API 中暴露密钥、YAML 明文 apiKey、自定义实例名（如 bailian-main）、同一厂商多条配置
+
 **EmbeddingModel（嵌入模型）**：
-创建 KnowledgeBase 时绑定的嵌入模型；创建后不可更换；不是对话用的 LLM。本阶段由只读模拟目录提供可选项，创建只接受目录中的标识。
-_Avoid_: LLM、Chat 模型、向量模型（口语可，文档用 EmbeddingModel）
+创建 KnowledgeBase 时绑定的嵌入模型；创建后不可更换；不是对话用的 LLM。权威来源是部署侧 YAML（挂在某个 ModelProvider 下）；进程启动时加载为只读目录，**仅重启后**反映配置变更（不热加载）。标识在全配置内全局唯一；KnowledgeBase 只存该标识，不存 Provider。目录项对人暴露 id、model、dimension、providerId、priority、isDefault；创建请求只传 id，且必须仍在当前目录中。`model` 是调用上游嵌入接口时使用的模型标识。目录返回顺序按 priority 升序（数值越小优先级越高）；priority 相同按 id 升序稳定排序。`dimension` 在本配置中要求统一大小（所有 EmbeddingModel 必须相同）。`isDefault` 在全目录中必须且仅能有一个 `true`。
+_Avoid_: LLM、Chat 模型、向量模型（口语可，文档用 EmbeddingModel）、模拟目录（已废弃称谓）、运行中热更新目录
+
+**目录漂移（已绑定但配置已移除）**：
+若某 KnowledgeBase 已绑定的 EmbeddingModel id 不再出现在当前目录中：已有库仍可列表、详情、改 Name/Description、删除；仅**新建**时拒绝不在目录中的 id。详情/列表仍返回库中已存的 id，不因目录缺失而失败。
+_Avoid_: 因此启动失败、因此阻断读改删
+
+**配置加载（本阶段）**：
+进程启动时从 YAML 加载。结构不合法（缺必填、`modelProviders` map key 不在允许集合、EmbeddingModel id 全局冲突、dimension 非法或不一致、priority 非法、`providerId` 未指向 map 中已声明 key、`isDefault=true` 数量不是 1 等）→ 启动失败。密钥占位未解析或为空 → 不挡启动。目录可以为空（0 个 EmbeddingModel）→ 启动成功，创建一律因模型不合法被拒。
+_Avoid_: 因缺密钥拒绝启动、把空目录当启动失败
 
 **Document（文档）**：
 KnowledgeBase 下的内容单元；本阶段不实现其 API，下一版本再做。删除 KnowledgeBase 的前提是其下没有 Document。
@@ -38,6 +50,7 @@ _Avoid_: 附件、File（作业务实体时）、把 Document 当成 KnowledgeBa
 | 改任意库的 Name / 描述 | 能 | 能 |
 | 改 Namespace / EmbeddingModel | 不能 | 不能 |
 | 删除 KnowledgeBase | 能 | 不能 |
+| 通过 API 增删改 ModelProvider / EmbeddingModel | 不能 | 不能 |
 
 **可见性（本阶段）**：任何已登录 AdminUser 都能看见全部 KnowledgeBase。`createdBy` 只做审计，不做访问隔离。
 
@@ -50,7 +63,7 @@ _Avoid_: 附件、File（作业务实体时）、把 Document 当成 KnowledgeBa
 | 3 | 创建 KnowledgeBase | Admin / Staff |
 | 4 | 改 Name / Description | Admin / Staff |
 | 5 | 删除 KnowledgeBase | Admin |
-| 6 | EmbeddingModel 模拟目录 | Admin / Staff |
+| 6 | EmbeddingModel 只读目录（对象列表） | Admin / Staff |
 
 ## Delete（本阶段）
 
@@ -62,13 +75,16 @@ _Avoid_: 附件、File（作业务实体时）、把 Document 当成 KnowledgeBa
 
 分页默认 20、上限 100；按 **Name 模糊**筛选；不按 Namespace 筛选；默认按创建时间倒序。
 
-## In-scope（本阶段知识库容器）
+## In-scope（本阶段）
 
-- 创建 KnowledgeBase（Name、Description、Namespace、EmbeddingModel）
+- 创建 KnowledgeBase（Name、Description、Namespace、EmbeddingModel id）
 - 分页列表与详情
 - 修改任意库的 Name / Description
 - 物理删除（无 Document 前提；仅 Admin）
-- EmbeddingModel 只读模拟目录
+- 从 YAML 加载 ModelProvider（map key = providerId，首版 `alibailian` | `siliconflow`）+ EmbeddingModel（list），暴露 EmbeddingModel 只读目录（对象：id / model / dimension / providerId / priority / isDefault）；密钥不出现在 API 响应；配置变更仅重启生效
+- 创建时校验 EmbeddingModel id 属于当前目录
+- 目录漂移按宽松规则（已绑定可读写删；仅新建校验目录）
+- 配置结构不合法则启动失败；缺密钥与空目录不挡启动
 
 ## Out-of-scope（本阶段明确不做）
 
@@ -78,4 +94,8 @@ _Avoid_: 附件、File（作业务实体时）、把 Document 当成 KnowledgeBa
 - 修改 Namespace 或 EmbeddingModel
 - 恢复已删除的 KnowledgeBase
 - 按创建人或租户隔离可见性
-- 管理端知识库页面（可并行，但不作为本上下文验收对象）
+- 通过 API 或管理端增删改 ModelProvider / EmbeddingModel
+- Chat/LLM 的 Provider 与模型配置
+- 单独的 ModelProvider 列表 API（目录已含 providerId）
+- 调用上游 Embedding 或连通性探测 API
+- Web 管理端页面与契约消费方改造（可并行，但不作为本上下文验收对象）

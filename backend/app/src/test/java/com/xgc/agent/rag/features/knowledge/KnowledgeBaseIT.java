@@ -2,7 +2,7 @@ package com.xgc.agent.rag.features.knowledge;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgc.agent.rag.HelloAgentApplication;
+import com.xgc.agent.rag.HelloAgentRApplication;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * 知识库容器 API 闭环（依赖本地 PostgreSQL + Redis，且已执行 t_admin_user.sql、t_knowledge_base.sql）。
  */
-@SpringBootTest(classes = HelloAgentApplication.class)
+@SpringBootTest(classes = HelloAgentRApplication.class)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class KnowledgeBaseIT {
@@ -61,8 +61,16 @@ class KnowledgeBaseIT {
         MvcResult catalog = mockMvc.perform(get("/admin/embedding-models").header("Authorization", adminToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("0"))
-                .andExpect(jsonPath("$.data[0]").value("mock-embedding-v1"))
-                .andExpect(jsonPath("$.data[1]").value("mock-embedding-v2"))
+                .andExpect(jsonPath("$.data[0].id").value("bge-m3"))
+                .andExpect(jsonPath("$.data[0].model").value("bge-m3"))
+                .andExpect(jsonPath("$.data[0].dimension").value(1024))
+                .andExpect(jsonPath("$.data[0].providerId").value("alibailian"))
+                .andExpect(jsonPath("$.data[0].priority").value(10))
+                .andExpect(jsonPath("$.data[0].isDefault").value(true))
+                .andExpect(jsonPath("$.data[0].apiKey").doesNotExist())
+                .andExpect(jsonPath("$.data[1].id").value("sf-bge-large-zh"))
+                .andExpect(jsonPath("$.data[1].providerId").value("siliconflow"))
+                .andExpect(jsonPath("$.data[1].isDefault").value(false))
                 .andReturn();
         JsonNode first = objectMapper.readTree(catalog.getResponse().getContentAsString()).path("data");
 
@@ -88,7 +96,7 @@ class KnowledgeBaseIT {
                         .header("Authorization", adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"坏键","namespace":"HR-FAQ","embeddingModel":"mock-embedding-v1"}
+                                {"name":"坏键","namespace":"HR-FAQ","embeddingModel":"bge-m3"}
                                 """))
                 .andExpect(jsonPath("$.code").value("A002004"));
     }
@@ -111,12 +119,12 @@ class KnowledgeBaseIT {
                         .header("Authorization", staffToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"%s","description":"手册","namespace":"%s","embeddingModel":"mock-embedding-v1"}
+                                {"name":"%s","description":"手册","namespace":"%s","embeddingModel":"bge-m3"}
                                 """.formatted(name, reusedNamespace)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("0"))
                 .andExpect(jsonPath("$.data.namespace").value(reusedNamespace))
-                .andExpect(jsonPath("$.data.embeddingModel").value("mock-embedding-v1"))
+                .andExpect(jsonPath("$.data.embeddingModel").value("bge-m3"))
                 .andExpect(jsonPath("$.data.documentCount").doesNotExist())
                 .andReturn();
         knowledgeBaseId = objectMapper.readTree(created.getResponse().getContentAsString())
@@ -126,7 +134,7 @@ class KnowledgeBaseIT {
                         .header("Authorization", adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"%s","namespace":"other%s","embeddingModel":"mock-embedding-v2"}
+                                {"name":"%s","namespace":"other%s","embeddingModel":"sf-bge-large-zh"}
                                 """.formatted(name, uniqueSuffix.substring(uniqueSuffix.length() - 8))))
                 .andExpect(jsonPath("$.code").value("A002003"));
 
@@ -150,7 +158,7 @@ class KnowledgeBaseIT {
                 .andExpect(jsonPath("$.code").value("0"))
                 .andExpect(jsonPath("$.data.name").value(renamed))
                 .andExpect(jsonPath("$.data.namespace").value(reusedNamespace))
-                .andExpect(jsonPath("$.data.embeddingModel").value("mock-embedding-v1"));
+                .andExpect(jsonPath("$.data.embeddingModel").value("bge-m3"));
     }
 
     @Test
@@ -169,11 +177,11 @@ class KnowledgeBaseIT {
                         .header("Authorization", adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"重建%s","namespace":"%s","embeddingModel":"mock-embedding-v2"}
+                                {"name":"重建%s","namespace":"%s","embeddingModel":"sf-bge-large-zh"}
                                 """.formatted(uniqueSuffix, reusedNamespace)))
                 .andExpect(jsonPath("$.code").value("0"))
                 .andExpect(jsonPath("$.data.namespace").value(reusedNamespace))
-                .andExpect(jsonPath("$.data.embeddingModel").value("mock-embedding-v2"));
+                .andExpect(jsonPath("$.data.embeddingModel").value("sf-bge-large-zh"));
     }
 
     private String login(String username, String password) throws Exception {

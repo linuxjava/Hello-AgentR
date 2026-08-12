@@ -3,7 +3,7 @@ package com.xgc.agent.rag.features.admin;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.xgc.agent.rag.HelloAgentApplication;
+import com.xgc.agent.rag.HelloAgentRApplication;
 import com.xgc.agent.rag.features.admin.bootstrap.BootstrapAdminInitializer;
 import com.xgc.agent.rag.features.admin.dao.entity.AdminUserDO;
 import com.xgc.agent.rag.features.admin.dao.entity.AdminUserRole;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * 管理端认证与账号治理集成测试（依赖本地 PostgreSQL + Redis，且已执行 t_admin_user.sql）。
  */
-@SpringBootTest(classes = HelloAgentApplication.class)
+@SpringBootTest(classes = HelloAgentRApplication.class)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AdminAuthAndUserIT {

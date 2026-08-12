@@ -1,6 +1,6 @@
 package com.xgc.agent.rag.features.admin;
 
-import com.xgc.agent.rag.HelloAgentApplication;
+import com.xgc.agent.rag.HelloAgentRApplication;
 import com.xgc.agent.rag.features.admin.dao.mapper.AdminUserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <p>依赖本地 PostgreSQL + Redis；表需已按 {@code resources/db/t_admin_user.sql} 建好。</p>
  */
-@SpringBootTest(classes = HelloAgentApplication.class)
+@SpringBootTest(classes = HelloAgentRApplication.class)
 class AdminUserPersistenceIT {
 
     /**

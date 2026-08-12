@@ -316,15 +316,36 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/users/$USER_ID" \
 
 ---
 
-## 3. 知识库 `/admin/knowledge-bases` 与模拟目录
+## 3. 知识库 `/admin/knowledge-bases` 与配置目录
 
-词汇见 [`context/knowledge/CONTEXT.md`](context/knowledge/CONTEXT.md)。本阶段**没有** Document 上传与向量索引；模拟目录不是生产模型。
+词汇见 [`context/knowledge/CONTEXT.md`](context/knowledge/CONTEXT.md)。本阶段**没有** Document 上传与向量索引；EmbeddingModel 目录由 YAML 配置驱动。
 
-### 3.1 EmbeddingModel 模拟目录
+### 3.1 EmbeddingModel 目录
 
 `GET /admin/embedding-models` — 需登录
 
-**Response `data`**：`["mock-embedding-v1", "mock-embedding-v2"]`（稳定标识，创建只接受其中之一）
+**Response `data`**：对象数组，按 `priority ASC, id ASC` 排序。创建只接受目录中的 `id`。
+
+```json
+[
+  {
+    "id": "bge-m3",
+    "model": "bge-m3",
+    "dimension": 1024,
+    "providerId": "alibailian",
+    "priority": 10,
+    "isDefault": true
+  },
+  {
+    "id": "sf-bge-large-zh",
+    "model": "BAAI/bge-large-zh-v1.5",
+    "dimension": 1024,
+    "providerId": "siliconflow",
+    "priority": 20,
+    "isDefault": false
+  }
+]
+```
 
 ```bash
 curl -s 'http://localhost:9898/hello-agent/admin/embedding-models' \
@@ -466,7 +487,7 @@ curl -s 'http://localhost:9898/hello-agent/admin/embedding-models' \
 | PUT    | `/admin/users/{id}/password` | Admin       | 重置密码       |
 | PUT    | `/admin/users/{id}/role`     | Admin       | 变更角色       |
 | DELETE | `/admin/users/{id}`          | Admin       | 物理删除       |
-| GET    | `/admin/embedding-models`    | 已登录         | EmbeddingModel 模拟目录 |
+| GET    | `/admin/embedding-models`    | 已登录         | EmbeddingModel 配置目录（对象列表） |
 | GET    | `/admin/knowledge-bases`     | 已登录         | 知识库分页列表    |
 | POST   | `/admin/knowledge-bases`     | 已登录         | 创建知识库      |
 | GET    | `/admin/knowledge-bases/{id}` | 已登录        | 知识库详情      |
