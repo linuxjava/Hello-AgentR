@@ -26,7 +26,7 @@ public enum KnowledgeErrorCode implements IErrorCode {
     NAMESPACE_INVALID("A002004", "Namespace 不符合规则"),
 
     /** Namespace 已被占用。 */
-    NAMESPACE_EXISTS("A002005", "Namespace 已存在"),
+    NAMESPACE_EXISTS("A002005", "命名空间已存在"),
 
     /** Description 超过 200 字。 */
     DESCRIPTION_INVALID("A002006", "描述不符合规则"),

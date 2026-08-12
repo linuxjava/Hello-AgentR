@@ -60,7 +60,7 @@ xgc:
       prefix: ${XGC_FRAMEWORK_REDIS_PREFIX:HelloAgentR}
 
 # ---------- 模型目录（V0.3：配置驱动 Embedding） ----------
-hello-agent:
+hello-agentr:
   model-catalog:
     # key = providerId（首版仅允许 alibailian / siliconflow）
     modelProviders:

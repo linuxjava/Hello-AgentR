@@ -71,7 +71,7 @@
 ### 4.1 结构定义
 
 ```yaml
-hello-agent:
+hello-agentr:
   model-catalog:
     modelProviders: # map
       alibailian:

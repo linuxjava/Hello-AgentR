@@ -385,7 +385,7 @@ curl -s 'http://localhost:9898/hello-agent/admin/embedding-models' \
 | A002002 | 名称不符合规则 |
 | A002003 | 名称已存在 |
 | A002004 | Namespace 不符合规则 |
-| A002005 | Namespace 已存在 |
+| A002005 | 命名空间已存在 |
 | A002006 | 描述不符合规则 |
 | A002007 | 嵌入模型不合法 |
 
@@ -458,7 +458,7 @@ curl -s 'http://localhost:9898/hello-agent/admin/embedding-models' \
 | A002002 | 名称不符合规则 |
 | A002003 | 名称已存在 |
 | A002004 | Namespace 不符合规则 |
-| A002005 | Namespace 已存在 |
+| A002005 | 命名空间已存在 |
 | A002006 | 描述不符合规则 |
 | A002007 | 嵌入模型不合法 |
 | A002008 | 知识库下仍有文档，不能删除 |

@@ -1,9 +1,7 @@
 package com.xgc.agent.rag.features.knowledge.properties;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -13,12 +11,11 @@ import java.util.Map;
 /**
  * 模型目录配置。
  *
- * <p>配置来源：{@code hello-agent.model-catalog}。本配置只描述 Embedding 能力，不含 Chat。</p>
+ * <p>配置来源：{@code hello-agentr.model-catalog}。本配置只描述 Embedding 能力，不含 Chat。</p>
+ * <p>由启动类 {@code @EnableConfigurationProperties} 注册并绑定。</p>
  */
-@Getter
-@Setter
-@Component
-@ConfigurationProperties(prefix = "hello-agent.model-catalog")
+@Data
+@ConfigurationProperties(prefix = "hello-agentr.model-catalog")
 public class ModelCatalogProperties {
 
     /**
@@ -31,8 +28,7 @@ public class ModelCatalogProperties {
      */
     private List<EmbeddingModelConfig> embeddingModels = new ArrayList<>();
 
-    @Getter
-    @Setter
+    @Data
     public static class ProviderConfig {
 
         /**
@@ -46,8 +42,7 @@ public class ModelCatalogProperties {
         private String apiKey;
     }
 
-    @Getter
-    @Setter
+    @Data
     public static class EmbeddingModelConfig {
 
         /**

@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -75,5 +76,34 @@ class KnowledgeBaseServiceImplTest {
         org.assertj.core.api.Assertions.assertThat(service.listEmbeddingModels())
                 .extracting(EmbeddingModelCatalogItem::id)
                 .containsExactly("bge-m3", "sf-bge-large-zh");
+    }
+
+    @Test
+    void create_usesDefaultEmbeddingModel() {
+        when(adminAccessService.requireLoginUser()).thenReturn(AdminUserDO.builder().id("u-1").build());
+        when(embeddingModelCatalog.defaultId()).thenReturn("qwen3.7-text-embedding");
+        when(embeddingModelCatalog.contains("qwen3.7-text-embedding")).thenReturn(true);
+        when(knowledgeBaseMapper.selectCount(org.mockito.ArgumentMatchers.any())).thenReturn(0L);
+
+        var view = service.create(new com.xgc.agent.rag.features.knowledge.dto.KnowledgeBaseCreateRequest(
+                "手册", null, "hrfaq01"));
+
+        verify(knowledgeBaseMapper).insert(org.mockito.ArgumentMatchers.argThat((KnowledgeBaseDO kb) ->
+                "qwen3.7-text-embedding".equals(kb.getEmbeddingModel())
+                        && "hrfaq01".equals(kb.getNamespace())));
+        org.assertj.core.api.Assertions.assertThat(view).isNotNull();
+    }
+
+    @Test
+    void create_whenDefaultMissing_rejects() {
+        when(adminAccessService.requireLoginUser()).thenReturn(AdminUserDO.builder().id("u-1").build());
+        when(embeddingModelCatalog.defaultId()).thenReturn(null);
+
+        assertThatThrownBy(() -> service.create(
+                new com.xgc.agent.rag.features.knowledge.dto.KnowledgeBaseCreateRequest("手册", null, "hrfaq01")))
+                .isInstanceOf(WebAdminException.class)
+                .extracting(ex -> ((WebAdminException) ex).getErrorCode())
+                .isEqualTo(KnowledgeErrorCode.EMBEDDING_MODEL_INVALID.code());
+        verify(knowledgeBaseMapper, never()).insert(isA(KnowledgeBaseDO.class));
     }
 }
