@@ -63,12 +63,12 @@ export function KnowledgeBaseTable({
         <table className="w-full table-fixed border-collapse text-left">
           <thead>
             <tr className="h-11 border-b border-[#CBD5E159] bg-[#FFFFFF66] text-xs font-semibold text-[#64748B]">
-              <th className="w-[16%] px-4">名称</th>
-              <th className="w-[16%] px-4">命名空间</th>
-              <th className="w-[18%] px-4">向量模型</th>
-              <th className="w-[22%] px-4">描述</th>
-              <th className="w-[16%] px-4">创建时间</th>
-              <th className="w-[12%] px-4">操作</th>
+              <th className="w-[15%] px-4">名称</th>
+              <th className="w-[14%] px-4">命名空间</th>
+              <th className="w-[16%] px-4">向量模型</th>
+              <th className="w-[18%] px-4">描述</th>
+              <th className="w-[15%] px-4">创建时间</th>
+              <th className="w-[22%] min-w-[168px] px-4">操作</th>
             </tr>
           </thead>
           {showTableBody ? (
@@ -106,26 +106,26 @@ export function KnowledgeBaseTable({
                 </td>
                 <td className="truncate px-4">{formatCreatedAt(kb.createdAt)}</td>
                 <td className="px-4">
-                  <div className="flex items-center gap-2">
+                  <div className="flex shrink-0 items-center gap-2 whitespace-nowrap">
                     <button
                       type="button"
                       onClick={() => onEdit(kb)}
-                      className="inline-flex h-7 items-center gap-1.5 rounded-full border border-[#CBD5E1] bg-[#F1F5F9] px-2.5 text-xs font-medium text-[#334155]"
+                      className="inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-[#CBD5E1] bg-[#F1F5F9] px-2.5 text-xs font-medium text-[#334155]"
                     >
-                      <Pencil size={12} aria-hidden />
+                      <Pencil size={12} className="shrink-0" aria-hidden />
                       编辑
                     </button>
                     <button
                       type="button"
                       onClick={() => onDelete(kb)}
                       className={[
-                        'inline-flex h-7 items-center gap-1.5 rounded-full border px-2.5 text-xs font-medium',
+                        'inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 text-xs font-medium',
                         isAdmin
                           ? 'border-[#CBD5E1] bg-[#F1F5F9] text-[#334155]'
                           : 'cursor-pointer border-[#E2E8F0] bg-[#F8FAFC] text-[#94A3B8] opacity-70',
                       ].join(' ')}
                     >
-                      <Trash2 size={12} aria-hidden />
+                      <Trash2 size={12} className="shrink-0" aria-hidden />
                       删除
                     </button>
                   </div>
