@@ -2050,7 +2050,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -2215,7 +2215,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -2356,7 +2356,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -2682,7 +2682,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -2847,7 +2847,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -3008,7 +3008,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -4799,7 +4799,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -4964,7 +4964,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -5125,7 +5125,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -7001,7 +7001,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -7166,7 +7166,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -7327,7 +7327,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -9346,7 +9346,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -9511,7 +9511,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -9672,7 +9672,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -11732,7 +11732,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -11897,7 +11897,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -12058,7 +12058,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -14060,7 +14060,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -14225,7 +14225,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -14366,7 +14366,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -15143,7 +15143,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -15308,7 +15308,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -15469,7 +15469,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -17203,7 +17203,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -17368,7 +17368,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -17529,7 +17529,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -19484,7 +19484,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -19649,7 +19649,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -19810,7 +19810,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -21721,7 +21721,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -21886,7 +21886,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -22047,7 +22047,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -23980,7 +23980,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -24145,7 +24145,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -24306,7 +24306,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -24863,7 +24863,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -25028,7 +25028,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -25189,7 +25189,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -26980,7 +26980,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -27145,7 +27145,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -27306,7 +27306,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -29300,7 +29300,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -29465,7 +29465,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -29626,7 +29626,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -31636,7 +31636,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -31801,7 +31801,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -31962,7 +31962,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -33931,7 +33931,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -34096,7 +34096,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -34257,7 +34257,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -36005,7 +36005,7 @@
               "width": 248,
               "height": "fill_container",
               "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
+              "cornerRadius": "$radius-md",
               "stroke": "$edge",
               "strokeWidth": 1,
               "effect": [
@@ -36170,7 +36170,7 @@
                   "width": "fill_container",
                   "height": 64,
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [
@@ -36331,7 +36331,7 @@
                   "width": "fill_container",
                   "height": "fill_container",
                   "fill": "#FFFFFF7A",
-                  "cornerRadius": "$radius-lg",
+                  "cornerRadius": "$radius-md",
                   "stroke": "$edge",
                   "strokeWidth": 1,
                   "effect": [

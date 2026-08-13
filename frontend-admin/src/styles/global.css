@@ -12,7 +12,8 @@
 
 .glass-panel {
   border: 1px solid #ffffffcc;
-  border-radius: 20px;
+  /* Align with Pencil $radius-md (14); shell Sidebar / Topbar / Content */
+  border-radius: 14px;
   background: #ffffff7a;
   box-shadow: 0 8px 32px #0f172a2e;
   backdrop-filter: blur(48px);
