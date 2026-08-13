@@ -17,16 +17,19 @@
 - React管理后台 + 用户端
 - Flutter移动端App
 
-## 项目进度 5%
+## 项目进度 8%
 
 管理后台
 
 - 登录
 - 账号管理
+- 知识库管理
+
+
 
 ![1](imgs/2.png)
 
-![1](imgs/3.png)
+![1](imgs/4.png)
 
 ## 公众号
 
@@ -38,7 +41,7 @@
 
 
 
-![1](imgs/qrcode_for_gh_ed42ac3287bd_430.jpg)
+![1](imgs/qrcode_for_gh_ed42ac3287bd_258.jpg)
 
 
 

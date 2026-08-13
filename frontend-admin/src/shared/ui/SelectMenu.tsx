@@ -14,6 +14,10 @@ export interface SelectMenuProps {
   onChange: (value: string) => void
   className?: string
   triggerClassName?: string
+  disabled?: boolean
+  /** 当前值不在 options 中时展示；有此项时不再回落到第一项。 */
+  placeholder?: string
+  error?: string
   'aria-label'?: string
 }
 
@@ -25,6 +29,9 @@ export function SelectMenu({
   onChange,
   className,
   triggerClassName,
+  disabled = false,
+  placeholder,
+  error,
   'aria-label': ariaLabel,
 }: SelectMenuProps) {
   const autoId = useId()
@@ -33,7 +40,10 @@ export function SelectMenu({
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
 
-  const selected = options.find((opt) => opt.value === value) ?? options[0]
+  const selected = options.find((opt) => opt.value === value)
+  // 有 placeholder 时空值保持未选；账号角色等调用方仍回落到第一项以免空白触发器。
+  const displayLabel = selected?.label ?? placeholder ?? options[0]?.label ?? ''
+  const showingPlaceholder = !selected && Boolean(placeholder)
 
   useEffect(() => {
     if (!open) {
@@ -71,13 +81,24 @@ export function SelectMenu({
         aria-expanded={open}
         aria-controls={listboxId}
         aria-label={ariaLabel ?? label}
-        onClick={() => setOpen((v) => !v)}
+        disabled={disabled}
+        onClick={() => {
+          if (disabled) {
+            return
+          }
+          setOpen((v) => !v)
+        }}
         className={[
           'flex w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] text-left text-sm text-[#0F172A] outline-none',
           triggerClassName ?? 'h-11 bg-[#FFFFFF59] px-3.5',
+          disabled ? 'cursor-not-allowed opacity-70' : '',
         ].join(' ')}
       >
-        <span className="min-w-0 truncate">{selected?.label ?? ''}</span>
+        <span
+          className={['min-w-0 truncate', showingPlaceholder ? 'text-[#64748B]' : ''].join(' ')}
+        >
+          {displayLabel}
+        </span>
         <ChevronDown
           size={16}
           className={['shrink-0 text-[#64748B] transition', open ? 'rotate-180' : ''].join(' ')}
@@ -120,6 +141,7 @@ export function SelectMenu({
           })}
         </ul>
       ) : null}
+      {error ? <span className="text-xs text-[#DC2626]">{error}</span> : null}
     </div>
   )
 }

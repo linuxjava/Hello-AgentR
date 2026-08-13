@@ -19,6 +19,10 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
+/** Bootstrap 初始账号，仅作表单预填方便本地联调；提交仍走登录接口。 */
+const DEFAULT_LOGIN_USERNAME = 'admin'
+const DEFAULT_LOGIN_PASSWORD = 'admin@123456'
+
 export function LoginPage() {
   const navigate = useNavigate()
   const setSession = useSessionStore((s) => s.setSession)
@@ -32,8 +36,8 @@ export function LoginPage() {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     defaultValues: {
-      username: getRememberedUsername(),
-      password: '',
+      username: getRememberedUsername() || DEFAULT_LOGIN_USERNAME,
+      password: DEFAULT_LOGIN_PASSWORD,
       remember: Boolean(getRememberedUsername()),
     },
   })

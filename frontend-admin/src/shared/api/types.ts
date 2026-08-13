@@ -20,6 +20,28 @@ export interface PageResult<T> {
   records: T[]
 }
 
+/** EmbeddingModel 目录项（V0.3 配置驱动目录契约）。 */
+export interface EmbeddingModelCatalogItem {
+  id: string
+  model: string
+  dimension: number
+  providerId: string
+  priority: number
+  isDefault: boolean
+}
+
+/** KnowledgeBase 列表/写回视图；不含文档数等摄入假字段（V0.2 契约）。 */
+export interface KnowledgeBaseView {
+  id: string
+  name: string
+  description: string | null
+  namespace: string
+  embeddingModel: string
+  createdBy: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface ApiResponse<T> {
   code: string
   message: string

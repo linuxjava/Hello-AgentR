@@ -1,27 +1,25 @@
 package com.xgc.agent.rag;
 
-import com.xgc.agent.rag.mybatisplus.KnowledgeBaseDO;
-import com.xgc.agent.rag.mybatisplus.KnowledgeBaseMapper;
+import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeBaseMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = HelloAgentApplication.class)
+@SpringBootTest(classes = HelloAgentRApplication.class)
 class BackendApplicationTests {
 
     @Autowired
-    private KnowledgeBaseMapper userMapper;
+    private KnowledgeBaseMapper knowledgeBaseMapper;
 
     @Test
     void contextLoads() {
+        assertThat(knowledgeBaseMapper).isNotNull();
     }
 
     @Test
     void testMybatisPlus() {
-        List<KnowledgeBaseDO> knowledgeBaseDO = userMapper.selectList(null);
-        System.out.println(knowledgeBaseDO.toString());
+        assertThat(knowledgeBaseMapper.selectCount(null)).isGreaterThanOrEqualTo(0);
     }
-
 }

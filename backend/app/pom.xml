@@ -68,5 +68,17 @@
         </dependency>
         <!-- 密码哈希（BCrypt）；仅 crypto，不引入 spring-security-web -->
 
+        <!-- tika用于文档解析，支持PPT / XLS / PDF / DOC / DOCX / Markdown  start-->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parsers-standard-package</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+        </dependency>
+        <!-- tika用于文档解析，支持PPT / XLS / PDF / DOC / DOCX / Markdown  end-->
+
     </dependencies>
 </project>

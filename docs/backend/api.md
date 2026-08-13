@@ -11,6 +11,8 @@
 | Context Path | `/hello-agent`（见 `application.yaml`）     |
 | 鉴权头          | `Authorization: <token>`（Sa-Token，`loginType=admin`） |
 | 匿名接口         | 仅 `POST /admin/auth/login`               |
+| 知识库 Name      | 去首尾空白后 1–64；中文与常见标点；全局唯一；可改     |
+| 知识库 Namespace | 2–32，仅 `[a-z0-9]`；人填；创建后不可改           |
 | 登录门禁         | 其余 `/admin/**` 由拦截器统一校验；未登录返回宏观码 `A000001`，文案「未登录或登录已过期」；Web 用户端框架层一级码为 `U000001` |
 | 角色           | `ADMIN` / `STAFF`（JSON 枚举名）              |
 | 密码规则         | 长度 8–64，须同时包含字母与数字                       |
@@ -24,6 +26,8 @@
 | 登录 / 登出 / me / 改自己密码 | ✓     | ✓     |
 | 分页列表                 | ✓     | ✓     |
 | 创建 / 重置密码 / 改角色 / 删除 | ✓     | ✗     |
+| 知识库列表 / 详情 / 创建 / 改 Name·描述 / 模拟目录 | ✓     | ✓     |
+| 删除 KnowledgeBase | ✓     | ✗     |
 
 ### 公共类型
 
@@ -312,9 +316,115 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/users/$USER_ID" \
 
 ---
 
-## 3. 错误码
+## 3. 知识库 `/admin/knowledge-bases` 与配置目录
 
-### 3.1 一级宏观码（`BaseErrorCode`）
+词汇见 [`context/knowledge/CONTEXT.md`](context/knowledge/CONTEXT.md)。本阶段**没有** Document 上传与向量索引；EmbeddingModel 目录由 YAML 配置驱动。
+
+### 3.1 EmbeddingModel 目录
+
+`GET /admin/embedding-models` — 需登录
+
+**Response `data`**：对象数组，按 `priority ASC, id ASC` 排序。创建只接受目录中的 `id`。
+
+```json
+[
+  {
+    "id": "bge-m3",
+    "model": "bge-m3",
+    "dimension": 1024,
+    "providerId": "alibailian",
+    "priority": 10,
+    "isDefault": true
+  },
+  {
+    "id": "sf-bge-large-zh",
+    "model": "BAAI/bge-large-zh-v1.5",
+    "dimension": 1024,
+    "providerId": "siliconflow",
+    "priority": 20,
+    "isDefault": false
+  }
+]
+```
+
+```bash
+curl -s 'http://localhost:9898/hello-agent/admin/embedding-models' \
+  -H "Authorization: $TOKEN"
+```
+
+### 3.2 分页列表
+
+`GET /admin/knowledge-bases` — 需登录
+
+| Query | 说明 |
+| --- | --- |
+| page | 可选，默认 1 |
+| pageSize | 可选，默认 20，上限 100（超出 → `A001010`） |
+| name | 可选，Name 模糊；**无** Namespace 筛选 |
+
+**Response `data`**：`{ page, pageSize, total, records }`，元素为 **KnowledgeBaseView**。
+
+**KnowledgeBaseView**：`id` / `name` / `description` / `namespace` / `embeddingModel` / `createdBy` / `createdAt` / `updatedAt`。不含文档数、切片数、索引状态。
+
+### 3.3 创建
+
+`POST /admin/knowledge-bases` — 需登录（Admin / Staff）
+
+```json
+{
+  "name": "员工手册",
+  "description": "可选",
+  "namespace": "hrfaq"
+}
+```
+
+创建时不接收 `embeddingModel`；后端会自动绑定目录中 `isDefault=true` 的默认模型。
+
+| 错误码 | 文案 |
+| --- | --- |
+| A002002 | 名称不符合规则 |
+| A002003 | 名称已存在 |
+| A002004 | Namespace 不符合规则 |
+| A002005 | 命名空间已存在 |
+| A002006 | 描述不符合规则 |
+| A002007 | 向量模型不合法 |
+
+### 3.4 详情
+
+`GET /admin/knowledge-bases/{id}` — 需登录
+
+不存在 → `A002001`。
+
+### 3.5 修改 Name / Description
+
+`PUT /admin/knowledge-bases/{id}` — 需登录
+
+```json
+{
+  "name": "已修订手册",
+  "description": ""
+}
+```
+
+`description` 为空或省略表示清空。Namespace / EmbeddingModel **不会**被此接口修改。
+
+| 错误码 | 文案 |
+| --- | --- |
+| A002001 | 知识库不存在 |
+| A002002 / A002003 | 名称不合规或冲突 |
+| A002006 | 描述不符合规则 |
+
+### 3.6 删除
+
+`DELETE /admin/knowledge-bases/{id}` — **仅 Admin**
+
+物理删除；库下有 Document 时拒绝（`A002008`，本阶段无文档则不会触发）；成功后原 Namespace 可再建。Staff → `A001002`。
+
+---
+
+## 4. 错误码
+
+### 4.1 一级宏观码（`BaseErrorCode`）
 
 | 码       | 说明                            |
 | ------- | ----------------------------- |
@@ -324,7 +434,7 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/users/$USER_ID" \
 | A000001 | Web 管理端错误（框架层：未登录、参数校验等按路径归入） |
 | M000001 | 移动端错误                         |
 
-### 3.2 管理端业务码（`AdminErrorCode`）
+### 4.2 管理端业务码（`AdminErrorCode`）
 
 | 码       | 文案          |
 | ------- | ----------- |
@@ -340,6 +450,19 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/users/$USER_ID" \
 | A001010 | 分页参数不合法     |
 | A001011 | 角色不合法       |
 
+### 4.3 知识库业务码（`KnowledgeErrorCode`）
+
+| 码 | 文案 |
+| --- | --- |
+| A002001 | 知识库不存在 |
+| A002002 | 名称不符合规则 |
+| A002003 | 名称已存在 |
+| A002004 | Namespace 不符合规则 |
+| A002005 | 命名空间已存在 |
+| A002006 | 描述不符合规则 |
+| A002007 | 向量模型不合法 |
+| A002008 | 知识库下仍有文档，不能删除 |
+
 失败响应示例：
 
 ```json
@@ -352,7 +475,7 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/users/$USER_ID" \
 
 ---
 
-## 4. 端点一览
+## 5. 端点一览
 
 | 方法     | 路径                           | 鉴权          | 说明         |
 | ------ | ---------------------------- | ----------- | ---------- |
@@ -365,5 +488,11 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/users/$USER_ID" \
 | PUT    | `/admin/users/{id}/password` | Admin       | 重置密码       |
 | PUT    | `/admin/users/{id}/role`     | Admin       | 变更角色       |
 | DELETE | `/admin/users/{id}`          | Admin       | 物理删除       |
+| GET    | `/admin/embedding-models`    | 已登录         | EmbeddingModel 配置目录（对象列表） |
+| GET    | `/admin/knowledge-bases`     | 已登录         | 知识库分页列表    |
+| POST   | `/admin/knowledge-bases`     | 已登录         | 创建知识库      |
+| GET    | `/admin/knowledge-bases/{id}` | 已登录        | 知识库详情      |
+| PUT    | `/admin/knowledge-bases/{id}` | 已登录        | 改 Name / 描述 |
+| DELETE | `/admin/knowledge-bases/{id}` | Admin       | 物理删除（无文档） |
 
 

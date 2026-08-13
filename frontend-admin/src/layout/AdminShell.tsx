@@ -11,6 +11,12 @@ function breadcrumbForPath(pathname: string) {
       { label: '账号管理' },
     ]
   }
+  if (pathname.startsWith('/knowledge-bases')) {
+    return [
+      { label: '首页', to: '/' },
+      { label: '知识库管理' },
+    ]
+  }
   return [{ label: '首页' }]
 }
 

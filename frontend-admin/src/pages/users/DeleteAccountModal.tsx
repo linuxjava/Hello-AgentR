@@ -3,6 +3,7 @@ import { useState } from 'react'
 import type { AdminUserView } from '@/shared/api/types'
 import { ApiError } from '@/shared/api/types'
 import { usersApi } from '@/shared/api/users'
+import { ModalLayer } from '@/shared/ui/ModalLayer'
 import { toastSuccess } from '@/shared/ui/toast-store'
 
 export interface DeleteAccountModalProps {
@@ -47,6 +48,7 @@ export function DeleteAccountModal({
   }
 
   return (
+    <ModalLayer>
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <button
         type="button"
@@ -122,5 +124,6 @@ export function DeleteAccountModal({
         </div>
       </section>
     </div>
+    </ModalLayer>
   )
 }

@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { ApiError, type AdminRole } from '@/shared/api/types'
 import { usersApi } from '@/shared/api/users'
 import { passwordSchema, usernameSchema } from '@/shared/lib/validation'
+import { ModalLayer } from '@/shared/ui/ModalLayer'
 import { SelectMenu } from '@/shared/ui/SelectMenu'
 import { toastSuccess } from '@/shared/ui/toast-store'
 
@@ -125,6 +126,7 @@ function ModalShell({
   children: ReactNode
 }) {
   return (
+    <ModalLayer>
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <button
         type="button"
@@ -154,6 +156,7 @@ function ModalShell({
         {children}
       </section>
     </div>
+    </ModalLayer>
   )
 }
 

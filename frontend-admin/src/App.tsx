@@ -2,6 +2,7 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import { AdminShell } from '@/layout/AdminShell'
+import { KnowledgeBasesPage } from '@/pages/knowledge-bases/KnowledgeBasesPage'
 import { HomePage } from '@/pages/HomePage'
 import { LoginPage } from '@/pages/LoginPage'
 import { UsersPage } from '@/pages/users/UsersPage'
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <HomePage />,
+          },
+          {
+            path: 'knowledge-bases',
+            element: <KnowledgeBasesPage />,
           },
           {
             path: 'users',

@@ -4,7 +4,7 @@
 
 **版本**：V0.1  
 **交付重心**：后端 API（供 `frontend-admin` 对接）；本 PRD 不涵盖管理端 UI 视觉与交互稿。  
-**领域词汇**：见 [`docs/backend/CONTEXT.md`](../../CONTEXT.md)  
+**领域词汇**：见 [`docs/backend/context/admin-identity/CONTEXT.md`](../../context/admin-identity/CONTEXT.md)  
 **相关决策**：[`docs/adr/0001-separate-admin-and-enduser-identity.md`](../../../adr/0001-separate-admin-and-enduser-identity.md)
 
 ---
@@ -233,7 +233,7 @@
 
 - **依赖**：
   - 后端工程（Spring Boot / PostgreSQL / Redis / Sa-Token）
-  - 领域词汇 `docs/backend/CONTEXT.md`
+  - 领域词汇 `docs/backend/context/admin-identity/CONTEXT.md`
   - 后续：`frontend-admin` 对接（非本 PRD 完成定义）
 - **发布策略**：随 backend V0.1 发布；无特性开关要求（待定）。
 - **运维 / 支持就绪**：
@@ -246,7 +246,7 @@
 
 ## 11. 追溯链接
 
-- **领域词汇表**：`docs/backend/CONTEXT.md`
+- **领域词汇表**：`docs/backend/context/admin-identity/CONTEXT.md`
 - **架构决策**：`docs/adr/0001-separate-admin-and-enduser-identity.md`
 - **上下文地图**：`CONTEXT-MAP.md`
 - **软件需求规格（SRS）**：待定（建议下一步：`docs/backend/版本迭代/V0.1/srs.md` 或 OpenSpec specs）

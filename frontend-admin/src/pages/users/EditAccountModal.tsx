@@ -6,6 +6,7 @@ import type { AdminRole, AdminUserView } from '@/shared/api/types'
 import { ApiError } from '@/shared/api/types'
 import { usersApi } from '@/shared/api/users'
 import { passwordSchema } from '@/shared/lib/validation'
+import { ModalLayer } from '@/shared/ui/ModalLayer'
 import { SelectMenu } from '@/shared/ui/SelectMenu'
 import { toastSuccess } from '@/shared/ui/toast-store'
 
@@ -103,6 +104,7 @@ export function EditAccountModal({ open, user, onClose, onSaved }: EditAccountMo
   })
 
   return (
+    <ModalLayer>
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <button
         type="button"
@@ -226,5 +228,6 @@ export function EditAccountModal({ open, user, onClose, onSaved }: EditAccountMo
         </form>
       </section>
     </div>
+    </ModalLayer>
   )
 }

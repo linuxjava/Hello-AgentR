@@ -44,6 +44,22 @@ describe('auth route guards', () => {
     expect(screen.queryByText('PROTECTED')).toBeNull()
   })
 
+  it('RequireAuth redirects knowledge-bases to login when no token', async () => {
+    render(
+      <MemoryRouter initialEntries={['/knowledge-bases']}>
+        <Routes>
+          <Route element={<RequireAuth />}>
+            <Route path="/knowledge-bases" element={<div>KB_PROTECTED</div>} />
+          </Route>
+          <Route path="/login" element={<div>LOGIN</div>} />
+        </Routes>
+      </MemoryRouter>,
+    )
+
+    expect(await screen.findByText('LOGIN')).toBeTruthy()
+    expect(screen.queryByText('KB_PROTECTED')).toBeNull()
+  })
+
   it('RequireAuth redirects to login when me fails', async () => {
     localStorage.setItem(sessionStorageKeys.TOKEN_KEY, 'bad')
     vi.mocked(authApi.authApi.me).mockRejectedValue(new Error('unauthorized'))

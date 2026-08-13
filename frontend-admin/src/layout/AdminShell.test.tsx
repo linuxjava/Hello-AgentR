@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -23,6 +23,7 @@ function renderShell(initialPath = '/') {
       <Routes>
         <Route element={<AdminShell />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/knowledge-bases" element={<div>KB_PAGE</div>} />
           <Route path="/users" element={<div>USERS_PAGE</div>} />
         </Route>
         <Route path="/login" element={<div>LOGIN_PAGE</div>} />
@@ -57,6 +58,27 @@ describe('AdminShell + HomePage', () => {
       screen.getByText('本阶段无业务内容。后续业务模块将挂载于此。'),
     ).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: '面包屑' })).toHaveTextContent('首页')
+  })
+
+  it('keeps sidebar order home → knowledge bases → accounts', () => {
+    renderShell('/')
+    const nav = screen.getByRole('navigation', { name: '主导航' })
+    const labels = within(nav)
+      .getAllByRole('link')
+      .map((link) => link.textContent)
+    expect(labels).toEqual(['首页', '知识库管理', '账号管理'])
+  })
+
+  it('navigates to knowledge bases via sidebar', async () => {
+    const user = userEvent.setup()
+    renderShell('/')
+    await user.click(screen.getByRole('link', { name: '知识库管理' }))
+    expect(screen.getByText('KB_PAGE')).toBeInTheDocument()
+    expect(screen.getByRole('navigation', { name: '面包屑' })).toHaveTextContent('知识库管理')
+    expect(screen.getByRole('link', { name: '知识库管理' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
   })
 
   it('navigates to users via sidebar', async () => {

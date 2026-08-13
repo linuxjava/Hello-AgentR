@@ -28,7 +28,7 @@ import java.util.List;
  * 按业务模块生成：同一业务下的多张表输出到同一包路径。
  * 数据源从 {@code application.yaml} 的 {@code spring.datasource.*} 读取。
  * <pre>
- * com.xgc.agent.rag.{MODULE}
+ * com.xgc.agent.rag.features.{MODULE}
  *   ├── dao.entity
  *   ├── dao.mapper
  *   ├── service
@@ -41,7 +41,7 @@ public class CodeGenerator {
 
     /**
      * 业务模块名（多表共用同一输出路径）。
-     * 例如 knowledge → com.xgc.agent.rag.knowledge.*
+     * 例如 knowledge → com.xgc.agent.rag.features.knowledge.*
      */
     private static final String MODULE = "knowledge";
 
@@ -77,7 +77,7 @@ public class CodeGenerator {
                         .disableOpenDir()
                 )
                 .packageConfig(builder -> builder
-                        .parent("com.xgc.agent.rag")
+                        .parent("com.xgc.agent.rag.features")
                         .moduleName(MODULE)
                         .entity("dao.entity")
                         .mapper("dao.mapper")
