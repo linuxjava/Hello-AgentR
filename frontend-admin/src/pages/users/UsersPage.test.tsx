@@ -90,6 +90,7 @@ describe('UsersPage', () => {
     expect(within(table).getByText('创建时间')).toBeInTheDocument()
     expect(within(table).getByText('操作')).toBeInTheDocument()
     expect(screen.queryByText('Bootstrap')).not.toBeInTheDocument()
+    expect(screen.getByText('共 2 条')).toBeInTheDocument()
     expect(screen.getByText('10 条/页')).toBeInTheDocument()
   })
 

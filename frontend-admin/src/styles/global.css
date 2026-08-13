@@ -105,6 +105,17 @@ button:not(:disabled):not([aria-label='关闭遮罩']),
   }
 }
 
+/* Total on the left; pager + size changer stay grouped on the right (Pencil P-04). */
+.admin-pagination.ant-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.admin-pagination .ant-pagination-total-text {
+  margin-inline-end: auto;
+}
+
 /* Ant Design Pagination — thicker active page border */
 .ant-pagination-item-active {
   border-width: 2px;

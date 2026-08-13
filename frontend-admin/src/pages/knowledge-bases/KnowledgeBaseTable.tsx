@@ -16,7 +16,7 @@ function TableEmptyHint({
 }) {
   const Icon = icon === 'library' ? Database : Search
   return (
-    <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-4 px-6 py-16 text-center">
+    <div className="flex flex-col items-center justify-center gap-4 px-6 py-16 text-center">
       <div className="flex h-[72px] w-[72px] items-center justify-center rounded-[14px] bg-[#CFFAFE] text-[#2563EB]">
         <Icon size={32} aria-hidden />
       </div>
@@ -61,7 +61,8 @@ export function KnowledgeBaseTable({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto">
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-x-auto">
+      {/* Table wrap must not flex-grow, or pager sticks to the panel foot like a sticky footer. */}
+      <div className="w-full overflow-x-auto">
         <table className="w-full table-fixed border-collapse text-left">
           <thead>
             <tr className="h-11 border-b border-[#CBD5E159] bg-[#FFFFFF66] text-xs font-semibold text-[#64748B]">
@@ -157,7 +158,7 @@ export function KnowledgeBaseTable({
       </div>
 
       {showLibraryEmpty || showFilterEmpty ? null : (
-        <div className="flex shrink-0 justify-end">
+        <div className="flex w-full shrink-0">
           <Pagination
             page={page}
             total={total}

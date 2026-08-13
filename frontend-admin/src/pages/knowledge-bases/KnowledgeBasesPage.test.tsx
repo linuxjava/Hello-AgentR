@@ -138,6 +138,7 @@ describe('KnowledgeBasesPage', () => {
     expect(screen.queryByText('createdBy')).not.toBeInTheDocument()
     expect(screen.queryByLabelText('命名空间')).not.toBeInTheDocument()
     expect(screen.getByPlaceholderText('模糊搜索名称')).toBeInTheDocument()
+    expect(screen.getByText('共 2 条')).toBeInTheDocument()
     expect(screen.getByText('20 条/页')).toBeInTheDocument()
     expect(screen.getByText('—')).toBeInTheDocument()
   })

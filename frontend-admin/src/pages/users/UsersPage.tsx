@@ -261,7 +261,7 @@ function UsersPageInner() {
           </table>
         </div>
 
-        <div className="flex shrink-0 justify-end">
+        <div className="flex w-full shrink-0">
           <Pagination page={page} total={total} pageSize={pageSize} onChange={onPaginationChange} />
         </div>
       </div>
