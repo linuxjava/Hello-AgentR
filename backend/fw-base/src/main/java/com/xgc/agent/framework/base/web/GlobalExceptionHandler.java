@@ -117,6 +117,14 @@ public class GlobalExceptionHandler {
         } else {
             message = "上传请求大小超过限制，单次请求最大允许 " + maxRequestSize;
         }
+        // 管理端文档上传超限对齐 KnowledgeErrorCode.FILE_TOO_LARGE，避免只返回宏观 A000001。
+        String path = request.getServletPath();
+        if (StrUtil.isBlank(path)) {
+            path = request.getRequestURI();
+        }
+        if (path != null && path.contains("/admin")) {
+            return R.failure("A002012", message);
+        }
         return R.failure(resolveClientErrorCode(request).code(), message);
     }
 

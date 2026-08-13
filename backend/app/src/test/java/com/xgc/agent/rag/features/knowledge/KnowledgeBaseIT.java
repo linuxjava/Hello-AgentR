@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * 知识库容器 API 闭环（依赖本地 PostgreSQL + Redis，且已执行 t_admin_user.sql、t_knowledge_base.sql）。
+ * 知识库容器 API 闭环（依赖本地 PostgreSQL + Redis，且已执行 t_admin_user.sql、t_knowledge_base.sql、t_knowledge_document.sql）。
  */
 @SpringBootTest(classes = HelloAgentRApplication.class)
 @AutoConfigureMockMvc
@@ -117,7 +117,7 @@ class KnowledgeBaseIT {
                 .andExpect(jsonPath("$.code").value("0"))
                 .andExpect(jsonPath("$.data.namespace").value(reusedNamespace))
                 .andExpect(jsonPath("$.data.embeddingModel").value("bge-m3"))
-                .andExpect(jsonPath("$.data.documentCount").doesNotExist())
+                .andExpect(jsonPath("$.data.documentCount").value(0))
                 .andReturn();
         knowledgeBaseId = objectMapper.readTree(created.getResponse().getContentAsString())
                 .path("data").path("id").asText();

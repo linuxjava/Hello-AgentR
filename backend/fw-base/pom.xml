@@ -61,5 +61,11 @@
             <artifactId>s3</artifactId>
         </dependency>
         <!--s3文件上传依赖 end-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
