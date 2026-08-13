@@ -23,7 +23,7 @@ COMMENT ON COLUMN t_knowledge_base.id IS '主键 ID（Snowflake 字符串）';
 COMMENT ON COLUMN t_knowledge_base.name IS '显示名；去首尾空白后 1–64；全局唯一；可改';
 COMMENT ON COLUMN t_knowledge_base.description IS '可选说明；最长 200；可空';
 COMMENT ON COLUMN t_knowledge_base.namespace IS '隔离键；人填；[a-z0-9]{2,32}；全局唯一；创建后不可改';
-COMMENT ON COLUMN t_knowledge_base.embedding_model IS '创建时绑定的嵌入模型标识；创建后不可改';
+COMMENT ON COLUMN t_knowledge_base.embedding_model IS '创建时绑定的向量模型标识；创建后不可改';
 COMMENT ON COLUMN t_knowledge_base.created_by IS '创建者 AdminUser id（审计，非 ACL）';
 COMMENT ON COLUMN t_knowledge_base.updated_by IS '最后修改者 AdminUser id';
 COMMENT ON COLUMN t_knowledge_base.create_time IS '创建时间';

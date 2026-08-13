@@ -25,9 +25,10 @@ _Avoid_: slug、code、Collection、path、用 Name 当存储键、系统自动�
 上游嵌入服务的接入点；由部署侧 YAML 以 **map** 声明，不是运营在 API 里创建的实体。map 的 **key 即 providerId**，同时也是协议适配标识；首版仅允许 `alibailian`、`siliconflow` 两个 key，**每个 key 最多一条**（无 `type` 字段——key 即 type）。每条声明含连接参数（baseUrl、鉴权密钥引用等）。密钥在配置中只以环境变量/占位引用出现，不以明文写入 YAML。本阶段不包含 Chat/LLM。`ModelProvider` 与 `EmbeddingModel` 在配置结构上分开声明；`EmbeddingModel.providerId` 必须指向 map 中已存在的 key。连接参数只服务后续摄入/调用，不通过管理 API 回传密钥；本阶段不调用上游做连通性探测。
 _Avoid_: Vendor、Supplier、账号、把 Provider 当成 EmbeddingModel、在目录 API 中暴露密钥、YAML 明文 apiKey、自定义实例名（如 bailian-main）、同一厂商多条配置
 
-**EmbeddingModel（嵌入模型）**：
-创建 KnowledgeBase 时绑定的嵌入模型；创建后不可更换；不是对话用的 LLM。权威来源是部署侧 YAML（挂在某个 ModelProvider 下）；进程启动时加载为只读目录，**仅重启后**反映配置变更（不热加载）。标识在全配置内全局唯一；KnowledgeBase 只存该标识，不存 Provider。目录项对人暴露 id、model、dimension、providerId、priority、isDefault；创建知识库时由后端自动选择 `isDefault=true` 的目录项，不接受前端传入模型 id。`model` 是调用上游嵌入接口时使用的模型标识。目录返回顺序按 priority 升序（数值越小优先级越高）；priority 相同按 id 升序稳定排序。`dimension` 在本配置中要求统一大小（所有 EmbeddingModel 必须相同）。`isDefault` 在全目录中必须且仅能有一个 `true`。
-_Avoid_: LLM、Chat 模型、向量模型（口语可，文档用 EmbeddingModel）、模拟目录（已废弃称谓）、运行中热更新目录
+**EmbeddingModel（向量模型）**：
+创建 KnowledgeBase 时绑定的向量模型；创建后不可更换；不是对话用的 LLM。权威来源是部署侧 YAML（挂在某个 ModelProvider 下）；进程启动时加载为只读目录，**仅重启后**反映配置变更（不热加载）。标识在全配置内全局唯一；KnowledgeBase 只存该标识，不存 Provider。目录项对人暴露 id、model、dimension、providerId、priority、isDefault；创建知识库时由后端自动选择 `isDefault=true` 的目录项，不接受前端传入模型 id。`model` 是调用上游 Embedding 接口时使用的模型标识。目录返回顺序按 priority 升序（数值越小优先级越高）；priority 相同按 id 升序稳定排序。`dimension` 在本配置中要求统一大小（所有 EmbeddingModel 必须相同）。`isDefault` 在全目录中必须且仅能有一个 `true`。
+代码 / API / YAML 用 `EmbeddingModel`；界面、错误提示、中文文档用「向量模型」。
+_Avoid_: LLM、Chat 模型、嵌入模型（技术对照可，文档与界面用向量模型）、模拟目录（已废弃称谓）、运行中热更新目录
 
 **目录漂移（已绑定但配置已移除）**：
 若某 KnowledgeBase 已绑定的 EmbeddingModel id 不再出现在当前目录中：已有库仍可列表、详情、改 Name/Description、删除；仅**新建**时拒绝不在目录中的 id。详情/列表仍返回库中已存的 id，不因目录缺失而失败。

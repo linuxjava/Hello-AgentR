@@ -13,7 +13,7 @@ import java.util.Date;
  * @param name           显示名
  * @param description    描述，可空
  * @param namespace      隔离键
- * @param embeddingModel 绑定的嵌入模型标识
+ * @param embeddingModel 绑定的向量模型标识
  * @param createdBy      创建者 AdminUser id
  * @param createdAt      创建时间
  * @param updatedAt      更新时间

@@ -49,7 +49,7 @@ public class KnowledgeBaseDO {
     private String namespace;
 
     /**
-     * 创建时绑定的嵌入模型标识；创建后业务层禁止改此列。
+     * 创建时绑定的向量模型标识；创建后业务层禁止改此列。
      */
     private String embeddingModel;
 

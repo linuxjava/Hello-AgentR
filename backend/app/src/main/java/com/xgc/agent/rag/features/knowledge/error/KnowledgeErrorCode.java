@@ -32,7 +32,7 @@ public enum KnowledgeErrorCode implements IErrorCode {
     DESCRIPTION_INVALID("A002006", "描述不符合规则"),
 
     /** EmbeddingModel 不在模拟目录中。 */
-    EMBEDDING_MODEL_INVALID("A002007", "嵌入模型不合法"),
+    EMBEDDING_MODEL_INVALID("A002007", "向量模型不合法"),
 
     /** 占用检查报告仍有 Document。 */
     NOT_EMPTY("A002008", "知识库下仍有文档，不能删除");

@@ -1,0 +1,11 @@
+#1. 把某些目录标记为第三方依赖，不参与语言统计（node_modules、vendor、dist、docs）
+node_modules/** linguist-vendored
+vendor/** linguist-vendored
+dist/** linguist-vendored
+
+#2. 强制某类后缀识别为指定语言
+*.java linguist-language=Java
+
+#3. 某些文件完全不参与语言统计
+*.md linguist-detectable=false
+*.yml linguist-detectable=false
