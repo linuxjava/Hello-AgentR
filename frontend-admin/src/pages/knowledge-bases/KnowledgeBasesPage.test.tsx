@@ -8,6 +8,7 @@ import { KnowledgeBasesPage } from '@/pages/knowledge-bases/KnowledgeBasesPage'
 import { ApiError } from '@/shared/api/types'
 import { useSessionStore } from '@/shared/auth/session-store'
 import {
+  KB_HAS_DOCUMENTS_MESSAGE,
   KB_NO_DELETE_PERMISSION_MESSAGE,
   useToastStore,
 } from '@/shared/ui/toast-store'
@@ -18,6 +19,7 @@ const createMock = vi.fn()
 const updateMock = vi.fn()
 const removeMock = vi.fn()
 const listEmbeddingModelsMock = vi.fn()
+const listUsersMock = vi.fn()
 
 vi.mock('@/shared/api/knowledge', () => ({
   knowledgeApi: {
@@ -29,12 +31,19 @@ vi.mock('@/shared/api/knowledge', () => ({
   },
 }))
 
+vi.mock('@/shared/api/users', () => ({
+  usersApi: {
+    list: (...args: unknown[]) => listUsersMock(...args),
+  },
+}))
+
 const sampleKb = {
   id: 'kb-1',
   name: '产品手册',
   description: '面向运营的产品说明容器',
   namespace: 'productdocs',
   embeddingModel: 'qwen3.7-text-embedding',
+  documentCount: 3,
   createdBy: '1',
   createdAt: '2026-08-01T09:12:00.000+00:00',
   updatedAt: '2026-08-01T09:12:00.000+00:00',
@@ -46,6 +55,7 @@ const emptyDescKb = {
   name: '空描述库',
   description: null,
   namespace: 'emptydesc',
+  documentCount: 0,
 }
 
 function renderPage() {
@@ -94,6 +104,7 @@ describe('KnowledgeBasesPage', () => {
     updateMock.mockReset()
     removeMock.mockReset()
     listEmbeddingModelsMock.mockReset()
+    listUsersMock.mockReset()
     useToastStore.setState({ items: [] })
     listMock.mockResolvedValue({
       page: 1,
@@ -119,28 +130,75 @@ describe('KnowledgeBasesPage', () => {
         isDefault: false,
       },
     ])
+    listUsersMock.mockResolvedValue({
+      page: 1,
+      pageSize: 100,
+      total: 1,
+      records: [
+        {
+          id: '1',
+          username: 'admin',
+          role: 'ADMIN',
+          bootstrap: true,
+          createdAt: '2026-07-01T10:00:00.000+00:00',
+        },
+      ],
+    })
     setAdminSession()
   })
 
-  it('shows Pencil columns without ingest fake fields or namespace filter', async () => {
+  it('shows Pencil columns with documentCount and without ingest fake fields', async () => {
     renderPage()
     expect(await screen.findByText('产品手册')).toBeInTheDocument()
     const table = screen.getByRole('table')
     expect(within(table).getByText('名称')).toBeInTheDocument()
     expect(within(table).getByText('命名空间')).toBeInTheDocument()
     expect(within(table).getByText('向量模型')).toBeInTheDocument()
+    expect(within(table).getByText('文档数')).toBeInTheDocument()
     expect(within(table).getByText('描述')).toBeInTheDocument()
-    expect(within(table).getByText('创建时间')).toBeInTheDocument()
+    expect(within(table).getByText('更新时间')).toBeInTheDocument()
     expect(within(table).getByText('操作')).toBeInTheDocument()
-    expect(screen.queryByText('文档数')).not.toBeInTheDocument()
+    expect(within(table).getByText('3')).toBeInTheDocument()
+    expect(within(table).getByText('0')).toBeInTheDocument()
+    expect(within(table).getAllByText('qwen3.7-text-embedding').length).toBeGreaterThan(0)
+    expect(within(table).getAllByText('alibailian').length).toBeGreaterThan(0)
+    expect(screen.queryByText(/alibailian\s*\/\s*qwen/)).not.toBeInTheDocument()
     expect(screen.queryByText('切片数')).not.toBeInTheDocument()
     expect(screen.queryByText('索引状态')).not.toBeInTheDocument()
+    // 副行创建者：id→username 映射后展示 admin，不展示契约字段名
+    expect(await within(table).findAllByText('admin')).toHaveLength(2)
     expect(screen.queryByText('createdBy')).not.toBeInTheDocument()
     expect(screen.queryByLabelText('命名空间')).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: '进入' })).not.toBeInTheDocument()
     expect(screen.getByPlaceholderText('模糊搜索名称')).toBeInTheDocument()
     expect(screen.getByText('共 2 条')).toBeInTheDocument()
     expect(screen.getByText('20 条/页')).toBeInTheDocument()
     expect(screen.getByText('—')).toBeInTheDocument()
+  })
+
+  it('links name to documents route', async () => {
+    renderPage()
+    const nameLink = await screen.findByRole('link', { name: /产品手册/ })
+    expect(nameLink).toHaveAttribute('href', '/knowledge-bases/kb-1/documents')
+  })
+
+  it('toasts when Admin deletes a non-empty knowledge base', async () => {
+    const user = userEvent.setup()
+    renderPage()
+    await screen.findByText('产品手册')
+
+    await user.click(screen.getAllByRole('button', { name: '删除' })[0]!)
+    expect(await screen.findByRole('status')).toHaveTextContent(KB_HAS_DOCUMENTS_MESSAGE)
+    expect(screen.queryByRole('dialog', { name: '删除知识库' })).not.toBeInTheDocument()
+  })
+
+  it('opens delete confirm when Admin deletes an empty knowledge base', async () => {
+    const user = userEvent.setup()
+    renderPage()
+    await screen.findByText('空描述库')
+
+    await user.click(screen.getAllByRole('button', { name: '删除' })[1]!)
+    expect(await screen.findByRole('dialog', { name: '删除知识库' })).toBeInTheDocument()
   })
 
   it('applies name fuzzy filter without namespace', async () => {
@@ -172,7 +230,7 @@ describe('KnowledgeBasesPage', () => {
     expect(within(table).getByText('命名空间')).toBeInTheDocument()
     expect(within(table).getByText('向量模型')).toBeInTheDocument()
     expect(within(table).getByText('描述')).toBeInTheDocument()
-    expect(within(table).getByText('创建时间')).toBeInTheDocument()
+    expect(within(table).getByText('更新时间')).toBeInTheDocument()
     expect(within(table).getByText('操作')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: '创建知识库' })).toBeEnabled()
     expect(screen.queryByText('20 条/页')).not.toBeInTheDocument()
@@ -297,9 +355,10 @@ describe('KnowledgeBasesPage', () => {
     const user = userEvent.setup()
     removeMock.mockRejectedValue(new ApiError('A002008', '知识库下仍有文档，不能删除'))
     renderPage()
-    await screen.findByText('产品手册')
+    await screen.findByText('空描述库')
 
-    await user.click(screen.getAllByRole('button', { name: '删除' })[0]!)
+    // 空库可打开 O-07；列表未刷新时后端仍可能返回 A002008（O-07a 兜底）。
+    await user.click(screen.getAllByRole('button', { name: '删除' })[1]!)
     const dialog = await screen.findByRole('dialog', { name: '删除知识库' })
     expect(within(dialog).getByText('将执行彻底删除，且无法恢复。')).toBeInTheDocument()
     await user.click(within(dialog).getByRole('button', { name: '确认删除' }))

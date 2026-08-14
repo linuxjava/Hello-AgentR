@@ -1,14 +1,24 @@
 import { useState } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import { ChangePasswordModal } from '@/layout/ChangePasswordModal'
+import { useDocBreadcrumbStore } from '@/layout/doc-breadcrumb-store'
 import { ShellSidebar } from '@/layout/ShellSidebar'
 import { ShellTopbar } from '@/layout/ShellTopbar'
 
-function breadcrumbForPath(pathname: string) {
+function breadcrumbForPath(pathname: string, docKbLabel: string | null) {
   if (pathname.startsWith('/users')) {
     return [
       { label: '首页', to: '/' },
       { label: '账号管理' },
+    ]
+  }
+  // 文档列表：第三段为库 Name 或「知识库不存在」（由 DocumentsPage 写入 store）。
+  const docsMatch = pathname.match(/^\/knowledge-bases\/[^/]+\/documents\/?$/)
+  if (docsMatch) {
+    return [
+      { label: '首页', to: '/' },
+      { label: '知识库管理', to: '/knowledge-bases' },
+      { label: docKbLabel ?? '…' },
     ]
   }
   if (pathname.startsWith('/knowledge-bases')) {
@@ -22,6 +32,7 @@ function breadcrumbForPath(pathname: string) {
 
 export function AdminShell() {
   const location = useLocation()
+  const docKbLabel = useDocBreadcrumbStore((s) => s.kbLabel)
   const [changePasswordOpen, setChangePasswordOpen] = useState(false)
 
   return (
@@ -36,7 +47,7 @@ export function AdminShell() {
         <ShellSidebar />
         <div className="flex min-w-0 flex-1 flex-col gap-4">
           <ShellTopbar
-            breadcrumb={breadcrumbForPath(location.pathname)}
+            breadcrumb={breadcrumbForPath(location.pathname, docKbLabel)}
             onChangePassword={() => setChangePasswordOpen(true)}
           />
           <main className="glass-panel min-h-0 flex-1 overflow-auto">

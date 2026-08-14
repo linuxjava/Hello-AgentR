@@ -68,8 +68,8 @@ _Avoid_: ChunkingMode、SplitStrategy、把策略拖到「开始分块」才首�
 _Avoid_: 任意自由 JSON、把 STRUCTURE_AWARE 限定为仅 Markdown（已否决）、上传时按 MIME 禁止某策略（已否决）、把标题层级做成运营多选、本阶段把正则写进词汇表、把参数留到开始分块再收（已否决）、V0.4 执行切块或格式转换
 
 **ObjectStorage（对象存储）**：
-部署级、全局唯一的活跃文件后端，实现落在 `fw-base`，不是 Knowledge 独有实体。由部署侧 YAML 声明，不是运营可切换的业务选项。首版活跃类型为 `s3`；实现须可扩展为 `oss` 等，但同一时刻只有一个活跃后端。连接参数按 `type` 分挂在 `s3` / `oss` 子块（endpoint、bucket、region 或 internal-endpoint 等）；密钥只以环境变量/占位引用出现，不以明文写入 YAML，也不通过管理 API 回传。配置变更仅重启后生效。只校验当前活跃子块。Document 的 **objectKey 由 Knowledge 生成**（调用方不可传），路径包含该库 Namespace 以实现存储隔离；不使用 OriginalFilename 作为路径主体。objectKey 不通过管理 API 返回。存储失败由 Document 用例映射为 `A002015`。
-_Avoid_: 每文档绑定 storageProvider、把 S3/OSS 当运营可选项、在管理 API 中暴露密钥或 objectKey、YAML 明文密钥、Bucket（作业务实体名时）、运行中热切换存储后端、调用方自定 objectKey、把存储适配器放进 knowledge 包、fw-base 依赖 Knowledge 错误码
+部署级、全局唯一的活跃文件后端，实现落在 `fw-base`，不是 Knowledge 独有实体。由部署侧 YAML 声明，不是运营可切换的业务选项。首版活跃类型为 `s3`；实现须可扩展为 `oss` 等，但同一时刻只有一个活跃后端。连接参数按 `type` 分挂在 `s3` / `oss` 子块（endpoint、bucket、region 或 internal-endpoint 等）；密钥只以环境变量/占位引用出现，不以明文写入 YAML，也不通过管理 API 回传。配置变更仅重启后生效。只校验当前活跃子块。S3 适配器在首次写入/删除对象时，若配置桶不存在则自动创建（账号须有建桶权限）。Document 的 **objectKey 由 Knowledge 生成**（调用方不可传），路径包含该库 Namespace 以实现存储隔离；不使用 OriginalFilename 作为路径主体。objectKey 不通过管理 API 返回。存储失败由 Document 用例映射为 `A002015`。
+_Avoid_: 每文档绑定 storageProvider、把 S3/OSS 当运营可选项、在管理 API 中暴露密钥或 objectKey、YAML 明文密钥、Bucket（作业务实体名时）、运行中热切换存储后端、调用方自定 objectKey、把存储适配器放进 knowledge 包、fw-base 依赖 Knowledge 错误码、启动期强制建桶（会挡登录）
 
 **DocumentSourceType（文档来源）**：
 Document 的入库来源类型；上传时写入并持久化。本阶段仅允许 `LOCAL_FILE`（运营选择本地文件，经管理 API 入库）；后续可扩展 `URL`（从地址拉取后再写入同一 ObjectStorage，仍是同一 Document 模型）。本阶段 API 拒绝非 `LOCAL_FILE`。

@@ -63,3 +63,10 @@ export const KB_NO_DELETE_PERMISSION_MESSAGE = '无权限删除知识库'
 export function toastKbNoDeletePermission(): string {
   return toastInfo(KB_NO_DELETE_PERMISSION_MESSAGE)
 }
+
+/** Admin 有文档时删库拦截（Pencil H-01）；外观不灰显，与 Staff 无权限文案区分。 */
+export const KB_HAS_DOCUMENTS_MESSAGE = '库下仍有文档，不能删除'
+
+export function toastKbHasDocuments(): string {
+  return toastInfo(KB_HAS_DOCUMENTS_MESSAGE)
+}

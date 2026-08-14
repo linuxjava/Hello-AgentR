@@ -8,8 +8,14 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3Configuration;
+import software.amazon.awssdk.services.s3.model.BucketAlreadyExistsException;
+import software.amazon.awssdk.services.s3.model.BucketAlreadyOwnedByYouException;
+import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+import software.amazon.awssdk.services.s3.model.HeadBucketRequest;
+import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.net.URI;
 
@@ -17,7 +23,8 @@ import java.net.URI;
  * 首版活跃后端：S3 兼容存储。
  *
  * <p>密钥为空时仍允许进程启动，put/delete 再失败，避免本地没配桶时登录也起不来。
- * 客户端延迟到首次 put/delete 再建，避免启动期加载 AWS 类。</p>
+ * 客户端延迟到首次 put/delete 再建，避免启动期加载 AWS 类。
+ * 首次使用时若不存在配置桶则自动创建（本地 MinIO 友好；账号需有建桶权限）。</p>
  */
 @Slf4j
 public class S3ObjectStorage implements ObjectStorage {
@@ -27,6 +34,9 @@ public class S3ObjectStorage implements ObjectStorage {
     private final ObjectStorageProperties properties;
 
     private S3Client client;
+
+    /** 进程内只确保一次，避免每次 put 都 headBucket。 */
+    private volatile boolean bucketReady;
 
     public S3ObjectStorage(ObjectStorageProperties properties) {
         this.properties = properties;
@@ -69,6 +79,7 @@ public class S3ObjectStorage implements ObjectStorage {
         if (client == null) {
             throw new ObjectStorageException();
         }
+        ensureBucketExists(client);
         return client;
     }
 
@@ -90,6 +101,48 @@ public class S3ObjectStorage implements ObjectStorage {
                         .pathStyleAccessEnabled(s3.isPathStyle())
                         .build())
                 .build();
+    }
+
+    /**
+     * head 失败且确认为缺桶时 create；并发建桶冲突视为成功。
+     * 不放在启动期：缺密钥/MinIO 未起时仍要能登录。
+     */
+    private void ensureBucketExists(S3Client s3) {
+        if (bucketReady) {
+            return;
+        }
+        synchronized (this) {
+            if (bucketReady) {
+                return;
+            }
+            String bucket = s3Settings().getBucket().trim();
+            try {
+                s3.headBucket(HeadBucketRequest.builder().bucket(bucket).build());
+            } catch (NoSuchBucketException missing) {
+                createBucket(s3, bucket);
+            } catch (S3Exception ex) {
+                // 部分兼容端点用 404 而非 NoSuchBucketException
+                if (ex.statusCode() == 404) {
+                    createBucket(s3, bucket);
+                } else {
+                    throw new ObjectStorageException(ex);
+                }
+            } catch (RuntimeException ex) {
+                throw new ObjectStorageException(ex);
+            }
+            bucketReady = true;
+        }
+    }
+
+    private void createBucket(S3Client s3, String bucket) {
+        try {
+            log.info("ObjectStorage 桶不存在，自动创建 bucket={}", bucket);
+            s3.createBucket(CreateBucketRequest.builder().bucket(bucket).build());
+        } catch (BucketAlreadyOwnedByYouException | BucketAlreadyExistsException race) {
+            log.debug("ObjectStorage 建桶时桶已存在 bucket={}", bucket);
+        } catch (RuntimeException ex) {
+            throw new ObjectStorageException(ex);
+        }
     }
 
     private boolean hasCredentials() {

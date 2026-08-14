@@ -30,13 +30,55 @@ export interface EmbeddingModelCatalogItem {
   isDefault: boolean
 }
 
-/** KnowledgeBase 列表/写回视图；不含文档数等摄入假字段（V0.2 契约）。 */
+/** KnowledgeBase 列表/写回视图；V0.4 起含真实 documentCount（含已禁用 Document）。 */
 export interface KnowledgeBaseView {
   id: string
   name: string
   description: string | null
   namespace: string
   embeddingModel: string
+  /** 库下 Document 条数（含已禁用）；非切片数 / 索引状态。 */
+  documentCount: number
+  createdBy: string
+  createdAt: string
+  updatedAt: string
+}
+
+/** Document 摄入状态；本阶段创建后为 UPLOADED，其余为后续预留。 */
+export type DocumentStatus = 'UPLOADED' | 'CHUNKING' | 'CHUNKED' | 'FAILED'
+
+export type ChunkStrategy = 'OVERLAPPING' | 'STRUCTURE_AWARE'
+
+export type DocumentSourceType = 'LOCAL_FILE' | 'URL'
+
+/** OVERLAPPING 参数（Unicode 字符计数；由前端组装后提交）。 */
+export interface OverlappingChunkParams {
+  chunkSize: number
+  overlap: number
+}
+
+/** STRUCTURE_AWARE 参数。 */
+export interface StructureAwareChunkParams {
+  minChunkSize: number
+  defaultChunkSize: number
+  maxChunkSize: number
+  overlap: number
+}
+
+export type ChunkStrategyParams = OverlappingChunkParams | StructureAwareChunkParams
+
+/** Document 列表/写回视图；永不含 objectKey。 */
+export interface DocumentView {
+  id: string
+  knowledgeBaseId: string
+  originalFilename: string
+  mediaType: string
+  byteSize: number
+  status: DocumentStatus
+  enabled: boolean
+  chunkStrategy: ChunkStrategy
+  chunkStrategyParams: ChunkStrategyParams
+  sourceType: DocumentSourceType
   createdBy: string
   createdAt: string
   updatedAt: string

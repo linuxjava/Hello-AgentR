@@ -65,7 +65,7 @@ class ObjectStoragePropertiesValidationTest {
         properties.setType("s3");
         ObjectStorageProperties.S3 s3 = properties.getS3();
         s3.setEndpoint("http://127.0.0.1:9000");
-        s3.setBucket("hello-agentr");
+        s3.setBucket("hello-agentr-knowledge");
         s3.setRegion("us-east-1");
         s3.setAccessKey("");
         s3.setSecretKey("");

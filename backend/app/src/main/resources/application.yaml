@@ -90,7 +90,7 @@ hello-agentr:
     type: s3
     s3:
       endpoint: ${S3_ENDPOINT:http://127.0.0.1:9000}
-      bucket: ${S3_BUCKET:hello-agentr}
+      bucket: ${S3_BUCKET:hello-agentr-knowledge}
       region: ${S3_REGION:us-east-1}
       access-key: ${S3_ACCESS_KEY:}
       secret-key: ${S3_SECRET_KEY:}

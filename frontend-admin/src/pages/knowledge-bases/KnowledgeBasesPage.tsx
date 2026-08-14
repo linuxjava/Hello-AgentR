@@ -4,8 +4,9 @@ import { useEffect, useMemo, useState } from 'react'
 import type { KnowledgeBaseView } from '@/shared/api/types'
 import { ApiError } from '@/shared/api/types'
 import { knowledgeApi } from '@/shared/api/knowledge'
+import { usersApi } from '@/shared/api/users'
 import { useSessionStore } from '@/shared/auth/session-store'
-import { toastError, toastKbNoDeletePermission } from '@/shared/ui/toast-store'
+import { toastError, toastKbHasDocuments, toastKbNoDeletePermission } from '@/shared/ui/toast-store'
 import { CreateKbModal } from '@/pages/knowledge-bases/CreateKbModal'
 import { DeleteKbModal } from '@/pages/knowledge-bases/DeleteKbModal'
 import { EditKbModal } from '@/pages/knowledge-bases/EditKbModal'
@@ -40,6 +41,13 @@ function KnowledgeBasesPageInner() {
     queryFn: () => knowledgeApi.listEmbeddingModels(),
     retry: false,
   })
+  // Why 拉用户目录：列表副行要展示创建者 username，契约 createdBy 仅有 AdminUser id。
+  const usersDirectoryQuery = useQuery({
+    queryKey: ['admin-users-directory'],
+    queryFn: () => usersApi.list({ page: 1, pageSize: 100 }),
+    staleTime: 60_000,
+    retry: false,
+  })
 
   useEffect(() => {
     if (!query.error) {
@@ -52,13 +60,21 @@ function KnowledgeBasesPageInner() {
 
   const records = query.data?.records ?? []
   const total = query.data?.total ?? 0
-  const embeddingModelDisplayMap = useMemo(() => {
+  /** model id → providerId；列表两行展示，提供商作副行弱化。 */
+  const embeddingModelProviderMap = useMemo(() => {
     const map: Record<string, string> = {}
     for (const item of catalogQuery.data ?? []) {
-      map[item.id] = `${item.providerId} / ${item.id}`
+      map[item.id] = item.providerId
     }
     return map
   }, [catalogQuery.data])
+  const usernameById = useMemo(() => {
+    const map: Record<string, string> = {}
+    for (const user of usersDirectoryQuery.data?.records ?? []) {
+      map[user.id] = user.username
+    }
+    return map
+  }, [usersDirectoryQuery.data])
   const showLibraryEmpty =
     !query.isLoading && !query.error && records.length === 0 && !appliedName
   const showFilterEmpty =
@@ -77,6 +93,11 @@ function KnowledgeBasesPageInner() {
     // Staff 灰显仍可点：前端拦截，避免误开 O-07；后端 DELETE 仍以 Admin 为准。
     if (!isAdmin) {
       toastKbNoDeletePermission()
+      return
+    }
+    // Why Toast 而非灰显：Pencil 定稿有文档时删除外观与空库相同，用文案拦截。
+    if (kb.documentCount > 0) {
+      toastKbHasDocuments()
       return
     }
     setDeleteKb(kb)
@@ -124,7 +145,8 @@ function KnowledgeBasesPageInner() {
         page={page}
         pageSize={pageSize}
         total={total}
-        embeddingModelDisplayMap={embeddingModelDisplayMap}
+        embeddingModelProviderMap={embeddingModelProviderMap}
+        usernameById={usernameById}
         onPageChange={(nextPage, nextPageSize) => {
           setPage(nextPage)
           setPageSize(nextPageSize)
