@@ -6,7 +6,7 @@ import { ChangePasswordModal } from '@/layout/ChangePasswordModal'
 import { ApiError } from '@/shared/api/types'
 import { useSessionStore } from '@/shared/auth/session-store'
 import { ToastHost } from '@/shared/ui/ToastHost'
-import { useToastStore } from '@/shared/ui/toast-store'
+import { clearToasts } from '@/shared/ui/toast-store'
 
 const changePasswordMock = vi.fn()
 
@@ -22,7 +22,7 @@ vi.mock('@/shared/api/auth', () => ({
 describe('ChangePasswordModal', () => {
   beforeEach(() => {
     changePasswordMock.mockReset()
-    useToastStore.setState({ items: [] })
+    clearToasts()
     useSessionStore.setState({
       token: 'tok',
       status: 'authenticated',

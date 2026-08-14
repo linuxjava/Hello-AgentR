@@ -103,7 +103,7 @@ function UsersPageInner() {
     <div className="flex h-full flex-col gap-4 p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex h-9 w-[220px] items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFF59] px-3">
+          <div className="admin-input flex h-9 w-[220px] items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFF59] px-3">
             <Search size={14} className="text-[#64748B]" aria-hidden />
             <input
               id="filter-username"
@@ -261,7 +261,7 @@ function UsersPageInner() {
           </table>
         </div>
 
-        <div className="flex shrink-0 justify-end">
+        <div className="flex w-full shrink-0">
           <Pagination page={page} total={total} pageSize={pageSize} onChange={onPaginationChange} />
         </div>
       </div>

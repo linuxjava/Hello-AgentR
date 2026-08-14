@@ -59,13 +59,15 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
                         .like(nameKeyword != null, KnowledgeBaseDO::getName, nameKeyword)
                         .orderByDesc(KnowledgeBaseDO::getCreateTime)
         );
-        List<KnowledgeBaseView> records = result.getRecords().stream().map(KnowledgeBaseView::from).toList();
+        List<KnowledgeBaseView> records = result.getRecords().stream()
+                .map(item -> KnowledgeBaseView.from(item, documentPresence.count(item.getId())))
+                .toList();
         return new KnowledgeBasePageResponse(result.getCurrent(), result.getSize(), result.getTotal(), records);
     }
 
     @Override
     public KnowledgeBaseView get(String id) {
-        return KnowledgeBaseView.from(requireById(id));
+        return KnowledgeBaseView.from(requireById(id), documentPresence.count(id));
     }
 
     @Override
@@ -93,7 +95,7 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
                 .updatedBy(operatorId)
                 .build();
         knowledgeBaseMapper.insert(created);
-        return KnowledgeBaseView.from(created);
+        return KnowledgeBaseView.from(created, 0L);
     }
 
     @Override
@@ -110,7 +112,7 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
         target.setDescription(description);
         target.setUpdatedBy(operatorId);
         knowledgeBaseMapper.updateById(target);
-        return KnowledgeBaseView.from(requireById(id));
+        return KnowledgeBaseView.from(requireById(id), documentPresence.count(id));
     }
 
     @Override

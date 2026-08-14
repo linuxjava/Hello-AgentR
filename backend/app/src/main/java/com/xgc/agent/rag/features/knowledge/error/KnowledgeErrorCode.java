@@ -35,7 +35,34 @@ public enum KnowledgeErrorCode implements IErrorCode {
     EMBEDDING_MODEL_INVALID("A002007", "向量模型不合法"),
 
     /** 占用检查报告仍有 Document。 */
-    NOT_EMPTY("A002008", "知识库下仍有文档，不能删除");
+    NOT_EMPTY("A002008", "知识库下仍有文档，不能删除"),
+
+    /** Document 不存在，或不属于路径中的知识库。 */
+    DOCUMENT_NOT_FOUND("A002009", "文档不存在"),
+
+    /** 0 字节或不带文件。 */
+    FILE_EMPTY("A002010", "文件为空"),
+
+    /** Tika 探测结果不在白名单。 */
+    FILE_TYPE_UNSUPPORTED("A002011", "文件类型不支持"),
+
+    /** 超过部署配置的 multipart 上限。 */
+    FILE_TOO_LARGE("A002012", "文件大小超过限制"),
+
+    /** ChunkStrategy 枚举非法。 */
+    CHUNK_STRATEGY_INVALID("A002013", "分块策略不合法"),
+
+    /** 参数缺键、多键或不等式不成立。 */
+    CHUNK_STRATEGY_PARAMS_INVALID("A002014", "分块策略参数不合法"),
+
+    /** 对象存储不可用（含缺密钥、put/delete 失败）。 */
+    OBJECT_STORAGE_UNAVAILABLE("A002015", "对象存储不可用"),
+
+    /** OriginalFilename 主名为空、超长或含路径分隔符等非法字符。 */
+    FILENAME_INVALID("A002016", "文件名不符合规则"),
+
+    /** 改名时试图更换扩展名。 */
+    FILENAME_EXTENSION_LOCKED("A002017", "不能修改文件名后缀");
 
     /**
      * 错误码。

@@ -13,35 +13,35 @@ export function ModalShell({
 }) {
   return (
     <ModalLayer>
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <button
-        type="button"
-        aria-label="关闭遮罩"
-        className="absolute inset-0 bg-[#0F172A66] backdrop-blur-[8px]"
-        onClick={onClose}
-      />
-      <section
-        role="dialog"
-        aria-modal
-        aria-label={title}
-        className="relative z-10 flex w-full max-w-[500px] flex-col gap-5 rounded-[20px] border border-[#FFFFFFCC] bg-[#FFFFFFD9] p-7 shadow-[0_16px_40px_#0F172A40] backdrop-blur-[48px]"
-      >
-        <header className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-[#0F172A] font-[family-name:var(--font-display)]">
-            {title}
-          </h2>
-          <button
-            type="button"
-            aria-label="关闭"
-            onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#FFFFFF66] bg-[#FFFFFF59]"
-          >
-            <X size={16} className="text-[#334155]" />
-          </button>
-        </header>
-        {children}
-      </section>
-    </div>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <button
+          type="button"
+          aria-label="关闭遮罩"
+          className="absolute inset-0 bg-[#0F172A66] backdrop-blur-[8px]"
+          onClick={onClose}
+        />
+        <section
+          role="dialog"
+          aria-modal
+          aria-label={title}
+          className="relative z-10 flex w-full max-w-[500px] flex-col gap-5 rounded-[20px] border border-[#FFFFFFCC] bg-[#FFFFFFD9] p-7 shadow-[0_16px_40px_#0F172A40] backdrop-blur-[48px]"
+        >
+          <header className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-[#0F172A] font-[family-name:var(--font-display)]">
+              {title}
+            </h2>
+            <button
+              type="button"
+              aria-label="关闭"
+              onClick={onClose}
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-[#FFFFFF66] bg-[#FFFFFF59]"
+            >
+              <X size={16} className="text-[#334155]" />
+            </button>
+          </header>
+          {children}
+        </section>
+      </div>
     </ModalLayer>
   )
 }
@@ -100,7 +100,7 @@ export function LabeledInput({ id, label, error, ...inputProps }: LabeledInputPr
       <label htmlFor={id} className="text-[13px] font-medium text-[#334155]">
         {label}
       </label>
-      <div className="flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+      <div className="admin-input flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
         <input
           id={id}
           className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
@@ -125,7 +125,7 @@ export function LabeledTextarea({ id, label, error, ...textareaProps }: LabeledT
       </label>
       <textarea
         id={id}
-        className="min-h-[72px] resize-none rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5 py-2.5 text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
+        className="admin-input min-h-[72px] resize-none rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5 py-2.5 text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
         {...textareaProps}
       />
       {error ? <span className="text-xs text-[#DC2626]">{error}</span> : null}

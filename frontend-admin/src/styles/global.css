@@ -12,7 +12,8 @@
 
 .glass-panel {
   border: 1px solid #ffffffcc;
-  border-radius: 20px;
+  /* Align with Pencil $radius-md (14); shell Sidebar / Topbar / Content */
+  border-radius: 14px;
   background: #ffffff7a;
   box-shadow: 0 8px 32px #0f172a2e;
   backdrop-filter: blur(48px);
@@ -69,9 +70,40 @@
   background: linear-gradient(135deg, #22d3ee 0%, #7c3aed 100%);
 }
 
+/*
+ * Glass 输入盒包住真正的 input；高亮画在盒子上。
+ * Why 对齐 antd outlined Input：hover #4096ff、focus #1677ff + 2px controlOutline。
+ */
+.admin-input {
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.admin-input:hover:not(:focus-within):not([aria-expanded='true']):not(:disabled):not(:has(:disabled)) {
+  border-color: #4096ff;
+}
+
+.admin-input:focus-within,
+.admin-input[aria-expanded='true'] {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  outline: none;
+}
+
+.admin-input.admin-input-error,
+.admin-input.admin-input-error:hover,
+.admin-input.admin-input-error:focus-within {
+  border-color: #ff4d4f;
+}
+
+.admin-input.admin-input-error:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
+}
+
 /* Ink ripple press feedback (coords set by button-ripple.ts) */
-button:not(:disabled):not([aria-label='关闭遮罩']),
-[role='button']:not([aria-disabled='true']) {
+button:not(:disabled):not([aria-label='关闭遮罩']):not([data-no-ripple]):not([aria-haspopup]),
+[role='button']:not([aria-disabled='true']):not([data-no-ripple]):not([aria-haspopup]) {
   position: relative;
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
@@ -93,6 +125,18 @@ button:not(:disabled):not([aria-label='关闭遮罩']),
   animation: btn-ripple 520ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
+/* Why：下拉触发器/选项即使仍被旧 listener 打上 ripple，也不展示波浪。 */
+[data-no-ripple] .btn-ripple,
+[aria-haspopup] .btn-ripple,
+[role='listbox'] .btn-ripple,
+[role='option'] .btn-ripple,
+[role='menu'] .btn-ripple,
+.ant-select .btn-ripple,
+.ant-select-dropdown .btn-ripple {
+  display: none !important;
+  animation: none !important;
+}
+
 @keyframes btn-ripple {
   0% {
     transform: scale(0);
@@ -102,6 +146,17 @@ button:not(:disabled):not([aria-label='关闭遮罩']),
     transform: scale(1);
     opacity: 0;
   }
+}
+
+/* Total on the left; pager + size changer stay grouped on the right (Pencil P-04). */
+.admin-pagination.ant-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.admin-pagination .ant-pagination-total-text {
+  margin-inline-end: auto;
 }
 
 /* Ant Design Pagination — thicker active page border */

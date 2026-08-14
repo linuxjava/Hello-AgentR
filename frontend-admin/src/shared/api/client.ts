@@ -43,7 +43,9 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
     Accept: 'application/json',
   }
 
-  if (body !== undefined) {
+  // FormData 必须让浏览器自带 multipart boundary；勿手动设 Content-Type。
+  const isFormData = typeof FormData !== 'undefined' && body instanceof FormData
+  if (body !== undefined && !isFormData) {
     headers['Content-Type'] = 'application/json'
   }
 
@@ -57,7 +59,12 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
   const response = await fetch(`${getBaseUrl()}${path}`, {
     method,
     headers,
-    body: body === undefined ? undefined : JSON.stringify(body),
+    body:
+      body === undefined
+        ? undefined
+        : isFormData
+          ? (body as FormData)
+          : JSON.stringify(body),
     signal,
     credentials: 'include',
   })

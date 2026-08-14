@@ -22,11 +22,12 @@ export function Pagination({
 }: PaginationProps) {
   return (
     <AntPagination
-      className={className}
+      className={['admin-pagination w-full', className].filter(Boolean).join(' ')}
       current={page}
       pageSize={pageSize}
       total={total}
       showSizeChanger
+      showTotal={(count) => `共 ${count} 条`}
       pageSizeOptions={[...pageSizeOptions]}
       onChange={onChange}
     />

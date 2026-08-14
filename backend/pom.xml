@@ -29,6 +29,7 @@
         <redisson.version>4.0.0</redisson.version>
         <!--tika版本-->
         <tika.version>3.2.3</tika.version>
+        <amazon.s3.version>2.51.4</amazon.s3.version>
     </properties>
 
     <dependencyManagement>
@@ -100,7 +101,15 @@
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
             </dependency>
-            <!--redis依赖 start-->
+            <!--redis依赖 end-->
+
+            <!--s3文件上传依赖 start-->
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>s3</artifactId>
+                <version>${amazon.s3.version}</version>
+            </dependency>
+            <!--s3文件上传依赖 end-->
         </dependencies>
     </dependencyManagement>
 

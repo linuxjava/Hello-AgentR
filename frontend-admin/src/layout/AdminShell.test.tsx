@@ -52,6 +52,7 @@ describe('AdminShell + HomePage', () => {
   it('renders Pencil home placeholder and shell brand', () => {
     renderShell('/')
     expect(screen.getByText('Hello-AgentR')).toBeInTheDocument()
+    expect(screen.getByText('HA')).toBeInTheDocument()
     expect(screen.getByText('管理控制台')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '首页占位' })).toBeInTheDocument()
     expect(
@@ -87,6 +88,30 @@ describe('AdminShell + HomePage', () => {
     await user.click(screen.getByRole('link', { name: '账号管理' }))
     expect(screen.getByText('USERS_PAGE')).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: '面包屑' })).toHaveTextContent('账号管理')
+  })
+
+  it('highlights knowledge-bases nav on documents sub-route', () => {
+    render(
+      <MemoryRouter initialEntries={['/knowledge-bases/kb-1/documents']}>
+        <Routes>
+          <Route element={<AdminShell />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/knowledge-bases" element={<div>KB_PAGE</div>} />
+            <Route
+              path="/knowledge-bases/:kbId/documents"
+              element={<div>DOCS_PAGE</div>}
+            />
+            <Route path="/users" element={<div>USERS_PAGE</div>} />
+          </Route>
+        </Routes>
+      </MemoryRouter>,
+    )
+    expect(screen.getByText('DOCS_PAGE')).toBeInTheDocument()
+    const kbNavLink = screen
+      .getAllByRole('link', { name: '知识库管理' })
+      .find((link) => link.getAttribute('href') === '/knowledge-bases')
+    expect(kbNavLink).toHaveAttribute('aria-current', 'page')
+    expect(screen.getByRole('navigation', { name: '面包屑' })).toHaveTextContent('知识库管理')
   })
 
   it('logs out from identity menu', async () => {

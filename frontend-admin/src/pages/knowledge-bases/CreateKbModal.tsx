@@ -48,7 +48,6 @@ export function CreateKbModal({ open, onClose, onCreated }: CreateKbModalProps) 
       return
     }
     reset({ name: '', namespace: '', description: '' })
-    setBusinessError(null)
   }, [open, reset])
 
   if (!open) {

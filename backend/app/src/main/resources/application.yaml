@@ -85,6 +85,23 @@ hello-agentr:
         priority: 20
         isDefault: false
 
+  # 文档源文件：部署级单一活跃后端。只认 type；s3/oss 参数分块，只校验当前 type。
+  object-storage:
+    type: s3
+    s3:
+      endpoint: ${S3_ENDPOINT:http://127.0.0.1:9000}
+      bucket: ${S3_BUCKET:hello-agentr-knowledge}
+      region: ${S3_REGION:us-east-1}
+      access-key: ${S3_ACCESS_KEY:}
+      secret-key: ${S3_SECRET_KEY:}
+      path-style: true
+    oss:
+      endpoint: ${OSS_ENDPOINT:}
+      bucket: ${OSS_BUCKET:}
+      access-key: ${OSS_ACCESS_KEY:}
+      secret-key: ${OSS_SECRET_KEY:}
+      internal-endpoint: ${OSS_INTERNAL_ENDPOINT:}
+
 # ---------- Sa-Token 鉴权 ----------
 # token 放在 Authorization 请求头；超时单位为秒（2592000 ≈ 30 天）
 sa-token:

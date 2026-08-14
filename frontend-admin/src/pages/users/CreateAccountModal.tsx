@@ -215,7 +215,7 @@ function LabeledInput({ id, label, icon, error, ...inputProps }: LabeledInputPro
       <label htmlFor={id} className="text-[13px] font-medium text-[#334155]">
         {label}
       </label>
-      <div className="flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+      <div className="admin-input flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
         {icon}
         <input
           id={id}

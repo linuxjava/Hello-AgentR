@@ -1,5 +1,5 @@
 import { ChevronDown } from 'lucide-react'
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 
 export interface SelectOption {
   value: string
@@ -18,6 +18,8 @@ export interface SelectMenuProps {
   /** 当前值不在 options 中时展示；有此项时不再回落到第一项。 */
   placeholder?: string
   error?: string
+  /** 触发器左侧装饰图标（与 Pencil Select/Field 一致，不影响可访问名称）。 */
+  icon?: ReactNode
   'aria-label'?: string
 }
 
@@ -32,6 +34,7 @@ export function SelectMenu({
   disabled = false,
   placeholder,
   error,
+  icon,
   'aria-label': ariaLabel,
 }: SelectMenuProps) {
   const autoId = useId()
@@ -81,6 +84,7 @@ export function SelectMenu({
         aria-expanded={open}
         aria-controls={listboxId}
         aria-label={ariaLabel ?? label}
+        data-no-ripple
         disabled={disabled}
         onClick={() => {
           if (disabled) {
@@ -89,15 +93,18 @@ export function SelectMenu({
           setOpen((v) => !v)
         }}
         className={[
-          'flex w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] text-left text-sm text-[#0F172A] outline-none',
+          'flex w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] text-left text-sm text-[#0F172A] outline-none admin-input',
           triggerClassName ?? 'h-11 bg-[#FFFFFF59] px-3.5',
           disabled ? 'cursor-not-allowed opacity-70' : '',
         ].join(' ')}
       >
-        <span
-          className={['min-w-0 truncate', showingPlaceholder ? 'text-[#64748B]' : ''].join(' ')}
-        >
-          {displayLabel}
+        <span className="flex min-w-0 flex-1 items-center gap-2.5">
+          {icon}
+          <span
+            className={['min-w-0 truncate', showingPlaceholder ? 'text-[#64748B]' : ''].join(' ')}
+          >
+            {displayLabel}
+          </span>
         </span>
         <ChevronDown
           size={16}
@@ -117,12 +124,13 @@ export function SelectMenu({
             const isSelected = opt.value === value
             return (
               <li key={opt.value} role="presentation">
-                <button
-                  type="button"
+                <div
                   role="option"
+                  tabIndex={-1}
                   aria-selected={isSelected}
+                  data-no-ripple
                   className={[
-                    'flex h-10 w-full items-center px-3.5 text-left text-sm transition-colors',
+                    'flex h-10 w-full cursor-pointer items-center px-3.5 text-left text-sm',
                     // Match Ant Design Pagination size-changer Select tokens:
                     // optionSelectedBg=#E6F4FF, optionActiveBg=rgba(0,0,0,0.04)
                     isSelected
@@ -133,9 +141,17 @@ export function SelectMenu({
                     onChange(opt.value)
                     setOpen(false)
                   }}
+                  onKeyDown={(event) => {
+                    if (event.key !== 'Enter' && event.key !== ' ') {
+                      return
+                    }
+                    event.preventDefault()
+                    onChange(opt.value)
+                    setOpen(false)
+                  }}
                 >
                   {opt.label}
-                </button>
+                </div>
               </li>
             )
           })}

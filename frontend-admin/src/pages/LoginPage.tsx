@@ -10,6 +10,7 @@ import {
   persistRememberUsername,
 } from '@/shared/auth/remember-username'
 import { useSessionStore } from '@/shared/auth/session-store'
+import { BrandLogo } from '@/shared/ui/BrandLogo'
 
 const loginSchema = z.object({
   username: z.string().min(1, '请输入用户名'),
@@ -88,9 +89,7 @@ export function LoginPage() {
         <section className="login-card flex w-full flex-col gap-5 rounded-[20px] border border-[#FFFFFFCC] bg-[#FFFFFF7A] p-8 shadow-[0_8px_32px_#0F172A2E] backdrop-blur-[48px]">
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-3 pb-1">
-              <div className="login-logo flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-white shadow-[0_4px_12px_#7C3AED66] font-[family-name:var(--font-display)]">
-                HA
-              </div>
+              <BrandLogo />
               <p className="text-xl font-bold tracking-tight text-[#0F172A] font-[family-name:var(--font-display)]">
                 Hello-AgentR
               </p>
@@ -120,7 +119,7 @@ export function LoginPage() {
                 <label htmlFor="login-username" className="text-[13px] font-medium text-[#334155]">
                   用户名
                 </label>
-                <div className="flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+                <div className="admin-input flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
                   <User size={16} className="shrink-0 text-[#64748B]" aria-hidden />
                   <input
                     id="login-username"
@@ -142,8 +141,8 @@ export function LoginPage() {
                 <div
                   className={
                     businessError
-                      ? 'flex h-11 items-center gap-2.5 rounded-[10px] border-[1.5px] border-[#DC2626] bg-[#FFFFFFD9] px-3.5'
-                      : 'flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5'
+                      ? 'admin-input admin-input-error flex h-11 items-center gap-2.5 rounded-[10px] border-[1.5px] border-[#DC2626] bg-[#FFFFFFD9] px-3.5'
+                      : 'admin-input flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5'
                   }
                 >
                   <Lock size={16} className="shrink-0 text-[#64748B]" aria-hidden />
