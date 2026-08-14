@@ -1,5 +1,14 @@
 const RIPPLE_SELECTOR = 'button, [role="button"]'
-const SKIP_SELECTOR = ':disabled, [disabled], [aria-disabled="true"], [aria-label="关闭遮罩"]'
+const SKIP_SELECTOR = [
+  ':disabled',
+  '[disabled]',
+  '[aria-disabled="true"]',
+  '[aria-label="关闭遮罩"]',
+  '[data-no-ripple]',
+  '[aria-haspopup]',
+  '[role="option"]',
+  '[role="menuitem"]',
+].join(', ')
 
 function resolveTarget(eventTarget: EventTarget | null): HTMLElement | null {
   if (!(eventTarget instanceof Element)) {
@@ -10,6 +19,14 @@ function resolveTarget(eventTarget: EventTarget | null): HTMLElement | null {
     return null
   }
   if (candidate.matches(SKIP_SELECTOR)) {
+    return null
+  }
+  // Why：下拉触发器/选项都是 button，全局水波纹会盖住列表交互。
+  if (
+    candidate.closest(
+      '[data-no-ripple], [aria-haspopup], [role="listbox"], [role="menu"], .ant-select, .ant-select-dropdown',
+    )
+  ) {
     return null
   }
   return candidate

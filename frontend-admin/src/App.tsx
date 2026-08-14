@@ -58,6 +58,7 @@ export default function App() {
   return (
     <ConfigProvider
       locale={zhCN}
+      wave={{ disabled: true }}
       theme={{
         token: {
           colorPrimary: '#1677ff',

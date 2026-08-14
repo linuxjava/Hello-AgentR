@@ -238,7 +238,7 @@ describe('DocumentsPage', () => {
     const dialog = await screen.findByRole('dialog', { name: '上传文档' })
 
     await user.click(within(dialog).getByRole('button', { name: '分块策略' }))
-    await user.click(await screen.findByRole('option', { name: '基于文档结构的分块' }))
+    await user.click(await screen.findByRole('option', { name: '文档结构分块(建议MD文档使用)' }))
 
     expect(within(dialog).getByLabelText('最小分块大小')).toHaveValue('256')
     expect(within(dialog).getByLabelText('默认分块大小')).toHaveValue('512')

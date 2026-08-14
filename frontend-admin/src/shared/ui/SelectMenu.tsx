@@ -84,6 +84,7 @@ export function SelectMenu({
         aria-expanded={open}
         aria-controls={listboxId}
         aria-label={ariaLabel ?? label}
+        data-no-ripple
         disabled={disabled}
         onClick={() => {
           if (disabled) {
@@ -123,12 +124,13 @@ export function SelectMenu({
             const isSelected = opt.value === value
             return (
               <li key={opt.value} role="presentation">
-                <button
-                  type="button"
+                <div
                   role="option"
+                  tabIndex={-1}
                   aria-selected={isSelected}
+                  data-no-ripple
                   className={[
-                    'flex h-10 w-full items-center px-3.5 text-left text-sm transition-colors',
+                    'flex h-10 w-full cursor-pointer items-center px-3.5 text-left text-sm',
                     // Match Ant Design Pagination size-changer Select tokens:
                     // optionSelectedBg=#E6F4FF, optionActiveBg=rgba(0,0,0,0.04)
                     isSelected
@@ -139,9 +141,17 @@ export function SelectMenu({
                     onChange(opt.value)
                     setOpen(false)
                   }}
+                  onKeyDown={(event) => {
+                    if (event.key !== 'Enter' && event.key !== ' ') {
+                      return
+                    }
+                    event.preventDefault()
+                    onChange(opt.value)
+                    setOpen(false)
+                  }}
                 >
                   {opt.label}
-                </button>
+                </div>
               </li>
             )
           })}

@@ -2,7 +2,7 @@ import type { ChunkStrategy, ChunkStrategyParams } from '@/shared/api/types'
 
 export const STRATEGY_OPTIONS = [
   { value: 'OVERLAPPING', label: '重叠分块' },
-  { value: 'STRUCTURE_AWARE', label: '基于文档结构的分块' },
+  { value: 'STRUCTURE_AWARE', label: '文档结构分块(建议MD文档使用)' },
 ] as const
 
 /** 上传默认值（O-08）；切种类时整份替换。 */
