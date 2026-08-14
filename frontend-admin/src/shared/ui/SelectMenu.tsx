@@ -1,5 +1,5 @@
 import { ChevronDown } from 'lucide-react'
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 
 export interface SelectOption {
   value: string
@@ -18,6 +18,8 @@ export interface SelectMenuProps {
   /** 当前值不在 options 中时展示；有此项时不再回落到第一项。 */
   placeholder?: string
   error?: string
+  /** 触发器左侧装饰图标（与 Pencil Select/Field 一致，不影响可访问名称）。 */
+  icon?: ReactNode
   'aria-label'?: string
 }
 
@@ -32,6 +34,7 @@ export function SelectMenu({
   disabled = false,
   placeholder,
   error,
+  icon,
   'aria-label': ariaLabel,
 }: SelectMenuProps) {
   const autoId = useId()
@@ -94,10 +97,13 @@ export function SelectMenu({
           disabled ? 'cursor-not-allowed opacity-70' : '',
         ].join(' ')}
       >
-        <span
-          className={['min-w-0 truncate', showingPlaceholder ? 'text-[#64748B]' : ''].join(' ')}
-        >
-          {displayLabel}
+        <span className="flex min-w-0 flex-1 items-center gap-2.5">
+          {icon}
+          <span
+            className={['min-w-0 truncate', showingPlaceholder ? 'text-[#64748B]' : ''].join(' ')}
+          >
+            {displayLabel}
+          </span>
         </span>
         <ChevronDown
           size={16}

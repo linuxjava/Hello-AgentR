@@ -202,8 +202,13 @@ describe('DocumentsPage', () => {
 
     await user.click(screen.getByRole('button', { name: '上传文档' }))
     const dialog = await screen.findByRole('dialog', { name: '上传文档' })
-    expect(within(dialog).getByLabelText('分块大小')).toHaveValue(512)
-    expect(within(dialog).getByLabelText('重叠长度')).toHaveValue(64)
+    expect(within(dialog).getByLabelText('分块大小')).toHaveValue('512')
+    expect(within(dialog).getByLabelText('重叠长度')).toHaveValue('64')
+    expect(within(dialog).getByRole('button', { name: '分块策略' }).querySelectorAll('svg')).toHaveLength(
+      2,
+    )
+    expect(within(dialog).getByLabelText('分块大小').previousElementSibling?.tagName).toBe('svg')
+    expect(within(dialog).getByLabelText('重叠长度').previousElementSibling?.tagName).toBe('svg')
     expect(within(dialog).queryByText(/50MB/)).not.toBeInTheDocument()
     expect(within(dialog).queryByText(/同名/)).not.toBeInTheDocument()
 
@@ -235,10 +240,10 @@ describe('DocumentsPage', () => {
     await user.click(within(dialog).getByRole('button', { name: '分块策略' }))
     await user.click(await screen.findByRole('option', { name: '基于文档结构的分块' }))
 
-    expect(within(dialog).getByLabelText('最小分块大小')).toHaveValue(256)
-    expect(within(dialog).getByLabelText('默认分块大小')).toHaveValue(512)
-    expect(within(dialog).getByLabelText('最大分块大小')).toHaveValue(1024)
-    expect(within(dialog).getByLabelText('重叠长度')).toHaveValue(32)
+    expect(within(dialog).getByLabelText('最小分块大小')).toHaveValue('256')
+    expect(within(dialog).getByLabelText('默认分块大小')).toHaveValue('512')
+    expect(within(dialog).getByLabelText('最大分块大小')).toHaveValue('1024')
+    expect(within(dialog).getByLabelText('重叠长度')).toHaveValue('32')
   })
 
   it('keeps upload open on validation and business errors', async () => {
@@ -266,6 +271,25 @@ describe('DocumentsPage', () => {
     expect(screen.getByRole('dialog', { name: '上传文档' })).toBeInTheDocument()
   })
 
+  it('does not prefix a leading zero when typing chunk numbers', async () => {
+    const user = userEvent.setup()
+    renderPage()
+    await screen.findByText('handbook.pdf')
+    await user.click(screen.getByRole('button', { name: '上传文档' }))
+    const dialog = await screen.findByRole('dialog', { name: '上传文档' })
+    const size = within(dialog).getByLabelText('分块大小')
+    const overlap = within(dialog).getByLabelText('重叠长度')
+
+    await user.clear(size)
+    expect(size).toHaveValue('')
+    await user.type(size, '111')
+    expect(size).toHaveValue('111')
+
+    await user.clear(overlap)
+    expect(overlap).toHaveValue('')
+    await user.type(overlap, '10')
+    expect(overlap).toHaveValue('10')
+  })
 
   it('prefills change-strategy from stored values', async () => {
     const user = userEvent.setup()
@@ -279,8 +303,8 @@ describe('DocumentsPage', () => {
     const dialog = await screen.findByRole('dialog', { name: '改策略' })
     expect(within(dialog).getByLabelText('文件名')).toHaveValue('handbook')
     expect(within(dialog).getByText('.pdf')).toBeInTheDocument()
-    expect(within(dialog).getByLabelText('分块大小')).toHaveValue(400)
-    expect(within(dialog).getByLabelText('重叠长度')).toHaveValue(80)
+    expect(within(dialog).getByLabelText('分块大小')).toHaveValue('400')
+    expect(within(dialog).getByLabelText('重叠长度')).toHaveValue('80')
     await user.clear(within(dialog).getByLabelText('文件名'))
     await user.type(within(dialog).getByLabelText('文件名'), '手册')
     await user.click(within(dialog).getByRole('button', { name: '保存' }))

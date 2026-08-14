@@ -1,3 +1,5 @@
+import { GitCompare, Hash, Layers } from 'lucide-react'
+import type { ReactNode } from 'react'
 import type { ChunkStrategy, ChunkStrategyParams } from '@/shared/api/types'
 import { SelectMenu } from '@/shared/ui/SelectMenu'
 import {
@@ -15,19 +17,34 @@ export interface ChunkStrategyFormProps {
   onParamsChange: (params: ChunkStrategyParams) => void
 }
 
+const fieldIconClass = 'shrink-0 text-[#64748B]'
+
 function NumberField({
   id,
   label,
   value,
   disabled,
+  icon,
   onChange,
 }: {
   id: string
   label: string
   value: number
   disabled?: boolean
+  icon: ReactNode
   onChange: (n: number) => void
 }) {
+  const onInputChange = (raw: string) => {
+    if (raw === '') {
+      onChange(Number.NaN)
+      return
+    }
+    if (!/^\d+$/.test(raw)) {
+      return
+    }
+    onChange(parsePositiveInt(raw))
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-[13px] font-medium text-[#334155]">
@@ -35,17 +52,20 @@ function NumberField({
       </label>
       <div
         className={[
-          'flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5',
+          'flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5',
           disabled ? 'opacity-60' : '',
         ].join(' ')}
       >
+        {icon}
         <input
           id={id}
-          type="number"
+          // Why type=text：type=number 下 0111 与 111 数值相等，React 不回写 DOM，前导 0 残留。
+          type="text"
           inputMode="numeric"
+          autoComplete="off"
           disabled={disabled}
-          value={Number.isFinite(value) ? value : ''}
-          onChange={(e) => onChange(parsePositiveInt(e.target.value))}
+          value={Number.isFinite(value) ? String(value) : ''}
+          onChange={(e) => onInputChange(e.target.value)}
           className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#0F172A] outline-none"
         />
       </div>
@@ -66,6 +86,7 @@ export function ChunkStrategyForm({
       <SelectMenu
         id="chunk-strategy"
         label="分块策略"
+        icon={<Layers size={16} className={fieldIconClass} aria-hidden />}
         value={strategy}
         options={[...STRATEGY_OPTIONS]}
         disabled={disabled}
@@ -81,6 +102,7 @@ export function ChunkStrategyForm({
           <NumberField
             id="chunk-size"
             label="分块大小"
+            icon={<Hash size={16} className={fieldIconClass} aria-hidden />}
             value={params.chunkSize}
             disabled={disabled}
             onChange={(chunkSize) => onParamsChange({ ...params, chunkSize })}
@@ -88,6 +110,7 @@ export function ChunkStrategyForm({
           <NumberField
             id="chunk-overlap"
             label="重叠长度"
+            icon={<GitCompare size={16} className={fieldIconClass} aria-hidden />}
             value={params.overlap}
             disabled={disabled}
             onChange={(overlap) => onParamsChange({ ...params, overlap })}
@@ -100,6 +123,7 @@ export function ChunkStrategyForm({
           <NumberField
             id="min-chunk-size"
             label="最小分块大小"
+            icon={<Hash size={16} className={fieldIconClass} aria-hidden />}
             value={params.minChunkSize}
             disabled={disabled}
             onChange={(minChunkSize) => onParamsChange({ ...params, minChunkSize })}
@@ -107,6 +131,7 @@ export function ChunkStrategyForm({
           <NumberField
             id="default-chunk-size"
             label="默认分块大小"
+            icon={<Hash size={16} className={fieldIconClass} aria-hidden />}
             value={params.defaultChunkSize}
             disabled={disabled}
             onChange={(defaultChunkSize) => onParamsChange({ ...params, defaultChunkSize })}
@@ -114,6 +139,7 @@ export function ChunkStrategyForm({
           <NumberField
             id="max-chunk-size"
             label="最大分块大小"
+            icon={<Hash size={16} className={fieldIconClass} aria-hidden />}
             value={params.maxChunkSize}
             disabled={disabled}
             onChange={(maxChunkSize) => onParamsChange({ ...params, maxChunkSize })}
@@ -121,6 +147,7 @@ export function ChunkStrategyForm({
           <NumberField
             id="structure-overlap"
             label="重叠长度"
+            icon={<GitCompare size={16} className={fieldIconClass} aria-hidden />}
             value={params.overlap}
             disabled={disabled}
             onChange={(overlap) => onParamsChange({ ...params, overlap })}

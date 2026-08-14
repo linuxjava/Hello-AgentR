@@ -76,6 +76,11 @@ export function validateChunkParams(
 }
 
 export function parsePositiveInt(raw: string): number {
-  const n = Number(raw.trim())
+  const trimmed = raw.trim()
+  // Why 空串返回 NaN 而非 0：Number('') === 0，清空后立刻变成 0，再键入会拼出 0111。
+  if (trimmed === '') {
+    return Number.NaN
+  }
+  const n = Number(trimmed)
   return Number.isFinite(n) ? n : Number.NaN
 }
