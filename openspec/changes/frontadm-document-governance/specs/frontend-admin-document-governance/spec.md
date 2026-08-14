@@ -34,7 +34,7 @@
 
 ### Requirement: 文档列表列与筛选分页
 
-系统 SHALL 提供文档列表（Pencil `P-05/V-01`）：表头 MUST 为文件名、状态、分块数、启用、更新时间、操作。文件名主行 MUST 为 OriginalFilename，副行 MUST 展示可读类型与大小（格式对齐稿面，如 `PDF · 1.2 MB`）。更新时间主行 MUST 为 `updatedAt`，副行 MUST 展示创建者 username（`createdBy` 经账号目录映射；不可用时回退 id）。状态 MUST 为色点+中文文案、无底色；`UPLOADED` MUST 展示为「待分块」。尚未分块时分块数 MUST 为「—」。系统 SHALL 支持文件名模糊、状态精确、是否启用精确、「查询」、默认 pageSize=20、更新时间倒序；SHALL NOT 提供 strategy 筛选，SHALL NOT 设独立媒体类型/大小/策略列。
+系统 SHALL 提供文档列表（Pencil `P-05/V-01`）：表头 MUST 为文件名、状态、分块数、启用、更新时间、操作。文件名主行 MUST 为 OriginalFilename，副行 MUST 展示可读类型与大小（格式对齐稿面，如 `PDF · 1.2 MB`）。更新时间主行 MUST 为 `updatedAt`，副行 MUST 展示创建者 username（`createdBy` 经账号目录映射；不可用时回退 id）。状态 MUST 为毛玻璃胶囊徽章（底 `$glass-fill` + 描边 `$edge-dim`，与行操作「删除」同形同底；字色按状态区分、无色点）+ 中文文案；`UPLOADED` MUST 展示为「待分块」，`CHUNKING` MUST 展示为「处理中」，`CHUNKED` MUST 展示为「已就绪」，`FAILED` MUST 展示为「异常」。尚未分块时分块数 MUST 为「—」。系统 SHALL 支持文件名模糊、状态精确、是否启用精确、「查询」、默认 pageSize=20、更新时间倒序；SHALL NOT 提供 strategy 筛选，SHALL NOT 设独立媒体类型/大小/策略列。
 
 #### Scenario: 有数据列表
 

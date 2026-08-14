@@ -52,6 +52,7 @@ describe('AdminShell + HomePage', () => {
   it('renders Pencil home placeholder and shell brand', () => {
     renderShell('/')
     expect(screen.getByText('Hello-AgentR')).toBeInTheDocument()
+    expect(screen.getByText('HA')).toBeInTheDocument()
     expect(screen.getByText('管理控制台')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '首页占位' })).toBeInTheDocument()
     expect(

@@ -1,29 +1,13 @@
 import { FileText, Search, SlidersHorizontal, Trash2 } from 'lucide-react'
-import type { DocumentStatus, DocumentView } from '@/shared/api/types'
+import type { DocumentView } from '@/shared/api/types'
+import {
+  documentStatusBadgeClass,
+  documentStatusLabel,
+} from '@/pages/documents/document-status'
 import { formatByteSize, formatCreatedAt, formatCreatorLabel, mediaTypeLabel } from '@/shared/lib/display'
 import { Pagination } from '@/shared/ui/Pagination'
 
 const PAGE_SIZE_OPTIONS = ['10', '20', '50', '100'] as const
-
-function statusPresentation(status: DocumentStatus): {
-  label: string
-  dot: string
-  text: string
-} {
-  switch (status) {
-    case 'CHUNKING':
-      return { label: '分块中', dot: 'bg-[#2563EB]', text: 'text-[#2563EB]' }
-    case 'CHUNKED':
-      // Pencil `$success` = #059669
-      return { label: '分块成功', dot: 'bg-[#059669]', text: 'text-[#059669]' }
-    case 'FAILED':
-      return { label: '分块失败', dot: 'bg-[#DC2626]', text: 'text-[#DC2626]' }
-    case 'UPLOADED':
-    default:
-      // 待分块：色点 + 文案均为 `$fg-3`（#64748B），非主色正文。
-      return { label: '待分块', dot: 'bg-[#64748B]', text: 'text-[#64748B]' }
-  }
-}
 
 function TableEmptyHint({
   icon,
@@ -147,7 +131,8 @@ export function DocumentTable({
                   </tr>
                 ) : null}
                 {records.map((doc, index) => {
-                  const status = statusPresentation(doc.status)
+                  const statusLabel = documentStatusLabel(doc.status)
+                  const statusBadge = documentStatusBadgeClass(doc.status)
                   const typeSize = `${mediaTypeLabel(doc.mediaType)} · ${formatByteSize(doc.byteSize)}`
                   // 契约尚无 chunkCount：未分块一律「—」（本阶段创建后均为 UPLOADED）。
                   const chunkCountLabel = doc.status === 'CHUNKED' ? '—' : '—'
@@ -181,9 +166,11 @@ export function DocumentTable({
                         </div>
                       </td>
                       <td className="px-4">
-                        <span className="inline-flex items-center gap-1.5">
-                          <span className={`h-2 w-2 rounded-full ${status.dot}`} aria-hidden />
-                          <span className={`font-semibold ${status.text}`}>{status.label}</span>
+                        {/* Why 毛玻璃：底/描边对齐行操作「删除」（$glass-fill / $edge-dim）；字色仍分状态。 */}
+                        <span
+                          className={`inline-flex h-7 shrink-0 items-center rounded-full px-2.5 text-xs font-semibold ${statusBadge}`}
+                        >
+                          {statusLabel}
                         </span>
                       </td>
                       <td className="px-4 tabular-nums text-[#334155]">{chunkCountLabel}</td>

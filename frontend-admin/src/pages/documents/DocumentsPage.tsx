@@ -12,6 +12,7 @@ import { SelectMenu } from '@/shared/ui/SelectMenu'
 import { ChangeStrategyModal } from '@/pages/documents/ChangeStrategyModal'
 import { DeleteDocumentModal } from '@/pages/documents/DeleteDocumentModal'
 import { DocumentTable } from '@/pages/documents/DocumentTable'
+import { DOCUMENT_STATUS_LABEL } from '@/pages/documents/document-status'
 import { UploadDocumentModal } from '@/pages/documents/UploadDocumentModal'
 
 const DEFAULT_PAGE_SIZE = 20
@@ -21,10 +22,10 @@ type EnabledFilter = '' | 'true' | 'false'
 
 const STATUS_FILTER_OPTIONS = [
   { value: '', label: '全部' },
-  { value: 'UPLOADED', label: '待分块' },
-  { value: 'CHUNKING', label: '分块中' },
-  { value: 'CHUNKED', label: '分块成功' },
-  { value: 'FAILED', label: '分块失败' },
+  { value: 'UPLOADED', label: DOCUMENT_STATUS_LABEL.UPLOADED },
+  { value: 'CHUNKING', label: DOCUMENT_STATUS_LABEL.CHUNKING },
+  { value: 'CHUNKED', label: DOCUMENT_STATUS_LABEL.CHUNKED },
+  { value: 'FAILED', label: DOCUMENT_STATUS_LABEL.FAILED },
 ]
 
 const ENABLED_FILTER_OPTIONS = [

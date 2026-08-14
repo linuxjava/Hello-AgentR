@@ -150,6 +150,7 @@ describe('DocumentsPage', () => {
     expect(within(table).getByText('更新时间')).toBeInTheDocument()
     expect(within(table).getByText('操作')).toBeInTheDocument()
     expect(screen.getByText('待分块')).toBeInTheDocument()
+    expect(screen.queryByText('分块中')).not.toBeInTheDocument()
     expect(screen.getByText('—')).toBeInTheDocument()
     expect(screen.getByText(/PDF ·/)).toBeInTheDocument()
     expect(await within(table).findByText('admin')).toBeInTheDocument()
@@ -157,6 +158,28 @@ describe('DocumentsPage', () => {
     expect(screen.getByRole('button', { name: '上传文档' })).toBeEnabled()
     expect(screen.getByRole('button', { name: '改策略' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: '删除' })).toBeInTheDocument()
+  })
+
+  it('renders operator status badges for all document statuses', async () => {
+    listDocumentsMock.mockResolvedValue({
+      page: 1,
+      pageSize: 20,
+      total: 4,
+      records: [
+        sampleDoc,
+        { ...sampleDoc, id: 'doc-2', originalFilename: 'a.pdf', status: 'CHUNKING' },
+        { ...sampleDoc, id: 'doc-3', originalFilename: 'b.pdf', status: 'CHUNKED' },
+        { ...sampleDoc, id: 'doc-4', originalFilename: 'c.pdf', status: 'FAILED' },
+      ],
+    })
+    renderPage()
+    const table = await screen.findByRole('table')
+    expect(await within(table).findByText('待分块')).toBeInTheDocument()
+    expect(within(table).getByText('处理中')).toBeInTheDocument()
+    expect(within(table).getByText('已就绪')).toBeInTheDocument()
+    expect(within(table).getByText('异常')).toBeInTheDocument()
+    expect(within(table).queryByText('分块成功')).not.toBeInTheDocument()
+    expect(within(table).queryByText('分块失败')).not.toBeInTheDocument()
   })
 
   it('shows V-02 empty copy and keeps upload available', async () => {
@@ -189,6 +212,10 @@ describe('DocumentsPage', () => {
     await screen.findByText('handbook.pdf')
 
     await user.click(screen.getByRole('button', { name: '状态' }))
+    expect(screen.getByRole('option', { name: '处理中' })).toBeInTheDocument()
+    expect(screen.getByRole('option', { name: '已就绪' })).toBeInTheDocument()
+    expect(screen.getByRole('option', { name: '异常' })).toBeInTheDocument()
+    expect(screen.queryByRole('option', { name: '分块中' })).not.toBeInTheDocument()
     await user.click(screen.getByRole('option', { name: '待分块' }))
     await user.click(screen.getByRole('button', { name: '是否启用' }))
     await user.click(screen.getByRole('option', { name: '禁用' }))

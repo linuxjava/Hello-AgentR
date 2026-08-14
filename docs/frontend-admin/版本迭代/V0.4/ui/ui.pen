@@ -1665,10 +1665,38 @@
                       "type": "frame",
                       "id": "Zc1pa",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -1676,10 +1704,10 @@
                           "type": "text",
                           "id": "pqEFA",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -2297,10 +2325,38 @@
                       "type": "frame",
                       "id": "XZgDb",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -2308,10 +2364,10 @@
                           "type": "text",
                           "id": "Ap7XF",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -4434,10 +4490,38 @@
                       "type": "frame",
                       "id": "E0NiN",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -4445,10 +4529,10 @@
                           "type": "text",
                           "id": "cIFLd",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -6656,10 +6740,38 @@
                       "type": "frame",
                       "id": "aXYOK",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -6667,10 +6779,10 @@
                           "type": "text",
                           "id": "LnTYn",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -9021,10 +9133,38 @@
                       "type": "frame",
                       "id": "Q1NQOK",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -9032,10 +9172,10 @@
                           "type": "text",
                           "id": "zj1oI",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -11427,10 +11567,38 @@
                       "type": "frame",
                       "id": "R81fNY",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -11438,10 +11606,10 @@
                           "type": "text",
                           "id": "Jrkf0",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -13775,10 +13943,38 @@
                       "type": "frame",
                       "id": "p6cvrm",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -13786,10 +13982,10 @@
                           "type": "text",
                           "id": "MH0tm",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -14858,10 +15054,38 @@
                       "type": "frame",
                       "id": "jAE6d",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -14869,10 +15093,10 @@
                           "type": "text",
                           "id": "I3Tb1s",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -17341,10 +17565,38 @@
                       "type": "frame",
                       "id": "vdQjT",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -17352,10 +17604,10 @@
                           "type": "text",
                           "id": "an7gn",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -19988,10 +20240,38 @@
                       "type": "frame",
                       "id": "IYYfR",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -19999,10 +20279,10 @@
                           "type": "text",
                           "id": "AE5oo",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -22591,10 +22871,38 @@
                       "type": "frame",
                       "id": "GCcF3",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -22602,10 +22910,10 @@
                           "type": "text",
                           "id": "sXjpe",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -25216,10 +25524,38 @@
                       "type": "frame",
                       "id": "LDHpa",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -25227,10 +25563,10 @@
                           "type": "text",
                           "id": "L8Fj9",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -26120,10 +26456,38 @@
                       "type": "frame",
                       "id": "EKK61",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -26131,10 +26495,10 @@
                           "type": "text",
                           "id": "oSsfK",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -28603,10 +28967,38 @@
                       "type": "frame",
                       "id": "azl6Y",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -28614,10 +29006,10 @@
                           "type": "text",
                           "id": "y0aQ6G",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -31289,10 +31681,38 @@
                       "type": "frame",
                       "id": "LLYbZ",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -31300,10 +31720,10 @@
                           "type": "text",
                           "id": "U23WS",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -33991,10 +34411,38 @@
                       "type": "frame",
                       "id": "sZcJY",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -34002,10 +34450,10 @@
                           "type": "text",
                           "id": "gtOy4",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -36652,10 +37100,38 @@
                       "type": "frame",
                       "id": "R5GaF",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -36663,10 +37139,10 @@
                           "type": "text",
                           "id": "daTyL",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -39092,10 +39568,38 @@
                       "type": "frame",
                       "id": "w0Bi1S",
                       "name": "Logo Mark",
-                      "width": 32,
-                      "height": 32,
-                      "fill": "$primary",
-                      "cornerRadius": "$radius-sm",
+                      "width": 40,
+                      "height": 40,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 135,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#22D3EE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#7C3AED",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 12,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#7C3AED66",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 12
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
@@ -39103,10 +39607,10 @@
                           "type": "text",
                           "id": "PLz3M",
                           "name": "Logo Letter",
-                          "fill": "$primary-fg",
-                          "content": "H",
+                          "fill": "#FFFFFF",
+                          "content": "HA",
                           "fontFamily": "$font-display",
-                          "fontSize": 16,
+                          "fontSize": 14,
                           "fontWeight": "700"
                         }
                       ]
@@ -40445,26 +40949,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "g9ZDZ",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "Hb6Te",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "w2wcB",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "HdZ4p",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -40723,26 +41236,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "iQWG8",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "eC7E3",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "rRH1U",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "A5yn4",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -41000,26 +41522,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "c0ZkCH",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "ptK1B",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "X8590",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "XNbvl",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -41277,26 +41808,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "HM69z",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "y1eLRC",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "sXMn8",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "uC0Af",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -41554,26 +42094,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "bFDpZ",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "F2XCI",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "z1UEjF",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "w4Igp",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -42166,10 +42715,38 @@
                   "type": "frame",
                   "id": "h9Aaq",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -42177,10 +42754,10 @@
                       "type": "text",
                       "id": "dtBl9",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -43057,10 +43634,38 @@
                   "type": "frame",
                   "id": "c06BpJ",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -43068,10 +43673,10 @@
                       "type": "text",
                       "id": "l81zf",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -43949,10 +44554,38 @@
                   "type": "frame",
                   "id": "BpOBo",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -43960,10 +44593,10 @@
                       "type": "text",
                       "id": "Q722d",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -44677,26 +45310,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "q0l0K",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "PHPYj",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "Vsfeb",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "SJunx",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -44955,26 +45597,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "EYtwe",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "QYpE8",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "YFf41",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Agn1R",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -45232,26 +45883,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "k4UMZN",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "OA5Tx",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "SKqjq",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "wAQSC",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -45509,26 +46169,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "R3oPg",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "y6a4Q5",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "NCGKd",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "owUo2",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -45786,26 +46455,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "LBjaj",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "Om4Ip",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "O7qYn",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "X89pqU",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -46398,10 +47076,38 @@
                   "type": "frame",
                   "id": "ToTJq",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -46409,10 +47115,10 @@
                       "type": "text",
                       "id": "wHzLP",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -47413,26 +48119,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "gA1aB",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "LZfKQ",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "aVvhD",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "jwBIz",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -47691,26 +48406,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "RJExx",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "QOLhe",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "Aktor",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Pkz0T",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -47968,26 +48692,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "MPyhY",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "N9fLvY",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "k4MxM4",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "af3Fa",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -48245,26 +48978,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "h1gy9w",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "H3bBy",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "xppfL",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "l777R",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -48522,26 +49264,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "VarZI",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "ui4lq",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "ME2kJ",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "EHTSP",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -49134,10 +49885,38 @@
                   "type": "frame",
                   "id": "C0onJp",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -49145,10 +49924,10 @@
                       "type": "text",
                       "id": "jqN5d",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -50226,26 +51005,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "xcgOm",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "jmSB4",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "V7LdW",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "IgbCY",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -50504,26 +51292,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "vaKiE",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "koVMx",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "Y6KRGJ",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ZbbZ9",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -50781,26 +51578,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "ZIwab",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "DLhZh",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "aINX3",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "H3RB1",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -51058,26 +51864,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "JsrZR",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "BsPdo",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "RHiKw",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "KSR7B",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -51335,26 +52150,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "p9kBd",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "B0L3C3",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "FW99L",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "iJWx3",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -51947,10 +52771,38 @@
                   "type": "frame",
                   "id": "eBYdV",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -51958,10 +52810,10 @@
                       "type": "text",
                       "id": "pEExy",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -53023,26 +53875,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "T5oi6",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "Kci3W",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "FdCTl",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "LFeI7",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -53301,26 +54162,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "Y1TB6",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "t5Ui6",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "N7qNOr",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "QuZje",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -53578,26 +54448,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "fdh3b",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "S9BKSr",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "o9WUqX",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "GseLF",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -53855,26 +54734,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "gMtQV",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "q1tIU",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "YQv4i",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Yn80m",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -54132,26 +55020,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "xyta8",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "iF1XW",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "IvSio",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BMERX",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -54744,10 +55641,38 @@
                   "type": "frame",
                   "id": "g7FnJ",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -54755,10 +55680,10 @@
                       "type": "text",
                       "id": "Za1iy",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -55811,26 +56736,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "KbJos",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "W3TMo",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "P6kWSu",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "p5wnO",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -56089,26 +57023,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "uDdGU",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "G8Wgdb",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "voOVD",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "njDKO",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -56366,26 +57309,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "im28d",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "aRXHV",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "HoFHy",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "TOxLs",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -56643,26 +57595,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "WQM9v",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "xSAnG",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "t2c28W",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "wix1Q",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -56920,26 +57881,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "Q05Zi",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "h3f5B",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "EWJRO",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "m93lX",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -57532,10 +58502,38 @@
                   "type": "frame",
                   "id": "qhPIK",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -57543,10 +58541,10 @@
                       "type": "text",
                       "id": "j64y2R",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -58604,26 +59602,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "v2tEv",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "GNFYT",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "FDjFB",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "t6P4y",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -58882,26 +59889,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "JDd4M",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "kI21H",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "jlTZh",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "jfkvV",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -59159,26 +60175,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "STpCB",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "zsWCM",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "Q8Z9oM",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "tDAOD",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -59436,26 +60461,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "cny51",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "Xu3lU",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "kC2Tu",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "I8Ryz9",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -59713,26 +60747,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "X6dchX",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "a1LWa3",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "zPV5Q",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "sZi4z",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -60325,10 +61368,38 @@
                   "type": "frame",
                   "id": "i1bPe",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -60336,10 +61407,10 @@
                       "type": "text",
                       "id": "VJ65I",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -61286,26 +62357,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "ItFQQ",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "VEYhB",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "EHAsR",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "YVlBu",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -61564,26 +62644,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "gb9zp",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "uPAgk",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "BYX6I",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "bMXk5",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -61841,26 +62930,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "Xv8b8",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "wxVzV",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "G9e7M",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "N9c2v",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -62118,26 +63216,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "zYx8k",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "uP1pm",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "N5WLS",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "W9tZZ",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -62395,26 +63502,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "q2x4W",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "i4zV9X",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "fKCX0",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "DC98f",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -63007,10 +64123,38 @@
                   "type": "frame",
                   "id": "otWru",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -63018,10 +64162,10 @@
                       "type": "text",
                       "id": "o1dn9",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -63907,26 +65051,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "O8145P",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "m01lBq",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "URbfo",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "v7nqVh",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -64185,26 +65338,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "a1nIk",
-                              "name": "Status Dot",
-                              "fill": "$primary",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "I1ZRC6",
-                              "name": "Status Text",
-                              "fill": "$primary",
-                              "content": "分块中",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "pVKXo",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "G9vsCX",
+                                  "name": "Status Text",
+                                  "fill": "#4379ED",
+                                  "content": "处理中",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -64462,26 +65624,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "JNQHK",
-                              "name": "Status Dot",
-                              "fill": "$success",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "A7gDq",
-                              "name": "Status Text",
-                              "fill": "$success",
-                              "content": "分块成功",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "LGvdW",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "uv5Wf",
+                                  "name": "Status Text",
+                                  "fill": "#33A985",
+                                  "content": "已就绪",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -64739,26 +65910,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "Fur56",
-                              "name": "Status Dot",
-                              "fill": "$danger",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "b96If",
-                              "name": "Status Text",
-                              "fill": "$danger",
-                              "content": "分块失败",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "McwAf",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "i6kg7",
+                                  "name": "Status Text",
+                                  "fill": "#E04D4D",
+                                  "content": "异常",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -65016,26 +66196,35 @@
                           "name": "Cell Status",
                           "width": 120,
                           "height": "fill_container",
-                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "ellipse",
-                              "id": "s1CY1O",
-                              "name": "Status Dot",
-                              "fill": "$fg-3",
-                              "width": 8,
-                              "height": 8
-                            },
-                            {
-                              "type": "text",
-                              "id": "zpTe4",
-                              "name": "Status Text",
-                              "fill": "$fg-3",
-                              "content": "待分块",
-                              "fontFamily": "$font-body",
-                              "fontSize": 13,
-                              "fontWeight": "600"
+                              "type": "frame",
+                              "id": "oLr43",
+                              "name": "Status Badge",
+                              "height": 28,
+                              "fill": "$glass-fill",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$edge-dim",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "a1gNl",
+                                  "name": "Status Text",
+                                  "fill": "#DE9139",
+                                  "content": "待分块",
+                                  "fontFamily": "$font-body",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -65628,10 +66817,38 @@
                   "type": "frame",
                   "id": "W0xST",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -65639,10 +66856,10 @@
                       "type": "text",
                       "id": "wgZaE",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]
@@ -66347,10 +67564,38 @@
                   "type": "frame",
                   "id": "z26hq",
                   "name": "Logo Mark",
-                  "width": 32,
-                  "height": 32,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-sm",
+                  "width": 40,
+                  "height": 40,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#22D3EE",
+                        "position": 0
+                      },
+                      {
+                        "color": "#7C3AED",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#7C3AED66",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -66358,10 +67603,10 @@
                       "type": "text",
                       "id": "f3rPKJ",
                       "name": "Logo Letter",
-                      "fill": "$primary-fg",
-                      "content": "H",
+                      "fill": "#FFFFFF",
+                      "content": "HA",
                       "fontFamily": "$font-display",
-                      "fontSize": 16,
+                      "fontSize": 14,
                       "fontWeight": "700"
                     }
                   ]

@@ -10,6 +10,7 @@ import {
   persistRememberUsername,
 } from '@/shared/auth/remember-username'
 import { useSessionStore } from '@/shared/auth/session-store'
+import { BrandLogo } from '@/shared/ui/BrandLogo'
 
 const loginSchema = z.object({
   username: z.string().min(1, '请输入用户名'),
@@ -88,9 +89,7 @@ export function LoginPage() {
         <section className="login-card flex w-full flex-col gap-5 rounded-[20px] border border-[#FFFFFFCC] bg-[#FFFFFF7A] p-8 shadow-[0_8px_32px_#0F172A2E] backdrop-blur-[48px]">
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-3 pb-1">
-              <div className="login-logo flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-white shadow-[0_4px_12px_#7C3AED66] font-[family-name:var(--font-display)]">
-                HA
-              </div>
+              <BrandLogo />
               <p className="text-xl font-bold tracking-tight text-[#0F172A] font-[family-name:var(--font-display)]">
                 Hello-AgentR
               </p>

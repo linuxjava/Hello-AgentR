@@ -1,5 +1,6 @@
 import { Database, Home, Users } from 'lucide-react'
 import { NavLink } from 'react-router'
+import { BrandLogo } from '@/shared/ui/BrandLogo'
 
 const navItems = [
   { to: '/', label: '首页', icon: Home, end: true },
@@ -11,9 +12,7 @@ export function ShellSidebar() {
   return (
     <aside className="glass-panel flex w-[248px] shrink-0 flex-col gap-6 px-4 py-6">
       <div className="flex items-center gap-2.5 px-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#2563EB] text-base font-bold text-white font-[family-name:var(--font-display)]">
-          H
-        </div>
+        <BrandLogo />
         <div className="flex min-w-0 flex-col gap-0.5">
           <p className="truncate text-[15px] font-bold text-[#0F172A] font-[family-name:var(--font-display)]">
             Hello-AgentR

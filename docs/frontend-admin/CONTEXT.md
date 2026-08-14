@@ -89,7 +89,7 @@ _Avoid_: 知识库详情页、附件列表、文件管理（泛称）、Dataset 
 - **输入焦点**：玻璃输入盒（含策略数字、文件名、搜索框、其它管理端同类字段）聚焦后高亮，对齐 Ant Design outlined Input：主色描边 `#1677ff` + `0 0 0 2px rgba(5, 145, 255, 0.1)`；悬停描边 `#4096ff`。下拉在展开期间保持焦点高亮。
 - **上传预填（仅 UI，非领域常量）**：打开上传时默认 `OVERLAPPING`，`chunkSize=512`、`overlap=64`；切到 `STRUCTURE_AWARE` 时改为 `minChunkSize=256`、`defaultChunkSize=512`、`maxChunkSize=1024`、`overlap=32`。改策略弹窗打开时带回该 Document 的已存种类与参数，不套用上传预填。文件名主名可改，后缀只读锁定；与策略一次提交。
 - **选文件**：单文件；支持**拖拽到投放区**或点击选择；`accept` 提示白名单常见扩展名（txt/md/pdf/doc/docx/ppt/pptx/xls/xlsx/png/jpg/jpeg/svg）。投放区只提示常见类型，**不**写约 50MB / 服务端为准类文案。扩展名不是权威，0 字节 / MIME / 超限一律以后端 `message` 为准。已选文件后仍可拖拽替换或点击重新选择。
-- **Document 状态展示**：后端 `DocumentStatus` 在列表用中文标签，**不**直接展示枚举名；**不**使用色块底（仅色点 + 文字）。本阶段运行时仅 `UPLOADED` →「待分块」。预留后续：`CHUNKING` →「分块中」、`CHUNKED` →「分块成功」、`FAILED` →「分块失败」。色板：待分块 `$fg-3`（灰）、分块中 `$primary`（蓝）、分块成功 `$success`（绿）、分块失败 `$danger`（红）。
+- **Document 状态展示**：后端 `DocumentStatus` 在列表与筛选用中文标签，**不**直接展示枚举名。展示为**毛玻璃胶囊徽章**（底 `$glass-fill` `#FFFFFF59` + 描边 `$edge-dim` `#FFFFFF66`，与行操作「删除」同形同底；字色按状态区分、无色点）。文案：`UPLOADED` →「待分块」、`CHUNKING` →「处理中」、`CHUNKED` →「已就绪」、`FAILED` →「异常」。字色：待分块橙 `#DE9139`、处理中蓝 `#4379ED`、已就绪青绿 `#33A985`、异常红 `#E04D4D`。枚举值不变；不把「待分块」改成「排队中」。
 - **分块数**：列表展示该 Document 已产生的 Chunk 条数；尚未开始分块（如「待分块」）时展示「—」，不展示 0。
 - **同名文件**：同库允许相同 OriginalFilename，每次上传都是新 Document；**不**因同名二次确认或拒绝；弹窗**不**常驻「新增不覆盖」说明。
 - **上传提交中**：按钮 loading，禁止再次提交或更换文件；不要求百分比进度条。失败则解锁，弹窗内展示后端 `message`。
