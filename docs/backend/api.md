@@ -544,9 +544,11 @@ curl -s -X POST "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_ID/
 | --- | --- | --- | --- |
 | page | 否 | 1 | 页码，&lt;1 时按 1 |
 | pageSize | 否 | 20 | 每页条数；&lt;1 或 &gt;100 → `A001010` |
-| originalFilename | 否 | — | 原始文件名模糊；**无** status / strategy / enabled 筛选 |
+| originalFilename | 否 | — | 原始文件名模糊 |
+| status | 否 | — | `DocumentStatus` 精确匹配：`UPLOADED` / `CHUNKING` / `CHUNKED` / `FAILED`；非法枚举由框架拒绝 |
+| enabled | 否 | — | `true` / `false` 精确匹配；缺省不过滤 |
 
-按 **更新时间倒序**。已禁用记录仍返回。知识库不存在 → `A002001`。
+条件为 **AND**。不做 strategy 筛选。按 **更新时间倒序**。缺省不过滤启用时，已禁用记录仍返回。知识库不存在 → `A002001`。
 
 **Response `data`**
 

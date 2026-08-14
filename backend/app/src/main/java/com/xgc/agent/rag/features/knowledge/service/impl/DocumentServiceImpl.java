@@ -11,6 +11,7 @@ import com.xgc.agent.framework.base.storage.ObjectStorageException;
 import com.xgc.agent.rag.features.admin.error.AdminErrorCode;
 import com.xgc.agent.rag.features.admin.service.AdminAccessService;
 import com.xgc.agent.rag.features.knowledge.chunk.ChunkStrategyParamsValidator;
+import com.xgc.agent.rag.features.knowledge.dao.entity.DocumentStatus;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeBaseDO;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeDocumentDO;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeBaseMapper;
@@ -124,7 +125,14 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public DocumentPageResponse page(String knowledgeBaseId, Long page, Long pageSize, String originalFilename) {
+    public DocumentPageResponse page(
+            String knowledgeBaseId,
+            Long page,
+            Long pageSize,
+            String originalFilename,
+            DocumentStatus status,
+            Boolean enabled
+    ) {
         adminAccessService.requireLoginUser();
         requireKnowledgeBase(knowledgeBaseId);
         long pageNo = page == null || page < 1 ? 1L : page;
@@ -138,6 +146,8 @@ public class DocumentServiceImpl implements DocumentService {
                 Wrappers.lambdaQuery(KnowledgeDocumentDO.class)
                         .eq(KnowledgeDocumentDO::getKnowledgeBaseId, knowledgeBaseId)
                         .like(filenameKeyword != null, KnowledgeDocumentDO::getOriginalFilename, filenameKeyword)
+                        .eq(status != null, KnowledgeDocumentDO::getStatus, status == null ? null : status.name())
+                        .eq(enabled != null, KnowledgeDocumentDO::getEnabled, enabled)
                         .orderByDesc(KnowledgeDocumentDO::getUpdateTime)
         );
         List<DocumentView> records = result.getRecords().stream().map(this::toView).toList();

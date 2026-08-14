@@ -2,18 +2,36 @@ import { keepPreviousData, QueryClient, QueryClientProvider, useQuery } from '@t
 import { CircleAlert, Search } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router'
-import type { DocumentView } from '@/shared/api/types'
+import type { DocumentStatus, DocumentView } from '@/shared/api/types'
 import { ApiError } from '@/shared/api/types'
 import { knowledgeApi } from '@/shared/api/knowledge'
 import { usersApi } from '@/shared/api/users'
 import { useDocBreadcrumbStore } from '@/layout/doc-breadcrumb-store'
 import { toastError, toastSuccess } from '@/shared/ui/toast-store'
+import { SelectMenu } from '@/shared/ui/SelectMenu'
 import { ChangeStrategyModal } from '@/pages/documents/ChangeStrategyModal'
 import { DeleteDocumentModal } from '@/pages/documents/DeleteDocumentModal'
 import { DocumentTable } from '@/pages/documents/DocumentTable'
 import { UploadDocumentModal } from '@/pages/documents/UploadDocumentModal'
 
 const DEFAULT_PAGE_SIZE = 20
+
+type StatusFilter = '' | DocumentStatus
+type EnabledFilter = '' | 'true' | 'false'
+
+const STATUS_FILTER_OPTIONS = [
+  { value: '', label: '全部' },
+  { value: 'UPLOADED', label: '待分块' },
+  { value: 'CHUNKING', label: '分块中' },
+  { value: 'CHUNKED', label: '分块成功' },
+  { value: 'FAILED', label: '分块失败' },
+]
+
+const ENABLED_FILTER_OPTIONS = [
+  { value: '', label: '全部' },
+  { value: 'true', label: '启用' },
+  { value: 'false', label: '禁用' },
+]
 
 function DocumentsPageInner() {
   const { kbId = '' } = useParams<{ kbId: string }>()
@@ -22,7 +40,11 @@ function DocumentsPageInner() {
   const setKbLabel = useDocBreadcrumbStore((s) => s.setKbLabel)
 
   const [filenameInput, setFilenameInput] = useState('')
+  const [statusInput, setStatusInput] = useState<StatusFilter>('')
+  const [enabledInput, setEnabledInput] = useState<EnabledFilter>('')
   const [appliedFilename, setAppliedFilename] = useState('')
+  const [appliedStatus, setAppliedStatus] = useState<StatusFilter>('')
+  const [appliedEnabled, setAppliedEnabled] = useState<EnabledFilter>('')
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
   const [uploadOpen, setUploadOpen] = useState(false)
@@ -40,12 +62,14 @@ function DocumentsPageInner() {
   })
 
   const listQuery = useQuery({
-    queryKey: ['admin-documents', kbId, page, pageSize, appliedFilename],
+    queryKey: ['admin-documents', kbId, page, pageSize, appliedFilename, appliedStatus, appliedEnabled],
     queryFn: async () =>
       knowledgeApi.listDocuments(kbId, {
         page,
         pageSize,
         originalFilename: appliedFilename || undefined,
+        status: appliedStatus || undefined,
+        enabled: appliedEnabled === '' ? undefined : appliedEnabled === 'true',
       }),
     enabled: Boolean(kbId) && kbQuery.isSuccess,
     placeholderData: keepPreviousData,
@@ -116,22 +140,26 @@ function DocumentsPageInner() {
       : { ...doc, enabled: enabledOverrides[doc.id]! },
   )
   const total = listQuery.data?.total ?? 0
+  const hasAppliedFilters =
+    Boolean(appliedFilename) || Boolean(appliedStatus) || appliedEnabled !== ''
   const showLibraryEmpty =
     kbQuery.isSuccess &&
     !listQuery.isLoading &&
     !listQuery.error &&
     records.length === 0 &&
-    !appliedFilename
+    !hasAppliedFilters
   const showFilterEmpty =
     kbQuery.isSuccess &&
     !listQuery.isLoading &&
     !listQuery.error &&
     records.length === 0 &&
-    Boolean(appliedFilename)
+    hasAppliedFilters
 
   const onSearch = () => {
     setPage(1)
     setAppliedFilename(filenameInput.trim())
+    setAppliedStatus(statusInput)
+    setAppliedEnabled(enabledInput)
   }
 
   const refresh = () => {
@@ -210,6 +238,24 @@ function DocumentsPageInner() {
               className="h-full min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[#64748B]"
             />
           </div>
+          <SelectMenu
+            id="filter-doc-status"
+            aria-label="状态"
+            value={statusInput}
+            onChange={(next) => setStatusInput(next as StatusFilter)}
+            className="w-[160px]"
+            triggerClassName="h-9 bg-[#FFFFFF59] px-3"
+            options={STATUS_FILTER_OPTIONS}
+          />
+          <SelectMenu
+            id="filter-doc-enabled"
+            aria-label="是否启用"
+            value={enabledInput}
+            onChange={(next) => setEnabledInput(next as EnabledFilter)}
+            className="w-[160px]"
+            triggerClassName="h-9 bg-[#FFFFFF59] px-3"
+            options={ENABLED_FILTER_OPTIONS}
+          />
           <button
             type="button"
             onClick={onSearch}

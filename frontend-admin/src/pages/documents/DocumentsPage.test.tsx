@@ -179,7 +179,30 @@ describe('DocumentsPage', () => {
     await user.click(screen.getByRole('button', { name: '查询' }))
 
     expect(await screen.findByText('暂无匹配的文档')).toBeInTheDocument()
+    expect(screen.getByText('没有符合筛选条件的文档。可修改筛选后再查询。')).toBeInTheDocument()
     expect(screen.queryByText('暂无文档')).not.toBeInTheDocument()
+  })
+
+  it('applies status and enabled filters on query', async () => {
+    const user = userEvent.setup()
+    renderPage()
+    await screen.findByText('handbook.pdf')
+
+    await user.click(screen.getByRole('button', { name: '状态' }))
+    await user.click(screen.getByRole('option', { name: '待分块' }))
+    await user.click(screen.getByRole('button', { name: '是否启用' }))
+    await user.click(screen.getByRole('option', { name: '禁用' }))
+    await user.click(screen.getByRole('button', { name: '查询' }))
+
+    await waitFor(() => {
+      expect(listDocumentsMock).toHaveBeenLastCalledWith('kb-1', {
+        page: 1,
+        pageSize: 20,
+        originalFilename: undefined,
+        status: 'UPLOADED',
+        enabled: false,
+      })
+    })
   })
 
   it('shows V-04 when knowledge base is missing', async () => {

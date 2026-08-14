@@ -252,7 +252,7 @@ export function DocumentTable({
             <TableEmptyHint
               icon="filter"
               title="暂无匹配的文档"
-              description="没有文件名包含该关键词的文档。可修改筛选后再查询。"
+              description="没有符合筛选条件的文档。可修改筛选后再查询。"
             />
           </div>
         ) : null}

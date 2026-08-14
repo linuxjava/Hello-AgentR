@@ -1,5 +1,6 @@
 package com.xgc.agent.rag.features.knowledge.service;
 
+import com.xgc.agent.rag.features.knowledge.dao.entity.DocumentStatus;
 import com.xgc.agent.rag.features.knowledge.dto.ChunkStrategyUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.DocumentEnabledUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.DocumentPageResponse;
@@ -17,9 +18,16 @@ public interface DocumentService {
     DocumentView upload(String knowledgeBaseId, MultipartFile file, String chunkStrategy, String chunkStrategyParamsJson);
 
     /**
-     * 库内分页；OriginalFilename 模糊；更新时间倒序。
+     * 库内分页；OriginalFilename 模糊；status / enabled 精确筛选（缺省不过滤）；更新时间倒序。
      */
-    DocumentPageResponse page(String knowledgeBaseId, Long page, Long pageSize, String originalFilename);
+    DocumentPageResponse page(
+            String knowledgeBaseId,
+            Long page,
+            Long pageSize,
+            String originalFilename,
+            DocumentStatus status,
+            Boolean enabled
+    );
 
     /**
      * 详情；不属于该库视为不存在。

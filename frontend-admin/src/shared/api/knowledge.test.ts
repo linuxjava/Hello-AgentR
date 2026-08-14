@@ -171,7 +171,7 @@ describe('knowledgeApi', () => {
     } satisfies Partial<ApiError>)
   })
 
-  it('listDocuments filters by originalFilename only', async () => {
+  it('listDocuments filters by originalFilename only by default', async () => {
     setTokenProvider(() => 'tok-1')
     const fetchMock = vi.fn().mockResolvedValue({
       json: async () => ({
@@ -193,6 +193,28 @@ describe('knowledgeApi', () => {
     expect(url).toContain('originalFilename=')
     expect(url).not.toContain('status=')
     expect(url).not.toContain('enabled=')
+  })
+
+  it('listDocuments appends status and enabled when set', async () => {
+    setTokenProvider(() => 'tok-1')
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: async () => ({
+        code: '0',
+        message: 'ok',
+        data: { page: 1, pageSize: 20, total: 0, records: [] },
+      }),
+    })
+    vi.stubGlobal('fetch', fetchMock)
+
+    await listDocuments('kb-1', {
+      page: 1,
+      pageSize: 20,
+      status: 'UPLOADED',
+      enabled: false,
+    })
+    const [url] = fetchMock.mock.calls[0] as [string]
+    expect(url).toContain('status=UPLOADED')
+    expect(url).toContain('enabled=false')
   })
 
   it('uploadDocument posts multipart without forcing JSON Content-Type', async () => {

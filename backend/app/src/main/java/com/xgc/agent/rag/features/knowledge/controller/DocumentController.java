@@ -1,6 +1,7 @@
 package com.xgc.agent.rag.features.knowledge.controller;
 
 import com.xgc.agent.framework.base.result.R;
+import com.xgc.agent.rag.features.knowledge.dao.entity.DocumentStatus;
 import com.xgc.agent.rag.features.knowledge.dto.ChunkStrategyUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.DocumentEnabledUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.DocumentPageResponse;
@@ -44,16 +45,18 @@ public class DocumentController {
     }
 
     /**
-     * 分页列表。刻意不接收 status/strategy/enabled 参数，本阶段不做这些筛选。
+     * 分页列表。originalFilename 模糊；status / enabled 精确匹配；不做 strategy 筛选。
      */
     @GetMapping
     public R<DocumentPageResponse> page(
             @PathVariable String kbId,
             @RequestParam(required = false) Long page,
             @RequestParam(required = false) Long pageSize,
-            @RequestParam(required = false) String originalFilename
+            @RequestParam(required = false) String originalFilename,
+            @RequestParam(required = false) DocumentStatus status,
+            @RequestParam(required = false) Boolean enabled
     ) {
-        return R.success(documentService.page(kbId, page, pageSize, originalFilename));
+        return R.success(documentService.page(kbId, page, pageSize, originalFilename, status, enabled));
     }
 
     @GetMapping("/{docId}")

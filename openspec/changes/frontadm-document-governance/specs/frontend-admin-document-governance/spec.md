@@ -34,7 +34,7 @@
 
 ### Requirement: 文档列表列与筛选分页
 
-系统 SHALL 提供文档列表（Pencil `P-05/V-01`）：表头 MUST 为文件名、状态、分块数、启用、更新时间、操作。文件名主行 MUST 为 OriginalFilename，副行 MUST 展示可读类型与大小（格式对齐稿面，如 `PDF · 1.2 MB`）。更新时间主行 MUST 为 `updatedAt`，副行 MUST 展示创建者 username（`createdBy` 经账号目录映射；不可用时回退 id）。状态 MUST 为色点+中文文案、无底色；`UPLOADED` MUST 展示为「待分块」。尚未分块时分块数 MUST 为「—」。系统 SHALL 支持文件名模糊、「查询」、默认 pageSize=20、更新时间倒序；SHALL NOT 提供 status/enabled/strategy 筛选，SHALL NOT 设独立媒体类型/大小/策略列。
+系统 SHALL 提供文档列表（Pencil `P-05/V-01`）：表头 MUST 为文件名、状态、分块数、启用、更新时间、操作。文件名主行 MUST 为 OriginalFilename，副行 MUST 展示可读类型与大小（格式对齐稿面，如 `PDF · 1.2 MB`）。更新时间主行 MUST 为 `updatedAt`，副行 MUST 展示创建者 username（`createdBy` 经账号目录映射；不可用时回退 id）。状态 MUST 为色点+中文文案、无底色；`UPLOADED` MUST 展示为「待分块」。尚未分块时分块数 MUST 为「—」。系统 SHALL 支持文件名模糊、状态精确、是否启用精确、「查询」、默认 pageSize=20、更新时间倒序；SHALL NOT 提供 strategy 筛选，SHALL NOT 设独立媒体类型/大小/策略列。
 
 #### Scenario: 有数据列表
 
@@ -45,8 +45,8 @@
 #### Scenario: 模糊与翻页
 
 - **GIVEN** 已登录
-- **WHEN** 按文件名模糊或翻页
-- **THEN** 结果与筛选/分页一致，页上无 status/enabled 筛选
+- **WHEN** 按文件名模糊、状态、是否启用筛选或翻页
+- **THEN** 点「查询」后结果与筛选/分页一致；页上有状态与是否启用筛选，无 strategy 筛选
 
 #### Scenario: 列表请求失败
 
@@ -56,7 +56,7 @@
 
 ### Requirement: 文档列表空态与筛选空态
 
-库存在但无 Document 时，系统 SHALL 展示 Pencil `P-05/V-02` 空态且「上传文档」可用。文件名筛选无匹配时，系统 SHALL 展示 `P-05/V-03` 并保留关键词与上传入口。
+库存在但无 Document 时，系统 SHALL 展示 Pencil `P-05/V-02` 空态且「上传文档」可用。筛选无匹配时，系统 SHALL 展示 `P-05/V-03` 并保留当前筛选条件与上传入口。
 
 #### Scenario: 空库可上传
 

@@ -52,7 +52,7 @@ Document 在摄入管线上的阶段标记。本阶段创建后固定为 `UPLOAD
 _Avoid_: 本阶段实现完整状态迁移、用「有没有 Chunk」代替状态字段（已否决）、Processing（含糊）、用 DocumentStatus 表示启用/禁用
 
 **Enabled（启用）**：
-Document 的运营开关，与 DocumentStatus 解耦。上传成功后默认为启用（`true`）。Admin 与 Staff 可随时切换；禁用**不**删除业务记录或 ObjectStorage 对象，列表仍可见，且仍计入 `documentCount`（删库占用检查把禁用文档视为仍占用）。本阶段不做按 Enabled 筛选，也不把禁用接入检索/分块执行（那些能力尚未交付）。
+Document 的运营开关，与 DocumentStatus 解耦。上传成功后默认为启用（`true`）。Admin 与 Staff 可随时切换；禁用**不**删除业务记录或 ObjectStorage 对象，且仍计入 `documentCount`（删库占用检查把禁用文档视为仍占用）。列表可按 Enabled **精确筛选**（缺省不过滤，因此禁用行仍出现在默认列表）。本阶段不把禁用接入检索/分块执行（那些能力尚未交付）。
 代码 / API 用 `enabled`（boolean）；界面可用「启用 / 禁用」。
 _Avoid_: active、online、上架、用 status 字段兼做开关、禁用即软删除、禁用后从列表隐藏（已否决）、禁用后 documentCount 不计（已否决）
 
@@ -150,7 +150,7 @@ _Avoid_: 只信 multipart Content-Type、只认扩展名、本阶段不限类型
 
 **KnowledgeBase**：分页默认 20、上限 100；按 **Name 模糊**筛选；不按 Namespace 筛选；默认按创建时间倒序。列表与详情均返回 **documentCount**（该库下 Document 条数，含已禁用）。
 
-**Document**（V0.4）：在某一 KnowledgeBase 下分页列表；分页默认 20、上限 100；可按 **OriginalFilename 模糊**筛选；不按 Namespace / DocumentStatus / ChunkStrategy / Enabled 筛选；默认按 **更新时间倒序**（改 ChunkStrategy 或 Enabled 会刷新更新时间；新建时更新时间等于创建时间）。已禁用 Document 仍出现在列表中。
+**Document**（V0.4）：在某一 KnowledgeBase 下分页列表；分页默认 20、上限 100；可按 **OriginalFilename 模糊**筛选，可按 **DocumentStatus / Enabled 精确**筛选（缺省不过滤）；不按 Namespace / ChunkStrategy 筛选；默认按 **更新时间倒序**（改 ChunkStrategy 或 Enabled 会刷新更新时间；新建时更新时间等于创建时间）。缺省列表中已禁用 Document 仍出现。
 
 ## In-scope（本阶段）
 

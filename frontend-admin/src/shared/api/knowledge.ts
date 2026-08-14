@@ -2,6 +2,7 @@ import { apiRequest } from '@/shared/api/client'
 import type {
   ChunkStrategy,
   ChunkStrategyParams,
+  DocumentStatus,
   DocumentView,
   EmbeddingModelCatalogItem,
   KnowledgeBaseView,
@@ -30,8 +31,12 @@ export interface UpdateKnowledgeBaseRequest {
 export interface ListDocumentsQuery {
   page?: number
   pageSize?: number
-  /** OriginalFilename 模糊；无 status / strategy / enabled 筛选。 */
+  /** OriginalFilename 模糊。 */
   originalFilename?: string
+  /** DocumentStatus 精确匹配；缺省不过滤。不做 strategy 筛选。 */
+  status?: DocumentStatus
+  /** Enabled 精确匹配；缺省不过滤（禁用行仍出现）。 */
+  enabled?: boolean
 }
 
 export interface UploadDocumentInput {
@@ -81,6 +86,12 @@ function buildDocumentsQuery(kbId: string, query: ListDocumentsQuery = {}): stri
   }
   if (query.originalFilename) {
     params.set('originalFilename', query.originalFilename)
+  }
+  if (query.status) {
+    params.set('status', query.status)
+  }
+  if (query.enabled !== undefined) {
+    params.set('enabled', String(query.enabled))
   }
   const base = `/admin/knowledge-bases/${encodeURIComponent(kbId)}/documents`
   const qs = params.toString()

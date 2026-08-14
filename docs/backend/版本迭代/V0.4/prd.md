@@ -85,7 +85,7 @@
 | 用例 ID | 角色 | 任务 / 目标 | 边界说明 |
 | ------- | ---- | ----------- | -------- |
 | UC-401 | AdminUser（Admin 或 Staff） | 向某 KnowledgeBase 上传一份本地文件并指定分块策略 | 单文件；不切块 |
-| UC-402 | AdminUser（Admin 或 Staff） | 分页查看某库下 Document，按原始文件名模糊查找 | 默认更新时间倒序 |
+| UC-402 | AdminUser（Admin 或 Staff） | 分页查看某库下 Document，按原始文件名模糊、可选按状态与启用查找 | 默认更新时间倒序 |
 | UC-403 | AdminUser（Admin 或 Staff） | 查看 Document 元数据详情 | 无 objectKey、无下载 |
 | UC-404 | AdminUser（Admin 或 Staff） | 在 `UPLOADED` 时改 ChunkStrategy 与参数 | 改种类则整份参数替换 |
 | UC-405 | AdminUser（Admin 或 Staff） | 删除 Document（含存储对象） | 与删库权限不同 |
@@ -102,7 +102,7 @@
 | 需求 ID | 需求描述 | 角色 | 优先级 | 负责人 | 状态 | 业务目标引用 |
 | ------- | -------- | ---- | ------ | ------ | ---- | ------------ |
 | REQ-401 | 单文件本地上传：Tika 白名单、非空、大小受部署配置限制；必填 ChunkStrategy + 合法 Params；`sourceType=LOCAL_FILE`；先写 ObjectStorage 再创建 Document，状态 `UPLOADED` | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
-| REQ-402 | 库内 Document 分页列表（默认 20、上限 100；OriginalFilename 模糊；更新时间倒序） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
+| REQ-402 | 库内 Document 分页列表（默认 20、上限 100；OriginalFilename 模糊；可选 status / enabled 精确；更新时间倒序） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-403 | 按 id 查询 Document 详情（元数据，不含 objectKey） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-404 | 改 ChunkStrategy 与 Params（仅 `UPLOADED`；改种类整份 JSON 替换）；可选改 OriginalFilename 主名（后缀锁定，不改 objectKey） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-405 | 删除 Document：记录与对象同步删；对象失败则整笔失败 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
@@ -123,7 +123,7 @@
 | 故事 ID | 关联需求 | 用户故事 | INVEST 自检 | 状态 |
 | ------- | -------- | -------- | ----------- | ---- |
 | US-401 | REQ-401 / REQ-409 | 作为已登录的 Admin 或 Staff，我想要把一份本地文件上传进指定知识库并选定分块策略与参数，以便后续版本按该约定切块。 | 通过 | 草稿 |
-| US-402 | REQ-402 / REQ-411 | 作为已登录的 Admin 或 Staff，我想要按原始文件名查找某库下的文档列表，以便找到最近更新的文件。 | 通过 | 草稿 |
+| US-402 | REQ-402 / REQ-411 | 作为已登录的 Admin 或 Staff，我想要按原始文件名、状态和是否启用查找某库下的文档列表，以便找到最近更新的文件。 | 通过 | 草稿 |
 | US-403 | REQ-403 | 作为已登录的 Admin 或 Staff，我想要查看某文档的媒体类型、大小、状态与策略，以便确认上传是否正确。 | 通过 | 草稿 |
 | US-404 | REQ-404 | 作为已登录的 Admin 或 Staff，我想要在尚未分块前改策略或参数，以便纠正上传时选错的切法。 | 通过 | 草稿 |
 | US-405 | REQ-405 | 作为已登录的 Admin 或 Staff，我想要删掉传错的文档及其源文件，以便空库后可以由 Admin 删库。 | 通过 | 草稿 |
@@ -147,7 +147,7 @@
 | AC-409 | US-401 | 正常 | 已登录；文件为 PNG，策略为 `STRUCTURE_AWARE` 且参数合法 | 上传 | 成功（本版本不因 MIME 限制策略） | 草稿 |
 | AC-410 | US-401 | 正常 | 已登录；`.md` 且客户端 Content-Type 为 `application/octet-stream` | 上传（带 OriginalFilename） | Tika 结合文件名识别为 markdown 类则成功 | 草稿 |
 | AC-411 | US-402 | 正常 | 已登录；库内多条 Document | 默认分页列表 | 按更新时间倒序；默认 20；含 OriginalFilename、媒体类型、大小、策略、状态等；不含 objectKey | 草稿 |
-| AC-412 | US-402 | 边界 | 已登录 | OriginalFilename 模糊筛选，或 pageSize=100 | 筛选/分页生效；超过 100 拒绝 | 草稿 |
+| AC-412 | US-402 | 边界 | 已登录 | OriginalFilename 模糊，或 `status` / `enabled` 精确筛选，或 pageSize=100 | 筛选/分页生效；超过 100 拒绝；非法 status 枚举拒绝 | 草稿 |
 | AC-413 | US-403 | 正常 | 已登录；目标存在 | 查详情 | 返回元数据与策略 JSON；不返回 objectKey | 草稿 |
 | AC-414 | US-403 | 失败 | 已登录 | 查询不存在的 Document，或 Document 不属于该知识库 | 失败（不存在） | 草稿 |
 | AC-415 | US-404 | 正常 | 已登录；状态 `UPLOADED` | 将 `OVERLAPPING` 改为 `STRUCTURE_AWARE` 并提交新参数 | 成功；旧参数被整份替换；`updatedAt` 更新；列表顺序反映更新 | 草稿 |
@@ -174,7 +174,7 @@
 
 1. **选库**：已登录 AdminUser 确认目标 KnowledgeBase 存在。  
 2. **上传**：提交一份本地文件 + ChunkStrategy + ChunkStrategyParams → 拒绝空文件 → 校验大小 → Tika 探测 MIME → 写入 ObjectStorage（系统生成含 Namespace 的 objectKey）→ 创建 Document（`UPLOADED`，默认启用）。  
-3. **查找**：在该库下按更新时间倒序列表；可用 OriginalFilename 模糊筛选；已禁用仍列出。  
+3. **查找**：在该库下按更新时间倒序列表；可用 OriginalFilename 模糊，以及可选 status / enabled 精确筛选（AND）；缺省不过滤启用，已禁用仍列出。  
 4. **改策略**：仅元数据更新；可同时改 OriginalFilename 主名（后缀锁定）；不改对象内容与 objectKey。  
 5. **启用/禁用**：仅改 `enabled`；不改对象、不改 DocumentStatus。  
 6. **删文档**：同步删记录与对象；`documentCount` 降为 0 后 Admin 可删库。
@@ -225,7 +225,7 @@
 
 **上传**：单文件；`sourceType` 固定 `LOCAL_FILE`；调用方不可传 objectKey。  
 **OriginalFilename**：来自本地文件名；非唯一；`UPLOADED` 时可随改策略提交完整文件名（只改主名，后缀锁定）；不改 objectKey。  
-**Document 列表**：默认 pageSize=20，上限 100，超出拒绝；仅 OriginalFilename 模糊；不按状态/策略/启用筛；默认更新时间倒序；已禁用仍列出。  
+**Document 列表**：默认 pageSize=20，上限 100，超出拒绝；OriginalFilename 模糊；可选 status / enabled 精确筛选（缺省不过滤）；不做 strategy 筛选；默认更新时间倒序；缺省列表中已禁用仍列出。  
 **Document 可见字段**（至少）：id、所属知识库 id、OriginalFilename、媒体类型、字节大小、DocumentStatus、Enabled、ChunkStrategy、ChunkStrategyParams、sourceType、createdBy、createdAt、updatedAt。不返回 objectKey。  
 **KnowledgeBase 列表/详情**：在既有字段上增加 `documentCount`（含已禁用 Document）。  
 **启用/禁用 Document**：切换 `enabled`；不删记录与对象。  
@@ -340,6 +340,7 @@ URL 路径与错误码表交 SRS / OpenSpec design，不在本 PRD 发明。
 | 2026-08-13 | grilling → PRD | 首稿：Document 上传/列表/改策略/删除 + 可插拔 S3 ObjectStorage；不含分块与管理端 UI |
 | 2026-08-13 | 增量 | 增加 Document `enabled`：上传默认启用；可切换；禁用不删对象且仍计入 documentCount |
 | 2026-08-14 | 增量 | 改策略可改 OriginalFilename 主名；后缀锁定；不改 objectKey |
+| 2026-08-14 | 增量 | Document 列表可选 `status` / `enabled` 精确筛选；缺省不过滤；不做 strategy 筛选 |
 
 ---
 

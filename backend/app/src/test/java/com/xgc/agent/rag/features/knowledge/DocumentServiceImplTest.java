@@ -1,6 +1,7 @@
 package com.xgc.agent.rag.features.knowledge;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.framework.base.storage.ObjectStorage;
@@ -8,6 +9,7 @@ import com.xgc.agent.framework.base.storage.ObjectStorageException;
 import com.xgc.agent.rag.features.admin.dao.entity.AdminUserDO;
 import com.xgc.agent.rag.features.admin.service.AdminAccessService;
 import com.xgc.agent.rag.features.knowledge.chunk.ChunkStrategyParamsValidator;
+import com.xgc.agent.rag.features.knowledge.dao.entity.DocumentStatus;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeBaseDO;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeDocumentDO;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeBaseMapper;
@@ -269,9 +271,20 @@ class DocumentServiceImplTest {
     @Test
     void page_rejectsOversizedPage() {
         when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
-        assertThatThrownBy(() -> service.page("kb-1", 1L, 101L, null))
+        assertThatThrownBy(() -> service.page("kb-1", 1L, 101L, null, null, null))
                 .isInstanceOf(WebAdminException.class);
         verify(knowledgeDocumentMapper, never()).selectPage(any(), any(Wrapper.class));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    void page_queriesWithStatusAndEnabled() {
+        when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
+        when(knowledgeDocumentMapper.selectPage(any(), any(Wrapper.class))).thenReturn(new Page<>());
+
+        service.page("kb-1", 1L, 20L, "hand", DocumentStatus.UPLOADED, Boolean.FALSE);
+
+        verify(knowledgeDocumentMapper).selectPage(any(), any(Wrapper.class));
     }
 
     private static KnowledgeBaseDO kb() {
