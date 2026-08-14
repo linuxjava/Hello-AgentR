@@ -7,7 +7,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { DocumentsPage } from '@/pages/documents/DocumentsPage'
 import { ApiError } from '@/shared/api/types'
 import { useSessionStore } from '@/shared/auth/session-store'
-import { useToastStore } from '@/shared/ui/toast-store'
+import { clearToasts } from '@/shared/ui/toast-store'
 import { ToastHost } from '@/shared/ui/ToastHost'
 
 const getMock = vi.fn()
@@ -114,7 +114,7 @@ describe('DocumentsPage', () => {
     setDocumentEnabledMock.mockReset()
     deleteDocumentMock.mockReset()
     listUsersMock.mockReset()
-    useToastStore.setState({ items: [] })
+    clearToasts()
     getMock.mockResolvedValue(sampleKb)
     listDocumentsMock.mockResolvedValue({
       page: 1,
@@ -222,7 +222,7 @@ describe('DocumentsPage', () => {
         chunkStrategyParams: { chunkSize: 512, overlap: 64 },
       })
     })
-    expect(await screen.findByRole('status')).toHaveTextContent('上传成功')
+    expect(await screen.findByText('上传成功')).toBeInTheDocument()
   })
 
   it('switches upload form to structure-aware defaults', async () => {
@@ -291,7 +291,7 @@ describe('DocumentsPage', () => {
         originalFilename: '手册.pdf',
       })
     })
-    expect(await screen.findByRole('status')).toHaveTextContent('保存成功')
+    expect(await screen.findByText('保存成功')).toBeInTheDocument()
   })
 
   it('rejects empty filename stem without calling API', async () => {
@@ -314,7 +314,7 @@ describe('DocumentsPage', () => {
     const toggle = screen.getByRole('switch', { name: '启用 handbook.pdf' })
     expect(toggle).toHaveAttribute('aria-checked', 'true')
     await user.click(toggle)
-    expect(await screen.findByRole('alert')).toHaveTextContent('文档不存在')
+    expect(await screen.findByText('文档不存在')).toBeInTheDocument()
     await waitFor(() => {
       expect(screen.getByRole('switch', { name: '启用 handbook.pdf' })).toHaveAttribute(
         'aria-checked',
@@ -338,6 +338,6 @@ describe('DocumentsPage', () => {
     await waitFor(() => {
       expect(deleteDocumentMock).toHaveBeenCalledWith('kb-1', 'doc-1')
     })
-    expect(await screen.findByRole('status')).toHaveTextContent('删除成功')
+    expect(await screen.findByText('删除成功')).toBeInTheDocument()
   })
 })

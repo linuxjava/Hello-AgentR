@@ -1,59 +1,54 @@
+import { ConfigProvider } from 'antd'
+import zhCN from 'antd/locale/zh_CN'
 import { act, render, screen } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { ToastHost } from '@/shared/ui/ToastHost'
 import {
   NO_PERMISSION_MESSAGE,
+  clearToasts,
   toastError,
   toastNoPermission,
   toastSuccess,
-  useToastStore,
 } from '@/shared/ui/toast-store'
 
-describe('toast store + ToastHost', () => {
+function renderHost() {
+  return render(
+    <ConfigProvider locale={zhCN}>
+      <ToastHost />
+    </ConfigProvider>,
+  )
+}
+
+describe('antd Message via toast helpers', () => {
   beforeEach(() => {
-    useToastStore.setState({ items: [] })
-    vi.useFakeTimers()
+    clearToasts()
   })
 
   afterEach(() => {
-    vi.useRealTimers()
+    clearToasts()
   })
 
-  it('shows success and auto-dismisses', () => {
-    render(<ToastHost />)
-
+  it('shows success', async () => {
+    renderHost()
     act(() => {
       toastSuccess('创建成功')
     })
-
-    expect(screen.getByRole('status')).toHaveTextContent('创建成功')
-
-    act(() => {
-      vi.advanceTimersByTime(3200)
-    })
-
-    expect(screen.queryByRole('status')).not.toBeInTheDocument()
+    expect(await screen.findByText('创建成功')).toBeInTheDocument()
   })
 
-  it('shows no-permission message via helper', () => {
-    render(<ToastHost />)
-
+  it('shows no-permission message via helper', async () => {
+    renderHost()
     act(() => {
       toastNoPermission()
     })
-
-    const toast = screen.getByRole('status')
-    expect(toast).toHaveTextContent(NO_PERMISSION_MESSAGE)
-    expect(toast.className).toContain('bg-[#FFFFFFD9]')
+    expect(await screen.findByText(NO_PERMISSION_MESSAGE)).toBeInTheDocument()
   })
 
-  it('shows error toast', () => {
-    render(<ToastHost />)
-
+  it('shows error toast', async () => {
+    renderHost()
     act(() => {
       toastError('网络异常')
     })
-
-    expect(screen.getByRole('alert')).toHaveTextContent('网络异常')
+    expect(await screen.findByText('网络异常')).toBeInTheDocument()
   })
 })

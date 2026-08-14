@@ -938,436 +938,9 @@
     },
     {
       "type": "frame",
-      "id": "M1B8d",
-      "x": -8,
-      "y": 980,
-      "name": "P-01 / H-01 Login Default",
-      "clip": true,
-      "width": 1440,
-      "height": 900,
-      "fill": {
-        "type": "gradient",
-        "gradientType": "linear",
-        "enabled": true,
-        "rotation": 145,
-        "size": {
-          "height": 1
-        },
-        "colors": [
-          {
-            "color": "$bg-deep",
-            "position": 0
-          },
-          {
-            "color": "$bg-mid",
-            "position": 0.35
-          },
-          {
-            "color": "$bg-cyan",
-            "position": 0.7
-          },
-          {
-            "color": "$bg-blue",
-            "position": 1
-          }
-        ]
-      },
-      "layout": "none",
-      "children": [
-        {
-          "type": "ellipse",
-          "id": "v0xu8",
-          "x": -140,
-          "y": -100,
-          "name": "Orb Violet",
-          "fill": "$orb-violet",
-          "width": 560,
-          "height": 560,
-          "effect": {
-            "type": "blur",
-            "radius": 110
-          }
-        },
-        {
-          "type": "ellipse",
-          "id": "P9tmg8",
-          "x": 980,
-          "y": 280,
-          "name": "Orb Cyan",
-          "fill": "$orb-cyan",
-          "width": 620,
-          "height": 620,
-          "effect": {
-            "type": "blur",
-            "radius": 110
-          }
-        },
-        {
-          "type": "ellipse",
-          "id": "jOTWt",
-          "x": 420,
-          "y": 580,
-          "name": "Orb Pink",
-          "fill": "$orb-pink",
-          "width": 480,
-          "height": 480,
-          "effect": {
-            "type": "blur",
-            "radius": 110
-          }
-        },
-        {
-          "type": "ellipse",
-          "id": "Nzv3j",
-          "x": 1180,
-          "y": -40,
-          "name": "Orb Blue",
-          "fill": "#60A5FA77",
-          "width": 360,
-          "height": 360,
-          "effect": {
-            "type": "blur",
-            "radius": 110
-          }
-        },
-        {
-          "type": "frame",
-          "id": "RUSGS",
-          "x": 0,
-          "y": 0,
-          "name": "Frost Backdrop",
-          "width": 1440,
-          "height": 900,
-          "fill": "#FFFFFF1A",
-          "stroke": "#FFFFFF00",
-          "effect": {
-            "type": "background_blur",
-            "radius": 48
-          },
-          "layout": "none"
-        },
-        {
-          "type": "frame",
-          "id": "k7xx3",
-          "layoutPosition": "absolute",
-          "x": 500,
-          "y": 208,
-          "name": "Center",
-          "width": 440,
-          "layout": "vertical",
-          "gap": 28,
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "SEB5u",
-              "name": "Login Card",
-              "width": "fill_container",
-              "fill": "#FFFFFF7A",
-              "cornerRadius": "$radius-lg",
-              "stroke": "$edge",
-              "strokeWidth": 1,
-              "effect": [
-                {
-                  "type": "background_blur",
-                  "radius": 48
-                },
-                {
-                  "type": "shadow",
-                  "shadowType": "outer",
-                  "color": "#0F172A2E",
-                  "offset": {
-                    "x": 0,
-                    "y": 8
-                  },
-                  "blur": 32
-                }
-              ],
-              "layout": "vertical",
-              "gap": 20,
-              "padding": 32,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "EcOJ1",
-                  "name": "Brand Wrap",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "s4iQ04",
-                      "name": "Brand",
-                      "gap": 12,
-                      "padding": [
-                        0,
-                        0,
-                        4,
-                        0
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "q32JQi",
-                          "name": "Logo",
-                          "width": 40,
-                          "height": 40,
-                          "fill": {
-                            "type": "gradient",
-                            "gradientType": "linear",
-                            "enabled": true,
-                            "rotation": 135,
-                            "size": {
-                              "height": 1
-                            },
-                            "colors": [
-                              {
-                                "color": "#22D3EE",
-                                "position": 0
-                              },
-                              {
-                                "color": "#7C3AED",
-                                "position": 1
-                              }
-                            ]
-                          },
-                          "cornerRadius": 12,
-                          "effect": {
-                            "type": "shadow",
-                            "shadowType": "outer",
-                            "color": "#7C3AED66",
-                            "offset": {
-                              "x": 0,
-                              "y": 4
-                            },
-                            "blur": 12
-                          },
-                          "justifyContent": "center",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "tZjt0",
-                              "name": "Logo Mark",
-                              "fill": "#FFFFFF",
-                              "content": "HA",
-                              "fontFamily": "$font-display",
-                              "fontSize": 14,
-                              "fontWeight": "700"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "dveHY",
-                          "name": "Brand Text",
-                          "layout": "vertical",
-                          "gap": 2,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "D1A1l",
-                              "name": "Product",
-                              "fill": "$fg",
-                              "content": "Hello-AgentR",
-                              "fontFamily": "$font-display",
-                              "fontSize": 20,
-                              "fontWeight": "700"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "A9OROM",
-                  "name": "Card Head",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 6,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "uvlI1",
-                      "name": "Card Title",
-                      "fill": "$fg",
-                      "content": "登录",
-                      "fontFamily": "$font-display",
-                      "fontSize": 24,
-                      "fontWeight": "700"
-                    },
-                    {
-                      "type": "text",
-                      "id": "d79YN",
-                      "name": "Card Desc",
-                      "fill": "$fg-3",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "使用运营账号进入管理后台",
-                      "fontFamily": "$font-body",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "cKTQH",
-                  "name": "Fields",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 16,
-                  "children": [
-                    {
-                      "id": "Kg8pi",
-                      "type": "ref",
-                      "ref": "YVOdv",
-                      "name": "Username",
-                      "width": "fill_container",
-                      "descendants": {
-                        "DT4Fa": {
-                          "content": "用户名"
-                        },
-                        "wu8lP": {
-                          "icon": "user"
-                        },
-                        "pM2RE": {
-                          "content": "admin",
-                          "fill": "$fg"
-                        }
-                      }
-                    },
-                    {
-                      "id": "cGS32",
-                      "type": "ref",
-                      "ref": "YVOdv",
-                      "name": "Password",
-                      "width": "fill_container",
-                      "descendants": {
-                        "DT4Fa": {
-                          "content": "密码"
-                        },
-                        "jnDPi": {
-                          "type": "frame",
-                          "id": "T7cpn",
-                          "name": "Box",
-                          "width": "fill_container",
-                          "height": 44,
-                          "fill": "$glass-strong",
-                          "cornerRadius": "$radius-sm",
-                          "stroke": "$edge-dim",
-                          "strokeWidth": 1,
-                          "gap": 10,
-                          "padding": [
-                            0,
-                            14
-                          ],
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon",
-                              "id": "Gr7bz",
-                              "name": "Icon",
-                              "width": 16,
-                              "height": 16,
-                              "icon": "lock",
-                              "library": "lucide",
-                              "fill": "$fg-3"
-                            },
-                            {
-                              "type": "text",
-                              "id": "o5mvIr",
-                              "name": "Value",
-                              "fill": "$fg",
-                              "content": "••••••••",
-                              "fontFamily": "$font-body",
-                              "fontSize": 14,
-                              "fontWeight": "normal"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "DIyIW",
-                              "name": "Spacer",
-                              "width": "fill_container",
-                              "height": 1
-                            },
-                            {
-                              "type": "icon",
-                              "id": "n9Lv6S",
-                              "name": "Toggle Visibility",
-                              "width": 16,
-                              "height": 16,
-                              "icon": "eye",
-                              "library": "lucide",
-                              "fill": "$fg-3"
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "k9fF7S",
-                  "name": "Remember Row",
-                  "width": "fill_container",
-                  "gap": 8,
-                  "justifyContent": "end",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "urAuN",
-                      "name": "Checkbox",
-                      "width": 16,
-                      "height": 16,
-                      "fill": "$glass-strong",
-                      "cornerRadius": 4,
-                      "stroke": "$edge-dim",
-                      "strokeWidth": 1,
-                      "justifyContent": "center",
-                      "alignItems": "center"
-                    },
-                    {
-                      "type": "text",
-                      "id": "qEk22",
-                      "name": "Remember Label",
-                      "fill": "$fg-2",
-                      "content": "记住我",
-                      "fontFamily": "$font-body",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "id": "dToEr",
-                  "type": "ref",
-                  "ref": "lYSHx",
-                  "name": "Submit",
-                  "width": "fill_container",
-                  "descendants": {
-                    "ruJds": {
-                      "content": "登录"
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "kQ2FC",
-      "x": 1520,
-      "y": 980,
+      "x": 1531,
+      "y": 1361,
       "name": "P-01 / H-02 Login Error",
       "clip": true,
       "width": 1440,
@@ -66874,6 +66447,433 @@
                     },
                     "b0Ng6O": {
                       "content": "账号管理"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "M1B8d",
+      "x": -8,
+      "y": 1361,
+      "name": "P-01 / H-01 Login Default",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "enabled": true,
+        "rotation": 145,
+        "size": {
+          "height": 1
+        },
+        "colors": [
+          {
+            "color": "$bg-deep",
+            "position": 0
+          },
+          {
+            "color": "$bg-mid",
+            "position": 0.35
+          },
+          {
+            "color": "$bg-cyan",
+            "position": 0.7
+          },
+          {
+            "color": "$bg-blue",
+            "position": 1
+          }
+        ]
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "v0xu8",
+          "x": -140,
+          "y": -100,
+          "name": "Orb Violet",
+          "fill": "$orb-violet",
+          "width": 560,
+          "height": 560,
+          "effect": {
+            "type": "blur",
+            "radius": 110
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "P9tmg8",
+          "x": 980,
+          "y": 280,
+          "name": "Orb Cyan",
+          "fill": "$orb-cyan",
+          "width": 620,
+          "height": 620,
+          "effect": {
+            "type": "blur",
+            "radius": 110
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "jOTWt",
+          "x": 420,
+          "y": 580,
+          "name": "Orb Pink",
+          "fill": "$orb-pink",
+          "width": 480,
+          "height": 480,
+          "effect": {
+            "type": "blur",
+            "radius": 110
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "Nzv3j",
+          "x": 1180,
+          "y": -40,
+          "name": "Orb Blue",
+          "fill": "#60A5FA77",
+          "width": 360,
+          "height": 360,
+          "effect": {
+            "type": "blur",
+            "radius": 110
+          }
+        },
+        {
+          "type": "frame",
+          "id": "RUSGS",
+          "x": 0,
+          "y": 0,
+          "name": "Frost Backdrop",
+          "width": 1440,
+          "height": 900,
+          "fill": "#FFFFFF1A",
+          "stroke": "#FFFFFF00",
+          "effect": {
+            "type": "background_blur",
+            "radius": 48
+          },
+          "layout": "none"
+        },
+        {
+          "type": "frame",
+          "id": "k7xx3",
+          "layoutPosition": "absolute",
+          "x": 500,
+          "y": 208,
+          "name": "Center",
+          "width": 440,
+          "layout": "vertical",
+          "gap": 28,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "SEB5u",
+              "name": "Login Card",
+              "width": "fill_container",
+              "fill": "#FFFFFF7A",
+              "cornerRadius": "$radius-lg",
+              "stroke": "$edge",
+              "strokeWidth": 1,
+              "effect": [
+                {
+                  "type": "background_blur",
+                  "radius": 48
+                },
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#0F172A2E",
+                  "offset": {
+                    "x": 0,
+                    "y": 8
+                  },
+                  "blur": 32
+                }
+              ],
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EcOJ1",
+                  "name": "Brand Wrap",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "s4iQ04",
+                      "name": "Brand",
+                      "gap": 12,
+                      "padding": [
+                        0,
+                        0,
+                        4,
+                        0
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "q32JQi",
+                          "name": "Logo",
+                          "width": 40,
+                          "height": 40,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 135,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#22D3EE",
+                                "position": 0
+                              },
+                              {
+                                "color": "#7C3AED",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 12,
+                          "effect": {
+                            "type": "shadow",
+                            "shadowType": "outer",
+                            "color": "#7C3AED66",
+                            "offset": {
+                              "x": 0,
+                              "y": 4
+                            },
+                            "blur": 12
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "tZjt0",
+                              "name": "Logo Mark",
+                              "fill": "#FFFFFF",
+                              "content": "HA",
+                              "fontFamily": "$font-display",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "dveHY",
+                          "name": "Brand Text",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "D1A1l",
+                              "name": "Product",
+                              "fill": "$fg",
+                              "content": "Hello-AgentR",
+                              "fontFamily": "$font-display",
+                              "fontSize": 20,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "A9OROM",
+                  "name": "Card Head",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uvlI1",
+                      "name": "Card Title",
+                      "fill": "$fg",
+                      "content": "登录",
+                      "fontFamily": "$font-display",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "d79YN",
+                      "name": "Card Desc",
+                      "fill": "$fg-3",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "使用运营账号进入管理后台",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cKTQH",
+                  "name": "Fields",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "id": "Kg8pi",
+                      "type": "ref",
+                      "ref": "YVOdv",
+                      "name": "Username",
+                      "width": "fill_container",
+                      "descendants": {
+                        "DT4Fa": {
+                          "content": "用户名"
+                        },
+                        "wu8lP": {
+                          "icon": "user"
+                        },
+                        "pM2RE": {
+                          "content": "admin",
+                          "fill": "$fg"
+                        }
+                      }
+                    },
+                    {
+                      "id": "cGS32",
+                      "type": "ref",
+                      "ref": "YVOdv",
+                      "name": "Password",
+                      "width": "fill_container",
+                      "descendants": {
+                        "DT4Fa": {
+                          "content": "密码"
+                        },
+                        "jnDPi": {
+                          "type": "frame",
+                          "id": "T7cpn",
+                          "name": "Box",
+                          "width": "fill_container",
+                          "height": 44,
+                          "fill": "$glass-strong",
+                          "cornerRadius": "$radius-sm",
+                          "stroke": "$edge-dim",
+                          "strokeWidth": 1,
+                          "gap": 10,
+                          "padding": [
+                            0,
+                            14
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "Gr7bz",
+                              "name": "Icon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "lock",
+                              "library": "lucide",
+                              "fill": "$fg-3"
+                            },
+                            {
+                              "type": "text",
+                              "id": "o5mvIr",
+                              "name": "Value",
+                              "fill": "$fg",
+                              "content": "••••••••",
+                              "fontFamily": "$font-body",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "DIyIW",
+                              "name": "Spacer",
+                              "width": "fill_container",
+                              "height": 1
+                            },
+                            {
+                              "type": "icon",
+                              "id": "n9Lv6S",
+                              "name": "Toggle Visibility",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "eye",
+                              "library": "lucide",
+                              "fill": "$fg-3"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "k9fF7S",
+                  "name": "Remember Row",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "urAuN",
+                      "name": "Checkbox",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$glass-strong",
+                      "cornerRadius": 4,
+                      "stroke": "$edge-dim",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qEk22",
+                      "name": "Remember Label",
+                      "fill": "$fg-2",
+                      "content": "记住我",
+                      "fontFamily": "$font-body",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "id": "dToEr",
+                  "type": "ref",
+                  "ref": "lYSHx",
+                  "name": "Submit",
+                  "width": "fill_container",
+                  "descendants": {
+                    "ruJds": {
+                      "content": "登录"
                     }
                   }
                 }

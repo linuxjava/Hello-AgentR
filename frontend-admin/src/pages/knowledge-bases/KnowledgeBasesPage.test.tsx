@@ -10,7 +10,7 @@ import { useSessionStore } from '@/shared/auth/session-store'
 import {
   KB_HAS_DOCUMENTS_MESSAGE,
   KB_NO_DELETE_PERMISSION_MESSAGE,
-  useToastStore,
+  clearToasts,
 } from '@/shared/ui/toast-store'
 import { ToastHost } from '@/shared/ui/ToastHost'
 
@@ -105,7 +105,7 @@ describe('KnowledgeBasesPage', () => {
     removeMock.mockReset()
     listEmbeddingModelsMock.mockReset()
     listUsersMock.mockReset()
-    useToastStore.setState({ items: [] })
+    clearToasts()
     listMock.mockResolvedValue({
       page: 1,
       pageSize: 20,
@@ -188,7 +188,7 @@ describe('KnowledgeBasesPage', () => {
     await screen.findByText('产品手册')
 
     await user.click(screen.getAllByRole('button', { name: '删除' })[0]!)
-    expect(await screen.findByRole('status')).toHaveTextContent(KB_HAS_DOCUMENTS_MESSAGE)
+    expect(await screen.findByText(KB_HAS_DOCUMENTS_MESSAGE)).toBeInTheDocument()
     expect(screen.queryByRole('dialog', { name: '删除知识库' })).not.toBeInTheDocument()
   })
 
@@ -260,7 +260,7 @@ describe('KnowledgeBasesPage', () => {
   it('toasts list errors without fabricating rows', async () => {
     listMock.mockRejectedValue(new ApiError('NETWORK', '加载知识库列表失败'))
     renderPage()
-    expect(await screen.findByRole('alert')).toHaveTextContent('加载知识库列表失败')
+    expect(await screen.findByText('加载知识库列表失败')).toBeInTheDocument()
     expect(screen.queryByText('产品手册')).not.toBeInTheDocument()
   })
 
@@ -279,7 +279,7 @@ describe('KnowledgeBasesPage', () => {
     await user.click(screen.getByRole('button', { name: '取消' }))
 
     await user.click(screen.getAllByRole('button', { name: '删除' })[0]!)
-    expect(await screen.findByRole('status')).toHaveTextContent(KB_NO_DELETE_PERMISSION_MESSAGE)
+    expect(await screen.findByText(KB_NO_DELETE_PERMISSION_MESSAGE)).toBeInTheDocument()
     expect(screen.queryByRole('dialog', { name: '删除知识库' })).not.toBeInTheDocument()
     expect(removeMock).not.toHaveBeenCalled()
   })
@@ -304,7 +304,7 @@ describe('KnowledgeBasesPage', () => {
         namespace: 'newdocs',
       })
     })
-    expect(await screen.findByRole('status')).toHaveTextContent('创建成功')
+    expect(await screen.findByText('创建成功')).toBeInTheDocument()
   })
 
   it('keeps create dialog open on name conflict', async () => {

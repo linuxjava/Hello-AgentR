@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { UsersPage } from '@/pages/users/UsersPage'
 import { useSessionStore } from '@/shared/auth/session-store'
-import { NO_PERMISSION_MESSAGE, useToastStore } from '@/shared/ui/toast-store'
+import { NO_PERMISSION_MESSAGE, clearToasts } from '@/shared/ui/toast-store'
 import { ToastHost } from '@/shared/ui/ToastHost'
 
 const listMock = vi.fn()
@@ -60,7 +60,7 @@ describe('UsersPage', () => {
     updateRoleMock.mockReset()
     updatePasswordMock.mockReset()
     removeMock.mockReset()
-    useToastStore.setState({ items: [] })
+    clearToasts()
     listMock.mockResolvedValue({
       page: 1,
       pageSize: 10,
@@ -155,7 +155,7 @@ describe('UsersPage', () => {
     await screen.findByText('alice')
 
     await user.click(screen.getByRole('button', { name: '创建账号' }))
-    expect(await screen.findByRole('status')).toHaveTextContent(NO_PERMISSION_MESSAGE)
+    expect(await screen.findByText(NO_PERMISSION_MESSAGE)).toBeInTheDocument()
     expect(screen.queryByRole('dialog', { name: '创建账号' })).not.toBeInTheDocument()
   })
 
