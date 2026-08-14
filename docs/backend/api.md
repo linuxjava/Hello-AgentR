@@ -66,7 +66,7 @@
 | --- | --- | --- |
 | id | string | 雪花 ID |
 | knowledgeBaseId | string | 所属知识库 |
-| originalFilename | string | 原始文件名；同库允许重复 |
+| originalFilename | string | 原始文件名；同库允许重复；改策略时可改主名、后缀锁定 |
 | mediaType | string | 服务端 Tika 规范化后的 MIME，不以客户端 Content-Type 为准 |
 | byteSize | number | 字节数 |
 | status | string | 本阶段固定 `UPLOADED` |
@@ -581,7 +581,7 @@ curl -s "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_ID/document
 
 `PUT /admin/knowledge-bases/{kbId}/documents/{docId}/chunk-strategy` — 需登录
 
-本阶段 `status` 固定 `UPLOADED`，该接口始终可调用。改种类时整份替换 `chunkStrategyParams`（此处为 JSON **对象**，不是字符串）。成功后刷新 `updatedAt`。
+本阶段 `status` 固定 `UPLOADED`，该接口始终可调用。改种类时整份替换 `chunkStrategyParams`（此处为 JSON **对象**，不是字符串）。可选 `originalFilename`：缺省不改名；若提交则只允许改主名，后缀必须与已存值一致（大小写不敏感）。成功后刷新 `updatedAt`。**不**改 objectKey、不重写对象。
 
 ```json
 {
@@ -591,7 +591,8 @@ curl -s "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_ID/document
     "maxChunkSize": 1024,
     "minChunkSize": 256,
     "overlap": 32
-  }
+  },
+  "originalFilename": "手册.pdf"
 }
 ```
 
@@ -603,6 +604,8 @@ curl -s "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_ID/document
 | A002009 | 文档不存在 |
 | A002013 | 分块策略不合法 |
 | A002014 | 分块策略参数不合法 |
+| A002016 | 文件名不符合规则 |
+| A002017 | 不能修改文件名后缀 |
 
 ```bash
 curl -s -X PUT "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_ID/documents/$DOC_ID/chunk-strategy" \
@@ -705,6 +708,8 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_I
 | A002013 | 分块策略不合法 |
 | A002014 | 分块策略参数不合法 |
 | A002015 | 对象存储不可用 |
+| A002016 | 文件名不符合规则 |
+| A002017 | 不能修改文件名后缀 |
 
 失败响应示例：
 
@@ -740,7 +745,7 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_I
 | POST   | `/admin/knowledge-bases/{id}/documents` | 已登录 | 上传 Document（multipart） |
 | GET    | `/admin/knowledge-bases/{id}/documents` | 已登录 | 库内 Document 分页 |
 | GET    | `/admin/knowledge-bases/{id}/documents/{docId}` | 已登录 | Document 详情 |
-| PUT    | `/admin/knowledge-bases/{id}/documents/{docId}/chunk-strategy` | 已登录 | 改分块策略 |
+| PUT | `/admin/knowledge-bases/{id}/documents/{docId}/chunk-strategy` | 已登录 | 改分块策略；可选改文件名主名 |
 | PUT    | `/admin/knowledge-bases/{id}/documents/{docId}/enabled` | 已登录 | 启用 / 禁用 Document |
 | DELETE | `/admin/knowledge-bases/{id}/documents/{docId}` | 已登录 | 删除 Document（同步删对象） |
 

@@ -23,6 +23,7 @@ import com.xgc.agent.rag.features.knowledge.dto.DocumentView;
 import com.xgc.agent.rag.features.knowledge.error.KnowledgeErrorCode;
 import com.xgc.agent.rag.features.knowledge.service.DocumentService;
 import com.xgc.agent.rag.features.knowledge.storage.ObjectKeys;
+import com.xgc.agent.rag.features.knowledge.util.OriginalFilenameRules;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -162,8 +163,13 @@ public class DocumentServiceImpl implements DocumentService {
         String paramsJson = writeJson(request == null ? null : request.chunkStrategyParams());
         String strategy = request == null ? null : request.chunkStrategy();
         Map<String, Object> params = chunkStrategyParamsValidator.parseAndValidate(strategy, paramsJson);
+        // Why 与策略同接口：运营在 O-09 一次保存；objectKey 不含文件名，改名只写元数据。
+        String nextFilename = OriginalFilenameRules.resolve(
+                target.getOriginalFilename(),
+                request == null ? null : request.originalFilename());
         target.setChunkStrategy(strategy);
         target.setChunkStrategyParams(params);
+        target.setOriginalFilename(nextFilename);
         target.setUpdatedBy(operatorId);
         knowledgeDocumentMapper.updateById(target);
         return toView(requireDocument(knowledgeBaseId, documentId));

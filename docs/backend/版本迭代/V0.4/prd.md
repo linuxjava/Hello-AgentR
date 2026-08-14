@@ -104,7 +104,7 @@
 | REQ-401 | 单文件本地上传：Tika 白名单、非空、大小受部署配置限制；必填 ChunkStrategy + 合法 Params；`sourceType=LOCAL_FILE`；先写 ObjectStorage 再创建 Document，状态 `UPLOADED` | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-402 | 库内 Document 分页列表（默认 20、上限 100；OriginalFilename 模糊；更新时间倒序） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-403 | 按 id 查询 Document 详情（元数据，不含 objectKey） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
-| REQ-404 | 改 ChunkStrategy 与 Params（仅 `UPLOADED`；改种类整份 JSON 替换） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
+| REQ-404 | 改 ChunkStrategy 与 Params（仅 `UPLOADED`；改种类整份 JSON 替换）；可选改 OriginalFilename 主名（后缀锁定，不改 objectKey） | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-405 | 删除 Document：记录与对象同步删；对象失败则整笔失败 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-412 | 启用/禁用 Document：`enabled` 与 status 解耦；上传默认 true；禁用不删对象且仍计入 documentCount | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-406 | KnowledgeBase 列表/详情返回 `documentCount` | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
@@ -152,6 +152,8 @@
 | AC-414 | US-403 | 失败 | 已登录 | 查询不存在的 Document，或 Document 不属于该知识库 | 失败（不存在） | 草稿 |
 | AC-415 | US-404 | 正常 | 已登录；状态 `UPLOADED` | 将 `OVERLAPPING` 改为 `STRUCTURE_AWARE` 并提交新参数 | 成功；旧参数被整份替换；`updatedAt` 更新；列表顺序反映更新 | 草稿 |
 | AC-416 | US-404 | 失败 | 已登录 | 用 `OVERLAPPING` 种类提交结构分块的键，或 overlap ≥ chunkSize | 拒绝；原策略不变 | 草稿 |
+| AC-428 | US-404 | 正常 | 已登录；文件名为 `handbook.pdf` | 改策略请求带 `originalFilename=手册.pdf` | 成功；主名已改、后缀仍为 `.pdf`；objectKey 与对象内容不变 | 草稿 |
+| AC-429 | US-404 | 失败 | 已登录；文件名为 `handbook.pdf` | 提交 `originalFilename=handbook.md` 或主名为空/含路径符 | 拒绝（后缀锁定或文件名不合法）；原文件名与策略不变 | 草稿 |
 | AC-417 | US-405 | 正常 | Admin 或 Staff 已登录 | 删除 Document | 记录不可再查；对象已从存储删除；该库 `documentCount` -1 | 草稿 |
 | AC-418 | US-405 | 失败 | 已登录；模拟对象删除失败 | 删除 Document | 整笔失败；Document 仍可查 | 草稿 |
 | AC-419 | US-406 | 正常 | Admin 已登录；`documentCount=0` | 删除 KnowledgeBase | 成功；Namespace 可复用 | 草稿 |
@@ -173,7 +175,7 @@
 1. **选库**：已登录 AdminUser 确认目标 KnowledgeBase 存在。  
 2. **上传**：提交一份本地文件 + ChunkStrategy + ChunkStrategyParams → 拒绝空文件 → 校验大小 → Tika 探测 MIME → 写入 ObjectStorage（系统生成含 Namespace 的 objectKey）→ 创建 Document（`UPLOADED`，默认启用）。  
 3. **查找**：在该库下按更新时间倒序列表；可用 OriginalFilename 模糊筛选；已禁用仍列出。  
-4. **改策略**：仅元数据更新；不改对象内容。  
+4. **改策略**：仅元数据更新；可同时改 OriginalFilename 主名（后缀锁定）；不改对象内容与 objectKey。  
 5. **启用/禁用**：仅改 `enabled`；不改对象、不改 DocumentStatus。  
 6. **删文档**：同步删记录与对象；`documentCount` 降为 0 后 Admin 可删库。
 
@@ -222,7 +224,7 @@
 ### 7.5 输入 / 输出边界
 
 **上传**：单文件；`sourceType` 固定 `LOCAL_FILE`；调用方不可传 objectKey。  
-**OriginalFilename**：来自本地文件名；非唯一；本版本不可改。  
+**OriginalFilename**：来自本地文件名；非唯一；`UPLOADED` 时可随改策略提交完整文件名（只改主名，后缀锁定）；不改 objectKey。  
 **Document 列表**：默认 pageSize=20，上限 100，超出拒绝；仅 OriginalFilename 模糊；不按状态/策略/启用筛；默认更新时间倒序；已禁用仍列出。  
 **Document 可见字段**（至少）：id、所属知识库 id、OriginalFilename、媒体类型、字节大小、DocumentStatus、Enabled、ChunkStrategy、ChunkStrategyParams、sourceType、createdBy、createdAt、updatedAt。不返回 objectKey。  
 **KnowledgeBase 列表/详情**：在既有字段上增加 `documentCount`（含已禁用 Document）。  
@@ -337,6 +339,7 @@ URL 路径与错误码表交 SRS / OpenSpec design，不在本 PRD 发明。
 | ---- | ---- | -------- |
 | 2026-08-13 | grilling → PRD | 首稿：Document 上传/列表/改策略/删除 + 可插拔 S3 ObjectStorage；不含分块与管理端 UI |
 | 2026-08-13 | 增量 | 增加 Document `enabled`：上传默认启用；可切换；禁用不删对象且仍计入 documentCount |
+| 2026-08-14 | 增量 | 改策略可改 OriginalFilename 主名；后缀锁定；不改 objectKey |
 
 ---
 

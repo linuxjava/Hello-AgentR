@@ -262,6 +262,7 @@ describe('knowledgeApi', () => {
         maxChunkSize: 1024,
         overlap: 32,
       },
+      originalFilename: '手册.pdf',
     })
     await setDocumentEnabled('kb-1', 'doc-1', { enabled: false })
     await deleteDocument('kb-1', 'doc-1')

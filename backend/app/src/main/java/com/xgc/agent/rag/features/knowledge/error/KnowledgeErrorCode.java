@@ -56,7 +56,13 @@ public enum KnowledgeErrorCode implements IErrorCode {
     CHUNK_STRATEGY_PARAMS_INVALID("A002014", "分块策略参数不合法"),
 
     /** 对象存储不可用（含缺密钥、put/delete 失败）。 */
-    OBJECT_STORAGE_UNAVAILABLE("A002015", "对象存储不可用");
+    OBJECT_STORAGE_UNAVAILABLE("A002015", "对象存储不可用"),
+
+    /** OriginalFilename 主名为空、超长或含路径分隔符等非法字符。 */
+    FILENAME_INVALID("A002016", "文件名不符合规则"),
+
+    /** 改名时试图更换扩展名。 */
+    FILENAME_EXTENSION_LOCKED("A002017", "不能修改文件名后缀");
 
     /**
      * 错误码。

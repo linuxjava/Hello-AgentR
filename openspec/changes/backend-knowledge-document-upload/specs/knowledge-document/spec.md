@@ -128,7 +128,7 @@
 
 ### Requirement: 修改 ChunkStrategy
 
-已登录的 Admin 与 Staff SHALL 可修改状态为 `UPLOADED` 的 Document 的种类与参数。改种类时系统 MUST 整份替换参数 JSON。成功后 MUST 刷新更新时间。非法参数 MUST 拒绝且原值不变。
+已登录的 Admin 与 Staff SHALL 可修改状态为 `UPLOADED` 的 Document 的种类与参数。改种类时系统 MUST 整份替换参数 JSON。请求 MAY 携带 `originalFilename`：缺省 MUST 保留已存文件名；若提交则 MUST 只改主名，后缀 MUST 与已存值一致（大小写不敏感）。非法文件名或更换后缀 MUST 拒绝且原值不变。成功后 MUST 刷新更新时间。改名 MUST NOT 修改 objectKey 或重写对象。非法参数 MUST 拒绝且原值不变。
 
 #### Scenario: 改种类并替换参数成功
 
@@ -141,6 +141,18 @@
 - **GIVEN** 已登录，目标存在
 - **WHEN** 提交不满足不等式或不匹配种类的参数
 - **THEN** 系统拒绝，原策略与参数不变
+
+#### Scenario: 改主名保留后缀成功
+
+- **GIVEN** 已登录，目标文件名为 `handbook.pdf`
+- **WHEN** 提交 `originalFilename` 为 `手册.pdf` 及合法策略
+- **THEN** 文件名更新为主名已改、后缀仍为 `.pdf`，objectKey 与对象不变
+
+#### Scenario: 更换后缀被拒绝
+
+- **GIVEN** 已登录，目标文件名为 `handbook.pdf`
+- **WHEN** 提交 `originalFilename` 为 `handbook.md`
+- **THEN** 系统拒绝，原文件名与策略不变
 
 ### Requirement: 启用与禁用 Document
 

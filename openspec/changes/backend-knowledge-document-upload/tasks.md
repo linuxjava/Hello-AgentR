@@ -43,6 +43,7 @@
 - [x] 5.1 `POST /admin/knowledge-bases/{kbId}/documents`：单文件 multipart；先 put 后插库；库失败回滚对象
 - [x] 5.2 `GET` 分页列表与详情（不含 objectKey）；知识库不存在 `A002001`；文档不存在或不属该库 `A002009`
 - [x] 5.3 `PUT .../chunk-strategy`：整份替换参数并刷新 `update_time`
+- [x] 5.3a `PUT .../chunk-strategy`：可选 `originalFilename`（主名可改、后缀锁定；不改 objectKey）
 - [x] 5.4 `DELETE`：同步删对象；对象失败则整笔失败
 
 ### Phase 5 验证

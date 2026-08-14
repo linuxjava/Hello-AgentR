@@ -6,6 +6,11 @@ import { toastSuccess } from '@/shared/ui/toast-store'
 import { ErrorBanner, ModalActions, ModalShell } from '@/pages/knowledge-bases/kb-modal-chrome'
 import { ChunkStrategyForm } from '@/pages/documents/ChunkStrategyForm'
 import { validateChunkParams } from '@/pages/documents/chunk-strategy'
+import {
+  composeOriginalFilename,
+  splitOriginalFilename,
+  validateFilenameStem,
+} from '@/pages/documents/document-filename'
 
 export interface ChangeStrategyModalProps {
   kbId: string
@@ -21,6 +26,9 @@ export function ChangeStrategyModal({
   onClose,
   onSaved,
 }: ChangeStrategyModalProps) {
+  const parts = splitOriginalFilename(doc.originalFilename)
+  const suffix = parts.suffix
+  const [stem, setStem] = useState(parts.stem)
   const [strategy, setStrategy] = useState<ChunkStrategy>(doc.chunkStrategy)
   const [params, setParams] = useState<ChunkStrategyParams>(doc.chunkStrategyParams)
   const [validationError, setValidationError] = useState<string | null>(null)
@@ -39,6 +47,12 @@ export function ChangeStrategyModal({
     if (submitting) {
       return
     }
+    const filenameError = validateFilenameStem(stem, suffix)
+    if (filenameError) {
+      setValidationError(filenameError)
+      setBusinessError(null)
+      return
+    }
     const invalid = validateChunkParams(strategy, params)
     if (invalid) {
       setValidationError(invalid)
@@ -52,6 +66,7 @@ export function ChangeStrategyModal({
       await knowledgeApi.updateChunkStrategy(kbId, doc.id, {
         chunkStrategy: strategy,
         chunkStrategyParams: params,
+        originalFilename: composeOriginalFilename(stem, suffix),
       })
       toastSuccess('保存成功')
       onClose()
@@ -71,9 +86,30 @@ export function ChangeStrategyModal({
           <ErrorBanner message={validationError ?? businessError ?? ''} />
         ) : null}
 
-        <div className="flex flex-col gap-1.5 rounded-[12px] border border-[#FFFFFF66] bg-[#FFFFFF59] px-3.5 py-3">
-          <span className="text-xs font-medium text-[#64748B]">文件</span>
-          <span className="truncate text-sm font-semibold text-[#0F172A]">{doc.originalFilename}</span>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="doc-filename-stem" className="text-[13px] font-medium text-[#334155]">
+            文件名
+          </label>
+          {/* Why 后缀只读：改名只动主名；扩展名与内容类型对齐，且 objectKey 不依赖文件名。 */}
+          <div className="flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+            <input
+              id="doc-filename-stem"
+              value={stem}
+              disabled={submitting}
+              autoComplete="off"
+              aria-describedby={suffix ? 'doc-filename-suffix' : undefined}
+              onChange={(event) => {
+                setStem(event.target.value)
+                setValidationError(null)
+              }}
+              className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
+            />
+            {suffix ? (
+              <span id="doc-filename-suffix" className="shrink-0 pl-1 text-sm text-[#64748B]">
+                {suffix}
+              </span>
+            ) : null}
+          </div>
         </div>
 
         <ChunkStrategyForm

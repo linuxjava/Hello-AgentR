@@ -277,17 +277,33 @@ describe('DocumentsPage', () => {
     await screen.findByText('handbook.pdf')
     await user.click(screen.getByRole('button', { name: '改策略' }))
     const dialog = await screen.findByRole('dialog', { name: '改策略' })
-    expect(within(dialog).getByText('handbook.pdf')).toBeInTheDocument()
+    expect(within(dialog).getByLabelText('文件名')).toHaveValue('handbook')
+    expect(within(dialog).getByText('.pdf')).toBeInTheDocument()
     expect(within(dialog).getByLabelText('分块大小')).toHaveValue(400)
     expect(within(dialog).getByLabelText('重叠长度')).toHaveValue(80)
+    await user.clear(within(dialog).getByLabelText('文件名'))
+    await user.type(within(dialog).getByLabelText('文件名'), '手册')
     await user.click(within(dialog).getByRole('button', { name: '保存' }))
     await waitFor(() => {
       expect(updateChunkStrategyMock).toHaveBeenCalledWith('kb-1', 'doc-1', {
         chunkStrategy: 'OVERLAPPING',
         chunkStrategyParams: { chunkSize: 400, overlap: 80 },
+        originalFilename: '手册.pdf',
       })
     })
     expect(await screen.findByRole('status')).toHaveTextContent('保存成功')
+  })
+
+  it('rejects empty filename stem without calling API', async () => {
+    const user = userEvent.setup()
+    renderPage()
+    await screen.findByText('handbook.pdf')
+    await user.click(screen.getByRole('button', { name: '改策略' }))
+    const dialog = await screen.findByRole('dialog', { name: '改策略' })
+    await user.clear(within(dialog).getByLabelText('文件名'))
+    await user.click(within(dialog).getByRole('button', { name: '保存' }))
+    expect(await within(dialog).findByRole('alert')).toHaveTextContent('请输入文件名')
+    expect(updateChunkStrategyMock).not.toHaveBeenCalled()
   })
 
   it('toggles enabled immediately and rolls back on failure', async () => {

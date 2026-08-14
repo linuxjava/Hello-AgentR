@@ -169,6 +169,7 @@ class DocumentServiceImplTest {
         KnowledgeDocumentDO stored = KnowledgeDocumentDO.builder()
                 .id("doc-1")
                 .knowledgeBaseId("kb-1")
+                .originalFilename("handbook.pdf")
                 .chunkStrategy("OVERLAPPING")
                 .chunkStrategyParams(Map.of("chunkSize", 8, "overlap", 1))
                 .build();
@@ -179,7 +180,58 @@ class DocumentServiceImplTest {
                 Map.of("defaultChunkSize", 20, "maxChunkSize", 30, "minChunkSize", 10, "overlap", 2)
         ));
         assertThat(view.chunkStrategy()).isEqualTo("STRUCTURE_AWARE");
+        assertThat(view.originalFilename()).isEqualTo("handbook.pdf");
         verify(knowledgeDocumentMapper).updateById(org.mockito.ArgumentMatchers.isA(KnowledgeDocumentDO.class));
+        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).delete(anyString());
+    }
+
+    @Test
+    void updateStrategy_renamesStemKeepsExtension() {
+        when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
+        KnowledgeDocumentDO stored = KnowledgeDocumentDO.builder()
+                .id("doc-1")
+                .knowledgeBaseId("kb-1")
+                .originalFilename("handbook.pdf")
+                .chunkStrategy("OVERLAPPING")
+                .chunkStrategyParams(Map.of("chunkSize", 8, "overlap", 1))
+                .build();
+        when(knowledgeDocumentMapper.selectById("doc-1")).thenReturn(stored);
+
+        DocumentView view = service.updateChunkStrategy("kb-1", "doc-1", new ChunkStrategyUpdateRequest(
+                "OVERLAPPING",
+                Map.of("chunkSize", 8, "overlap", 1),
+                "手册.pdf"
+        ));
+        assertThat(view.originalFilename()).isEqualTo("手册.pdf");
+        ArgumentCaptor<KnowledgeDocumentDO> captor = ArgumentCaptor.forClass(KnowledgeDocumentDO.class);
+        verify(knowledgeDocumentMapper).updateById(captor.capture());
+        assertThat(captor.getValue().getOriginalFilename()).isEqualTo("手册.pdf");
+        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).delete(anyString());
+    }
+
+    @Test
+    void updateStrategy_rejectsExtensionChange() {
+        when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
+        KnowledgeDocumentDO stored = KnowledgeDocumentDO.builder()
+                .id("doc-1")
+                .knowledgeBaseId("kb-1")
+                .originalFilename("handbook.pdf")
+                .chunkStrategy("OVERLAPPING")
+                .chunkStrategyParams(Map.of("chunkSize", 8, "overlap", 1))
+                .build();
+        when(knowledgeDocumentMapper.selectById("doc-1")).thenReturn(stored);
+
+        assertThatThrownBy(() -> service.updateChunkStrategy("kb-1", "doc-1", new ChunkStrategyUpdateRequest(
+                "OVERLAPPING",
+                Map.of("chunkSize", 8, "overlap", 1),
+                "handbook.md"
+        )))
+                .isInstanceOf(WebAdminException.class)
+                .extracting(ex -> ((WebAdminException) ex).getErrorCode())
+                .isEqualTo(KnowledgeErrorCode.FILENAME_EXTENSION_LOCKED.code());
+        verify(knowledgeDocumentMapper, never()).updateById(org.mockito.ArgumentMatchers.isA(KnowledgeDocumentDO.class));
     }
 
     @Test

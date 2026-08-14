@@ -82,7 +82,7 @@ _Avoid_: 知识库详情页、附件列表、文件管理（泛称）、Dataset 
 - **知识库**：创建 / 编辑 Name·描述 / 删除均为知识库列表页 **模态框**；不设知识库详情页。
 - **文档**：上传 / 改策略 / 删除均为文档列表页 **模态框**；**启用 / 禁用**为行内开关（点即提交，不走确认框）。不设 Document 详情路由（列表列覆盖核对需求）。
 - **ChunkStrategy 表单**：上传与改策略均用按种类切换的结构化数字字段，前端组装 JSON；**不得**提供 JSON 文本框。字段旁**不**标注单位。改种类时清空并换成目标种类的字段（整份参数替换）。
-- **上传预填（仅 UI，非领域常量）**：打开上传时默认 `OVERLAPPING`，`chunkSize=512`、`overlap=64`；切到 `STRUCTURE_AWARE` 时改为 `minChunkSize=256`、`defaultChunkSize=512`、`maxChunkSize=1024`、`overlap=32`。改策略弹窗打开时带回该 Document 的已存种类与参数，不套用上传预填。
+- **上传预填（仅 UI，非领域常量）**：打开上传时默认 `OVERLAPPING`，`chunkSize=512`、`overlap=64`；切到 `STRUCTURE_AWARE` 时改为 `minChunkSize=256`、`defaultChunkSize=512`、`maxChunkSize=1024`、`overlap=32`。改策略弹窗打开时带回该 Document 的已存种类与参数，不套用上传预填。文件名主名可改，后缀只读锁定；与策略一次提交。
 - **选文件**：单文件；支持**拖拽到投放区**或点击选择；`accept` 提示白名单常见扩展名（txt/md/pdf/doc/docx/ppt/pptx/xls/xlsx/png/jpg/jpeg/svg）。投放区只提示常见类型，**不**写约 50MB / 服务端为准类文案。扩展名不是权威，0 字节 / MIME / 超限一律以后端 `message` 为准。已选文件后仍可拖拽替换或点击重新选择。
 - **Document 状态展示**：后端 `DocumentStatus` 在列表用中文标签，**不**直接展示枚举名；**不**使用色块底（仅色点 + 文字）。本阶段运行时仅 `UPLOADED` →「待分块」。预留后续：`CHUNKING` →「分块中」、`CHUNKED` →「分块成功」、`FAILED` →「分块失败」。色板：待分块 `$fg-3`（灰）、分块中 `$primary`（蓝）、分块成功 `$success`（绿）、分块失败 `$danger`（红）。
 - **分块数**：列表展示该 Document 已产生的 Chunk 条数；尚未开始分块（如「待分块」）时展示「—」，不展示 0。

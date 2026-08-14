@@ -97,7 +97,7 @@ App
 | DELETE | `/admin/knowledge-bases/{id}` | Admin | 仅空库；有文档前端 Toast 拦截，兜底展示 `A002008` |
 | GET | `/admin/knowledge-bases/{kbId}/documents` | 已登录 | `page` / `pageSize` / `originalFilename`；更新时间倒序 |
 | POST | `/admin/knowledge-bases/{kbId}/documents` | 已登录 | `multipart`：file + chunkStrategy + chunkStrategyParams |
-| PUT | `/admin/knowledge-bases/{kbId}/documents/{docId}/chunk-strategy` | 已登录 | 改策略整份替换 |
+| PUT | `/admin/knowledge-bases/{kbId}/documents/{docId}/chunk-strategy` | 已登录 | 改策略整份替换；可选 `originalFilename`（主名可改、后缀锁定） |
 | PUT | `/admin/knowledge-bases/{kbId}/documents/{docId}/enabled` | 已登录 | 启用/禁用 |
 | DELETE | `/admin/knowledge-bases/{kbId}/documents/{docId}` | 已登录 | 删文档（同步删对象，失败则整笔失败） |
 

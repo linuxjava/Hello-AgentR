@@ -116,19 +116,31 @@
 
 ### Requirement: 改 ChunkStrategy 模态
 
-系统 SHALL 提供行内「改策略」→ O-09：打开时 MUST 回填该 Document 已存种类与参数，SHALL NOT 套用上传预填；改种类 MUST 整份替换为目标种类字段；SHALL NOT 提供 JSON 文本框。仅当后端允许时（本阶段 `UPLOADED`）可提交。
+系统 SHALL 提供行内「改策略」→ O-09：打开时 MUST 回填该 Document 已存种类与参数，SHALL NOT 套用上传预填；改种类 MUST 整份替换为目标种类字段；SHALL NOT 提供 JSON 文本框。文件名 MUST 可改主名，后缀 MUST 只读锁定；提交 MUST 将完整 OriginalFilename 与策略一并 PUT。仅当后端允许时（本阶段 `UPLOADED`）可提交。
 
 #### Scenario: 打开回填
 
 - **GIVEN** 目标 Document 已有策略参数
 - **WHEN** 打开改策略
-- **THEN** 回填已存种类与数字，不等于上传默认预填（除非已存值恰好相同）
+- **THEN** 回填已存种类与数字，不等于上传默认预填（除非已存值恰好相同）；文件名主名可编、后缀只读
 
 #### Scenario: 改种类并保存成功
 
 - **GIVEN** 目标为 `UPLOADED`
 - **WHEN** 改为结构分块并提交合法参数
 - **THEN** 成功 Toast，弹窗关闭，列表 `updatedAt` 反映更新
+
+#### Scenario: 改文件名主名成功
+
+- **GIVEN** 已打开改策略，文件名为 `handbook.pdf`
+- **WHEN** 将主名改为 `手册` 并保存
+- **THEN** 请求携带 `originalFilename=手册.pdf`，成功 Toast，列表文件名更新
+
+#### Scenario: 主名为空拒绝
+
+- **GIVEN** 已打开改策略
+- **WHEN** 清空主名并保存
+- **THEN** 弹窗不关闭并展示「请输入文件名」，不发请求
 
 #### Scenario: 校验失败
 

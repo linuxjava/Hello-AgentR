@@ -84,7 +84,7 @@
 | REQ-F403 | `documentCount > 0` 时 Admin 点删除 → Toast「库下仍有文档，不能删除」，不打开确认、不用禁用色；Staff 仍为无权限 Toast | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-F404 | 文档列表：文件名模糊、分页默认 20、更新时间倒序；列含文件名（下方副行展示类型·大小）、状态（UPLOADED→「待分块」）、分块数（未分块为「—」）、Enabled、更新时间、行操作 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-F405 | 上传模态：单文件（拖拽或点击）+ 结构化策略表单 + UI 预填；提交中锁定 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
-| REQ-F406 | 改策略模态：带回已存值；按种类切换字段；禁止 JSON 文本框 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
+| REQ-F406 | 改策略模态：带回已存值；按种类切换字段；禁止 JSON 文本框；可改文件名主名、后缀锁定 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-F407 | 行内 Enabled 开关，点即提交；不走确认框 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-F408 | 删除 Document 轻确认；Admin 与 Staff 均可提交 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
 | REQ-F409 | 字段内联校验对齐策略不等式；业务失败展示后端 `message`；成功 Toast 并刷新 | Admin / Staff | P0 | 工程待定 | 草稿 | BRD-OBJ-TBD |
@@ -128,7 +128,9 @@
 | AC-F416 | US-F404 | 正常 | 已登录；该库尚无 Document | 进入文档列表 | 空态；上传入口可用 | 草稿 |
 | AC-F417 | US-F404 | 失败 | 已登录；知识库 id 不存在 | 访问该库文档列表路由 | 不能当作空列表使用；提示知识库不存在（`A002001`）并可回到知识库列表 | 草稿 |
 | AC-F418 | US-F405 | 正常 | 已登录；目标 `UPLOADED` | 打开改策略，将重叠改为结构分块并提交合法新参数 | 成功；`updatedAt` 更新；列表顺序反映更新 | 草稿 |
-| AC-F419 | US-F405 | 正常 | 已登录；目标已有参数 | 打开改策略 | 回填已存种类与数字，**不**套用上传预填 | 草稿 |
+| AC-F419 | US-F405 | 正常 | 已登录；目标已有参数 | 打开改策略 | 回填已存种类与数字，**不**套用上传预填；文件名主名可编、后缀只读 | 草稿 |
+| AC-F425 | US-F405 | 正常 | 已登录；文件名为 `handbook.pdf` | 改策略中将主名改为 `手册` 并保存 | 请求携带完整 `手册.pdf`；成功；列表文件名更新 | 草稿 |
+| AC-F426 | US-F405 | 失败 | 已登录；已打开改策略 | 清空主名并保存 | 弹窗红条「请输入文件名」；不发请求 | 草稿 |
 | AC-F420 | US-F406 | 正常 | 已登录；目标已启用 | 拨动启用开关为关 | 无确认框；成功后该行 `enabled=false`；仍在列表；知识库文档数不变 | 草稿 |
 | AC-F421 | US-F406 | 正常 | 已登录；目标已禁用 | 拨动开关为开 | 成功后启用 | 草稿 |
 | AC-F422 | US-F407 | 正常 | Admin 或 Staff 已登录 | 点删除并在轻确认中确认 | Toast 成功；该行消失；知识库文档数 -1 | 草稿 |
@@ -144,7 +146,7 @@
 1. **选库**：已登录 → 侧栏「知识库管理」→ 知识库列表（含文档数）→ **点击名称**进入文档列表。
 2. **上传**：文档列表页头「上传」→ 拖拽或点击选一份本地文件 → 确认或修改策略数字 → 提交（锁定中）→ 成功 Toast → 列表刷新。
 3. **查找**：OriginalFilename 模糊 + 分页；已禁用仍列出。
-4. **改策略**：行内「改策略」→ 回填 → 可换种类（字段整份替换）→ 提交。
+4. **改策略**：行内「改策略」→ 回填 → 可改文件名主名（后缀锁定）→ 可换种类（字段整份替换）→ 提交。
 5. **启用/禁用**：行内开关，点即提交。
 6. **删文档**：轻确认 → 删除 → 文档数降为 0 后 Admin 可在知识库列表删库。
 
@@ -184,7 +186,7 @@
 - **上传**：`multipart` 单文件；`chunkStrategy` + 前端组装的 `chunkStrategyParams` JSON 字符串。
 - **选文件**：支持拖拽到投放区或点击选择；`accept` 提示 txt/md/pdf/doc/docx/ppt/pptx/xls/xlsx/png/jpg/jpeg/svg；投放区只提示类型，不写约 50MB / 服务端为准。权威为 Tika 与部署配置。已选后可拖拽替换或点击重选。
 - **上传预填**：默认 `OVERLAPPING`，`chunkSize=512`，`overlap=64`；切到 `STRUCTURE_AWARE` 为 `minChunkSize=256`、`defaultChunkSize=512`、`maxChunkSize=1024`、`overlap=32`。字段旁不标注单位。
-- **改策略**：打开时回填已存值；改种类则目标种类默认预填（与上传切种类相同），提交为整份 JSON 替换。
+- **改策略**：打开时回填已存值；文件名主名可改、后缀只读；改种类则目标种类默认预填（与上传切种类相同），提交为整份 JSON 替换，并带完整 OriginalFilename。
 - **不等式（内联）**：`OVERLAPPING`：`chunkSize > 0` 且 `0 ≤ overlap < chunkSize`。`STRUCTURE_AWARE`：三者 `> 0` 且 `minChunkSize ≤ defaultChunkSize ≤ maxChunkSize` 且 `0 ≤ overlap < minChunkSize`。
 - **文档列表**：默认 pageSize=20，上限 100；仅 OriginalFilename 模糊；默认更新时间倒序。
 - **列表列**：文件名（OriginalFilename）、状态、分块数、Enabled、updatedAt、操作（改策略 / 删除）。文件名下方副行展示文档类型与大小（`mediaType` → 可读标签如 PDF/Markdown/Word；`byteSize` → 人类可读），格式 `类型 · 大小`，不另开列。`UPLOADED` 在界面展示为「待分块」；尚未分块时分块数展示「—」。状态为**色点 + 文字、无底色**：待分块灰 / 分块中蓝 / 分块成功绿 / 分块失败红。
@@ -300,6 +302,7 @@
 | 2026-08-14 | Pencil 确认 | 去掉约 50MB 文案与同名常驻说明 |
 | 2026-08-14 | Pencil 完成 | C/D 帧齐；E 复用 H-01 Toast + O-07a；增补 V-04 知识库不存在（A002001） |
 | 2026-08-14 | IXD | 产出 `ixd.md`：以 Pencil 为视觉真源，无 ASCII 线框 |
+| 2026-08-14 | 增量 | 改策略可改文件名主名，后缀锁定 |
 
 ---
 

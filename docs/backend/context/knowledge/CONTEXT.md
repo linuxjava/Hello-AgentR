@@ -44,8 +44,8 @@ KnowledgeBase 下的内容单元；对应一份已入库的源文件（对象存
 _Avoid_: 附件、File（作业务实体时）、把 Document 当成 KnowledgeBase、把「上传」与「分块」当成同一步、同库同名互斥、按内容去重（本阶段不做）
 
 **OriginalFilename（原始文件名）**：
-运营本地选择文件时的文件名；随 Document 持久化，供列表/详情展示与下载命名。不是唯一键，创建后本阶段不提供改名。
-_Avoid_: Name（那是 KnowledgeBase 的显示名）、displayName、把文件名当 DocumentId
+运营本地选择文件时的文件名；随 Document 持久化，供列表/详情展示与下载命名。不是唯一键。状态为 `UPLOADED` 时可在改策略请求中改**主名**；**后缀必须与已存值一致**（大小写不敏感，写入时沿用已存后缀）。改名只更新元数据，**不**改 objectKey、不重写对象。主名为空、含 `/` `\` `:` 或控制字符、超 512 则拒绝。
+_Avoid_: Name（那是 KnowledgeBase 的显示名）、displayName、把文件名当 DocumentId、改名时 rename 对象存储
 
 **DocumentStatus（文档状态）**：
 Document 在摄入管线上的阶段标记。本阶段创建后固定为 `UPLOADED`，不迁到其他值；词汇上预留后续如 `CHUNKING` / `CHUNKED` / `FAILED`（具体枚举以后版本再钉）。仅当状态为 `UPLOADED` 时允许修改 ChunkStrategy。

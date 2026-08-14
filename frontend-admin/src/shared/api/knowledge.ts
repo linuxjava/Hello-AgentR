@@ -48,6 +48,8 @@ export interface UpdateChunkStrategyRequest {
   chunkStrategy: ChunkStrategy
   /** PUT 体为 JSON 对象（非整段字符串）。 */
   chunkStrategyParams: ChunkStrategyParams
+  /** 可选；提交完整 OriginalFilename，后缀须与已存值一致。 */
+  originalFilename?: string
 }
 
 export interface SetDocumentEnabledRequest {

@@ -171,6 +171,8 @@ Document 全部 `requireLoginUser()`。删 Document **不**要求 Admin。删库
 | A002013 | 分块策略不合法 |
 | A002014 | 分块策略参数不合法 |
 | A002015 | 对象存储不可用 |
+| A002016 | 文件名不符合规则 |
+| A002017 | 不能修改文件名后缀 |
 
 知识库不存在仍 `A002001`。Document id 存在但不属于该 `{kbId}` → `A002009`。multipart 超限：优先映射 `A002012`（可与全局 Handler 对齐，避免只返回 5xx）。
 
@@ -183,7 +185,7 @@ Document 全部 `requireLoginUser()`。删 Document **不**要求 Admin。删库
 | POST | `/admin/knowledge-bases/{kbId}/documents` | 已登录 | multipart：`file` + `chunkStrategy` + `chunkStrategyParams`（JSON 字符串） |
 | GET | `/admin/knowledge-bases/{kbId}/documents` | 已登录 | query: `page`, `pageSize`(默认20,≤100), `originalFilename?` 模糊；**更新时间倒序** |
 | GET | `/admin/knowledge-bases/{kbId}/documents/{docId}` | 已登录 | 详情 |
-| PUT | `/admin/knowledge-bases/{kbId}/documents/{docId}/chunk-strategy` | 已登录 | body: `{ chunkStrategy, chunkStrategyParams }` |
+| PUT | `/admin/knowledge-bases/{kbId}/documents/{docId}/chunk-strategy` | 已登录 | body: `{ chunkStrategy, chunkStrategyParams, originalFilename? }`；改名只改主名 |
 | PUT | `/admin/knowledge-bases/{kbId}/documents/{docId}/enabled` | 已登录 | body: `{ enabled }` |
 | DELETE | `/admin/knowledge-bases/{kbId}/documents/{docId}` | 已登录 | 同步删记录与对象 |
 
