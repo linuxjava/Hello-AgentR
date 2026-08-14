@@ -1,6 +1,6 @@
 # 产品需求文档（PRD）：Web 管理端 Document 治理（V0.4）
 
-**状态**：草稿 | **负责人**：待定（产品） | **最后更新**：2026-08-13
+**状态**：草稿 | **负责人**：待定（产品） | **最后更新**：2026-08-14
 
 **版本**：V0.4  
 **交付重心**：`frontend-admin` 对齐后端 V0.4 Document API：从知识库列表**点击名称**进入独立文档列表，完成上传 / 改策略 / 启用禁用 / 删除；**视觉定稿不在本阶段**（后续 Pencil）。  
@@ -118,7 +118,7 @@
 | AC-F406 | US-F402 | 正常 | Admin 已登录；删光文档后 `documentCount=0` | 确认删除知识库 | 成功；该行消失 | 草稿 |
 | AC-F407 | US-F403 | 正常 | 已登录；目标库存在；文件非空、类型与大小可被后端接受 | 打开上传，保留默认重叠分块 512/64，选文件并提交 | 成功 Toast；弹窗关闭；列表出现新行；状态展示「待分块」；分块数为「—」；知识库列表文档数 +1 | 草稿 |
 | AC-F408 | US-F403 | 正常 | 已登录；库中已有同名文件 | 再传相同 OriginalFilename | 成功；两行同名并存；无二次确认；弹窗无「新增不覆盖」常驻说明 | 草稿 |
-| AC-F409 | US-F403 | 正常 | 已登录；打开上传后改选「基于文档结构的分块」 | 查看数字字段 | 字段变为 min/default/max/overlap，预填 256/512/1024/32；无 JSON 文本框 | 草稿 |
+| AC-F409 | US-F403 | 正常 | 已登录；打开上传后改选「文档结构分块(建议MD文档使用)」 | 查看数字字段 | 字段变为 min/default/max/overlap，预填 256/512/1024/32；无 JSON 文本框 | 草稿 |
 | AC-F410 | US-F403 | 失败 | 已登录 | 将 overlap 填成 ≥ chunkSize 后点提交 | 内联错误；不发成功请求 | 草稿 |
 | AC-F411 | US-F403 | 失败 | 已登录 | 上传 0 字节、白名单外类型或超限文件 | 弹窗内展示 `A002010` / `A002011` / `A002012` 的 `message`；列表无新行 | 草稿 |
 | AC-F412 | US-F403 | 失败 | 已登录；存储不可用 | 提交合法上传 | 弹窗内 `A002015` 文案；列表无新行 | 草稿 |
@@ -186,6 +186,8 @@
 - **上传**：`multipart` 单文件；`chunkStrategy` + 前端组装的 `chunkStrategyParams` JSON 字符串。
 - **选文件**：支持拖拽到投放区或点击选择；`accept` 提示 txt/md/pdf/doc/docx/ppt/pptx/xls/xlsx/png/jpg/jpeg/svg；投放区只提示类型，不写约 50MB / 服务端为准。权威为 Tika 与部署配置。已选后可拖拽替换或点击重选。
 - **上传预填**：默认 `OVERLAPPING`，`chunkSize=512`，`overlap=64`；切到 `STRUCTURE_AWARE` 为 `minChunkSize=256`、`defaultChunkSize=512`、`maxChunkSize=1024`、`overlap=32`。字段旁不标注单位。
+- **策略下拉文案**：`OVERLAPPING` →「重叠分块」；`STRUCTURE_AWARE` →「文档结构分块(建议MD文档使用)」。
+- **策略字段控件**：输入盒内侧左侧装饰图标（与 Pencil 一致）；数字直接键入无前导 `0`、无原生步进器；下拉无水波纹 / 波浪；玻璃输入盒焦点高亮对齐 Ant Design outlined Input。
 - **改策略**：打开时回填已存值；文件名主名可改、后缀只读；改种类则目标种类默认预填（与上传切种类相同），提交为整份 JSON 替换，并带完整 OriginalFilename。
 - **不等式（内联）**：`OVERLAPPING`：`chunkSize > 0` 且 `0 ≤ overlap < chunkSize`。`STRUCTURE_AWARE`：三者 `> 0` 且 `minChunkSize ≤ defaultChunkSize ≤ maxChunkSize` 且 `0 ≤ overlap < minChunkSize`。
 - **文档列表**：默认 pageSize=20，上限 100；仅 OriginalFilename 模糊；默认更新时间倒序。
@@ -303,6 +305,7 @@
 | 2026-08-14 | Pencil 完成 | C/D 帧齐；E 复用 H-01 Toast + O-07a；增补 V-04 知识库不存在（A002001） |
 | 2026-08-14 | IXD | 产出 `ixd.md`：以 Pencil 为视觉真源，无 ASCII 线框 |
 | 2026-08-14 | 增量 | 改策略可改文件名主名，后缀锁定 |
+| 2026-08-14 | 增量 | `STRUCTURE_AWARE` 界面文案改为「文档结构分块(建议MD文档使用)」；策略字段图标、数字无前导 0、下拉无波浪、输入焦点高亮 |
 
 ---
 
