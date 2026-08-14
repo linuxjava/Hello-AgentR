@@ -91,7 +91,7 @@ export function ChangeStrategyModal({
             文件名
           </label>
           {/* Why 后缀只读：改名只动主名；扩展名与内容类型对齐，且 objectKey 不依赖文件名。 */}
-          <div className="flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+          <div className="admin-input flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
             <input
               id="doc-filename-stem"
               value={stem}

@@ -120,7 +120,7 @@ export function LoginPage() {
                 <label htmlFor="login-username" className="text-[13px] font-medium text-[#334155]">
                   用户名
                 </label>
-                <div className="flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+                <div className="admin-input flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
                   <User size={16} className="shrink-0 text-[#64748B]" aria-hidden />
                   <input
                     id="login-username"
@@ -142,8 +142,8 @@ export function LoginPage() {
                 <div
                   className={
                     businessError
-                      ? 'flex h-11 items-center gap-2.5 rounded-[10px] border-[1.5px] border-[#DC2626] bg-[#FFFFFFD9] px-3.5'
-                      : 'flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5'
+                      ? 'admin-input admin-input-error flex h-11 items-center gap-2.5 rounded-[10px] border-[1.5px] border-[#DC2626] bg-[#FFFFFFD9] px-3.5'
+                      : 'admin-input flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5'
                   }
                 >
                   <Lock size={16} className="shrink-0 text-[#64748B]" aria-hidden />

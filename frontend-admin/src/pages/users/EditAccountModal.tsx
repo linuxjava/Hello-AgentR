@@ -172,7 +172,7 @@ export function EditAccountModal({ open, user, onClose, onSaved }: EditAccountMo
             <label htmlFor="edit-new-password" className="text-[13px] font-medium text-[#334155]">
               新密码（可选）
             </label>
-            <div className="flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+            <div className="admin-input flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
               <KeyRound size={16} className="text-[#64748B]" aria-hidden />
               <input
                 id="edit-new-password"
@@ -194,7 +194,7 @@ export function EditAccountModal({ open, user, onClose, onSaved }: EditAccountMo
             >
               确认新密码
             </label>
-            <div className="flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+            <div className="admin-input flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
               <KeyRound size={16} className="text-[#64748B]" aria-hidden />
               <input
                 id="edit-confirm-password"

@@ -193,7 +193,7 @@ function Field({ id, label, error, ...inputProps }: FieldProps) {
       </label>
       <input
         id={id}
-        className="h-11 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5 text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
+        className="admin-input h-11 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5 text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
         {...inputProps}
       />
       {error ? <span className="text-xs text-[#DC2626]">{error}</span> : null}

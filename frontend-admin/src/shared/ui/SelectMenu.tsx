@@ -93,7 +93,7 @@ export function SelectMenu({
           setOpen((v) => !v)
         }}
         className={[
-          'flex w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] text-left text-sm text-[#0F172A] outline-none',
+          'flex w-full items-center justify-between gap-2 rounded-[10px] border border-[#FFFFFF66] text-left text-sm text-[#0F172A] outline-none admin-input',
           triggerClassName ?? 'h-11 bg-[#FFFFFF59] px-3.5',
           disabled ? 'cursor-not-allowed opacity-70' : '',
         ].join(' ')}

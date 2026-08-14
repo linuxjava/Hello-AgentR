@@ -100,7 +100,7 @@ export function LabeledInput({ id, label, error, ...inputProps }: LabeledInputPr
       <label htmlFor={id} className="text-[13px] font-medium text-[#334155]">
         {label}
       </label>
-      <div className="flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
+      <div className="admin-input flex h-11 items-center rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5">
         <input
           id={id}
           className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
@@ -125,7 +125,7 @@ export function LabeledTextarea({ id, label, error, ...textareaProps }: LabeledT
       </label>
       <textarea
         id={id}
-        className="min-h-[72px] resize-none rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5 py-2.5 text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
+        className="admin-input min-h-[72px] resize-none rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5 py-2.5 text-sm text-[#0F172A] outline-none placeholder:text-[#64748B]"
         {...textareaProps}
       />
       {error ? <span className="text-xs text-[#DC2626]">{error}</span> : null}

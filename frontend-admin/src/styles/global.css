@@ -70,6 +70,37 @@
   background: linear-gradient(135deg, #22d3ee 0%, #7c3aed 100%);
 }
 
+/*
+ * Glass 输入盒包住真正的 input；高亮画在盒子上。
+ * Why 对齐 antd outlined Input：hover #4096ff、focus #1677ff + 2px controlOutline。
+ */
+.admin-input {
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.admin-input:hover:not(:focus-within):not([aria-expanded='true']):not(:disabled):not(:has(:disabled)) {
+  border-color: #4096ff;
+}
+
+.admin-input:focus-within,
+.admin-input[aria-expanded='true'] {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  outline: none;
+}
+
+.admin-input.admin-input-error,
+.admin-input.admin-input-error:hover,
+.admin-input.admin-input-error:focus-within {
+  border-color: #ff4d4f;
+}
+
+.admin-input.admin-input-error:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
+}
+
 /* Ink ripple press feedback (coords set by button-ripple.ts) */
 button:not(:disabled):not([aria-label='关闭遮罩']):not([data-no-ripple]):not([aria-haspopup]),
 [role='button']:not([aria-disabled='true']):not([data-no-ripple]):not([aria-haspopup]) {

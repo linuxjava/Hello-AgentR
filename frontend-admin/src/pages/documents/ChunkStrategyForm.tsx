@@ -52,7 +52,7 @@ function NumberField({
       </label>
       <div
         className={[
-          'flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5',
+          'flex h-11 items-center gap-2.5 rounded-[10px] border border-[#FFFFFF66] bg-[#FFFFFFD9] px-3.5 admin-input',
           disabled ? 'opacity-60' : '',
         ].join(' ')}
       >
