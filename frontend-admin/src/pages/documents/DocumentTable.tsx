@@ -4,7 +4,7 @@ import {
   documentStatusBadgeClass,
   documentStatusLabel,
 } from '@/pages/documents/document-status'
-import { formatByteSize, formatCreatedAt, formatCreatorLabel, mediaTypeLabel } from '@/shared/lib/display'
+import { formatByteSize, formatCreatedAt, formatCreatorLabel, documentFormatLabel } from '@/shared/lib/display'
 import { Pagination } from '@/shared/ui/Pagination'
 
 const PAGE_SIZE_OPTIONS = ['10', '20', '50', '100'] as const
@@ -133,7 +133,7 @@ export function DocumentTable({
                 {records.map((doc, index) => {
                   const statusLabel = documentStatusLabel(doc.status)
                   const statusBadge = documentStatusBadgeClass(doc.status)
-                  const typeSize = `${mediaTypeLabel(doc.mediaType)} · ${formatByteSize(doc.byteSize)}`
+                  const typeSize = `${documentFormatLabel(doc.documentFormat)} · ${formatByteSize(doc.byteSize)}`
                   // 契约尚无 chunkCount：未分块一律「—」（本阶段创建后均为 UPLOADED）。
                   const chunkCountLabel = doc.status === 'CHUNKED' ? '—' : '—'
                   return (

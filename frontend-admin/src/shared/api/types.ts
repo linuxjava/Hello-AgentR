@@ -47,6 +47,21 @@ export interface KnowledgeBaseView {
 /** Document 摄入状态；本阶段创建后为 UPLOADED，其余为后续预留。 */
 export type DocumentStatus = 'UPLOADED' | 'CHUNKING' | 'CHUNKED' | 'FAILED'
 
+/** 与后端 DocumentFormat 枚举一致；列表展示与后续分支以此为准。 */
+export type DocumentFormat =
+  | 'TXT'
+  | 'MARKDOWN'
+  | 'PDF'
+  | 'DOC'
+  | 'DOCX'
+  | 'PPT'
+  | 'PPTX'
+  | 'XLS'
+  | 'XLSX'
+  | 'PNG'
+  | 'JPEG'
+  | 'SVG'
+
 export type ChunkStrategy = 'OVERLAPPING' | 'STRUCTURE_AWARE'
 
 export type DocumentSourceType = 'LOCAL_FILE' | 'URL'
@@ -73,6 +88,7 @@ export interface DocumentView {
   knowledgeBaseId: string
   originalFilename: string
   mediaType: string
+  documentFormat: DocumentFormat
   byteSize: number
   status: DocumentStatus
   enabled: boolean

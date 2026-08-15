@@ -16,6 +16,7 @@ import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeBaseDO;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeDocumentDO;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeBaseMapper;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeDocumentMapper;
+import com.xgc.agent.rag.features.knowledge.detect.DocumentFormat;
 import com.xgc.agent.rag.features.knowledge.detect.MediaTypeDetector;
 import com.xgc.agent.rag.features.knowledge.dto.ChunkStrategyUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.DocumentEnabledUpdateRequest;
@@ -84,9 +85,9 @@ public class DocumentServiceImpl implements DocumentService {
         Map<String, Object> params = chunkStrategyParamsValidator.parseAndValidate(chunkStrategy, chunkStrategyParamsJson);
 
         // Why 两次 getInputStream()：MultipartFile 每次返回新流；探测与 put 各自消费，无需自建临时文件或 byte[]。
-        String mediaType;
+        MediaTypeDetector.DetectedMediaType detected;
         try (InputStream detectStream = file.getInputStream()) {
-            mediaType = mediaTypeDetector.detectAllowed(detectStream, originalFilename);
+            detected = mediaTypeDetector.detectAllowed(detectStream, originalFilename);
         } catch (IOException ex) {
             throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
         }
@@ -95,7 +96,7 @@ public class DocumentServiceImpl implements DocumentService {
         String objectKey = ObjectKeys.of(knowledgeBase.getNamespace(), documentId);
         long byteSize = file.getSize();
         try (InputStream uploadStream = file.getInputStream()) {
-            putObject(objectKey, uploadStream, byteSize, mediaType);
+            putObject(objectKey, uploadStream, byteSize, detected.mediaType());
         } catch (IOException ex) {
             throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
         }
@@ -104,7 +105,8 @@ public class DocumentServiceImpl implements DocumentService {
                 .id(documentId)
                 .knowledgeBaseId(knowledgeBaseId)
                 .originalFilename(originalFilename)
-                .mediaType(mediaType)
+                .mediaType(detected.mediaType())
+                .documentFormat(detected.documentFormat().name())
                 .byteSize(byteSize)
                 .status(STATUS_UPLOADED)
                 .enabled(Boolean.TRUE)
@@ -276,6 +278,7 @@ public class DocumentServiceImpl implements DocumentService {
                 source.getKnowledgeBaseId(),
                 source.getOriginalFilename(),
                 source.getMediaType(),
+                resolveDocumentFormat(source),
                 source.getByteSize() == null ? 0L : source.getByteSize(),
                 source.getStatus(),
                 !Boolean.FALSE.equals(source.getEnabled()),
@@ -286,5 +289,19 @@ public class DocumentServiceImpl implements DocumentService {
                 source.getCreateTime(),
                 source.getUpdateTime()
         );
+    }
+
+    /**
+     * 旧行可能尚未回填 document_format；读路径用规范 MIME 兜底，避免前端再猜。
+     * mediaType 也缺失时不抛上传类错误码（读路径），返回空串由调用方/脏数据排查。
+     */
+    private static String resolveDocumentFormat(KnowledgeDocumentDO source) {
+        if (StringUtils.hasText(source.getDocumentFormat())) {
+            return source.getDocumentFormat();
+        }
+        if (!StringUtils.hasText(source.getMediaType())) {
+            return "";
+        }
+        return DocumentFormat.fromCanonicalMediaType(source.getMediaType()).name();
     }
 }

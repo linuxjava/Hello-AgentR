@@ -191,7 +191,7 @@
 - **改策略**：打开时回填已存值；文件名主名可改、后缀只读；改种类则目标种类默认预填（与上传切种类相同），提交为整份 JSON 替换，并带完整 OriginalFilename。
 - **不等式（内联）**：`OVERLAPPING`：`chunkSize > 0` 且 `0 ≤ overlap < chunkSize`。`STRUCTURE_AWARE`：三者 `> 0` 且 `minChunkSize ≤ defaultChunkSize ≤ maxChunkSize` 且 `0 ≤ overlap < minChunkSize`。
 - **文档列表**：默认 pageSize=20，上限 100；OriginalFilename 模糊；可选 `status` / `enabled` 精确筛选（点「查询」生效，缺省不过滤）；不做 strategy 筛选；默认更新时间倒序。禁用文档在未筛启用时仍列出。
-- **列表列**：文件名（OriginalFilename）、状态、分块数、Enabled、updatedAt、操作（改策略 / 删除）。文件名下方副行展示文档类型与大小（`mediaType` → 可读标签如 PDF/Markdown/Word；`byteSize` → 人类可读），格式 `类型 · 大小`，不另开列。`UPLOADED` 在界面展示为「待分块」；`CHUNKING` →「处理中」；`CHUNKED` →「已就绪」；`FAILED` →「异常」。尚未分块时分块数展示「—」。状态为**毛玻璃胶囊徽章**（底 `$glass-fill` + 描边 `$edge-dim`，与行操作「删除」同形同底；字色按状态区分）：待分块橙 / 处理中蓝 / 已就绪青绿 / 异常红。
+- **列表列**：文件名（OriginalFilename）、状态、分块数、Enabled、updatedAt、操作（改策略 / 删除）。文件名下方副行展示文档类型与大小（`documentFormat` → 可读标签如 PDF/Markdown/Word；`byteSize` → 人类可读），格式 `类型 · 大小`，不另开列。**不要**自行解析 `mediaType`。`UPLOADED` 在界面展示为「待分块」；`CHUNKING` →「处理中」；`CHUNKED` →「已就绪」；`FAILED` →「异常」。尚未分块时分块数展示「—」。状态为**毛玻璃胶囊徽章**（底 `$glass-fill` + 描边 `$edge-dim`，与行操作「删除」同形同底；字色按状态区分）：待分块橙 / 处理中蓝 / 已就绪青绿 / 异常红。
 - **不展示**：策略摘要、objectKey、sourceType、createdBy（本版本不要求）；类型与大小仅作文件名副行，不设独立列。
 - **删除文档文案**：轻确认，例如「确定删除该文档？」；不写对象存储 / 不可下载。
 

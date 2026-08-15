@@ -67,7 +67,8 @@
 | id | string | 雪花 ID |
 | knowledgeBaseId | string | 所属知识库 |
 | originalFilename | string | 原始文件名；同库允许重复；改策略时可改主名、后缀锁定 |
-| mediaType | string | 服务端 Tika 规范化后的 MIME，不以客户端 Content-Type 为准 |
+| mediaType | string | 服务端 Tika 规范化后的 MIME（别名已归一），不以客户端 Content-Type 为准 |
+| documentFormat | string | 业务格式族：`TXT` / `MARKDOWN` / `PDF` / `DOC` / `DOCX` / `PPT` / `PPTX` / `XLS` / `XLSX` / `PNG` / `JPEG` / `SVG`；展示与后续分支用此字段，勿再解析 `mediaType` |
 | byteSize | number | 字节数 |
 | status | string | 本阶段固定 `UPLOADED` |
 | enabled | boolean | 运营开关；与 `status` 无关 |
@@ -512,9 +513,11 @@ curl -s -X DELETE "http://localhost:9898/hello-agent/admin/knowledge-bases/$KB_I
 
 成功后：`status=UPLOADED`，`sourceType=LOCAL_FILE`，`enabled=true`；该库 `documentCount` 加 1。
 
-**MIME 以 Tika 探测为准**（须带 OriginalFilename，否则 Markdown 可能退化成 `text/plain`）。规范化后须属于：
+**MIME 以 Tika 探测为准**（须带 OriginalFilename，否则 Markdown 可能退化成 `text/plain`）。别名归一后须属于：
 
-`text/plain`、`text/markdown`（含 `text/x-markdown` / `text/x-web-markdown`）、`application/pdf`、`application/msword`、`application/vnd.openxmlformats-officedocument.wordprocessingml.document`、`application/vnd.ms-powerpoint`、`application/vnd.openxmlformats-officedocument.presentationml.presentation`、`application/vnd.ms-excel`、`application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`、`image/png`、`image/jpeg`、`image/svg+xml`。
+`text/plain`、`text/markdown`（含 `text/x-markdown` / `text/x-web-markdown`）、`application/pdf`（含 `application/x-pdf` / `application/acrobat`）、`application/msword`、`application/vnd.openxmlformats-officedocument.wordprocessingml.document`、`application/vnd.ms-powerpoint`、`application/vnd.openxmlformats-officedocument.presentationml.presentation`、`application/vnd.ms-excel`、`application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`、`image/png`、`image/jpeg`（含 `image/jpg` / `image/pjpeg`）、`image/svg+xml`。
+
+成功时同时写入规范 `mediaType` 与 `documentFormat`。
 
 **Response `data`**：**DocumentView**
 

@@ -46,13 +46,13 @@
 
 ### Requirement: Tika 媒体类型白名单
 
-上传是否合法 MUST 以服务端 Tika 探测结果为准，MUST NOT 以客户端 Content-Type 为权威。探测 MUST 使用文件字节与 OriginalFilename。探测结果规范化后 MUST 属于词汇表 AllowedMediaType 集合，否则 MUST 拒绝。`text/x-markdown` 与 `text/x-web-markdown` MUST 视为 `text/markdown`。系统 MUST NOT 因媒体类型禁止某一 ChunkStrategy。
+上传是否合法 MUST 以服务端 Tika 探测结果为准，MUST NOT 以客户端 Content-Type 为权威。探测 MUST 使用文件字节与 OriginalFilename。探测结果 MUST 先经别名归一，再 MUST 属于词汇表 AllowedMediaType 规范集合，否则 MUST 拒绝。至少下列别名 MUST 归一：`text/x-markdown` / `text/x-web-markdown` → `text/markdown`；`application/x-pdf` / `application/acrobat` → `application/pdf`；`image/jpg` / `image/pjpeg` → `image/jpeg`。系统 MUST NOT 因媒体类型禁止某一 ChunkStrategy。成功时 MUST 同时持久化规范 `mediaType` 与派生的 `documentFormat`。
 
 #### Scenario: 白名单类型上传成功
 
 - **GIVEN** 已登录，文件经 Tika 识别为白名单类型（含客户端声明为 octet-stream 的 `.md`）
 - **WHEN** 上传
-- **THEN** 成功，详情中的 mediaType 为规范化后的类型
+- **THEN** 成功，详情中的 mediaType 为规范化后的类型，且 documentFormat 为对应业务格式（如 Markdown → `MARKDOWN`）
 
 #### Scenario: 白名单外类型被拒绝
 
@@ -90,7 +90,7 @@
 
 ### Requirement: 库内分页列表 Document
 
-已登录的 Admin 与 Staff SHALL 可分页查询指定知识库下全部 Document。默认 pageSize MUST 为 20，上限 MUST 为 100；超过上限或小于 1 时系统 MUST 拒绝。系统 SHALL 支持按 OriginalFilename 模糊筛选，MUST NOT 提供按 DocumentStatus、ChunkStrategy 或 Enabled 筛选。默认 MUST 按更新时间倒序。列表项 MUST 含 OriginalFilename、mediaType、byteSize、status、enabled、chunkStrategy；MUST NOT 含 objectKey。已禁用 Document MUST 仍出现在列表中。
+已登录的 Admin 与 Staff SHALL 可分页查询指定知识库下全部 Document。默认 pageSize MUST 为 20，上限 MUST 为 100；超过上限或小于 1 时系统 MUST 拒绝。系统 SHALL 支持按 OriginalFilename 模糊筛选，MUST NOT 提供按 DocumentStatus、ChunkStrategy 或 Enabled 筛选。默认 MUST 按更新时间倒序。列表项 MUST 含 OriginalFilename、mediaType、documentFormat、byteSize、status、enabled、chunkStrategy；MUST NOT 含 objectKey。已禁用 Document MUST 仍出现在列表中。
 
 #### Scenario: 默认按更新时间倒序
 
@@ -112,13 +112,13 @@
 
 ### Requirement: 查询 Document 详情
 
-已登录的 Admin 与 Staff SHALL 可按知识库 id 与 Document id 查询详情。详情 MUST 包含策略 JSON、媒体类型与 `enabled` 等元数据，MUST NOT 包含 objectKey。目标不存在或不属于该知识库时系统 MUST 拒绝。
+已登录的 Admin 与 Staff SHALL 可按知识库 id 与 Document id 查询详情。详情 MUST 包含策略 JSON、媒体类型、`documentFormat` 与 `enabled` 等元数据，MUST NOT 包含 objectKey。目标不存在或不属于该知识库时系统 MUST 拒绝。
 
 #### Scenario: 按 id 查询成功
 
 - **GIVEN** 已登录且目标 Document 属于该知识库
 - **WHEN** 查询详情
-- **THEN** 返回元数据与策略参数，且响应不含 objectKey
+- **THEN** 返回元数据与策略参数（含 documentFormat），且响应不含 objectKey
 
 #### Scenario: 文档不存在或不属于该库
 

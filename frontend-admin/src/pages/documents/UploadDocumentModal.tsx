@@ -3,7 +3,7 @@ import { CloudUpload } from 'lucide-react'
 import type { ChunkStrategy, ChunkStrategyParams } from '@/shared/api/types'
 import { ApiError } from '@/shared/api/types'
 import { knowledgeApi } from '@/shared/api/knowledge'
-import { formatByteSize, mediaTypeLabel } from '@/shared/lib/display'
+import { formatByteSize, documentFormatLabel, guessDocumentFormat } from '@/shared/lib/display'
 import { toastSuccess } from '@/shared/ui/toast-store'
 import { ErrorBanner, ModalActions, ModalShell } from '@/pages/knowledge-bases/kb-modal-chrome'
 import { ChunkStrategyForm } from '@/pages/documents/ChunkStrategyForm'
@@ -15,32 +15,9 @@ export interface UploadDocumentModalProps {
   onUploaded: () => void
 }
 
-/** 浏览器 File.type 可能为空；用扩展名兜底，便于副行「类型 · 大小」。 */
-function fileTypeHint(file: File): string {
-  if (file.type) {
-    return file.type
-  }
-  const name = file.name.toLowerCase()
-  if (name.endsWith('.pdf')) {
-    return 'application/pdf'
-  }
-  if (name.endsWith('.md') || name.endsWith('.markdown')) {
-    return 'text/markdown'
-  }
-  if (name.endsWith('.txt')) {
-    return 'text/plain'
-  }
-  if (name.endsWith('.doc') || name.endsWith('.docx')) {
-    return 'application/msword'
-  }
-  if (/\.(png|jpe?g|gif|webp|bmp)$/.test(name)) {
-    return 'image/png'
-  }
-  return ''
-}
-
 function fileMetaLine(file: File): string {
-  return `${mediaTypeLabel(fileTypeHint(file))} · ${formatByteSize(file.size)}`
+  // 上传前无服务端 documentFormat；扩展名猜测仅用于弹窗副行预览。
+  return `${documentFormatLabel(guessDocumentFormat(file))} · ${formatByteSize(file.size)}`
 }
 
 /** 由父级条件挂载；卸载即复位，避免 open 切换时在 effect 里 setState。 */
