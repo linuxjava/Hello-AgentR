@@ -47,7 +47,13 @@ Implement tasks from an OpenSpec change.
    **Handle states:**
    - If `state: "blocked"` (missing artifacts): show message, suggest using openspec-continue-change
    - If `state: "all_done"`: congratulate, suggest archive
-   - Otherwise: proceed to implementation
+   - Otherwise: run **architecture review**, then implementation
+
+3b. **Architecture review (required before coding)**
+
+   Follow skill `openspec-architecture-review`: compare `design.md` to applicable `docs/architecture-decisions/<stack>.md`.
+   On `FAIL`: list failed R#; stop; do **not** implement.
+   On `PASS`: continue.
 
 4. **Read context files**
 

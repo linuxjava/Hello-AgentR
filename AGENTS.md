@@ -84,11 +84,12 @@ Hello-AgentR/
 
 ### Apply 阶段规则
 
-1. 每完成一个 tasks.md 中的 Phase，停下来。
-2. 总结当前阶段的代码变更（改了什么文件、为什么这么改）。
-3. 等待我 review 并确认后，再继续下一 Phase。
-4. 严禁一次性实现所有任务。
-5. **代码注释**：OpenSpec Apply 阶段编写的代码须添加详细注释——说明意图与取舍（Why），而非复述语法（What）；公共 API / 复杂分支 / 非显而易见的约束与边界条件必须写清。
+1. Apply 前须通过 **`openspec-architecture-review`**（对照 `docs/architecture-decisions/`）；FAIL 不得开始写业务代码。
+2. 每完成一个 tasks.md 中的 Phase，停下来。
+3. 总结当前阶段的代码变更（改了什么文件、为什么这么改）。
+4. 等待我 review 并确认后，再继续下一 Phase。
+5. 严禁一次性实现所有任务。
+6. **代码注释**：OpenSpec Apply 阶段编写的代码须添加详细注释——说明意图与取舍（Why），而非复述语法（What）；公共 API / 复杂分支 / 非显而易见的约束与边界条件必须写清。
 
 <!-- SKILLS_INDEX_START -->
 ## Agent Skills Index

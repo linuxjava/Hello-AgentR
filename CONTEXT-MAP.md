@@ -14,5 +14,6 @@
 - **Frontend Admin → Admin Identity**：管理端 UI 只对接 `/admin/**` API 与 AdminUser 能力矩阵；不引入 EndUser 概念。会话 token 存 localStorage，见 [ADR-0002](./docs/adr/0002-admin-console-token-in-localstorage.md)。
 - **Admin Identity → Knowledge**：已登录 AdminUser 治理 KnowledgeBase 与 Document；Knowledge 不拥有身份，只引用操作者。
 - **Knowledge → ObjectStorage**：Document 源文件经 `fw-base` 的可插拔 ObjectStorage 存取；部署级单一活跃后端（首版 s3）。Knowledge 只约定 objectKey，不拥有存储适配器。见 [ADR-0003](./docs/adr/0003-pluggable-object-storage.md)。
+- **Backend architecture decisions**：`backend-*` change 须响应 [backend baseline](./docs/architecture-decisions/backend.md)（按栈通用基线；系统级单点决策仍见 [docs/adr](./docs/adr/)）。
 - **Frontend Admin → Knowledge**：管理端「知识库管理」消费 Knowledge API。V0.4 起从知识库列表**点击名称**进入独立的 Document List（不是知识库详情页）；实体定义仍只在 Backend / Knowledge。
 
