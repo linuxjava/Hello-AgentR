@@ -38,9 +38,14 @@
 ## D. 安全
 
 1. **门禁与能力**：`/admin/**` 等与既有鉴权、角色能力矩阵、系统 ADR（身份隔离等）一致；不在本变更悄悄放宽。
-2. **数据出站**：objectKey、密钥、内部存储路径等不得进入对外 DTO/日志明文。
-3. **输入**：请求 DTO 用 Bean Validation；文件类型以服务端探测为准时，不把客户端 Content-Type 当权威。
-4. **租户/归属**：按知识库、用户等做存在性与归属校验，防止 IDOR 式越权（对照词汇表与既有错误码）。
+2. **管理端认证分层**（认证 ≠ 授权）：
+   - **认证（已登录）**：由 `AdminInterceptorConfig` 对 `/admin/**` 统一 `StpAdminUtil.checkLogin()`（仅放行 `/admin/auth/login`）。挂在该前缀下的新 API **默认已登录**，不必再配拦截器。
+   - **禁止重复门禁**：Service **不得**仅为「确认已登录」调用 `requireLoginUser()` / `checkLogin()`（易被误当成授权，且多余查库）。
+   - **写审计字段**：只需操作者 id 时用 `AdminAccessService.requireLoginUserId()`（取 Sa-Token loginId，不 `selectById`）。
+   - **要实体或角色**：`/me`、改己密等需整行账号 → `requireLoginUser()`；能力矩阵要求 Admin → `requireAdmin()`。读路径若无审计/角色需求，依赖拦截器即可，不强制解析当前用户。
+3. **数据出站**：objectKey、密钥、内部存储路径等不得进入对外 DTO/日志明文。
+4. **输入**：请求 DTO 用 Bean Validation；文件类型以服务端探测为准时，不把客户端 Content-Type 当权威。
+5. **租户/归属**：按知识库、用户等做存在性与归属校验，防止 IDOR 式越权（对照词汇表与既有错误码）。
 
 ## E. API 与错误模型
 
