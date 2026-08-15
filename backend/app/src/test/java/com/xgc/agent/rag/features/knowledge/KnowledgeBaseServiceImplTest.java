@@ -80,7 +80,7 @@ class KnowledgeBaseServiceImplTest {
 
     @Test
     void create_usesDefaultEmbeddingModel() {
-        when(adminAccessService.requireLoginUser()).thenReturn(AdminUserDO.builder().id("u-1").build());
+        when(adminAccessService.requireLoginUserId()).thenReturn("u-1");
         when(embeddingModelCatalog.defaultId()).thenReturn("qwen3.7-text-embedding");
         when(embeddingModelCatalog.contains("qwen3.7-text-embedding")).thenReturn(true);
         when(knowledgeBaseMapper.selectCount(org.mockito.ArgumentMatchers.any())).thenReturn(0L);
@@ -96,7 +96,7 @@ class KnowledgeBaseServiceImplTest {
 
     @Test
     void create_whenDefaultMissing_rejects() {
-        when(adminAccessService.requireLoginUser()).thenReturn(AdminUserDO.builder().id("u-1").build());
+        when(adminAccessService.requireLoginUserId()).thenReturn("u-1");
         when(embeddingModelCatalog.defaultId()).thenReturn(null);
 
         assertThatThrownBy(() -> service.create(

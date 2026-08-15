@@ -24,6 +24,7 @@ public class AdminSaTokenConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //如果检测到用户没有登录，则自动跳转到登录页
         registry.addInterceptor(new SaInterceptor(handle -> StpAdminUtil.checkLogin()))
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/auth/login");

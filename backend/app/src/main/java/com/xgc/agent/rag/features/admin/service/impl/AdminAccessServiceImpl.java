@@ -23,9 +23,14 @@ public class AdminAccessServiceImpl implements AdminAccessService {
     private final AdminUserMapper adminUserMapper;
 
     @Override
+    public String requireLoginUserId() {
+        // 拦截器已 checkLogin；审计字段只需 loginId，避免多余 selectById。
+        return StpAdminUtil.getLoginIdAsString();
+    }
+
+    @Override
     public AdminUserDO requireLoginUser() {
-        StpAdminUtil.checkLogin();
-        String loginId = StpAdminUtil.getLoginIdAsString();
+        String loginId = requireLoginUserId();
         AdminUserDO user = adminUserMapper.selectById(loginId);
         if (user == null) {
             throw new WebAdminException(AdminErrorCode.USER_NOT_FOUND.message(), AdminErrorCode.USER_NOT_FOUND);

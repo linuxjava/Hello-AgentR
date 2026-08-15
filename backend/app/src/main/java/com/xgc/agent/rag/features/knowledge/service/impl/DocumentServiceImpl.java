@@ -39,6 +39,8 @@ import java.util.Map;
 
 /**
  * Document 用例：上传与切块解耦，本类不产生 Chunk。
+ *
+ * <p>登录由 {@code /admin/**} 拦截器保证；写路径仅取 {@code requireLoginUserId()} 填审计字段。</p>
  */
 @Slf4j
 @Service
@@ -74,7 +76,7 @@ public class DocumentServiceImpl implements DocumentService {
             String chunkStrategy,
             String chunkStrategyParamsJson
     ) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         KnowledgeBaseDO knowledgeBase = requireKnowledgeBase(knowledgeBaseId);
         if (file == null || file.isEmpty() || file.getSize() <= 0) {
             throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY);
@@ -139,7 +141,7 @@ public class DocumentServiceImpl implements DocumentService {
             DocumentStatus status,
             Boolean enabled
     ) {
-        adminAccessService.requireLoginUser();
+        // 登录由 /admin/** 拦截器保证；本方法不写审计字段，无需解析操作者。
         requireKnowledgeBase(knowledgeBaseId);
         long pageNo = page == null || page < 1 ? 1L : page;
         long size = pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
@@ -162,7 +164,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public DocumentView get(String knowledgeBaseId, String documentId) {
-        adminAccessService.requireLoginUser();
         requireKnowledgeBase(knowledgeBaseId);
         return toView(requireDocument(knowledgeBaseId, documentId));
     }
@@ -173,7 +174,7 @@ public class DocumentServiceImpl implements DocumentService {
             String documentId,
             ChunkStrategyUpdateRequest request
     ) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         requireKnowledgeBase(knowledgeBaseId);
         KnowledgeDocumentDO target = requireDocument(knowledgeBaseId, documentId);
         String paramsJson = writeJson(request == null ? null : request.chunkStrategyParams());
@@ -197,7 +198,7 @@ public class DocumentServiceImpl implements DocumentService {
             String documentId,
             DocumentEnabledUpdateRequest request
     ) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         requireKnowledgeBase(knowledgeBaseId);
         KnowledgeDocumentDO target = requireDocument(knowledgeBaseId, documentId);
         target.setEnabled(request.enabled());
@@ -208,7 +209,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public void delete(String knowledgeBaseId, String documentId) {
-        adminAccessService.requireLoginUser();
         requireKnowledgeBase(knowledgeBaseId);
         KnowledgeDocumentDO target = requireDocument(knowledgeBaseId, documentId);
         // 先删对象：失败则整笔失败、记录仍在。

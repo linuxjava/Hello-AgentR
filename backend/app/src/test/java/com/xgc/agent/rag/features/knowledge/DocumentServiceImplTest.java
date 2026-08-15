@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.framework.base.storage.ObjectStorage;
 import com.xgc.agent.framework.base.storage.ObjectStorageException;
-import com.xgc.agent.rag.features.admin.dao.entity.AdminUserDO;
 import com.xgc.agent.rag.features.admin.service.AdminAccessService;
 import com.xgc.agent.rag.features.knowledge.chunk.ChunkStrategyParamsValidator;
 import com.xgc.agent.rag.features.knowledge.dao.entity.DocumentStatus;
@@ -40,6 +39,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -76,7 +76,8 @@ class DocumentServiceImplTest {
                 objectStorage,
                 new ObjectMapper()
         );
-        when(adminAccessService.requireLoginUser()).thenReturn(AdminUserDO.builder().id("u-1").build());
+        // page/get/delete 不取操作者；上传/更新仍依赖 loginId。
+        lenient().when(adminAccessService.requireLoginUserId()).thenReturn("u-1");
     }
 
     @Test
