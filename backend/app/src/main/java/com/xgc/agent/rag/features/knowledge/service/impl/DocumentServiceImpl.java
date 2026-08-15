@@ -32,6 +32,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -77,31 +78,34 @@ public class DocumentServiceImpl implements DocumentService {
         if (file == null || file.isEmpty() || file.getSize() <= 0) {
             throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY);
         }
-        byte[] bytes;
-        try {
-            bytes = file.getBytes();
-        } catch (IOException ex) {
-            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
-        }
-        if (bytes.length == 0) {
-            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY);
-        }
         String originalFilename = StringUtils.hasText(file.getOriginalFilename())
                 ? file.getOriginalFilename()
                 : "unnamed";
-        String mediaType = mediaTypeDetector.detectAllowed(bytes, originalFilename);
         Map<String, Object> params = chunkStrategyParamsValidator.parseAndValidate(chunkStrategy, chunkStrategyParamsJson);
+
+        // Why 两次 getInputStream()：MultipartFile 每次返回新流；探测与 put 各自消费，无需自建临时文件或 byte[]。
+        String mediaType;
+        try (InputStream detectStream = file.getInputStream()) {
+            mediaType = mediaTypeDetector.detectAllowed(detectStream, originalFilename);
+        } catch (IOException ex) {
+            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
+        }
 
         String documentId = IdUtil.getSnowflakeNextIdStr();
         String objectKey = ObjectKeys.of(knowledgeBase.getNamespace(), documentId);
-        putObject(objectKey, bytes, mediaType);
+        long byteSize = file.getSize();
+        try (InputStream uploadStream = file.getInputStream()) {
+            putObject(objectKey, uploadStream, byteSize, mediaType);
+        } catch (IOException ex) {
+            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
+        }
 
         KnowledgeDocumentDO created = KnowledgeDocumentDO.builder()
                 .id(documentId)
                 .knowledgeBaseId(knowledgeBaseId)
                 .originalFilename(originalFilename)
                 .mediaType(mediaType)
-                .byteSize((long) bytes.length)
+                .byteSize(byteSize)
                 .status(STATUS_UPLOADED)
                 .enabled(Boolean.TRUE)
                 .chunkStrategy(chunkStrategy)
@@ -213,9 +217,9 @@ public class DocumentServiceImpl implements DocumentService {
     /**
      * 基建只抛 {@link ObjectStorageException}；管理端 Document 契约仍是 A002015。
      */
-    private void putObject(String objectKey, byte[] content, String mediaType) {
+    private void putObject(String objectKey, InputStream content, long contentLength, String mediaType) {
         try {
-            objectStorage.put(objectKey, content, mediaType);
+            objectStorage.put(objectKey, content, contentLength, mediaType);
         } catch (ObjectStorageException ex) {
             throw toDocumentStorageError(ex);
         }

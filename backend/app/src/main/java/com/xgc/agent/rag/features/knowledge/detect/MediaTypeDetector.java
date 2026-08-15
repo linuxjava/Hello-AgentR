@@ -4,20 +4,22 @@ import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.rag.features.knowledge.error.KnowledgeErrorCode;
 import org.apache.tika.detect.DefaultDetector;
 import org.apache.tika.detect.Detector;
-import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.TikaCoreProperties;
 import org.apache.tika.mime.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Set;
 
 /**
  * 以 Tika 探测结果为 MIME 权威，不信客户端 Content-Type。
  *
- * <p>Markdown 几乎没有魔数，必须带上 OriginalFilename，否则会退化成 text/plain。</p>
+ * <p>Markdown 几乎没有魔数，必须带上 OriginalFilename，否则会退化成 text/plain。
+ * 入参用 {@link InputStream}：探测只读所需前缀，避免整文件 {@code byte[]}。</p>
  */
 @Component
 public class MediaTypeDetector {
@@ -46,17 +48,22 @@ public class MediaTypeDetector {
     private final Detector detector = new DefaultDetector();
 
     /**
-     * @param content           文件字节
-     * @param originalFilename  原始文件名，可空
+     * @param content          内容流（探测只读头部；由调用方关闭；探测后勿再读同一实例）
+     * @param originalFilename 原始文件名，可空
      * @return 规范化后的白名单 MIME
      */
-    public String detectAllowed(byte[] content, String originalFilename) {
+    public String detectAllowed(InputStream content, String originalFilename) {
+        if (content == null) {
+            throw new WebAdminException(KnowledgeErrorCode.FILE_TYPE_UNSUPPORTED);
+        }
         Metadata metadata = new Metadata();
         if (StringUtils.hasText(originalFilename)) {
             metadata.set(TikaCoreProperties.RESOURCE_NAME_KEY, originalFilename);
         }
-        try (TikaInputStream stream = TikaInputStream.get(content, metadata)) {
-            MediaType mediaType = detector.detect(stream, metadata);
+        try {
+            // Detector 依赖 mark/reset；不支持时包一层缓冲，避免探测把流读穿后无法回退
+            InputStream probe = content.markSupported() ? content : new BufferedInputStream(content);
+            MediaType mediaType = detector.detect(probe, metadata);
             String normalized = normalize(mediaType);
             if (!ALLOWED.contains(normalized)) {
                 throw new WebAdminException(KnowledgeErrorCode.FILE_TYPE_UNSUPPORTED);

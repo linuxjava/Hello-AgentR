@@ -28,12 +28,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
@@ -84,13 +86,13 @@ class DocumentServiceImplTest {
                 .isInstanceOf(WebAdminException.class)
                 .extracting(ex -> ((WebAdminException) ex).getErrorCode())
                 .isEqualTo(KnowledgeErrorCode.FILE_EMPTY.code());
-        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).put(anyString(), any(InputStream.class), anyLong(), anyString());
     }
 
     @Test
     void upload_sameFilenameTwice_insertsTwoRows() {
         when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
-        when(mediaTypeDetector.detectAllowed(any(), eq("a.md"))).thenReturn("text/markdown");
+        when(mediaTypeDetector.detectAllowed(any(InputStream.class), eq("a.md"))).thenReturn("text/markdown");
         byte[] body = "# hi".getBytes(StandardCharsets.UTF_8);
         MockMultipartFile file = new MockMultipartFile("file", "a.md", "application/octet-stream", body);
 
@@ -102,13 +104,13 @@ class DocumentServiceImplTest {
         assertThat(captor.getAllValues()).allMatch(doc -> "a.md".equals(doc.getOriginalFilename()));
         assertThat(captor.getAllValues()).allMatch(doc -> Boolean.TRUE.equals(doc.getEnabled()));
         assertThat(captor.getAllValues().get(0).getId()).isNotEqualTo(captor.getAllValues().get(1).getId());
-        verify(objectStorage, times(2)).put(anyString(), any(), eq("text/markdown"));
+        verify(objectStorage, times(2)).put(anyString(), any(InputStream.class), anyLong(), eq("text/markdown"));
     }
 
     @Test
     void upload_whenInsertFails_rollsBackObject() {
         when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
-        when(mediaTypeDetector.detectAllowed(any(), anyString())).thenReturn("text/markdown");
+        when(mediaTypeDetector.detectAllowed(any(InputStream.class), anyString())).thenReturn("text/markdown");
         when(knowledgeDocumentMapper.insert(org.mockito.ArgumentMatchers.isA(KnowledgeDocumentDO.class)))
                 .thenThrow(new RuntimeException("db"));
         MockMultipartFile file = new MockMultipartFile(
@@ -122,8 +124,9 @@ class DocumentServiceImplTest {
     @Test
     void upload_whenPutFails_mapsToDocumentError() {
         when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
-        when(mediaTypeDetector.detectAllowed(any(), anyString())).thenReturn("text/markdown");
-        doThrow(new ObjectStorageException()).when(objectStorage).put(anyString(), any(), anyString());
+        when(mediaTypeDetector.detectAllowed(any(InputStream.class), anyString())).thenReturn("text/markdown");
+        doThrow(new ObjectStorageException())
+                .when(objectStorage).put(anyString(), any(InputStream.class), anyLong(), anyString());
         MockMultipartFile file = new MockMultipartFile(
                 "file", "a.md", "text/markdown", "# hi".getBytes(StandardCharsets.UTF_8));
 
@@ -184,7 +187,7 @@ class DocumentServiceImplTest {
         assertThat(view.chunkStrategy()).isEqualTo("STRUCTURE_AWARE");
         assertThat(view.originalFilename()).isEqualTo("handbook.pdf");
         verify(knowledgeDocumentMapper).updateById(org.mockito.ArgumentMatchers.isA(KnowledgeDocumentDO.class));
-        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).put(anyString(), any(InputStream.class), anyLong(), anyString());
         verify(objectStorage, never()).delete(anyString());
     }
 
@@ -209,7 +212,7 @@ class DocumentServiceImplTest {
         ArgumentCaptor<KnowledgeDocumentDO> captor = ArgumentCaptor.forClass(KnowledgeDocumentDO.class);
         verify(knowledgeDocumentMapper).updateById(captor.capture());
         assertThat(captor.getValue().getOriginalFilename()).isEqualTo("手册.pdf");
-        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).put(anyString(), any(InputStream.class), anyLong(), anyString());
         verify(objectStorage, never()).delete(anyString());
     }
 

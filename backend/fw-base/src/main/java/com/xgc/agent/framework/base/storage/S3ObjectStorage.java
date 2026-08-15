@@ -17,7 +17,9 @@ import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
+import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.Path;
 
 /**
  * 首版活跃后端：S3 兼容存储。
@@ -44,19 +46,43 @@ public class S3ObjectStorage implements ObjectStorage {
     }
 
     @Override
-    public void put(String objectKey, byte[] content, String mediaType) {
+    public void put(String objectKey, InputStream content, long contentLength, String mediaType) {
+        if (content == null) {
+            throw new ObjectStorageException("content stream is null", null);
+        }
+        if (contentLength < 0) {
+            throw new ObjectStorageException("contentLength must be >= 0", null);
+        }
         S3Client s3 = requireClient();
         try {
-            PutObjectRequest.Builder builder = PutObjectRequest.builder()
-                    .bucket(s3Settings().getBucket())
-                    .key(objectKey);
-            if (StringUtils.hasText(mediaType)) {
-                builder.contentType(mediaType);
-            }
-            s3.putObject(builder.build(), RequestBody.fromBytes(content));
+            s3.putObject(putRequest(objectKey, mediaType), RequestBody.fromInputStream(content, contentLength));
         } catch (RuntimeException ex) {
             throw new ObjectStorageException(ex);
         }
+    }
+
+    @Override
+    public void put(String objectKey, Path content, String mediaType) {
+        if (content == null) {
+            throw new ObjectStorageException("content path is null", null);
+        }
+        S3Client s3 = requireClient();
+        try {
+            // fromFile：SDK 按文件流式读，避免 byte[] 整包进堆
+            s3.putObject(putRequest(objectKey, mediaType), RequestBody.fromFile(content));
+        } catch (RuntimeException ex) {
+            throw new ObjectStorageException(ex);
+        }
+    }
+
+    private PutObjectRequest putRequest(String objectKey, String mediaType) {
+        PutObjectRequest.Builder builder = PutObjectRequest.builder()
+                .bucket(s3Settings().getBucket())
+                .key(objectKey);
+        if (StringUtils.hasText(mediaType)) {
+            builder.contentType(mediaType);
+        }
+        return builder.build();
     }
 
     @Override

@@ -51,3 +51,20 @@ grilling 第 1 轮一次抛出 Q1–Q5。用户要求「一个一个提问，每
 
 ### ✅ Better Approach
 词汇表放 `docs/backend/context/<context>/CONTEXT.md`；版本夹只放 PRD，用链接引用。
+
+---
+
+## Agent Learning Log: Iteration #4
+
+**Date**: 2026-08-15 | **Task**: Document 上传去 byte[] / 流式改造
+**Signal**: User correction
+
+### ❌ Mistake Made
+在 `DocumentServiceImpl#upload` 用 `transferTo` 自建临时文件，并误称 `MultipartFile.getInputStream()` 是一次性流；实际每次调用返回新流，探测与上传可各开一流。
+
+### 🚫 Pattern to Avoid
+- **No 把 MultipartFile 当成单次 InputStream**：在已有可重复 `getInputStream()` 时再 `transferTo` 落盘，增加无磁盘 I/O 与清理负担。
+- **No 用笼统「流只能读一遍」掩盖框架契约**：先核对 `MultipartFile` / `Part` 语义再选编排。
+
+### ✅ Better Approach
+MIME 用 `file.getInputStream()` + Tika `detect(InputStream, Metadata)`；`ObjectStorage.put` 再 `getInputStream()` 一次并传入 `file.getSize()`；仅在非 Multipart、或明确需要可重试落盘时再使用 `Path` 重载。
