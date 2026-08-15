@@ -45,7 +45,9 @@
 
 
 
-[HelloAgent 工程手记1/100天——项目工作流搭建](https://mp.weixin.qq.com/s/q7Tx7CjK5cfmPRAkh96_Mg)
+[Hello-AgentR 工程手记1/100天——项目工作流搭建](https://mp.weixin.qq.com/s/q7Tx7CjK5cfmPRAkh96_Mg)
+
+[Hello-AgentR工程手记第2/100篇——创建知识库时，我砍掉了向量模型](https://mp.weixin.qq.com/s/d3K2WIWzT2EnelJaXCiGew)
 
 
 
