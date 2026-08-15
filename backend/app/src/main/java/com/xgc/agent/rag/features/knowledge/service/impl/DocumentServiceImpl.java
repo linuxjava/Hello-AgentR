@@ -156,7 +156,7 @@ public class DocumentServiceImpl implements DocumentService {
                         .like(filenameKeyword != null, KnowledgeDocumentDO::getOriginalFilename, filenameKeyword)
                         .eq(status != null, KnowledgeDocumentDO::getStatus, status == null ? null : status.name())
                         .eq(enabled != null, KnowledgeDocumentDO::getEnabled, enabled)
-                        .orderByDesc(KnowledgeDocumentDO::getUpdateTime)
+                        .orderByDesc(KnowledgeDocumentDO::getCreateTime)
         );
         List<DocumentView> records = result.getRecords().stream().map(this::toView).toList();
         return new DocumentPageResponse(result.getCurrent(), result.getSize(), result.getTotal(), records);
