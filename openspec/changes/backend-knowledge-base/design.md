@@ -162,7 +162,7 @@ flowchart TB
 
 | 能力 | 落点 | Phase 2+ 用法 |
 | --- | --- | --- |
-| 登录门禁 | `AdminSaTokenConfig`：`/admin/**` + `StpAdminUtil.checkLogin()`，仅放行 `/admin/auth/login` | `/admin/knowledge-bases/**`、`/admin/embedding-models` 自动需登录，不必再配拦截器 |
+| 登录门禁 | `AdminInterceptorConfig`：`/admin/**` + `StpAdminUtil.checkLogin()`，仅放行 `/admin/auth/login` | `/admin/knowledge-bases/**`、`/admin/embedding-models` 自动需登录，不必再配拦截器 |
 | 当前用户 / Admin 门禁 | `AdminAccessService.requireLoginUser()` / `requireAdmin()` | 写 `createdBy`/`updatedBy` 用前者；删除用后者（Staff → `A001002`） |
 | 统一响应 | `fw-base` `R<T>` | Controller 返回 `R.success(...)` |
 | 管理端业务异常 | `WebAdminException` + `IErrorCode` | 新建 `KnowledgeErrorCode`（A002xxx），分页越界可复用 `A001010` |

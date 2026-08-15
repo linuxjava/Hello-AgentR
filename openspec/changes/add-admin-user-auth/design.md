@@ -93,7 +93,7 @@ flowchart TB
 
 - **选择**：Service 内基于当前登录 role 校验能力矩阵；Admin 专属写操作在入口显式拒绝 Staff
 - **备选**：Sa-Token 权限码体系 → V0.1 不做自定义权限码，仅两角色
-- **登录门禁**：`AdminSaTokenConfig` 对 `/admin/**`（排除 `/admin/auth/login`）统一 `StpAdminUtil.checkLogin()`；业务层不再为「仅确认已登录」重复调用 `requireLoginUser()`
+- **登录门禁**：`AdminInterceptorConfig` 对 `/admin/**`（排除 `/admin/auth/login`）统一 `StpAdminUtil.checkLogin()`；业务层不再为「仅确认已登录」重复调用 `requireLoginUser()`
 
 ### D7. Bootstrap 初始化
 

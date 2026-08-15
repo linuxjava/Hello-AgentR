@@ -121,7 +121,7 @@ flowchart TB
 | 目录抽象接口 | `com.xgc.agent.rag.features.knowledge.service.EmbeddingModelCatalog` | 保留接口，替换 `StaticEmbeddingModelCatalog` 为配置驱动实现，减少创建校验改动面 |
 | 创建模型校验路径 | `KnowledgeBaseServiceImpl#create()` 中 `embeddingModelCatalog.contains()` | 将 `contains` 改为基于配置目录 `id` 集合判断，创建接口入参保持不变 |
 | 目录查询路径 | `KnowledgeBaseServiceImpl#listEmbeddingModels()` | 改为返回对象 DTO 列表并保持统一从 catalog 取数 |
-| 登录门禁 | `AdminSaTokenConfig`（`/admin/**` + 排除 `/admin/auth/login`） | 新目录响应结构复用现有门禁，无需新增拦截器 |
+| 登录门禁 | `AdminInterceptorConfig`（`/admin/**` + 排除 `/admin/auth/login`） | 新目录响应结构复用现有门禁，无需新增拦截器 |
 | 角色与当前用户 | `AdminAccessServiceImpl` | 创建/更新继续 `requireLoginUser()`，删除继续 `requireAdmin()` |
 | 统一响应 | `com.xgc.agent.framework.base.result.R` | 目录与知识库接口继续返回 `R<T>`，不引入新响应包 |
 
