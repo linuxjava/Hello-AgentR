@@ -25,7 +25,7 @@ _Avoid_: 用户管理（易与 EndUser 混淆）、Operator 列表
 _Avoid_: 数据集列表、Collection 列表、知识库实例列表、把知识库列表当成文档页、用切片数/索引状态冒充文档数
 
 **Document List（文档列表）**：
-某一 KnowledgeBase 下的 Document 管理页；从知识库列表**点击名称**打开。面包屑展示当前库 Name 作为上下文；不在本页改库的 Name / 描述 / 删除库。支持文件名（OriginalFilename）模糊搜索、**状态**精确筛选、**是否启用**精确筛选与分页（默认 20、上限 100）；点「查询」才生效；缺省不过滤状态与启用，因此禁用文档仍出现在默认列表。默认按更新时间倒序。不做 strategy 筛选。列表列：文件名、状态、分块数、Enabled 开关、更新时间、行操作（改策略 / 删除）。界面标签「文件名」对应 OriginalFilename；**文件名下方副行**展示文档类型与大小（由 `mediaType` 映射为可读标签 + `byteSize` 人类可读，格式如 `PDF · 1.2 MB`），不另开独立列。**更新时间下方副行**展示创建者 username（契约 `createdBy` 为 AdminUser id，经账号目录映射）；映射不可用时回退显示 id。状态列对 `UPLOADED` 展示为「待分块」；尚未开始分块时分块数展示为「—」（不用 0）。不展示策略摘要、objectKey。
+某一 KnowledgeBase 下的 Document 管理页；从知识库列表**点击名称**打开。面包屑展示当前库 Name 作为上下文；不在本页改库的 Name / 描述 / 删除库。支持文件名（OriginalFilename）模糊搜索、**状态**精确筛选、**是否启用**精确筛选与分页（默认 20、上限 100）；点「查询」才生效；缺省不过滤状态与启用，因此禁用文档仍出现在默认列表。默认按更新时间倒序。不做 strategy 筛选。列表列：文件名、状态、分块数、Enabled 开关、更新时间、行操作（改策略 / 删除）。界面标签「文件名」对应 OriginalFilename；**文件名下方副行**展示文档类型与大小（由后端 `documentFormat` 映射为可读标签 + `byteSize` 人类可读，格式如 `PDF · 1.2 MB`；**不要**自行解析 `mediaType`），不另开独立列。**更新时间下方副行**展示创建者 username（契约 `createdBy` 为 AdminUser id，经账号目录映射）；映射不可用时回退显示 id。状态列对 `UPLOADED` 展示为「待分块」；尚未开始分块时分块数展示为「—」（不用 0）。不展示策略摘要、objectKey。
 _Avoid_: 知识库详情页、附件列表、文件管理（泛称）、Dataset 内容页、把策略 JSON 当成列表列、按启用状态隐藏行
 
 ## Screens

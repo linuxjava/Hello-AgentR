@@ -27,7 +27,8 @@ import java.util.List;
 /**
  * KnowledgeBase 用例实现。
  *
- * <p>登录门禁由 {@code /admin/**} 拦截器完成；这里只解析当前用户（审计）或 Admin（删除）。</p>
+ * <p>登录门禁由 {@code /admin/**} 拦截器完成；写路径用 {@code requireLoginUserId()} 填审计，
+ * 删除用 {@code requireAdmin()}。</p>
  */
 @Service
 @RequiredArgsConstructor
@@ -73,7 +74,7 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
     @Override
     @Transactional
     public KnowledgeBaseView create(KnowledgeBaseCreateRequest request) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         String name = KnowledgeFieldRules.normalizeName(request.name());
         String namespace = KnowledgeFieldRules.normalizeNamespace(request.namespace());
         String description = KnowledgeFieldRules.normalizeDescription(request.description());
@@ -101,7 +102,7 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
     @Override
     @Transactional
     public KnowledgeBaseView update(String id, KnowledgeBaseUpdateRequest request) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         KnowledgeBaseDO target = requireById(id);
         String name = KnowledgeFieldRules.normalizeName(request.name());
         String description = KnowledgeFieldRules.normalizeDescription(request.description());

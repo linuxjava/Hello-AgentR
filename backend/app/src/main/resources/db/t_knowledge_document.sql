@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS t_knowledge_document (
     knowledge_base_id       VARCHAR(64)   NOT NULL,
     original_filename       VARCHAR(512)  NOT NULL,
     media_type              VARCHAR(128)  NOT NULL,
+    document_format         VARCHAR(32)   NOT NULL,
     byte_size               BIGINT        NOT NULL,
     status                  VARCHAR(32)   NOT NULL,
     enabled                 BOOLEAN       NOT NULL DEFAULT TRUE,
@@ -29,7 +30,8 @@ COMMENT ON TABLE t_knowledge_document IS '知识库文档（Document）；源文
 COMMENT ON COLUMN t_knowledge_document.id IS '主键 ID（Snowflake 字符串）';
 COMMENT ON COLUMN t_knowledge_document.knowledge_base_id IS '所属 KnowledgeBase id';
 COMMENT ON COLUMN t_knowledge_document.original_filename IS '原始文件名；非唯一';
-COMMENT ON COLUMN t_knowledge_document.media_type IS 'Tika 规范化后的 MIME';
+COMMENT ON COLUMN t_knowledge_document.media_type IS 'Tika 规范化后的 MIME（别名已归一）';
+COMMENT ON COLUMN t_knowledge_document.document_format IS '业务格式族：TXT/MARKDOWN/PDF/DOC/DOCX/PPT/PPTX/XLS/XLSX/PNG/JPEG/SVG';
 COMMENT ON COLUMN t_knowledge_document.byte_size IS '字节大小；必须 > 0';
 COMMENT ON COLUMN t_knowledge_document.status IS '本阶段恒 UPLOADED';
 COMMENT ON COLUMN t_knowledge_document.enabled IS '是否启用；禁用不删记录与对象，仍计入 documentCount';
@@ -45,3 +47,22 @@ COMMENT ON COLUMN t_knowledge_document.update_time IS '最后更新时间（改�
 -- 已有库增量：CREATE IF NOT EXISTS 不会给旧表加列。
 ALTER TABLE t_knowledge_document ADD COLUMN IF NOT EXISTS enabled BOOLEAN NOT NULL DEFAULT TRUE;
 COMMENT ON COLUMN t_knowledge_document.enabled IS '是否启用；禁用不删记录与对象，仍计入 documentCount';
+
+ALTER TABLE t_knowledge_document ADD COLUMN IF NOT EXISTS document_format VARCHAR(32);
+UPDATE t_knowledge_document SET document_format = CASE media_type
+    WHEN 'text/plain' THEN 'TXT'
+    WHEN 'text/markdown' THEN 'MARKDOWN'
+    WHEN 'application/pdf' THEN 'PDF'
+    WHEN 'application/msword' THEN 'DOC'
+    WHEN 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' THEN 'DOCX'
+    WHEN 'application/vnd.ms-powerpoint' THEN 'PPT'
+    WHEN 'application/vnd.openxmlformats-officedocument.presentationml.presentation' THEN 'PPTX'
+    WHEN 'application/vnd.ms-excel' THEN 'XLS'
+    WHEN 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' THEN 'XLSX'
+    WHEN 'image/png' THEN 'PNG'
+    WHEN 'image/jpeg' THEN 'JPEG'
+    WHEN 'image/svg+xml' THEN 'SVG'
+    ELSE document_format
+END
+WHERE document_format IS NULL;
+COMMENT ON COLUMN t_knowledge_document.document_format IS '业务格式族：TXT/MARKDOWN/PDF/DOC/DOCX/PPT/PPTX/XLS/XLSX/PNG/JPEG/SVG';

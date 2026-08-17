@@ -52,6 +52,7 @@ const sampleDoc = {
   knowledgeBaseId: 'kb-1',
   originalFilename: 'handbook.pdf',
   mediaType: 'application/pdf',
+  documentFormat: 'PDF' as const,
   byteSize: 1_258_291,
   status: 'UPLOADED' as const,
   enabled: true,

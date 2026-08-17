@@ -76,10 +76,10 @@ Document 的入库来源类型；上传时写入并持久化。本阶段仅允�
 _Avoid_: 为 URL 另建实体、本阶段实现 URL 拉取、把来源当成 ObjectStorage 厂商
 
 **AllowedMediaType（允许的媒体类型）**：
-上传是否合法以**服务端内容探测结果**为准，不以客户端声明的 Content-Type 为准。本阶段用 Apache Tika 探测（须同时提供文件字节与 OriginalFilename，否则 Markdown 等无魔数格式会退化成 `text/plain`）。探测结果规范化后须落在下列集合内，否则拒绝上传：
+上传是否合法以**服务端内容探测结果**为准，不以客户端声明的 Content-Type 为准。本阶段用 Apache Tika 探测（须同时提供文件字节与 OriginalFilename，否则 Markdown 等无魔数格式会退化成 `text/plain`）。探测结果先经**别名归一**，再须落在下列规范 MIME 集合内，否则拒绝上传：
 - `text/plain`
-- `text/markdown`（Tika 历史别名 `text/x-markdown`、`text/x-web-markdown` 视为同类）
-- `application/pdf`
+- `text/markdown`（别名：`text/x-markdown`、`text/x-web-markdown`）
+- `application/pdf`（别名：`application/x-pdf`、`application/acrobat`）
 - `application/msword`
 - `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
 - `application/vnd.ms-powerpoint`
@@ -87,10 +87,16 @@ _Avoid_: 为 URL 另建实体、本阶段实现 URL 拉取、把来源当成 Obj
 - `application/vnd.ms-excel`
 - `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
 - `image/png`
-- `image/jpeg`
+- `image/jpeg`（别名：`image/jpg`、`image/pjpeg`）
 - `image/svg+xml`
-探测得到的媒体类型随 Document 持久化。列表/详情对调用方只返回元数据（含 OriginalFilename、媒体类型、大小、ChunkStrategy、DocumentStatus、Enabled 等），**不**返回 objectKey。Office 容器格式（DOC/PPT/XLS 与 OOXML）依赖 Tika 的容器探测，不能只靠扩展名。
-_Avoid_: 只信 multipart Content-Type、只认扩展名、本阶段不限类型、把解析能否切块当作上传门槛、排除 PPTX/XLSX（已否决）
+规范 MIME 随 Document 持久化为 `mediaType`。Office 容器格式（DOC/PPT/XLS 与 OOXML）依赖 Tika 的容器探测，不能只靠扩展名。
+_Avoid_: 只信 multipart Content-Type、只认扩展名、本阶段不限类型、把解析能否切块当作上传门槛、排除 PPTX/XLSX（已否决）、把未归一的别名直接入库
+
+**DocumentFormat（文档格式族）**：
+由规范 MIME 推导的业务格式枚举，与 `mediaType` 一并持久化并对外返回。取值：`TXT`、`MARKDOWN`、`PDF`、`DOC`、`DOCX`、`PPT`、`PPTX`、`XLS`、`XLSX`、`PNG`、`JPEG`、`SVG`。列表/详情展示可读类型、以及后续切块/解析分支，**以 DocumentFormat 为准**，不得各端自行从 MIME 字符串猜测。
+_Avoid_: 前端各自维护 MIME→标签映射、用原始 Content-Type 当格式、把 DocumentFormat 做成自由字符串
+
+列表/详情对调用方返回元数据（含 OriginalFilename、mediaType、documentFormat、大小、ChunkStrategy、DocumentStatus、Enabled 等），**不**返回 objectKey。
 
 ## Upload（V0.4）
 

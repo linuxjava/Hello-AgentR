@@ -44,9 +44,14 @@ public class KnowledgeDocumentDO {
     private String originalFilename;
 
     /**
-     * Tika 规范化后的 MIME。
+     * Tika 规范化后的 MIME（别名已归一）。
      */
     private String mediaType;
+
+    /**
+     * 业务格式族（DocumentFormat 枚举名）；由规范 MIME 推导，供展示与后续分支。
+     */
+    private String documentFormat;
 
     /**
      * 字节大小。

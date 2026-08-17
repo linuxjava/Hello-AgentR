@@ -16,6 +16,7 @@ import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeBaseDO;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeDocumentDO;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeBaseMapper;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeDocumentMapper;
+import com.xgc.agent.rag.features.knowledge.detect.DocumentFormat;
 import com.xgc.agent.rag.features.knowledge.detect.MediaTypeDetector;
 import com.xgc.agent.rag.features.knowledge.dto.ChunkStrategyUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.DocumentEnabledUpdateRequest;
@@ -32,11 +33,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Document 用例：上传与切块解耦，本类不产生 Chunk。
+ *
+ * <p>登录由 {@code /admin/**} 拦截器保证；写路径仅取 {@code requireLoginUserId()} 填审计字段。</p>
  */
 @Slf4j
 @Service
@@ -72,36 +76,40 @@ public class DocumentServiceImpl implements DocumentService {
             String chunkStrategy,
             String chunkStrategyParamsJson
     ) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         KnowledgeBaseDO knowledgeBase = requireKnowledgeBase(knowledgeBaseId);
         if (file == null || file.isEmpty() || file.getSize() <= 0) {
-            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY);
-        }
-        byte[] bytes;
-        try {
-            bytes = file.getBytes();
-        } catch (IOException ex) {
-            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
-        }
-        if (bytes.length == 0) {
             throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY);
         }
         String originalFilename = StringUtils.hasText(file.getOriginalFilename())
                 ? file.getOriginalFilename()
                 : "unnamed";
-        String mediaType = mediaTypeDetector.detectAllowed(bytes, originalFilename);
         Map<String, Object> params = chunkStrategyParamsValidator.parseAndValidate(chunkStrategy, chunkStrategyParamsJson);
+
+        // Why 两次 getInputStream()：MultipartFile 每次返回新流；探测与 put 各自消费，无需自建临时文件或 byte[]。
+        MediaTypeDetector.DetectedMediaType detected;
+        try (InputStream detectStream = file.getInputStream()) {
+            detected = mediaTypeDetector.detectAllowed(detectStream, originalFilename);
+        } catch (IOException ex) {
+            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
+        }
 
         String documentId = IdUtil.getSnowflakeNextIdStr();
         String objectKey = ObjectKeys.of(knowledgeBase.getNamespace(), documentId);
-        putObject(objectKey, bytes, mediaType);
+        long byteSize = file.getSize();
+        try (InputStream uploadStream = file.getInputStream()) {
+            putObject(objectKey, uploadStream, byteSize, detected.mediaType());
+        } catch (IOException ex) {
+            throw new WebAdminException(KnowledgeErrorCode.FILE_EMPTY.message(), ex, KnowledgeErrorCode.FILE_EMPTY);
+        }
 
         KnowledgeDocumentDO created = KnowledgeDocumentDO.builder()
                 .id(documentId)
                 .knowledgeBaseId(knowledgeBaseId)
                 .originalFilename(originalFilename)
-                .mediaType(mediaType)
-                .byteSize((long) bytes.length)
+                .mediaType(detected.mediaType())
+                .documentFormat(detected.documentFormat().name())
+                .byteSize(byteSize)
                 .status(STATUS_UPLOADED)
                 .enabled(Boolean.TRUE)
                 .chunkStrategy(chunkStrategy)
@@ -133,7 +141,7 @@ public class DocumentServiceImpl implements DocumentService {
             DocumentStatus status,
             Boolean enabled
     ) {
-        adminAccessService.requireLoginUser();
+        // 登录由 /admin/** 拦截器保证；本方法不写审计字段，无需解析操作者。
         requireKnowledgeBase(knowledgeBaseId);
         long pageNo = page == null || page < 1 ? 1L : page;
         long size = pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
@@ -148,7 +156,7 @@ public class DocumentServiceImpl implements DocumentService {
                         .like(filenameKeyword != null, KnowledgeDocumentDO::getOriginalFilename, filenameKeyword)
                         .eq(status != null, KnowledgeDocumentDO::getStatus, status == null ? null : status.name())
                         .eq(enabled != null, KnowledgeDocumentDO::getEnabled, enabled)
-                        .orderByDesc(KnowledgeDocumentDO::getUpdateTime)
+                        .orderByDesc(KnowledgeDocumentDO::getCreateTime)
         );
         List<DocumentView> records = result.getRecords().stream().map(this::toView).toList();
         return new DocumentPageResponse(result.getCurrent(), result.getSize(), result.getTotal(), records);
@@ -156,7 +164,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public DocumentView get(String knowledgeBaseId, String documentId) {
-        adminAccessService.requireLoginUser();
         requireKnowledgeBase(knowledgeBaseId);
         return toView(requireDocument(knowledgeBaseId, documentId));
     }
@@ -167,7 +174,7 @@ public class DocumentServiceImpl implements DocumentService {
             String documentId,
             ChunkStrategyUpdateRequest request
     ) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         requireKnowledgeBase(knowledgeBaseId);
         KnowledgeDocumentDO target = requireDocument(knowledgeBaseId, documentId);
         String paramsJson = writeJson(request == null ? null : request.chunkStrategyParams());
@@ -191,7 +198,7 @@ public class DocumentServiceImpl implements DocumentService {
             String documentId,
             DocumentEnabledUpdateRequest request
     ) {
-        String operatorId = adminAccessService.requireLoginUser().getId();
+        String operatorId = adminAccessService.requireLoginUserId();
         requireKnowledgeBase(knowledgeBaseId);
         KnowledgeDocumentDO target = requireDocument(knowledgeBaseId, documentId);
         target.setEnabled(request.enabled());
@@ -202,7 +209,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public void delete(String knowledgeBaseId, String documentId) {
-        adminAccessService.requireLoginUser();
         requireKnowledgeBase(knowledgeBaseId);
         KnowledgeDocumentDO target = requireDocument(knowledgeBaseId, documentId);
         // 先删对象：失败则整笔失败、记录仍在。
@@ -213,9 +219,9 @@ public class DocumentServiceImpl implements DocumentService {
     /**
      * 基建只抛 {@link ObjectStorageException}；管理端 Document 契约仍是 A002015。
      */
-    private void putObject(String objectKey, byte[] content, String mediaType) {
+    private void putObject(String objectKey, InputStream content, long contentLength, String mediaType) {
         try {
-            objectStorage.put(objectKey, content, mediaType);
+            objectStorage.put(objectKey, content, contentLength, mediaType);
         } catch (ObjectStorageException ex) {
             throw toDocumentStorageError(ex);
         }
@@ -272,6 +278,7 @@ public class DocumentServiceImpl implements DocumentService {
                 source.getKnowledgeBaseId(),
                 source.getOriginalFilename(),
                 source.getMediaType(),
+                resolveDocumentFormat(source),
                 source.getByteSize() == null ? 0L : source.getByteSize(),
                 source.getStatus(),
                 !Boolean.FALSE.equals(source.getEnabled()),
@@ -282,5 +289,19 @@ public class DocumentServiceImpl implements DocumentService {
                 source.getCreateTime(),
                 source.getUpdateTime()
         );
+    }
+
+    /**
+     * 旧行可能尚未回填 document_format；读路径用规范 MIME 兜底，避免前端再猜。
+     * mediaType 也缺失时不抛上传类错误码（读路径），返回空串由调用方/脏数据排查。
+     */
+    private static String resolveDocumentFormat(KnowledgeDocumentDO source) {
+        if (StringUtils.hasText(source.getDocumentFormat())) {
+            return source.getDocumentFormat();
+        }
+        if (!StringUtils.hasText(source.getMediaType())) {
+            return "";
+        }
+        return DocumentFormat.fromCanonicalMediaType(source.getMediaType()).name();
     }
 }

@@ -1,0 +1,46 @@
+schema: spec-driven
+
+# Global meta-rules only: pick stack architecture baselines by change name prefix.
+# Details live in docs/architecture-decisions/<stack>.md (proactive baselines).
+
+context: |
+  Monorepo with four surfaces; change-name prefix selects the primary stack:
+    backend-       → Spring Boot (backend/)
+    frontAdm-      → React admin (frontend-admin/)
+    front-         → React user web (frontend/)
+    mobile-        → Flutter (mobile/)
+  Cross-surface changes: proposal lists other affected surfaces; design responds per affected stack.
+  Stack architecture baselines: docs/architecture-decisions/<stack>.md (if missing, design must still state stack trade-offs).
+  backend- MUST respond to docs/architecture-decisions/backend.md.
+  Functional behavior goes in specs; engineering trade-offs go in design (citing applicable stack baselines).
+
+rules:
+  specs:
+    - "所有 API 行为使用 Given/When/Then 格式"
+    - "每个 spec 必须包含至少一个错误场景"
+    - "每个 requirement 的 scenario 不超过 5 个"
+    - "单个 spec 文件不超过 2000 词"
+    - "省略理由说明，除非直接影响实现"
+    - "使用 RFC 2119 关键词（SHALL/SHOULD/MAY）"
+  tasks:
+    - "单个 task 不超过 2 小时工作量"
+    - "相关 task 按 phase 分组"
+    - "每个 phase 结束后包含验证步骤"
+    - "新建服务前必须先检查是否有可复用的已有服务"
+    - "当 design 记载了栈级架构决策时，对应 phase 必须含验证 task：实现与 design / 适用栈决策一致"
+  design:
+    - "包含组件层级图"
+    - "文档化所有 API 端点规范"
+    - "声明本变更适用的工程栈（依 change 前缀；跨端则列出全部）"
+    - "读取并响应适用栈的 docs/architecture-decisions/<stack>.md（及 docs/adr 中相关系统 ADR）；文件尚不存在时，仍须在 design 写清本栈相关工程取舍"
+    - "工程取舍写在 design，不要只留在对话里"
+    - "Apply 前须通过 openspec-architecture-review；FAIL 不得开始实现"
+  proposal:
+    - "必须显式列出不做的事项（out-of-scope/NOT doing 清单）"
+    - "高风险变更必须包含回滚方案"
+    - "声明主交付栈（前缀）及是否影响其它端"
+    - "声明是否已完成 grill-engineering（对照 docs/architecture-decisions）；跳过须说明理由（如纯文案无新 API）"
+
+languages: |
+  Generate all artifacts in Simplified Chinese.
+  Use English for code-related terms.

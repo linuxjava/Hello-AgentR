@@ -11,6 +11,7 @@ public record DocumentView(
         String knowledgeBaseId,
         String originalFilename,
         String mediaType,
+        String documentFormat,
         long byteSize,
         String status,
         boolean enabled,

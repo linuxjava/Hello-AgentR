@@ -7,13 +7,13 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 管理端 Sa-Token 登录门禁。
+ * 管理端登录拦截器配置。
  *
  * <p>对 {@code /admin/**} 统一校验 {@code loginType=admin} 会话；登录接口放行。
  * 业务层仅在需要当前用户实体或 Admin 角色时再调用 {@code AdminAccessService}。</p>
  */
 @Configuration
-public class AdminSaTokenConfig implements WebMvcConfigurer {
+public class AdminInterceptorConfig implements WebMvcConfigurer {
 
     /**
      * 注册管理端登录拦截器。
@@ -24,6 +24,7 @@ public class AdminSaTokenConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //如果检测到用户没有登录，则自动跳转到登录页
         registry.addInterceptor(new SaInterceptor(handle -> StpAdminUtil.checkLogin()))
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/auth/login");

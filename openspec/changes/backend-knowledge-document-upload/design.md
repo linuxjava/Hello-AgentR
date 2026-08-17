@@ -226,7 +226,7 @@ Document 全部 `requireLoginUser()`。删 Document **不**要求 Admin。删库
 
 | 能力 | 落点 | Phase 2+ 用法 |
 | --- | --- | --- |
-| 登录门禁 | `AdminSaTokenConfig`：`/admin/**` + `StpAdminUtil.checkLogin()`，仅放行 `/admin/auth/login` | `/admin/knowledge-bases/{id}/documents/**` 自动需登录，不必再配拦截器 |
+| 登录门禁 | `AdminInterceptorConfig`：`/admin/**` + `StpAdminUtil.checkLogin()`，仅放行 `/admin/auth/login` | `/admin/knowledge-bases/{id}/documents/**` 自动需登录，不必再配拦截器 |
 | 当前用户 / Admin 门禁 | `AdminAccessService.requireLoginUser()` / `requireAdmin()` | Document 写审计用前者；删 Document 不要求 Admin；删库仍用后者 |
 | 统一响应 | `fw-base` `R<T>` | Controller 返回 `R.success(...)` |
 | 管理端业务异常 | `WebAdminException` + `IErrorCode` | 续编 `KnowledgeErrorCode` A002009–A002015 |

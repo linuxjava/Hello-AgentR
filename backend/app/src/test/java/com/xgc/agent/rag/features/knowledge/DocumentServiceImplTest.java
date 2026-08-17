@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgc.agent.framework.base.error.exception.WebAdminException;
 import com.xgc.agent.framework.base.storage.ObjectStorage;
 import com.xgc.agent.framework.base.storage.ObjectStorageException;
-import com.xgc.agent.rag.features.admin.dao.entity.AdminUserDO;
 import com.xgc.agent.rag.features.admin.service.AdminAccessService;
 import com.xgc.agent.rag.features.knowledge.chunk.ChunkStrategyParamsValidator;
 import com.xgc.agent.rag.features.knowledge.dao.entity.DocumentStatus;
@@ -14,6 +13,7 @@ import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeBaseDO;
 import com.xgc.agent.rag.features.knowledge.dao.entity.KnowledgeDocumentDO;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeBaseMapper;
 import com.xgc.agent.rag.features.knowledge.dao.mapper.KnowledgeDocumentMapper;
+import com.xgc.agent.rag.features.knowledge.detect.DocumentFormat;
 import com.xgc.agent.rag.features.knowledge.detect.MediaTypeDetector;
 import com.xgc.agent.rag.features.knowledge.dto.ChunkStrategyUpdateRequest;
 import com.xgc.agent.rag.features.knowledge.dto.DocumentEnabledUpdateRequest;
@@ -28,15 +28,18 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -73,7 +76,8 @@ class DocumentServiceImplTest {
                 objectStorage,
                 new ObjectMapper()
         );
-        when(adminAccessService.requireLoginUser()).thenReturn(AdminUserDO.builder().id("u-1").build());
+        // page/get/delete 不取操作者；上传/更新仍依赖 loginId。
+        lenient().when(adminAccessService.requireLoginUserId()).thenReturn("u-1");
     }
 
     @Test
@@ -84,13 +88,14 @@ class DocumentServiceImplTest {
                 .isInstanceOf(WebAdminException.class)
                 .extracting(ex -> ((WebAdminException) ex).getErrorCode())
                 .isEqualTo(KnowledgeErrorCode.FILE_EMPTY.code());
-        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).put(anyString(), any(InputStream.class), anyLong(), anyString());
     }
 
     @Test
     void upload_sameFilenameTwice_insertsTwoRows() {
         when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
-        when(mediaTypeDetector.detectAllowed(any(), eq("a.md"))).thenReturn("text/markdown");
+        when(mediaTypeDetector.detectAllowed(any(InputStream.class), eq("a.md")))
+                .thenReturn(new MediaTypeDetector.DetectedMediaType("text/markdown", DocumentFormat.MARKDOWN));
         byte[] body = "# hi".getBytes(StandardCharsets.UTF_8);
         MockMultipartFile file = new MockMultipartFile("file", "a.md", "application/octet-stream", body);
 
@@ -101,14 +106,16 @@ class DocumentServiceImplTest {
         verify(knowledgeDocumentMapper, times(2)).insert(captor.capture());
         assertThat(captor.getAllValues()).allMatch(doc -> "a.md".equals(doc.getOriginalFilename()));
         assertThat(captor.getAllValues()).allMatch(doc -> Boolean.TRUE.equals(doc.getEnabled()));
+        assertThat(captor.getAllValues()).allMatch(doc -> "MARKDOWN".equals(doc.getDocumentFormat()));
         assertThat(captor.getAllValues().get(0).getId()).isNotEqualTo(captor.getAllValues().get(1).getId());
-        verify(objectStorage, times(2)).put(anyString(), any(), eq("text/markdown"));
+        verify(objectStorage, times(2)).put(anyString(), any(InputStream.class), anyLong(), eq("text/markdown"));
     }
 
     @Test
     void upload_whenInsertFails_rollsBackObject() {
         when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
-        when(mediaTypeDetector.detectAllowed(any(), anyString())).thenReturn("text/markdown");
+        when(mediaTypeDetector.detectAllowed(any(InputStream.class), anyString()))
+                .thenReturn(new MediaTypeDetector.DetectedMediaType("text/markdown", DocumentFormat.MARKDOWN));
         when(knowledgeDocumentMapper.insert(org.mockito.ArgumentMatchers.isA(KnowledgeDocumentDO.class)))
                 .thenThrow(new RuntimeException("db"));
         MockMultipartFile file = new MockMultipartFile(
@@ -122,8 +129,10 @@ class DocumentServiceImplTest {
     @Test
     void upload_whenPutFails_mapsToDocumentError() {
         when(knowledgeBaseMapper.selectById("kb-1")).thenReturn(kb());
-        when(mediaTypeDetector.detectAllowed(any(), anyString())).thenReturn("text/markdown");
-        doThrow(new ObjectStorageException()).when(objectStorage).put(anyString(), any(), anyString());
+        when(mediaTypeDetector.detectAllowed(any(InputStream.class), anyString()))
+                .thenReturn(new MediaTypeDetector.DetectedMediaType("text/markdown", DocumentFormat.MARKDOWN));
+        doThrow(new ObjectStorageException())
+                .when(objectStorage).put(anyString(), any(InputStream.class), anyLong(), anyString());
         MockMultipartFile file = new MockMultipartFile(
                 "file", "a.md", "text/markdown", "# hi".getBytes(StandardCharsets.UTF_8));
 
@@ -172,6 +181,8 @@ class DocumentServiceImplTest {
                 .id("doc-1")
                 .knowledgeBaseId("kb-1")
                 .originalFilename("handbook.pdf")
+                .mediaType("application/pdf")
+                .documentFormat("PDF")
                 .chunkStrategy("OVERLAPPING")
                 .chunkStrategyParams(Map.of("chunkSize", 8, "overlap", 1))
                 .build();
@@ -182,9 +193,10 @@ class DocumentServiceImplTest {
                 Map.of("defaultChunkSize", 20, "maxChunkSize", 30, "minChunkSize", 10, "overlap", 2)
         ));
         assertThat(view.chunkStrategy()).isEqualTo("STRUCTURE_AWARE");
+        assertThat(view.documentFormat()).isEqualTo("PDF");
         assertThat(view.originalFilename()).isEqualTo("handbook.pdf");
         verify(knowledgeDocumentMapper).updateById(org.mockito.ArgumentMatchers.isA(KnowledgeDocumentDO.class));
-        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).put(anyString(), any(InputStream.class), anyLong(), anyString());
         verify(objectStorage, never()).delete(anyString());
     }
 
@@ -195,6 +207,8 @@ class DocumentServiceImplTest {
                 .id("doc-1")
                 .knowledgeBaseId("kb-1")
                 .originalFilename("handbook.pdf")
+                .mediaType("application/pdf")
+                .documentFormat("PDF")
                 .chunkStrategy("OVERLAPPING")
                 .chunkStrategyParams(Map.of("chunkSize", 8, "overlap", 1))
                 .build();
@@ -209,7 +223,7 @@ class DocumentServiceImplTest {
         ArgumentCaptor<KnowledgeDocumentDO> captor = ArgumentCaptor.forClass(KnowledgeDocumentDO.class);
         verify(knowledgeDocumentMapper).updateById(captor.capture());
         assertThat(captor.getValue().getOriginalFilename()).isEqualTo("手册.pdf");
-        verify(objectStorage, never()).put(anyString(), any(), anyString());
+        verify(objectStorage, never()).put(anyString(), any(InputStream.class), anyLong(), anyString());
         verify(objectStorage, never()).delete(anyString());
     }
 
@@ -243,11 +257,14 @@ class DocumentServiceImplTest {
                 .id("doc-1")
                 .knowledgeBaseId("kb-1")
                 .enabled(true)
+                .mediaType("text/markdown")
+                .documentFormat("MARKDOWN")
                 .build();
         when(knowledgeDocumentMapper.selectById("doc-1")).thenReturn(stored);
 
         DocumentView view = service.updateEnabled("kb-1", "doc-1", new DocumentEnabledUpdateRequest(false));
         assertThat(view.enabled()).isFalse();
+        assertThat(view.documentFormat()).isEqualTo("MARKDOWN");
         ArgumentCaptor<KnowledgeDocumentDO> captor = ArgumentCaptor.forClass(KnowledgeDocumentDO.class);
         verify(knowledgeDocumentMapper).updateById(captor.capture());
         assertThat(captor.getValue().getEnabled()).isFalse();
@@ -260,11 +277,14 @@ class DocumentServiceImplTest {
                 .id("doc-1")
                 .knowledgeBaseId("kb-1")
                 .enabled(false)
+                .mediaType("text/markdown")
+                .documentFormat("MARKDOWN")
                 .build();
         when(knowledgeDocumentMapper.selectById("doc-1")).thenReturn(stored);
 
         DocumentView view = service.updateEnabled("kb-1", "doc-1", new DocumentEnabledUpdateRequest(true));
         assertThat(view.enabled()).isTrue();
+        assertThat(view.documentFormat()).isEqualTo("MARKDOWN");
     }
 
     @SuppressWarnings("unchecked")
